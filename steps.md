@@ -8,8 +8,10 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `Ajouter un bouton Créer un nouveau tricount qui envoie vers une autre page.`
     - `Débugger le test unitaire vérifiant qu'on passe sur la bonne url en cliquant (car ça marche bien)`
     - `Compléter le test fonctionnel et voir s'il passe. Débugger ce test`
-    -Créer cette page remplissage qui contient en input Titre, Description, devise en liste déroulante, catégorie en liste déroulante.
-    - Faire en sorte qu'une fois remplie on retourne à la page des tricount avec le tricount qui apparaît.
+    -Créer en html cette page remplissage qui contient en input Titre, Description, catégorie en liste déroulante.
+    -Créer les récupérations de données via une fonction qui redirige vers la liste des tricount. 
+    - Faire en sorte que le nouveau tricount qui apparaîsse dans la page.
+    -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel
     - Modifier pour que les infos rentrent dans une bdd et que ces infos soient affichées.
     - Test fonctionnel marche toujours?
