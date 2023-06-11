@@ -8,3 +8,6 @@ def listecount(request):
 
 def newcount(request):
     return render(request, 'newcount.html')
+
+def addcount(request):
+    return redirect('/count/')

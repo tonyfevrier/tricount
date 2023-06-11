@@ -8,9 +8,11 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `Ajouter un bouton Créer un nouveau tricount qui envoie vers une autre page.`
     - `Débugger le test unitaire vérifiant qu'on passe sur la bonne url en cliquant (car ça marche bien)`
     - `Compléter le test fonctionnel et voir s'il passe. Débugger ce test`
-    -Créer en html cette page remplissage qui contient en input Titre, Description, catégorie en liste déroulante.
+    - `Créer en html cette page remplissage qui contient en input Titre, Description, catégorie en liste déroulante.`
+    - `Créer la redirection vers la page listecount une fois le formulaire soumis. Débuuger le test (j'ai ajouté l'url, la fonction view et mis l'url dans le form du html) : tester rajouter le csrftoken.`
+    -`Débugger pourquoi; même si la redirection vers count marche, cette adresse n'est pas reliée à index.html alors qu'elle le devrait.`
     -Créer les récupérations de données via une fonction qui redirige vers la liste des tricount. 
-    - Faire en sorte que le nouveau tricount qui apparaîsse dans la page.
+    - Faire en sorte que le nouveau tricount  apparaîsse dans la page.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel
     - Modifier pour que les infos rentrent dans une bdd et que ces infos soient affichées.
@@ -21,6 +23,9 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
 
 # Bugs intéressants 
     - TIME SEND KEYS : Après send_Keys, il faut laisser du temps pour que la page se charge.
+    - URL : Faire bien attention à respecter le fait qu'il y ait ou non / dans les adresses (faire pareil que dans le path : si j'ai mis count/ dans le path il faut le mettre après dans les redirections) sinon on aura une réponse inappropriée ( 404 ou autre).
+    - FAUX BUG de redirect : quand on utilise la fonction post du client et que cela mène à une redirection, la réponse n'a pas de contenu c'est juste une redirection même si on redirige vers une autre fonction de view qui elle a un contenu.
+
 
 
 # Mes difficultés principales
