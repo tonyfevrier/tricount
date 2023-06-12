@@ -15,8 +15,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`Ecrire le test pour la ligne suivante.`
     -`Ajouter la récupération de données dans la fonction addcount.` 
     -`Créer les récupérations de données via une fonction qui redirige vers la liste des tricount.`
-    - Test fonctionnel
-    - Faire en sorte que le nouveau tricount  apparaîsse dans la page.
+    - `Test fonctionnel`
+    - Faire en sorte que le nouveau tricount  apparaîsse dans la page (html).
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel
     - Modifier pour que les infos rentrent dans une bdd et que ces infos soient affichées.
