@@ -21,18 +21,18 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser.get(url + '/count') 
         self.assertIn('Tricount',self.browser.title)
         
-        
+        #Il clique sur le lien du nouveau tricount
         link = self.browser.find_element(By.ID,'id_newcount') 
         link.send_keys(Keys.ENTER)
         time.sleep(2)  
 
         self.assertEqual(self.browser.current_url, url + '/count/newcount') 
 
-        """
+        
         #Il voit la liste des tricount présents.
         table = self.browser.find_element(By.ID, 'list_counts')
         rows = table.find_elements(By.TAG_NAME,'td')
         self.assertIn('Tony',[row for row in rows]) 
-        """
+        
 
         

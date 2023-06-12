@@ -11,7 +11,11 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `Créer en html cette page remplissage qui contient en input Titre, Description, catégorie en liste déroulante.`
     - `Créer la redirection vers la page listecount une fois le formulaire soumis. Débuuger le test (j'ai ajouté l'url, la fonction view et mis l'url dans le form du html) : tester rajouter le csrftoken.`
     -`Débugger pourquoi; même si la redirection vers count marche, cette adresse n'est pas reliée à index.html alors qu'elle le devrait.`
-    -Créer les récupérations de données via une fonction qui redirige vers la liste des tricount. 
+    -`Créer une première classe de données avec les trois infos à entrer.`
+    -`Ecrire le test pour la ligne suivante.`
+    -`Ajouter la récupération de données dans la fonction addcount.` 
+    -`Créer les récupérations de données via une fonction qui redirige vers la liste des tricount.`
+    - Test fonctionnel
     - Faire en sorte que le nouveau tricount  apparaîsse dans la page.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel

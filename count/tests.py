@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import resolve
 from count.views import listecount
 from bs4 import BeautifulSoup
+from count.models import Counts
 
 # Create your tests here.
 
@@ -38,10 +39,15 @@ class HomepageTest(TestCase):
         
         On génère l'url
         On entre des données dans toutes les parties du formulaire
+
         On regarde si on est bien redirigé vers la bonne page avec les listes.
         Après (une fois les tests ci-dessus ok) on regardera si les informations entrées sont bien apparues dans la page web
         """
-        response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"trip"})
-        
+        response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+        count = Counts.objects.first()
+
+        self.assertEqual("tricount 1",count.title)
+        self.assertEqual("description 1", count.description)
+        self.assertEqual("Voyage", count.category)
         self.assertRedirects(response, '/count/')  
         
