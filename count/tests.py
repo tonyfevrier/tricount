@@ -35,13 +35,7 @@ class HomepageTest(TestCase):
 
     def test_newcount_inputs(self):
         """
-        Fonction qui teste si les données entrées par l'utilisateur sont bien récupérées et envoyées à la bonne page html.
-        
-        On génère l'url
-        On entre des données dans toutes les parties du formulaire
-
-        On regarde si on est bien redirigé vers la bonne page avec les listes.
-        Après (une fois les tests ci-dessus ok) on regardera si les informations entrées sont bien apparues dans la page web
+        Fonction qui teste si les données entrées par l'utilisateur sont bien récupérées et si la redirection vers la page d'origine est effective.
         """
         response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
         count = Counts.objects.first()

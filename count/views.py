@@ -5,7 +5,8 @@ from count.models import Counts
 # Create your views here.
 
 def listecount(request): 
-    return render(request,'index.html')
+    items = Counts.objects.all() 
+    return render(request,'index.html',context ={'counts' : items})
 
 def newcount(request):
     return render(request, 'newcount.html')

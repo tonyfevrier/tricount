@@ -10,5 +10,13 @@
     <footer>
         <a id = "id_newcount" href="/count/newcount">Create a new tricount</a>
     </footer>
+    <main>
+        {% for count in counts %}
+        <div class="tricount"> 
+            <p> {{count.title}} </p>
+            <p> {{count.description}} </p>
+        </div>
+        {% endfor %}
+    </main>
 </body>
 </html>

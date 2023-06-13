@@ -41,11 +41,13 @@ class NewVisitorTest(LiveServerTestCase):
         
         self.assertEqual(self.browser.current_url, url + '/count/') 
         self.assertIn('Tricount',self.browser.title)
-        
+
         #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
-        table = self.browser.find_element(By.ID, 'list_counts')
-        rows = table.find_elements(By.TAG_NAME,'td')
-        self.assertIn('tricount 1',[row for row in rows]) 
+        main = self.browser.find_element(By.TAG_NAME, 'main')
+        rows = main.find_elements(By.CLASS_NAME,'tricount')
+        L = [row.text for row in rows]
+        self.assertIn('tricount 1',*L) 
+        self.assertIn('description 1',*L)
         
 
         
