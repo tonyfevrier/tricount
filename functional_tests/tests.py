@@ -14,7 +14,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser.quit()
         
     
-    def test_Welcome_Page(self):
+    def test_listecount_Page(self):
         
         #Le visiteur arrive sur la page il voit le titre. 
         url = self.live_server_url 
@@ -43,11 +43,33 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('Tricount',self.browser.title)
 
         #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
-        main = self.browser.find_element(By.TAG_NAME, 'main')
-        rows = main.find_elements(By.CLASS_NAME,'tricount')
-        L = [row.text for row in rows]
-        self.assertIn('tricount 1',*L) 
-        self.assertIn('description 1',*L)
+        title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
+        description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
+        self.assertIn('tricount 1',[titre.text for titre in title]) 
+        self.assertIn('description 1',[desc.text for desc in description])
+
+        #Il reclique pour recréer un second tricount.
+        link = self.browser.find_element(By.ID,'id_newcount') 
+        link.send_keys(Keys.ENTER)
+        time.sleep(2)  
+
+        self.assertEqual(self.browser.current_url, url + '/count/newcount') 
+
+        #Il remplit les données d'un nouveau tricount et les envoie
+        titlebox = self.browser.find_element(By.NAME,"newtricount_title")
+        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")
+        categorybox = self.browser.find_element(By.NAME,"newtricount_category")
+        submitbox = self.browser.find_element(By.NAME,"submit")
+        titlebox.send_keys('tricount 2')
+        descriptionbox.send_keys('description 2')
+        categorybox.send_keys('Projet')
+        submitbox.send_keys(Keys.ENTER)
+        time.sleep(3)
+
+        title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
+        description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
+        self.assertIn('tricount 2',[titre.text for titre in title]) 
+        self.assertIn('description 2',[desc.text for desc in description])
         
 
         

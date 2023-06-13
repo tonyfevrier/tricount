@@ -18,11 +18,12 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `Test fonctionnel`
     - `Faire en sorte que le nouveau tricount  apparaîsse dans la page (html).`
     - `Test fonctionnel`
-    - Compléter le test fonctionnel pour entrer un second tricount avec une autre catégorie et voir si ça tourne.
+    - `Compléter le test fonctionnel pour entrer un second tricount avec une autre catégorie.`
+    - `Débugger : comprendre pourquoi tricount 2 semble avoir un type différent que tricount 1`
+    -Factoriser la fonction du test fonctionnel en créant une fonction faisant une création de tricount.
+    -faire le css de la page de la liste des tricount.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
-    - Test fonctionnel
-    - Modifier pour que les infos rentrent dans une bdd et que ces infos soient affichées.
-    - Test fonctionnel marche toujours?
+    - Test fonctionnel 
     - Modifier la page remplissage pour qu'on puisse y intégrer des participants.
 
 

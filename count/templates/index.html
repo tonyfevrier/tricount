@@ -8,15 +8,22 @@
 </head>
 <body>
     <footer>
-        <a id = "id_newcount" href="/count/newcount">Create a new tricount</a>
+        <div class="titre"> tricount</div>
+        <nav>
+            <a href="" class="premium"></a>
+            <a href="" class="options"> ... </a>
+        </nav>
     </footer>
     <main>
         {% for count in counts %}
         <div class="tricount"> 
-            <p> {{count.title}} </p>
-            <p> {{count.description}} </p>
+            <p class = "tricount_title"> {{count.title}} </p>
+            <p class = "tricount_description"> {{count.description}} </p>
         </div>
         {% endfor %}
     </main>
+    <footer>
+        <a id = "id_newcount" href="/count/newcount"> + </a>
+    </footer>
 </body>
 </html>
