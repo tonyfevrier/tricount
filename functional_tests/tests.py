@@ -13,6 +13,31 @@ class NewVisitorTest(LiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
         
+    def check_inputs_appear_on_listecount_Page(self,inputs):
+        """
+        Fonction qui entre un nouveau tricount et vérifie si les données apparaissent sur la page recensant les tricount.
+        """
+
+        #Il remplit les données d'un nouveau tricount et les envoie
+        titlebox = self.browser.find_element(By.NAME,"newtricount_title")
+        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")
+        categorybox = self.browser.find_element(By.NAME,"newtricount_category")
+        submitbox = self.browser.find_element(By.NAME,"submit")
+        titlebox.send_keys(inputs[0])
+        descriptionbox.send_keys(inputs[1])
+        categorybox.send_keys(inputs[2])
+        submitbox.send_keys(Keys.ENTER)
+        time.sleep(3)
+        
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/') 
+        self.assertIn('Tricount',self.browser.title)
+
+        #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
+        title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
+        description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
+        self.assertIn(inputs[0],[titre.text for titre in title]) 
+        self.assertIn(inputs[1],[desc.text for desc in description])
+
     
     def test_listecount_Page(self):
         
@@ -28,48 +53,18 @@ class NewVisitorTest(LiveServerTestCase):
 
         self.assertEqual(self.browser.current_url, url + '/count/newcount') 
 
-        #Il remplit les données d'un nouveau tricount et les envoie
-        titlebox = self.browser.find_element(By.NAME,"newtricount_title")
-        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")
-        categorybox = self.browser.find_element(By.NAME,"newtricount_category")
-        submitbox = self.browser.find_element(By.NAME,"submit")
-        titlebox.send_keys('tricount 1')
-        descriptionbox.send_keys('description 1')
-        categorybox.send_keys('Voyage')
-        submitbox.send_keys(Keys.ENTER)
-        time.sleep(3)
+        #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
+        self.check_inputs_appear_on_listecount_Page(['tricount 1','description 1','Voyage'])
         
-        self.assertEqual(self.browser.current_url, url + '/count/') 
-        self.assertIn('Tricount',self.browser.title)
-
-        #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
-        title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
-        description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
-        self.assertIn('tricount 1',[titre.text for titre in title]) 
-        self.assertIn('description 1',[desc.text for desc in description])
-
         #Il reclique pour recréer un second tricount.
         link = self.browser.find_element(By.ID,'id_newcount') 
         link.send_keys(Keys.ENTER)
         time.sleep(2)  
-
-        self.assertEqual(self.browser.current_url, url + '/count/newcount') 
-
-        #Il remplit les données d'un nouveau tricount et les envoie
-        titlebox = self.browser.find_element(By.NAME,"newtricount_title")
-        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")
-        categorybox = self.browser.find_element(By.NAME,"newtricount_category")
-        submitbox = self.browser.find_element(By.NAME,"submit")
-        titlebox.send_keys('tricount 2')
-        descriptionbox.send_keys('description 2')
-        categorybox.send_keys('Projet')
-        submitbox.send_keys(Keys.ENTER)
-        time.sleep(3)
-
-        title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
-        description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
-        self.assertIn('tricount 2',[titre.text for titre in title]) 
-        self.assertIn('description 2',[desc.text for desc in description])
         
+        self.assertEqual(self.browser.current_url, url + '/count/newcount') 
+        
+        #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
+        self.check_inputs_appear_on_listecount_Page(['tricount 2','description 2','Projet'])
+
 
         
