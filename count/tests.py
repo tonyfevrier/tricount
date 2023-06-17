@@ -28,7 +28,7 @@ class HomepageTest(TestCase):
         """ 
         response = self.client.get('/count/')
         soup = BeautifulSoup(response.content,'html.parser')
-        link = soup.select_one('a#id_newcount')['href'] 
+        link = soup.select_one('a#id_newcount')['href'] #on clique sur le + : sorte de send_keys
         response2 = self.client.get(link)
 
         self.assertTemplateUsed(response2, 'newcount.html') 
@@ -44,4 +44,25 @@ class HomepageTest(TestCase):
         self.assertEqual("description 1", count.description)
         self.assertEqual("Voyage", count.category)
         self.assertRedirects(response, '/count/')  
+
+    def test_lack_newcountinputs(self):
+        """
+        Fonction qui regarde si lorsqu'on tente de créer un tricount sans titre ou sans catégorie, il n'y a pas de nouvel objet dans la bdd
+        et on a dans la réponse html un message en rouge indiquant que le titre et la catégorie doivent être remplis.
+        """    
+        one = Counts.objects.count()
+        response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+        two = Counts.objects.count() 
         
+        self.assertContains(response,"Le titre doit comporter au moins un caractère")
+        self.assertEqual(one,two)
+
+        
+
+
+        """
+        on regarde le nb d'elt de bdd
+        on écrit une donnée sans titre
+        on regarde le nb delt de bdd (n'a pas bougé)
+        on regarde si le code contient la bonne phrase attendue
+        """

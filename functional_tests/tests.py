@@ -36,15 +36,21 @@ class NewVisitorTest(StaticLiveServerTestCase):
         
         time.sleep(3)
         
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/')   
-        self.assertIn('Tricount',self.browser.title)
+          
 
+        if inputs[0] != "":
+            self.assertEqual(self.browser.current_url, self.live_server_url + '/count/') 
+
+            self.assertIn('Tricount',self.browser.title)
+
+            #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
+            title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
+            description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
+            self.assertIn(inputs[0],[titre.text for titre in title]) 
+            self.assertIn(inputs[1],[desc.text for desc in description])
         
-        #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
-        title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
-        description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
-        self.assertIn(inputs[0],[titre.text for titre in title]) 
-        self.assertIn(inputs[1],[desc.text for desc in description])
+        else:
+            self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount')
         
     
     def test_listecount_Page(self):
@@ -76,5 +82,15 @@ class NewVisitorTest(StaticLiveServerTestCase):
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
         self.check_inputs_appear_on_listecount_Page(['tricount 2','description 2','Projet'])
     
+        #Il reclique pour recréer un second tricount
+        link = self.browser.find_element(By.ID,'id_newcount') 
+        link.send_keys(Keys.ENTER)
+        time.sleep(2)  
+        #Il remplit les données d'un nouveau tricount mais oublie de mettre un titre
+        
+        self.check_inputs_appear_on_listecount_Page(['','description 2','Projet'])
+        #Il est renvoyé vers l'url de remplissagedu tricount avec un message d'erreur affiché en rouge
+
+
 
         
