@@ -20,11 +20,15 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `Test fonctionnel`
     - `Compléter le test fonctionnel pour entrer un second tricount avec une autre catégorie.`
     - `Débugger : comprendre pourquoi tricount 2 semble avoir un type différent que tricount 1`
-    -Factoriser la fonction du test fonctionnel en créant une fonction faisant une création de tricount.
+    - `Factoriser la fonction du test fonctionnel en créant une fonction faisant une création de tricount.`
+    - Débug : quelle est cette erreur quand j'intègre mes fichiers static? avec runserver le css apparaît, avec les tests fonctionnels le css n'apparaît pas et il y a l'erreur qui est signalée. Peut-être lire le bouquin pour comprendre cette erreur bizarre mais il semble que ce soit lié au test fonctionnel. Premier élt de réponse : le traceback qui n'est pas une erreur de test apparaît dès que je fais un retour à la page count qui contient le css. Il n'affiche pas le css d'ailleurs (contrairement avec runserver) : tout se passe comme s'il ne pouvait pas lire le css en passant par le test fonctionnel : est-ce lié à LiveTestServer? Selenium? Pas de pb si on met le css dans index.html. C'est donc le lien vers le css qui pose pb lors du test fonctionnel.Il est possible que ça soit l'url différente de celle de runserver qui n'arrive pas à se lier au css. Essayer de remettre l'adresse classique (voir test fonctionnel de tdd) sinon voir le livre. Voir réponse chatgpt. Tester en revenant à unittest et en remettant l'adresse 8000 : ça doit fonctionner.
     -faire le css de la page de la liste des tricount.
+    -Empêcher l'entrée en base de données si on ne met pas titre ou catégorie: si pas de description, on met pas de description.
+    -Ajouter des majuscules dans l'affichage des titres et description.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel 
     - Modifier la page remplissage pour qu'on puisse y intégrer des participants.
+    -Modifier le lien lors de la création du tricount : on va vers la page des dépenses et pas vers la liste des tricounts.
 
 
 
@@ -32,6 +36,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - TIME SEND KEYS : Après send_Keys, il faut laisser du temps pour que la page se charge.
     - URL : Faire bien attention à respecter le fait qu'il y ait ou non / dans les adresses (faire pareil que dans le path : si j'ai mis count/ dans le path il faut le mettre après dans les redirections) sinon on aura une réponse inappropriée ( 404 ou autre).
     - FAUX BUG de redirect : quand on utilise la fonction post du client et que cela mène à une redirection, la réponse n'a pas de contenu c'est juste une redirection même si on redirige vers une autre fonction de view qui elle a un contenu.
+    - CSS NON CHARGE : quand je mets à jour un css et que je lance le serveur, le css n'est pas forcément appliqué. Le navigateur utilise en fait l'ancien css gardé dans la mémoire cache. Il suffit de supprimer le cache dans l'historique récent.
+    - 
 
 
 

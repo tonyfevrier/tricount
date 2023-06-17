@@ -1,0 +1,96 @@
+*{
+    box-sizing: border-box;
+    font-size: 14px;
+    margin:0;
+}
+
+:root{
+    --padding:0.5em;
+    --color:rgb(71, 71, 199);
+}
+
+body{
+    background-color: lightgray;
+}
+
+header { 
+    background-color: var(--color);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+header::before{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 3em;
+    content:"";
+    background-image: url('/static/images/dollar-bill.png'),url('/static/images/scale.png');
+    background-position-x: 10px, 40px;
+    background-size: 20px,20px;
+    opacity: 0.3;
+    background-repeat: no-repeat; 
+    z-index: 0;
+}
+
+
+.titre{
+    padding-left: 1em;
+    padding-top: var(--padding);
+    padding-bottom: var(--padding);
+    font-size: 1.5em;
+    z-index: 1;
+}
+
+header nav{
+    padding-top: var(--padding);
+    padding-right: 1em;
+}
+
+.premium{
+    padding-right: var(--padding);
+}
+
+main{
+    background-color: white;
+}
+
+.tricount{
+    border-bottom-style: solid;
+    border-color: black;
+    border-width: 1px; 
+    height:3.5em; 
+
+}
+
+.tricount_title{
+    padding-top:  var(--padding);  ;
+    padding-bottom: calc(0.5* var(--padding)) ; 
+    padding-left: var(--padding);  
+}
+
+.tricount_description {
+    color: grey;
+    font-size: 0.8em;
+    padding-top: calc(0.5* var(--padding));
+    padding-bottom: var(--padding);  
+    padding-left: var(--padding); 
+}
+
+.id_newcount{
+    position:absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 2em;
+    color: white;
+    width:1.5em;
+    height : 1.5em;
+    background-color: var(--color);
+    border-radius: 100%;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 0.1em;
+}

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,15 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tricount</title>
+    <link rel="stylesheet" href="{% static 'listecount.css' %}">
 </head>
 <body>
-    <footer>
+    <header>
         <div class="titre"> tricount</div>
         <nav>
-            <a href="" class="premium"></a>
-            <a href="" class="options"> ... </a>
+            <a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>
+            <a href="" class="options"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </a>
         </nav>
-    </footer>
+    </header>
     <main>
         {% for count in counts %}
         <div class="tricount"> 
@@ -23,7 +26,7 @@
         {% endfor %}
     </main>
     <footer>
-        <a id = "id_newcount" href="/count/newcount"> + </a>
+        <a class ="id_newcount" id = "id_newcount" href="/count/newcount"> + </a>
     </footer>
 </body>
 </html>
