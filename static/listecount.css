@@ -21,6 +21,7 @@ header {
     text-align: center;
 }
 
+/*
 header::before{
     position: fixed;
     top:0;
@@ -34,7 +35,7 @@ header::before{
     opacity: 0.3;
     background-repeat: no-repeat; 
     z-index: 0;
-}
+}*/
 
 
 .titre{
@@ -45,9 +46,30 @@ header::before{
     z-index: 1;
 }
 
-header nav{
+.header_data{
     padding-top: var(--padding);
     padding-right: 1em;
+}
+
+.header_images{
+    position: absolute;
+    top : 0px;
+    left: 0px;
+    /*display: flex;
+    justify-content: center;
+    flex-wrap: wrap;*/
+    opacity: 0.3;
+    height: 3.5em;
+}
+
+.header_images img{
+    width: 1em;
+    height: 1em;
+    margin:0.2em 0.8em;
+}
+
+.header_images .trois{
+    margin-right: 1.5em;
 }
 
 .premium{
@@ -84,7 +106,8 @@ main{
     position:absolute;
     bottom: 10px;
     right: 10px;
-    font-size: 2em;
+    font-size: 1.8em;
+    font-weight: 700;
     color: white;
     width:1.5em;
     height : 1.5em;
@@ -92,5 +115,6 @@ main{
     border-radius: 100%;
     text-decoration: none;
     text-align: center;
-    padding-top: 0.1em;
+    padding-top: 0.15em;
+
 }

@@ -1,10 +1,12 @@
-from django.test import LiveServerTestCase
+#from django.test import LiveServerTestCase
+
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase): 
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -34,7 +36,7 @@ class NewVisitorTest(LiveServerTestCase):
         
         time.sleep(3)
         
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/') 
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/')   
         self.assertIn('Tricount',self.browser.title)
 
         
@@ -49,7 +51,7 @@ class NewVisitorTest(LiveServerTestCase):
         
         #Le visiteur arrive sur la page il voit le titre. 
         url = self.live_server_url  
-        self.browser.get(url + '/count') 
+        self.browser.get(url + '/count')  
         
         time.sleep(2) 
         self.assertIn('Tricount',self.browser.title)
