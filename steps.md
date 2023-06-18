@@ -25,7 +25,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`faire le css de la page de la liste des tricount.`
     -`Réfléchir à comment faire pour avoir plusieurs images de fond qui se répètent en css.`
     -`Débugger mon test fonctionnel : comprendre quelle adresse est parcourue après chaque send_keys`
-    - Empêcher l'entrée en base de données si on ne met pas titre ou catégorie et renvoyer vers la page de newcount avec en plus un message d'erreur en rouge au bon endroit. 
+    - `Empêcher l'entrée en base de données si on ne met pas titre ou catégorie et renvoyer vers la page de newcount avec en plus un message d'erreur en rouge au bon endroit.`
     - si pas de description, on met "pas de description."
     -Ajouter des majuscules dans l'affichage des titres et description.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
@@ -41,8 +41,6 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - FAUX BUG de redirect : quand on utilise la fonction post du client et que cela mène à une redirection, la réponse n'a pas de contenu c'est juste une redirection même si on redirige vers une autre fonction de view qui elle a un contenu.
     - CSS NON CHARGE : quand je mets à jour un css et que je lance le serveur, le css n'est pas forcément appliqué. Le navigateur utilise en fait l'ancien css gardé dans la mémoire cache. Il suffit de supprimer le cache dans l'historique récent.
     - STATICLIVESERVER : Attention avec Liveservertestcase, les tests fonctionnels ne parviennent pas à charger les fichiers css. Il faut utiliser le serveur de test Staticliveservertestcase.
-
-
 
 # Mes difficultés principales
     - Non connaissance des syntaxes du client django pour faire des tests unitaires. Idem pour les fonctionnels.

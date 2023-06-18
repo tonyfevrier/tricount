@@ -45,10 +45,12 @@ class NewVisitorTest(StaticLiveServerTestCase):
             title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
             description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
             self.assertIn(inputs[0],[titre.text for titre in title]) 
-            self.assertIn(inputs[1],[desc.text for desc in description])
+            self.assertIn(inputs[1] or 'Pas de description',[desc.text for desc in description])
         
         else:
             self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount/addcount')
+            msg = self.browser.find_element(By.CLASS_NAME,'error')
+            self.assertIn('Le titre doit comporter au moins un caractère.',msg.text)
     
     def test_listecount_Page(self):
         
@@ -89,4 +91,4 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.check_inputs_appear_on_listecount_Page(['','description 3','Projet'])
 
         #Du coup, il rajoute un titre :  
-        self.check_inputs_appear_on_listecount_Page(['tricount 3','description 3','Projet'])
+        self.check_inputs_appear_on_listecount_Page(['tricount 3','','Projet'])

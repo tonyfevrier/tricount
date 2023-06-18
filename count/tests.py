@@ -45,7 +45,7 @@ class HomepageTest(TestCase):
         self.assertEqual("Voyage", count.category)
         self.assertRedirects(response, '/count/')  
 
-    def test_lack_newcountinputs(self):
+    def test_lack_title_newcountinputs(self):
         """
         Fonction qui regarde si lorsqu'on tente de créer un tricount sans titre ou sans catégorie, il n'y a pas de nouvel objet dans la bdd
         et on a dans la réponse html un message en rouge indiquant que le titre et la catégorie doivent être remplis.
@@ -57,4 +57,6 @@ class HomepageTest(TestCase):
         self.assertEqual(one,two)
         self.assertTemplateUsed(response,"newcount.html")
         self.assertContains(response,"Le titre doit comporter au moins un caractère.")
+
+    
         
