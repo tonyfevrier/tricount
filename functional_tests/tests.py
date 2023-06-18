@@ -32,11 +32,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
         categorybox.send_keys(inputs[2])
         
         submitbox.send_keys(Keys.ENTER)
-        
-        
+
         time.sleep(3)
         
-          
 
         if inputs[0] != "":
             self.assertEqual(self.browser.current_url, self.live_server_url + '/count/') 
@@ -50,8 +48,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
             self.assertIn(inputs[1],[desc.text for desc in description])
         
         else:
-            self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount')
-        
+            self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount/addcount')
     
     def test_listecount_Page(self):
         
@@ -86,11 +83,10 @@ class NewVisitorTest(StaticLiveServerTestCase):
         link = self.browser.find_element(By.ID,'id_newcount') 
         link.send_keys(Keys.ENTER)
         time.sleep(2)  
+        
         #Il remplit les données d'un nouveau tricount mais oublie de mettre un titre
-        
-        self.check_inputs_appear_on_listecount_Page(['','description 2','Projet'])
-        #Il est renvoyé vers l'url de remplissagedu tricount avec un message d'erreur affiché en rouge
+        # Il est renvoyé vers l'url de remplissagedu tricount avec un message d'erreur affiché en rouge
+        self.check_inputs_appear_on_listecount_Page(['','description 3','Projet'])
 
-
-
-        
+        #Du coup, il rajoute un titre :  
+        self.check_inputs_appear_on_listecount_Page(['tricount 3','description 3','Projet'])

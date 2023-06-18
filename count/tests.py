@@ -53,16 +53,8 @@ class HomepageTest(TestCase):
         one = Counts.objects.count()
         response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
         two = Counts.objects.count() 
-        
-        self.assertContains(response,"Le titre doit comporter au moins un caractère")
+
         self.assertEqual(one,two)
-
+        self.assertTemplateUsed(response,"newcount.html")
+        self.assertContains(response,"Le titre doit comporter au moins un caractère.")
         
-
-
-        """
-        on regarde le nb d'elt de bdd
-        on écrit une donnée sans titre
-        on regarde le nb delt de bdd (n'a pas bougé)
-        on regarde si le code contient la bonne phrase attendue
-        """

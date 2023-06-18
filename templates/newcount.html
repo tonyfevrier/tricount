@@ -13,6 +13,9 @@
     <main>
         <form method="POST" class = "newtricount" action="/count/newcount/addcount">
             <input class = "newtricount_title" placeholder="Title" name = "newtricount_title"> 
+            {% if titre == False %}
+                <p>Le titre doit comporter au moins un caractère.</p>
+            {% endif %}
             <input class = "newtricount_description" placeholder="Description" name = "newtricount_description"> 
             <select class = "newtricount_category" name="newtricount_category" id="newtricount_category">
                 <option value="trip">Voyage</option>
