@@ -26,11 +26,11 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`Réfléchir à comment faire pour avoir plusieurs images de fond qui se répètent en css.`
     -`Débugger mon test fonctionnel : comprendre quelle adresse est parcourue après chaque send_keys`
     - `Empêcher l'entrée en base de données si on ne met pas titre ou catégorie et renvoyer vers la page de newcount avec en plus un message d'erreur en rouge au bon endroit.`
-    - si pas de description, on met "pas de description."
-    -Ajouter des majuscules dans l'affichage des titres et description.
+    - `si pas de description, on met "pas de description."`
+    -`Ajouter des majuscules dans l'affichage des titres et description.`
+    - Modifier la page remplissage pour qu'on puisse y intégrer des participants.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel 
-    - Modifier la page remplissage pour qu'on puisse y intégrer des participants.
     -Modifier le lien lors de la création du tricount : on va vers la page des dépenses et pas vers la liste des tricounts.
 
 

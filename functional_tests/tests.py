@@ -69,7 +69,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertEqual(self.browser.current_url, url + '/count/newcount') 
     
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
-        self.check_inputs_appear_on_listecount_Page(['tricount 1','description 1','Voyage'])
+        self.check_inputs_appear_on_listecount_Page(['Tricount 1','Description 1','Voyage'])
        
         #Il reclique pour recréer un second tricount.
         link = self.browser.find_element(By.ID,'id_newcount') 
@@ -79,7 +79,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertEqual(self.browser.current_url, url + '/count/newcount') 
         
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
-        self.check_inputs_appear_on_listecount_Page(['tricount 2','description 2','Projet'])
+        self.check_inputs_appear_on_listecount_Page(['Tricount 2','Description 2','Projet'])
     
         #Il reclique pour recréer un second tricount
         link = self.browser.find_element(By.ID,'id_newcount') 
@@ -91,4 +91,4 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.check_inputs_appear_on_listecount_Page(['','description 3','Projet'])
 
         #Du coup, il rajoute un titre :  
-        self.check_inputs_appear_on_listecount_Page(['tricount 3','','Projet'])
+        self.check_inputs_appear_on_listecount_Page(['Tricount 3','','Projet'])

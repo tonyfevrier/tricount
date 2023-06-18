@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from count.models import Counts
+from count.func import majuscule
 
 # Create your views here.
 
@@ -19,9 +20,9 @@ def addcount(request):
     descption = request.POST["newtricount_description"]
     if titre != "":
         if descption != "":
-            Counts.objects.create(title = titre, description = descption,category = request.POST["newtricount_category"] )
+            Counts.objects.create(title = majuscule(titre), description = majuscule(descption),category = request.POST["newtricount_category"] )
         else:
-            Counts.objects.create(title = titre, description = "Pas de description",category = request.POST["newtricount_category"] )
+            Counts.objects.create(title = majuscule(titre), description = "Pas de description",category = request.POST["newtricount_category"] )
         return redirect('/count/')
     else: 
         return render(request,'newcount.html', context={'titre':False})

@@ -40,8 +40,8 @@ class HomepageTest(TestCase):
         response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
         count = Counts.objects.first()
 
-        self.assertEqual("tricount 1",count.title)
-        self.assertEqual("description 1", count.description)
+        self.assertEqual("Tricount 1",count.title)
+        self.assertEqual("Description 1", count.description)
         self.assertEqual("Voyage", count.category)
         self.assertRedirects(response, '/count/')  
 
