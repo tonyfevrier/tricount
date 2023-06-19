@@ -27,11 +27,11 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`Débugger mon test fonctionnel : comprendre quelle adresse est parcourue après chaque send_keys`
     - `Empêcher l'entrée en base de données si on ne met pas titre ou catégorie et renvoyer vers la page de newcount avec en plus un message d'erreur en rouge au bon endroit.`
     - `si pas de description, on met "pas de description."`
-    -`Ajouter des majuscules dans l'affichage des titres et description.`
-    - Faire un plan de ce que je dois faire dans l'ordre pr ajouter des participants.
-    - Imaginer les tests unitaires pour ça.
-    -Test que les participants apparaissent bien.
-    -Modifier le code newcount.html pour qu'ils apparaissent.
+    -`Ajouter des majuscules dans l'affichage des titres et description.`  
+    -`Test que les participants apparaissent bien.`
+    -`Modifier le code newcount.html pour qu'ils apparaissent.`
+    -Associer les participants créés au tricount.
+    -Faire en sorte qu'une fois le tricount créé, les participants disparaissent de la page newcount, ils ne doivent plus être là pour le tricount suivant. Mais aussi faire en sorte que dans les bdd ils ne soient pas réassociés au tricount suivant (associer un identifiant, numéro?)
     - Modifier la page remplissage pour qu'on puisse y intégrer des participants (étape par étape précédé d'un test unitaire).
     -Test fonctionnel.
     -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix.

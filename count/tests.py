@@ -69,9 +69,17 @@ class NewcountTest(TestCase):
     def test_bdd_when_add_participants(self):
         """
         Fonction qui teste, si lorsqu'on ajoute un participant, la bdd des participants est bien incrémentée.
+        Elle teste ensuite lorsqu'on poste un titre, une description, une catégorie, que les participants sont bien associés au tricount.
         """
-        response = self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
         participant = Participants.objects.first()
 
-        self.assertEqual(participant.name,'Jean')
-        #Il faudra aussi tester que le numéro du tricount associé est le 1.
+        self.assertEqual(participant.name,'Jean') 
+
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
+
+        self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+        count = Counts.objects.first() 
+
+        self.assertIn('Jean', count.participants.first().name)
+        self.assertIn('Henri',count.participants.get(pk=2).name)

@@ -19,21 +19,25 @@ def addcount(request):
     """
     titre = request.POST["newtricount_title"]
     descption = request.POST["newtricount_description"]
+    participants = Participants.objects.all()
     if titre != "":
         if descption != "":
-            Counts.objects.create(title = majuscule(titre), description = majuscule(descption),category = request.POST["newtricount_category"] )
+            count = Counts.objects.create(title = majuscule(titre), description = majuscule(descption),category = request.POST["newtricount_category"] )
         else:
-            Counts.objects.create(title = majuscule(titre), description = "Pas de description",category = request.POST["newtricount_category"] )
+            count = Counts.objects.create(title = majuscule(titre), description = "Pas de description",category = request.POST["newtricount_category"] )
+        for participant in participants:
+            count.participants.add(participant)
         return redirect('/count/')
     else: 
         return render(request,'newcount.html', context={'titre':False})
     
 def addparticipant(request):
     """ 
+    Fonction qui récupère les participants créés, les met en bdd puis rédirige vers la page du nouveau tricount.
+
     Je récupère les participts et les metsdans la bdd participts,
     Dans newcount, je le mets dans context pr les envoyer à la page.
     Dans addcount, je crée le tricount avec en argument la liste des participants (en ajoutant tous les participants de la bdd)
-    Ensuite je supprime tous les participants de la bdd participants pr éviter qu'ils soient inclus ds le prochain tricount.
     Autre solution je peux associer un numéro à chaque participant et n'ajouter au tricount que ce numéro là.
     (Version +) Dans addcount, je supprime la classe si l'utilisateur retourne en arrière
     """
