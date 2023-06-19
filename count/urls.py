@@ -6,4 +6,5 @@ urlpatterns = [
     path('',countviews.listecount,name = 'listecount'),
     path('newcount',countviews.newcount, name = 'newcount'),
     path('newcount/addcount', countviews.addcount, name = 'addcount'),
+    path('newcount/addcount/addparticipant',countviews.addparticipant, name = "addparticipant"),
 ]

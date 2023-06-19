@@ -28,7 +28,14 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `Empêcher l'entrée en base de données si on ne met pas titre ou catégorie et renvoyer vers la page de newcount avec en plus un message d'erreur en rouge au bon endroit.`
     - `si pas de description, on met "pas de description."`
     -`Ajouter des majuscules dans l'affichage des titres et description.`
-    - Modifier la page remplissage pour qu'on puisse y intégrer des participants.
+    - Faire un plan de ce que je dois faire dans l'ordre pr ajouter des participants.
+    - Imaginer les tests unitaires pour ça.
+    -Test que les participants apparaissent bien.
+    -Modifier le code newcount.html pour qu'ils apparaissent.
+    - Modifier la page remplissage pour qu'on puisse y intégrer des participants (étape par étape précédé d'un test unitaire).
+    -Test fonctionnel.
+    -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix.
+    -Ajouter un bouton retour en arrière sur newcount au cas où il ne veut finalement pas créer de tricount.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel 
     -Modifier le lien lors de la création du tricount : on va vers la page des dépenses et pas vers la liste des tricounts.

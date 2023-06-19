@@ -28,6 +28,16 @@
             <input type="submit" name = "submit"> 
             {% csrf_token %}
         </form>
+        <form method="post" class = "addparticipant" action="/count/newcount/addcount/addparticipant">
+            {% for participant in participants %}
+            <div>
+                <p class = "nameparticipant"> {{participant.name}}</p>
+            </div>
+            {% endfor %}
+            <input name="new_participant" class ='new_participant' placeholder="Autre participant">
+            <button class = "add_participant">Ajouter</button>
+            {% csrf_token %}
+        </form>
     </main>
 </body>
 </html>

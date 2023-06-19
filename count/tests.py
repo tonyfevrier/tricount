@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import resolve
 from count.views import listecount
 from bs4 import BeautifulSoup
-from count.models import Counts
+from count.models import Counts, Participants
 
 # Create your tests here.
 
@@ -22,6 +22,7 @@ class HomepageTest(TestCase):
         self.assertIn(b'Tricount',response.content)
         self.assertTemplateUsed(response,'index.html')
 
+class NewcountTest(TestCase):
     def test_newcount(self):
         """
         Fonction qui à partir de la page de la liste des tricount clique sur "créer un nouveau tricount" et vérifie qu'on utilise le bon template
@@ -58,5 +59,19 @@ class HomepageTest(TestCase):
         self.assertTemplateUsed(response,"newcount.html")
         self.assertContains(response,"Le titre doit comporter au moins un caractère.")
 
-    
-        
+    def test_redirection_when_add_participants(self):
+        """
+        Fonction qui teste, si lorsqu'on ajoute un participant, on est bien redirigé vers la page newcount.
+        """
+        response = self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
+        self.assertRedirects(response,'/count/newcount')
+
+    def test_bdd_when_add_participants(self):
+        """
+        Fonction qui teste, si lorsqu'on ajoute un participant, la bdd des participants est bien incrémentée.
+        """
+        response = self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
+        participant = Participants.objects.first()
+
+        self.assertEqual(participant.name,'Jean')
+        #Il faudra aussi tester que le numéro du tricount associé est le 1.

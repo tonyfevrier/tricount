@@ -14,6 +14,18 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
     def tearDown(self):
         self.browser.quit()
+
+    def check_participant_appear_on_newcount_page(self,name_participant):
+        participantbox = self.browser.find_element(By.NAME,"new_participant")
+        buttonbox = self.browser.find_element(By.CLASS_NAME,"add_participant")
+        participantbox.send_keys(name_participant)
+        buttonbox.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/newcount")
+        participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
+        self.assertIn(name_participant, [participant.text for participant in participants])
+
         
     def check_inputs_appear_on_listecount_Page(self,inputs):
         """
@@ -68,6 +80,10 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         self.assertEqual(self.browser.current_url, url + '/count/newcount') 
     
+        #Il commence par remplir les différents participants à son premier tricount
+        self.check_participant_appear_on_newcount_page('Jean')
+        self.check_participant_appear_on_newcount_page('Heeeeeenri')
+
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
         self.check_inputs_appear_on_listecount_Page(['Tricount 1','Description 1','Voyage'])
        
