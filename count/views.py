@@ -26,7 +26,8 @@ def addcount(request):
         else:
             count = Counts.objects.create(title = majuscule(titre), description = "Pas de description",category = request.POST["newtricount_category"] )
         for participant in participants:
-            count.participants.add(participant)
+            if participant.number == Counts.objects.count() - 1:
+                count.participants.add(participant)
         return redirect('/count/')
     else: 
         return render(request,'newcount.html', context={'titre':False})
@@ -42,5 +43,5 @@ def addparticipant(request):
     (Version +) Dans addcount, je supprime la classe si l'utilisateur retourne en arrière
     """
 
-    Participants.objects.create(name = request.POST["new_participant"])
+    Participants.objects.create(name = request.POST["new_participant"], number = Counts.objects.count())
     return redirect('/count/newcount')

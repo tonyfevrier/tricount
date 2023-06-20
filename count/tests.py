@@ -70,6 +70,7 @@ class NewcountTest(TestCase):
         """
         Fonction qui teste, si lorsqu'on ajoute un participant, la bdd des participants est bien incrémentée.
         Elle teste ensuite lorsqu'on poste un titre, une description, une catégorie, que les participants sont bien associés au tricount.
+        Enfin elle crée un second tricount et vérifie que la bdd associe bien le bon nombre de participants au tricount et qu'elle n'associe par des noms du premier tricount au second.
         """
         self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
         participant = Participants.objects.first()
@@ -83,3 +84,15 @@ class NewcountTest(TestCase):
 
         self.assertIn('Jean', count.participants.first().name)
         self.assertIn('Henri',count.participants.get(pk=2).name)
+        self.assertEqual(0,count.participants.first().number)
+        self.assertEqual(2,count.participants.count())
+
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henriette"})
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Tony"})
+
+        self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount2", "newtricount_description":"description 2", "newtricount_category":"Voyage"})
+        count2 = Counts.objects.get(pk=2) 
+        self.assertEqual(3,count2.participants.count())
+
+        self.assertNotIn('Jean', [count2.participants.get(pk=i+3).name for i in range(count2.participants.count())])

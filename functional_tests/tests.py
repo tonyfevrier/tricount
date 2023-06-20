@@ -16,6 +16,10 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.browser.quit()
 
     def check_participant_appear_on_newcount_page(self,name_participant):
+        """
+        Fonction qui entre un participant dans un tricount donné et qui regarde si les participants apparaissent
+        sur la page
+        """
         participantbox = self.browser.find_element(By.NAME,"new_participant")
         buttonbox = self.browser.find_element(By.CLASS_NAME,"add_participant")
         participantbox.send_keys(name_participant)
@@ -33,7 +37,6 @@ class NewVisitorTest(StaticLiveServerTestCase):
         """
 
         #Il remplit les données d'un nouveau tricount et les envoie
-        
         titlebox = self.browser.find_element(By.NAME,"newtricount_title")
         descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")
         categorybox = self.browser.find_element(By.NAME,"newtricount_category")
@@ -46,7 +49,6 @@ class NewVisitorTest(StaticLiveServerTestCase):
         submitbox.send_keys(Keys.ENTER)
 
         time.sleep(3)
-        
 
         if inputs[0] != "":
             self.assertEqual(self.browser.current_url, self.live_server_url + '/count/') 
