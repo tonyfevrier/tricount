@@ -32,8 +32,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`Modifier le code newcount.html pour qu'ils apparaissent.`
     -`Associer les participants créés au tricount.`
     -`Modifier le test unitaire pour prendre en compte le numéro du participant : (créer deux tricount avec des participants diff et compter que le nb de participants est correct.)`
-    -Modifier aussi le test fonctionnel pour vérifier que Jean n'apparait pas dans la page après que le tricount a été validé.
-    -Faire en sorte qu'une fois le tricount créé, les participants disparaissent de la page newcount, ils ne doivent plus être là pour le tricount suivant. Mais aussi faire en sorte que dans les bdd ils ne soient pas réassociés au tricount suivant (associer un identifiant, numéro?). Voir si on ne peut pas exploiter la relation many to many pr associer au participant le numéro d'id du tricount qu'on crée. Idée: Ajouter un numéro de tricount au participant, mettre ce numéro à Count.objects.count() et ajouter  ce même numéro à url de newcount pour ne faire afficher que les participants de ce numéro.
+    -`Modifier aussi le test fonctionnel pour vérifier que Jean n'apparait pas dans la page après que le tricount a été validé.`
+    -Faire en sorte qu'une fois le tricount créé, les participants disparaissent de la page newcount.
     - Modifier la page remplissage pour qu'on puisse y intégrer des participants (étape par étape précédé d'un test unitaire).
     -Test fonctionnel.
     -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix.

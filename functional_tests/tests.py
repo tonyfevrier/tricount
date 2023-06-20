@@ -82,7 +82,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         self.assertEqual(self.browser.current_url, url + '/count/newcount') 
     
-        #Il commence par remplir les différents participants à son premier tricount
+        #Il commence par remplir les différents participants à son premier tricount : les participants apparaissent sur la page du tricount
         self.check_participant_appear_on_newcount_page('Jean')
         self.check_participant_appear_on_newcount_page('Heeeeeenri')
 
@@ -96,6 +96,15 @@ class NewVisitorTest(StaticLiveServerTestCase):
         
         self.assertEqual(self.browser.current_url, url + '/count/newcount') 
         
+        #Il remplit les différents participants d'un second tricount : les participants apparaissent sur la page du tricount mais pas ceux du tricount précédemment créé.
+        self.check_participant_appear_on_newcount_page('Tony')
+        self.check_participant_appear_on_newcount_page('Dulcinée')
+        self.check_participant_appear_on_newcount_page('Annie')
+
+        participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
+        self.assertNotIn('Jean', [participant.text for participant in participants])
+        self.assertNotIn('Heeeeeenri', [participant.text for participant in participants])
+
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
         self.check_inputs_appear_on_listecount_Page(['Tricount 2','Description 2','Projet'])
     
