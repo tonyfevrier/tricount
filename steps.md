@@ -33,7 +33,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`Associer les participants créés au tricount.`
     -`Modifier le test unitaire pour prendre en compte le numéro du participant : (créer deux tricount avec des participants diff et compter que le nb de participants est correct.)`
     -`Modifier aussi le test fonctionnel pour vérifier que Jean n'apparait pas dans la page après que le tricount a été validé.`
-    -Faire en sorte qu'une fois le tricount créé, les participants disparaissent de la page newcount.
+    -`Faire en sorte qu'une fois le tricount créé, les participants disparaissent de la page newcount. Il suffit dans la fonction newcount de ne passer que les participants du number le plus gd.`
     - Modifier la page remplissage pour qu'on puisse y intégrer des participants (étape par étape précédé d'un test unitaire).
     -Test fonctionnel.
     -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix.
