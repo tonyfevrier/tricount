@@ -119,3 +119,18 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         #Du coup, il rajoute un titre :  
         self.check_inputs_appear_on_listecount_Page(['Tricount 3','','Projet'])
+
+        #Il veut créer un nouveau tricount mais change d'avis et après avoir rentré un participant appuie sur le bouton retour en arrière
+        #Il atterrit à nouveau sur la liste des tricount.
+        link = self.browser.find_element(By.ID,'id_newcount') 
+        link.send_keys(Keys.ENTER)
+        time.sleep(2)  
+
+        self.check_participant_appear_on_newcount_page('Jeanine')
+        back = self.browser.find_element(By.CLASS_NAME,'backtotricount')
+        back.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+        self.assertEqual(self.browser.current_url, url + '/count/')
+
+

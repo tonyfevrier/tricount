@@ -34,10 +34,11 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`Modifier le test unitaire pour prendre en compte le numéro du participant : (créer deux tricount avec des participants diff et compter que le nb de participants est correct.)`
     -`Modifier aussi le test fonctionnel pour vérifier que Jean n'apparait pas dans la page après que le tricount a été validé.`
     -`Faire en sorte qu'une fois le tricount créé, les participants disparaissent de la page newcount. Il suffit dans la fonction newcount de ne passer que les participants du number le plus gd.`
-    - Modifier la page remplissage pour qu'on puisse y intégrer des participants (étape par étape précédé d'un test unitaire).
-    -Test fonctionnel.
+    - `Modifier la page remplissage pour qu'on puisse y intégrer des participants (étape par étape précédé d'un test unitaire).`
+    -`Ajouter un bouton retour en arrière sur newcount au cas où il ne veut finalement pas créer de tricount.`
+    -`Compléter le test fonctionnel : le participant revient en arrière et retombe sur la bonne page avec la liste des tricount.`
+    -Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés.
     -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix.
-    -Ajouter un bouton retour en arrière sur newcount au cas où il ne veut finalement pas créer de tricount.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel 
     -Modifier le lien lors de la création du tricount : on va vers la page des dépenses et pas vers la liste des tricounts.

@@ -1,3 +1,5 @@
+{%load static%}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,7 +10,8 @@
 </head>
 <body>
     <header>
-        Nouveau tricount
+        <a href="/count" class = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <div>Nouveau tricount</div>
     </header>
     <main>
         <form method="POST" class = "newtricount" action="/count/newcount/addcount">
