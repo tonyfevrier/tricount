@@ -6,12 +6,13 @@ from count.func import majuscule
 # Create your views here.
 
 def listecount(request): 
+    #if Participants.objects.last().number != Counts.objects.count() - 1:#on a alors pas validé le tricount, on a donc cliqué sur backtotricount. 
+    #    Participants.objects.filter(number = Participants.objects.last().number).delete()
     items = Counts.objects.all() 
     return render(request,'index.html',context ={'counts' : items})
 
 def newcount(request):
     items = Participants.objects.filter(number = Counts.objects.count()) 
-    #items = Participants.objects.all()
     return render(request, 'newcount.html',context={'participants':items})
 
 def addcount(request):

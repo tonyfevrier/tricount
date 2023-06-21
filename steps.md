@@ -37,10 +37,10 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `Modifier la page remplissage pour qu'on puisse y intégrer des participants (étape par étape précédé d'un test unitaire).`
     -`Ajouter un bouton retour en arrière sur newcount au cas où il ne veut finalement pas créer de tricount.`
     -`Compléter le test fonctionnel : le participant revient en arrière et retombe sur la bonne page avec la liste des tricount.`
-    -Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés.
+    -Réfléchir d'abord aux différentes solutions pour éliminer les participants créés. Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés. 
     -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
-    - Test fonctionnel 
+    - Test fonctionnel. 
     -Modifier le lien lors de la création du tricount : on va vers la page des dépenses et pas vers la liste des tricounts.
 
 

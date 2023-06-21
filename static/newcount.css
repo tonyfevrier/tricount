@@ -1,0 +1,68 @@
+*{
+    box-sizing: border-box;
+    margin : 0;
+    font-size: 14px;
+}
+
+:root{
+    --padding:0.5em;
+    --color:rgb(71, 71, 199);
+}
+
+header{
+    display: flex;
+    text-align: center;
+    background-color: var(--color);
+}
+
+header{
+    padding: 0.5em 0;
+}
+
+.header_images{
+    position: absolute;
+    top : 0px;
+    left: 0px;
+    /*display: flex;
+    justify-content: center;
+    flex-wrap: wrap;*/
+    opacity: 0.3;
+    height: 3.5em;
+}
+
+.header_images img{
+    width: 1em;
+    height: 1em;
+    margin:0.2em 0.8em;
+}
+
+.header_images .trois{
+    margin-right: 1.5em;
+}
+
+.backtotricount img{
+    width : 30px;
+    /*padding: 0 0.5em;*/
+    padding-top: var(--padding);
+    
+}
+
+.titre{
+    padding-left: 1em;
+    padding-top: var(--padding);
+    padding-bottom: var(--padding);
+    font-size: 1.5em;
+    color: white;
+}
+
+.newtricount_title, .newtricount_description, .newtricount_category{
+    display: block;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: transparent;   
+}
+
+.newtricount_title:hover,.newtricount_description:hover, .newtricount_category:hover {
+    border-color: var(--color);
+}

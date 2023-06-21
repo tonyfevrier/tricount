@@ -96,3 +96,17 @@ class NewcountTest(TestCase):
         self.assertEqual(3,count2.participants.count())
 
         self.assertNotIn('Jean', [count2.participants.get(pk=i+3).name for i in range(count2.participants.count())])
+
+    def test_back_to_listecount_page(self):
+        """
+        Fonction qui lance la création d'un tricount, ne valide pas le tricount et revient en arrière.
+        Vérifie si les participants créés dans la bdd sont bien supprimés.
+        """
+        number = Participants.objects.count()
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
+        response = self.client.get('/count/newcount') 
+
+        soup = BeautifulSoup(response.content,'html.parser')
+        link = soup.select_one('a#backtotricount')['href'] #on clique sur le + : sorte de send_keys
+        response2 = self.client.get(link)
+        self.assertEqual(number,Participants.objects.count())
