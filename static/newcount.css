@@ -9,25 +9,26 @@
     --color:rgb(71, 71, 199);
 }
 
+body{
+    background-color: lightgray;
+}
+
 header{
     display: flex;
     text-align: center;
     background-color: var(--color);
+    padding: 1em 0;
+    z-index: 1;
 }
-
-header{
-    padding: 0.5em 0;
-}
+ 
 
 .header_images{
     position: absolute;
     top : 0px;
-    left: 0px;
-    /*display: flex;
-    justify-content: center;
-    flex-wrap: wrap;*/
+    left: 0px; 
     opacity: 0.3;
     height: 3.5em;
+    z-index: 0;
 }
 
 .header_images img{
@@ -40,29 +41,83 @@ header{
     margin-right: 1.5em;
 }
 
+.backtotricount{
+    padding: 0 2em;
+    height: 1.5em;
+    width:1.5em
+}
+
 .backtotricount img{
-    width : 30px;
-    /*padding: 0 0.5em;*/
-    padding-top: var(--padding);
-    
+    width : 20px; 
 }
 
 .titre{
-    padding-left: 1em;
-    padding-top: var(--padding);
-    padding-bottom: var(--padding);
+    padding-left: 2em; 
     font-size: 1.5em;
     color: white;
+    z-index: 1;
 }
 
+
+.newtricount{
+    padding: 1em;
+    background: white;
+}
 .newtricount_title, .newtricount_description, .newtricount_category{
     display: block;
     border-top: none;
     border-left: none;
     border-right: none;
-    background-color: transparent;   
+    background-color: transparent;  
+    margin: 2em 0; 
+    width:100%
 }
 
 .newtricount_title:hover,.newtricount_description:hover, .newtricount_category:hover {
     border-color: var(--color);
+}
+
+.error{
+    color: red;
+    font-size: 10px;
+}
+
+.submit{
+    position: absolute;
+    right : 1em;
+    top : 1em;
+}
+
+.nb_participants{
+    padding: 1em;
+}
+
+.participants{
+    padding: 0.5em 0;
+}
+.nameparticipant{
+    padding: 0.1em 0;
+}
+
+
+.addparticipant{
+    background: white;
+    padding: 1em;
+}
+
+.new_participant{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: transparent;
+    margin-top: 0.2em;
+    width: 82%
+}
+
+.addparticipant button{
+    color : white;
+    background-color: var(--color);
+    padding: 0.2em 0.5em;
+
+    
 }

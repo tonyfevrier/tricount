@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'newcount.css' %}">
 </head>
 <body>
-    <header>
+    <header> 
         <a href="/count" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <div class = "titre">Nouveau tricount</div>
     </header>
@@ -51,16 +51,17 @@
                 <option value="project">Projet</option>
                 <option value="other">Autre</option>
             </select>
-            <input type="submit" name = "submit"> 
+            <input class = "submit" type="submit" name = "submit"> 
+            <!--<button class = "submit" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button>-->
             {% csrf_token %}
         </form>
         <div class = "nb_participants"> Participants (/50)</div>
         <form method="post" class = "addparticipant" action="/count/newcount/addcount/addparticipant">
-            {% for participant in participants %}
-            <div>
+            <div class = "participants">
+                {% for participant in participants %}
                 <p class = "nameparticipant"> {{participant.name}}</p>
+                {% endfor %}
             </div>
-            {% endfor %}
             <input name="new_participant" class ='new_participant' placeholder="Autre participant">
             <button class = "add_participant">Ajouter</button>
             {% csrf_token %}

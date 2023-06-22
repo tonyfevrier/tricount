@@ -37,6 +37,11 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `Modifier la page remplissage pour qu'on puisse y intégrer des participants (étape par étape précédé d'un test unitaire).`
     -`Ajouter un bouton retour en arrière sur newcount au cas où il ne veut finalement pas créer de tricount.`
     -`Compléter le test fonctionnel : le participant revient en arrière et retombe sur la bonne page avec la liste des tricount.`
+    -avancer et améliorer le css et html de newcount.
+    -voir si le submit de newcount passe les tests si je le transforme en a ou button.
+    -je ne peux pas cliquer sur le back de newcount. C'est lié au header images (commenté plus de pb)
+    -Bug de css : le css ne s'applique qu'au premier nameparticipant pas aux autres.
+    -Faire une liste de tout ce que contient ce html css très riche.
     -Réfléchir d'abord aux différentes solutions pour éliminer les participants créés. Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés. 
     -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
