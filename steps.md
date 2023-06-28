@@ -37,11 +37,14 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `Modifier la page remplissage pour qu'on puisse y intégrer des participants (étape par étape précédé d'un test unitaire).`
     -`Ajouter un bouton retour en arrière sur newcount au cas où il ne veut finalement pas créer de tricount.`
     -`Compléter le test fonctionnel : le participant revient en arrière et retombe sur la bonne page avec la liste des tricount.`
-    -avancer et améliorer le css et html de newcount.
-    -voir si le submit de newcount passe les tests si je le transforme en a ou button.
-    -je ne peux pas cliquer sur le back de newcount. C'est lié au header images (commenté plus de pb)
-    -Bug de css : le css ne s'applique qu'au premier nameparticipant pas aux autres.
-    -Faire une liste de tout ce que contient ce html css très riche.
+    -`voir si le submit de newcount passe les tests si je le transforme en a ou button. `
+    -`je ne peux pas cliquer sur le back de newcount. C'est lié au header images (commenté plus de pb)` 
+    -`Débugger le fond bleu de button.`
+    -voir comment on écrit cliquer en css.
+    -Faire une liste de tout ce que contient ce html css très riche et faire des micro étapes.
+    -Mettre le select en cadres arrondis.
+    -Ajouter à l'html le nombre de participants créées.
+    -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à 50 (resp 500).
     -Réfléchir d'abord aux différentes solutions pour éliminer les participants créés. Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés. 
     -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
@@ -57,6 +60,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - CSS NON CHARGE : quand je mets à jour un css et que je lance le serveur, le css n'est pas forcément appliqué. Le navigateur utilise en fait l'ancien css gardé dans la mémoire cache. Il suffit de supprimer le cache dans l'historique récent.
     - STATICLIVESERVER : Attention avec Liveservertestcase, les tests fonctionnels ne parviennent pas à charger les fichiers css. Il faut utiliser le serveur de test Staticliveservertestcase.
     - GET(Pk=1) différent de first() : first() ne correspond pas forcément à pk=1 quand on veut récupérer un objet. Il se peut qu'on ait créé des objets avant comme pour ma classe participants par exemple. 
+    - FORM SUBMIT : Il semble que si on remplace le input ayant la classe submit par un button avec la même classe, l'envoie des données se fasse alors que si on choisit un a cela n'envoie plus les données.
+    
 
 # Mes difficultés principales
     - Non connaissance des syntaxes du client django pour faire des tests unitaires. Idem pour les fonctionnels.

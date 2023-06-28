@@ -63,6 +63,8 @@ header{
     padding: 1em;
     background: white;
 }
+
+
 .newtricount_title, .newtricount_description, .newtricount_category{
     display: block;
     border-top: none;
@@ -70,11 +72,21 @@ header{
     border-right: none;
     background-color: transparent;  
     margin: 2em 0; 
-    width:100%
+    width:100%;
+    height: 30px;
 }
 
-.newtricount_title:hover,.newtricount_description:hover, .newtricount_category:hover {
+.newtricount_title:focus,.newtricount_description:focus, .newtricount_category:hover {
     border-color: var(--color);
+    color: var(--color); 
+    outline:none;
+}
+
+.newtricount_title:focus::placeholder, .newtricount_description:focus::placeholder {
+    color: var(--color);
+    transform: translate(0,-10px);
+    font-size: 10px;
+    transition: 0.2s;
 }
 
 .error{
@@ -82,7 +94,17 @@ header{
     font-size: 10px;
 }
 
-.submit{
+
+.submittricount{
+    padding: 0 2em;
+    height: 1.5em;
+    width:1.5em;
+    border: none;
+    background: transparent;
+}
+
+.submittricount img{
+    width : 20px; 
     position: absolute;
     right : 1em;
     top : 1em;
@@ -96,7 +118,7 @@ header{
     padding: 0.5em 0;
 }
 .nameparticipant{
-    padding: 0.1em 0;
+    padding: 0.5em 0;
 }
 
 
@@ -114,10 +136,27 @@ header{
     width: 82%
 }
 
-.addparticipant button{
+.addparticipant .add_participant{
     color : white;
     background-color: var(--color);
     padding: 0.2em 0.5em;
 
     
+}
+
+.printparticipant{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.addparticipant .closeparticipant{
+    background-color: transparent;
+    border: none;
+    /*background-color: transparent;*/
+}
+
+.closeparticipant img{
+    width: 15px;
+    background-color: transparent;
 }

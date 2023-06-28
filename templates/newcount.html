@@ -14,7 +14,7 @@
         <a href="/count" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <div class = "titre">Nouveau tricount</div>
     </header>
-    <div class = "header_images">
+    <!--<div class = "header_images">
         <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
         <img src="{% static 'images/scale.png' %}" alt="scale">
         <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
@@ -35,7 +35,7 @@
         <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
         <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
         <img src="{% static 'images/scale.png' %}" alt="scale">
-    </div>
+    </div>-->
     <main>
         <form method="POST" class = "newtricount" action="/count/newcount/addcount">
             <input class = "newtricount_title" placeholder="Titre" name = "newtricount_title"> 
@@ -51,15 +51,17 @@
                 <option value="project">Projet</option>
                 <option value="other">Autre</option>
             </select>
-            <input class = "submit" type="submit" name = "submit"> 
-            <!--<button class = "submit" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button>-->
+            <button class = "submittricount" name = "submit" href="/count"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
             {% csrf_token %}
         </form>
         <div class = "nb_participants"> Participants (/50)</div>
         <form method="post" class = "addparticipant" action="/count/newcount/addcount/addparticipant">
             <div class = "participants">
                 {% for participant in participants %}
-                <p class = "nameparticipant"> {{participant.name}}</p>
+                <div class = "printparticipant">
+                    <p class = "nameparticipant"> {{participant.name}}</p>
+                    <button class = "closeparticipant"><img src="{%static 'images/close.png'%}" alt="fermeture"></button>
+                </div>
                 {% endfor %}
             </div>
             <input name="new_participant" class ='new_participant' placeholder="Autre participant">
