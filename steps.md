@@ -40,12 +40,13 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`voir si le submit de newcount passe les tests si je le transforme en a ou button. `
     -`je ne peux pas cliquer sur le back de newcount. C'est lié au header images (commenté plus de pb)` 
     -`Débugger le fond bleu de button.`
-    -voir comment on écrit cliquer en css.
-    -Faire une liste de tout ce que contient ce html css très riche et faire des micro étapes.
-    -Mettre le select en cadres arrondis.
+    -`voir comment on écrit cliquer en css.` 
+    -`Mettre le select en cadres arrondis : remplacer mon select par une série de bouton avec des classes différentes. Celui qui est cliqué devient bleu.`
+    -`Quand j'envoie le tricount, on doit récupérer dans view la valeur du bouton cliqué (commande isactive?).`
+    -Ajouter les images au bouton.
     -Ajouter à l'html le nombre de participants créées.
     -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à 50 (resp 500).
-    -Réfléchir d'abord aux différentes solutions pour éliminer les participants créés. Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés. 
+    -Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés. Réfléchir d'abord aux différentes solutions pour éliminer les participants créés 
     -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel. 

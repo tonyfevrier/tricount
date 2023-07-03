@@ -42,7 +42,9 @@
             {% if titre == False %}
                 <p class="error">Le titre doit comporter au moins un caractère.</p>
             {% endif %}
-            <input class = "newtricount_description" placeholder="Description" name = "newtricount_description"> 
+            <input class = "newtricount_description" placeholder="Description" name = "newtricount_description">
+            
+            <!--
             <select class = "newtricount_category" name="newtricount_category" id="newtricount_category">
                 <option value="trip">Voyage</option>
                 <option value="coloc">Coloc</option>
@@ -51,6 +53,23 @@
                 <option value="project">Projet</option>
                 <option value="other">Autre</option>
             </select>
+            -->
+            <p class="title_category"> Catégorie </p> 
+            <div class = "category" name = "category" >
+                <input class = "newtricount_category" type="radio" id="trip" name="newtricount_category" value="trip">
+                <label for="trip">Voyage</label>
+                <input class = "newtricount_category" type="radio" id="coloc" name="newtricount_category" value="coloc">
+                <label for="coloc">Coloc</label>
+                <input class = "newtricount_category" type="radio" id="couple" name="newtricount_category" value="couple">
+                <label for="couple">Couple</label>
+                <input class = "newtricount_category" type="radio" id="event" name="newtricount_category" value="event">
+                <label for="event">Evénement</label>
+                <input class = "newtricount_category" type="radio" id="project" name="newtricount_category" value="project">
+                <label for="project">Projet</label>
+                <input class = "newtricount_category" type="radio" id="other" name="newtricount_category" value="other">
+                <label for="other">Autre</label>
+            </div>
+
             <button class = "submittricount" name = "submit" href="/count"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
             {% csrf_token %}
         </form>

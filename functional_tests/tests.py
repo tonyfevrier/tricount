@@ -39,12 +39,16 @@ class NewVisitorTest(StaticLiveServerTestCase):
         #Il remplit les données d'un nouveau tricount et les envoie
         titlebox = self.browser.find_element(By.NAME,"newtricount_title")
         descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")
-        categorybox = self.browser.find_element(By.NAME,"newtricount_category")
+        #categorybox = self.browser.find_element(By.NAME,"newtricount_category")
+        #categorybox = self.browser.find_element(By.XPATH,"//input[@value='Voyage']")
+        categorybox = self.browser.find_element(By.ID,f"{inputs[2]}")
+
         submitbox = self.browser.find_element(By.NAME,"submit")
         
         titlebox.send_keys(inputs[0])
         descriptionbox.send_keys(inputs[1])
-        categorybox.send_keys(inputs[2])
+        #categorybox.send_keys(inputs[2])
+        categorybox.click()
         
         submitbox.send_keys(Keys.ENTER)
 
@@ -87,7 +91,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.check_participant_appear_on_newcount_page('Heeeeeenri')
 
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
-        self.check_inputs_appear_on_listecount_Page(['Tricount 1','Description 1','Voyage'])
+        self.check_inputs_appear_on_listecount_Page(['Tricount 1','Description 1','trip'])
        
         #Il reclique pour recréer un second tricount.
         link = self.browser.find_element(By.ID,'id_newcount') 
@@ -106,7 +110,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertNotIn('Heeeeeenri', [participant.text for participant in participants])
 
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
-        self.check_inputs_appear_on_listecount_Page(['Tricount 2','Description 2','Projet'])
+        self.check_inputs_appear_on_listecount_Page(['Tricount 2','Description 2','project'])
     
         #Il reclique pour recréer un second tricount
         link = self.browser.find_element(By.ID,'id_newcount') 
@@ -115,10 +119,10 @@ class NewVisitorTest(StaticLiveServerTestCase):
         
         #Il remplit les données d'un nouveau tricount mais oublie de mettre un titre
         # Il est renvoyé vers l'url de remplissagedu tricount avec un message d'erreur affiché en rouge
-        self.check_inputs_appear_on_listecount_Page(['','description 3','Projet'])
+        self.check_inputs_appear_on_listecount_Page(['','description 3','project'])
 
         #Du coup, il rajoute un titre :  
-        self.check_inputs_appear_on_listecount_Page(['Tricount 3','','Projet'])
+        self.check_inputs_appear_on_listecount_Page(['Tricount 3','','project'])
 
         #Il veut créer un nouveau tricount mais change d'avis et après avoir rentré un participant appuie sur le bouton retour en arrière
         #Il atterrit à nouveau sur la liste des tricount.
