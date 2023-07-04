@@ -43,17 +43,7 @@
                 <p class="error">Le titre doit comporter au moins un caractère.</p>
             {% endif %}
             <input class = "newtricount_description" placeholder="Description" name = "newtricount_description">
-            
-            <!--
-            <select class = "newtricount_category" name="newtricount_category" id="newtricount_category">
-                <option value="trip">Voyage</option>
-                <option value="coloc">Coloc</option>
-                <option value="couple">Couple</option>
-                <option value="event">Evénement</option>
-                <option value="project">Projet</option>
-                <option value="other">Autre</option>
-            </select>
-            -->
+             
             <p class="title_category"> Catégorie </p> 
             <div class = "category" name = "category" >
                 <input class = "newtricount_category" type="radio" id="trip" name="newtricount_category" value="trip">
@@ -73,7 +63,7 @@
             <button class = "submittricount" name = "submit" href="/count"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
             {% csrf_token %}
         </form>
-        <div class = "nb_participants"> Participants (/50)</div>
+        <div class = "nb_participants"> Participants ({{number_participants}}/50)</div>
         <form method="post" class = "addparticipant" action="/count/newcount/addcount/addparticipant">
             <div class = "participants">
                 {% for participant in participants %}

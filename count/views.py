@@ -13,7 +13,7 @@ def listecount(request):
 
 def newcount(request):
     items = Participants.objects.filter(number = Counts.objects.count()) 
-    return render(request, 'newcount.html',context={'participants':items})
+    return render(request, 'newcount.html',context={'participants':items, 'number_participants': items.count()})
 
 def addcount(request):
     """

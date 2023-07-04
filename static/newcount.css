@@ -127,6 +127,40 @@ input[type="radio"].newtricount_category:focus + label {
     transition: 0.2s;
 }
 
+.category label::before{
+    content: " ";
+    display: inline-block;
+    background-size: cover;
+    height: 1em;
+    width: 1em; 
+    transform: translate(-5px,2px);
+}
+
+label[for="trip"]::before{ 
+    background-image: url("/static/images/planet-earth.png"); 
+}
+
+label[for="coloc"]::before{ 
+    background-image: url("/static/images/house.png"); 
+}
+
+label[for="couple"]::before{ 
+    background-image: url("/static/images/emoji.png"); 
+}
+
+label[for="event"]::before{ 
+    background-image: url("/static/images/micro.png"); 
+}
+
+label[for="project"]::before{ 
+    background-image: url("/static/images/tools.png"); 
+}
+
+label[for="other"]::before{ 
+    background-image: url("/static/images/point.png"); 
+}
+
+
 .error{
     color: red;
     font-size: 10px;

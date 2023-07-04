@@ -43,11 +43,12 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`voir comment on écrit cliquer en css.` 
     -`Mettre le select en cadres arrondis : remplacer mon select par une série de bouton avec des classes différentes. Celui qui est cliqué devient bleu.`
     -`Quand j'envoie le tricount, on doit récupérer dans view la valeur du bouton cliqué (commande isactive?).`
-    -Ajouter les images au bouton.
-    -Ajouter à l'html le nombre de participants créées.
+    -`Ajouter les images au bouton.`
+    -`Ajouter à l'html le nombre de participants créées.`
+    -`Ajouter au test fonctionnel si l'affichage du nombre est correct.`
     -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à 50 (resp 500).
     -Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés. Réfléchir d'abord aux différentes solutions pour éliminer les participants créés 
-    -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix.
+    -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix. Pour le moment quand je clique sur les croix, ça ajoute des participants.
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel. 
     -Modifier le lien lors de la création du tricount : on va vers la page des dépenses et pas vers la liste des tricounts.
