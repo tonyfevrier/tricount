@@ -84,7 +84,7 @@ class NewcountTest(TestCase):
 
         self.assertIn('Jean', count.participants.first().name)
         self.assertIn('Henri',count.participants.get(pk=2).name)
-        self.assertEqual(0,count.participants.first().number)
+        self.assertEqual(1,count.participants.first().number)
         self.assertEqual(2,count.participants.count())
 
         self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
@@ -104,9 +104,10 @@ class NewcountTest(TestCase):
         """
         number = Participants.objects.count()
         self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
         response = self.client.get('/count/newcount') 
 
         soup = BeautifulSoup(response.content,'html.parser')
-        link = soup.select_one('a#backtotricount')['href'] #on clique sur le + : sorte de send_keys
-        response2 = self.client.get(link)
+        link = soup.select_one('a#backtotricount')['href'] #on clique sur le + : sorte de send_keys 
+        response2 = self.client.get(link+'/')
         self.assertEqual(number,Participants.objects.count())

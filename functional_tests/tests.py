@@ -38,16 +38,13 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         #Il remplit les données d'un nouveau tricount et les envoie
         titlebox = self.browser.find_element(By.NAME,"newtricount_title")
-        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")
-        #categorybox = self.browser.find_element(By.NAME,"newtricount_category")
-        #categorybox = self.browser.find_element(By.XPATH,"//input[@value='Voyage']")
+        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description") 
         categorybox = self.browser.find_element(By.ID,f"{inputs[2]}")
 
         submitbox = self.browser.find_element(By.NAME,"submit")
         
         titlebox.send_keys(inputs[0])
-        descriptionbox.send_keys(inputs[1])
-        #categorybox.send_keys(inputs[2])
+        descriptionbox.send_keys(inputs[1]) 
         categorybox.click()
         
         submitbox.send_keys(Keys.ENTER)
@@ -142,4 +139,12 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         self.assertEqual(self.browser.current_url, url + '/count/')
 
+        #Il clique pour créer un nouveau tricount et voit que les participants précédemment entrés ne sont pas sur la page
+        link = self.browser.find_element(By.ID,'id_newcount') 
+        link.send_keys(Keys.ENTER)
+        time.sleep(2)  
+
+        participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
+        self.assertNotIn('Jeanine',[participant.text for participant in participants])
+        
 

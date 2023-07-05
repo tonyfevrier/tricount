@@ -46,18 +46,19 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`Ajouter les images au bouton.`
     -`Ajouter à l'html le nombre de participants créées.`
     -`Ajouter au test fonctionnel si l'affichage du nombre est correct.`
-    -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à 50 (resp 500).
-    -Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés. Réfléchir d'abord aux différentes solutions pour éliminer les participants créés 
-    -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix. Pour le moment quand je clique sur les croix, ça ajoute des participants.
+    -`Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés. Réfléchir d'abord aux différentes solutions pour éliminer les participants créés.` 
     -Ajouter un lien vers un choix de devise qui mène à une autre page html.
     - Test fonctionnel. 
     -Modifier le lien lors de la création du tricount : on va vers la page des dépenses et pas vers la liste des tricounts.
-
+   
+    -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à 50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel.
+    -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix. Pour le moment quand je clique sur les croix, ça ajoute des participants. (Je pense que j'ai besoin de JS aussi).
 
 
 # Bugs intéressants 
     - TIME SEND KEYS : Après send_Keys, il faut laisser du temps pour que la page se charge.
     - URL : Faire bien attention à respecter le fait qu'il y ait ou non / dans les adresses (faire pareil que dans le path : si j'ai mis count/ dans le path il faut le mettre après dans les redirections) sinon on aura une réponse inappropriée ( 404 ou autre).
+    - URL SELECTONE : la méthode selectone de BeautifoulSoup donne l'url sans / à la fin. Attention à ne pas oublier de le rajouter si nécessaire.
     - FAUX BUG de redirect : quand on utilise la fonction post du client et que cela mène à une redirection, la réponse n'a pas de contenu c'est juste une redirection même si on redirige vers une autre fonction de view qui elle a un contenu.
     - CSS NON CHARGE : quand je mets à jour un css et que je lance le serveur, le css n'est pas forcément appliqué. Le navigateur utilise en fait l'ancien css gardé dans la mémoire cache. Il suffit de supprimer le cache dans l'historique récent.
     - STATICLIVESERVER : Attention avec Liveservertestcase, les tests fonctionnels ne parviennent pas à charger les fichiers css. Il faut utiliser le serveur de test Staticliveservertestcase.
