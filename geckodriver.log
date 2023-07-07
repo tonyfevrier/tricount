@@ -8328,3 +8328,26 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: http://l
 console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:64814."
 1688545759899	Marionette	INFO	Stopped listening on port 64828
 Dynamically enable window occlusion 1
+1688750861549	geckodriver	INFO	Listening on 127.0.0.1:61129
+1688750864629	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "61130" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofilev9Hsdm"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1688750864947	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1688750864955	Marionette	INFO	Listening on port 61141
+Read port: 61141
+WebDriver BiDi listening on ws://127.0.0.1:61130
+1688750865091	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:61130/devtools/browser/dd8e15c4-8f93-4b36-8a17-ba2445413905
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:61128."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:61128."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:61128."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:61128."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:61128."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:61128."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:61128."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:61128."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:61128."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:61128."
+1688750909703	Marionette	INFO	Stopped listening on port 61141
+Dynamically enable window occlusion 1
