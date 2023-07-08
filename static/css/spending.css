@@ -1,0 +1,104 @@
+*{
+    box-sizing: border-box;
+    margin : 0;
+    font-size: 14px;
+}
+
+:root{
+    --padding:0.5em;
+    --color:rgb(71, 71, 199);
+}
+
+
+header{
+    background-color: var(--color);
+    color: white;
+    height: 7em;
+}
+
+.header-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+}
+
+.header-nav a{
+    text-decoration: none;
+    color : white;
+}
+ 
+.tricount-characteristics p:first-child{
+    font-size: 1.2em;
+}
+
+.tricount-characteristics p:last-child{
+    font-size: 0.8em;
+    opacity: 0.9;
+}
+
+.backtolistecount img{
+    width : 20px; 
+}
+
+.header-spending{
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+}
+
+.header-spending button{ 
+    width: 50%;
+    height : 3.5em;
+    background-color: transparent;
+    color: white;
+    border: none;
+    opacity: 0.7;
+}
+
+.header-spending button:focus{
+    opacity: 1;
+}
+
+.header-spending button:focus::after{
+    content: "";
+    display: block;
+    height:2px;
+    width: 100%;
+    background-color: orange;
+    transform: translate(0,1.25em);
+}
+
+main{
+    background-color: white;
+    
+}
+
+body{
+    background-color: lightgray;
+}
+
+.spending{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding: 0.5em 1em;
+}
+
+.spending-reason p:first-child, .spending-amount p:first-child{
+    color:var(--color)
+ 
+}
+
+.spending-reason p:last-child{
+    font-size: 0.8em;
+    opacity: 0.8;
+} 
+
+.spending-amount p:last-child{
+    font-size:0.7em;
+    opacity: 0.5; 
+    text-align: end;
+}
