@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nouveau tricount</title>
-    <link rel="stylesheet" href="{% static 'newcount.css' %}">
+    <link rel="stylesheet" href="{% static 'css/newcount.css' %}">
 </head>
 <body>
     <header> 
@@ -43,8 +43,9 @@
                 <p class="error">Le titre doit comporter au moins un caractère.</p>
             {% endif %}
             <input class = "newtricount_description" placeholder="Description" name = "newtricount_description">
-             
             
+            
+
             <p class="title_category"> Catégorie </p> 
             <div class = "category" name = "category" >
                 <input class = "newtricount_category" type="radio" id="trip" name="newtricount_category" value="trip">

@@ -50,8 +50,15 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`Créer l'adresse de la page des devises.`
     -`Créer un html.`
     -`Créer une fonction vue qui pointe vers l'html des devises. Faire passer le currency json.`
-    -Modifier le lien lors de la création du tricount : on va vers la page des dépenses et pas vers la liste des tricounts.
-    -Modifier le code pour mettre les fichiers css dans un dossier nommé css.
+    -`Modifier le code pour mettre les fichiers css dans un dossier nommé css.`
+    -`Modifier le lien lors de la création du tricount : on va vers la page des dépenses et pas vers la liste des tricounts.`
+        `Créer une nouvelle p html, une url and une vue pour les dépenses.`
+        `Test fonctionnel : on doit arriver sur l'url dépense quand on valide un tricount. Modifier aussi les tests unitaires qui buggeraient.`
+        `Test fonctionnel : quand il est sur dépense et qu'il revient en arrière,  on tombe sur le liste des tricount avec les bonnes choses à l'intérieur.`
+        `Modifier la fonction vue newcount pour qu'on arrive sur l'html des dépenses quand on valide le tricount.` 
+    -Améliorer le style de spending.html.
+    
+
 
     -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à 50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel.
     -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix. Pour le moment quand je clique sur les croix, ça ajoute des participants. (Je pense que j'ai besoin de JS aussi).

@@ -48,15 +48,24 @@ class NewVisitorTest(StaticLiveServerTestCase):
         categorybox.click()
 
         #He chooses to go on the currency page:
-        
+        #To complete when JS learned.
         
         submitbox.send_keys(Keys.ENTER)
 
         time.sleep(3)
 
-        #Il met un titre
+        #Il met un titre :
         if inputs[0] != "":
+            #self.assertEqual(self.browser.current_url, self.live_server_url + '/count/') 
+            self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount') 
+
+            back = self.browser.find_element(By.CLASS_NAME,'backtolistecount')
+            back.send_keys(Keys.ENTER)
+            time.sleep(2)
+
             self.assertEqual(self.browser.current_url, self.live_server_url + '/count/') 
+
+
 
             self.assertIn('Tricount',self.browser.title)
 

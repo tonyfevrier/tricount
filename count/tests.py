@@ -44,7 +44,7 @@ class NewcountTest(TestCase):
         self.assertEqual("Tricount 1",count.title)
         self.assertEqual("Description 1", count.description)
         self.assertEqual("Voyage", count.category)
-        self.assertRedirects(response, '/count/')  
+        self.assertRedirects(response, '/count/tricount')  
 
     def test_lack_title_newcountinputs(self):
         """

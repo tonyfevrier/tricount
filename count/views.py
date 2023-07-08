@@ -34,7 +34,7 @@ def addcount(request):
         for participant in participants:
             if participant.number == Counts.objects.count() :
                 count.participants.add(participant)
-        return redirect('/count/')
+        return redirect('/count/tricount')
     else: 
         return render(request,'newcount.html', context={'titre':False})
     
@@ -58,3 +58,9 @@ def choosecurrency(request):
     Function which leads to the choice of the payment currency
     """
     return render(request, 'currency.html')
+
+def spending(request):
+    """
+    Function which leads to the spending of a given tricount.
+    """
+    return render(request, "spending.html")
