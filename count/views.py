@@ -52,3 +52,9 @@ def addparticipant(request):
     #Creation of the participant assignated to a tricount number.
     Participants.objects.create(name = request.POST["new_participant"], number = Counts.objects.count() + 1)
     return redirect('/count/newcount')
+
+def choosecurrency(request):
+    """
+    Function which leads to the choice of the payment currency
+    """
+    return render(request, 'currency.html')

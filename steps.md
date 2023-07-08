@@ -47,12 +47,20 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`Ajouter à l'html le nombre de participants créées.`
     -`Ajouter au test fonctionnel si l'affichage du nombre est correct.`
     -`Faire en sorte qui si on clique sur retour, les participants éventuellement enregistrés en bdd soient supprimés. Réfléchir d'abord aux différentes solutions pour éliminer les participants créés.` 
-    -Ajouter un lien vers un choix de devise qui mène à une autre page html.
-    - Test fonctionnel. 
+    -`Créer l'adresse de la page des devises.`
+    -`Créer un html.`
+    -`Créer une fonction vue qui pointe vers l'html des devises. Faire passer le currency json.`
     -Modifier le lien lors de la création du tricount : on va vers la page des dépenses et pas vers la liste des tricounts.
-   
+    -Modifier le code pour mettre les fichiers css dans un dossier nommé css.
+
     -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à 50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel.
     -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix. Pour le moment quand je clique sur les croix, ça ajoute des participants. (Je pense que j'ai besoin de JS aussi).
+    -Ajouter dans devise.html la recherche de currency (JS sûrement nécessaire).
+    -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il semble que JS soit nécessaire pour revenir.
+    - Test fonctionnel. 
+    -Ajouter à l'html les devises via le json.
+    -Faire le css de l'html
+    -Test fonctionnel pour voir si tout est affiché et si on va vers la bonne url.
 
 
 # Bugs intéressants 

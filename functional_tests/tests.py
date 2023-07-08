@@ -46,11 +46,15 @@ class NewVisitorTest(StaticLiveServerTestCase):
         titlebox.send_keys(inputs[0])
         descriptionbox.send_keys(inputs[1]) 
         categorybox.click()
+
+        #He chooses to go on the currency page:
+        
         
         submitbox.send_keys(Keys.ENTER)
 
         time.sleep(3)
 
+        #Il met un titre
         if inputs[0] != "":
             self.assertEqual(self.browser.current_url, self.live_server_url + '/count/') 
 
@@ -62,6 +66,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
             self.assertIn(inputs[0],[titre.text for titre in title]) 
             self.assertIn(inputs[1] or 'Pas de description',[desc.text for desc in description])
         
+        #Il oublie de mettre un titre.
         else:
             self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount/addcount')
             msg = self.browser.find_element(By.CLASS_NAME,'error')
