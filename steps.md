@@ -57,7 +57,10 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `Test fonctionnel : quand il est sur dépense et qu'il revient en arrière,  on tombe sur le liste des tricount avec les bonnes choses à l'intérieur.`
         `Modifier la fonction vue newcount pour qu'on arrive sur l'html des dépenses quand on valide le tricount.` 
     -Améliorer le style de spending.html.
-    
+        ajouter les symboles
+    -faire en sorte que l'url de la dépense soit associée au tricount (que chaque tricount ait sa page dépense).
+    -ajouter les données du tricount dans spending.html (remplacer name tricount).
+
 
 
     -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à 50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel.
