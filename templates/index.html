@@ -42,10 +42,12 @@
 
     <main>
         {% for count in counts %}
-        <div class="tricount"> 
-            <p class = "tricount_title"> {{count.title}} </p>
-            <p class = "tricount_description"> {{count.description}} </p>
-        </div>
+        <a class = "link-tricount" id="link-tricount" href="/count/tricount">
+            <div class="tricount"> 
+                <p class = "tricount_title"> {{count.title}} </p>
+                <p class = "tricount_description"> {{count.description}} </p>
+            </div>
+        </a>
         {% endfor %}
     </main>
     <footer>

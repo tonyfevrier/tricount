@@ -56,21 +56,29 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `Test fonctionnel : on doit arriver sur l'url dépense quand on valide un tricount. Modifier aussi les tests unitaires qui buggeraient.`
         `Test fonctionnel : quand il est sur dépense et qu'il revient en arrière,  on tombe sur le liste des tricount avec les bonnes choses à l'intérieur.`
         `Modifier la fonction vue newcount pour qu'on arrive sur l'html des dépenses quand on valide le tricount.` 
-    -Améliorer le style de spending.html.
-        ajouter les symboles
+    -`Améliorer le style de spending.html.`
+        `ajouter les symboles`
     -faire en sorte que l'url de la dépense soit associée au tricount (que chaque tricount ait sa page dépense).
-    -ajouter les données du tricount dans spending.html (remplacer name tricount).
+        `commencer par transformer les counts de listecount en liens vers la page tricount.`
+        associer l'id du tricount à l'url : url à changer, view à changer (passer le nom du tricount et des participts grâce à l'id du count qui sera pk).
+        changer le test count en créant deux url et en vérifiant qu'on tombe bien sur deux url différentes.
+        -ajouter les données du tricount dans spending.html (remplacer name tricount).
+        test fonctionnel : cliquer sur deux liens différents et voir si on tombe sur deux url uniques associées au bon tricount. Vérifier que le bon nom de tricount est inscrit.
+    - voir comment obliger à ce qu'il y ait au moins un participant pour valider le tricount.
+    
 
 
-
-    -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à 50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel.
-    -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la petite croix. Pour le moment quand je clique sur les croix, ça ajoute des participants. (Je pense que j'ai besoin de JS aussi).
-    -Ajouter dans devise.html la recherche de currency (JS sûrement nécessaire).
-    -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il semble que JS soit nécessaire pour revenir.
-    - Test fonctionnel. 
-    -Ajouter à l'html les devises via le json.
-    -Faire le css de l'html
-    -Test fonctionnel pour voir si tout est affiché et si on va vers la bonne url.
+    Points qui nécessitent sûrement JS.
+        -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à   50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel.
+        -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la  petite croix. Pour le moment quand je clique sur les croix, ça ajoute des    participants. (Je pense que j'ai besoin de JS aussi).
+        -Ajouter dans devise.html la recherche de currency (JS sûrement nécessaire).
+        -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il   semble que JS soit nécessaire pour revenir.
+        - Test fonctionnel. 
+        -Ajouter à l'html les devises via le json.
+        -Faire le css de l'html
+        -Test fonctionnel pour voir si tout est affiché et si on va vers la bonne url.
+        -pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : 
+        -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît.
 
 
 # Bugs intéressants 
@@ -82,6 +90,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - STATICLIVESERVER : Attention avec Liveservertestcase, les tests fonctionnels ne parviennent pas à charger les fichiers css. Il faut utiliser le serveur de test Staticliveservertestcase.
     - GET(Pk=1) différent de first() : first() ne correspond pas forcément à pk=1 quand on veut récupérer un objet. Il se peut qu'on ait créé des objets avant comme pour ma classe participants par exemple. 
     - FORM SUBMIT : Il semble que si on remplace le input ayant la classe submit par un button avec la même classe, l'envoie des données se fasse alors que si on choisit un a cela n'envoie plus les données.
+    - SELECTONE ID : attention quand on sélectionne un élément via a#qqch, qqch est l'identifiant (repéré par un # comme en css). qqch ne peut être la classe.
     
 
 # Mes difficultés principales

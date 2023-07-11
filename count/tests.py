@@ -39,6 +39,7 @@ class NewcountTest(TestCase):
         Fonction qui teste si les données entrées par l'utilisateur sont bien récupérées et si la redirection vers la page d'origine est effective.
         """
         response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+        
         count = Counts.objects.first()
 
         self.assertEqual("Tricount 1",count.title)
@@ -111,3 +112,17 @@ class NewcountTest(TestCase):
         link = soup.select_one('a#backtotricount')['href'] #on clique sur le + : sorte de send_keys 
         response2 = self.client.get(link+'/')
         self.assertEqual(number,Participants.objects.count())
+
+    def test_click_on_count(self):
+        """
+        Function checking if we go on the good link after clicking on a tricount.
+        """ 
+        #We create one tricount
+        response = self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+           
+        #We go on the list of the tricounts
+        response = self.client.get('/count/')
+        soup = BeautifulSoup(response.content, 'html.parser')
+        link = soup.select_one('a#link-tricount')['href'] 
+
+        self.assertEqual(link,'/count/tricount')
