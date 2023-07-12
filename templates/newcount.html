@@ -62,7 +62,7 @@
                 <label for="other">Autre</label>
             </div>
 
-            <button class = "submittricount" name = "submit" href="/count"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
+            <button class = "submittricount" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
             {% csrf_token %}
         </form>
         <div class = "nb_participants"> Participants ({{number_participants}}/50)</div>

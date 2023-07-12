@@ -6,6 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 
+from count.models import Counts
+
 class NewVisitorTest(StaticLiveServerTestCase): 
 
     def setUp(self):
@@ -55,9 +57,10 @@ class NewVisitorTest(StaticLiveServerTestCase):
         time.sleep(3)
 
         #Il met un titre :
-        if inputs[0] != "":
+        if inputs[0] != "": 
             #self.assertEqual(self.browser.current_url, self.live_server_url + '/count/') 
-            self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount') 
+            id_count = Counts.objects.count()
+            self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount/' + str(id_count) ) 
 
             back = self.browser.find_element(By.CLASS_NAME,'backtolistecount')
             back.send_keys(Keys.ENTER)
@@ -81,7 +84,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
             msg = self.browser.find_element(By.CLASS_NAME,'error')
             self.assertIn('Le titre doit comporter au moins un caractère.',msg.text)
     
-    def test_listecount_Page(self):
+    def test_tricount_creation(self):
         
         #Le visiteur arrive sur la page il voit le titre. 
         url = self.live_server_url  
@@ -160,5 +163,21 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
         self.assertNotIn('Jeanine',[participant.text for participant in participants])
-        
 
+        back = self.browser.find_element(By.CLASS_NAME,'backtotricount')
+        back.send_keys(Keys.ENTER)
+        time.sleep(2)
+        #Il clique maintenant sur les tricounts existant pour vérifier que les informations du tricount sont correctes. 
+        
+        link = self.browser.find_element(By.ID,"link-tricount-3")
+        link.send_keys(Keys.ENTER)
+        time.sleep(2) 
+
+        self.assertEqual(self.browser.current_url, url + "/count/tricount/3")
+
+        count = Counts.objects.get(id=3)
+        tricount_title = self.browser.find_element(By.CLASS_NAME,"tricount-title")
+        tricount_participants = self.browser.find_element(By.CLASS_NAME,"tricount-participants")
+
+        self.assertEqual(tricount_title.text, count.title)
+        self.assertEqual(tricount_participants.text,count.participants.all()) 

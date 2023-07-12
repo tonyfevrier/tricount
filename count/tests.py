@@ -45,7 +45,7 @@ class NewcountTest(TestCase):
         self.assertEqual("Tricount 1",count.title)
         self.assertEqual("Description 1", count.description)
         self.assertEqual("Voyage", count.category)
-        self.assertRedirects(response, '/count/tricount')  
+        self.assertRedirects(response, '/count/tricount/1')  
 
     def test_lack_title_newcountinputs(self):
         """
@@ -117,12 +117,20 @@ class NewcountTest(TestCase):
         """
         Function checking if we go on the good link after clicking on a tricount.
         """ 
-        #We create one tricount
-        response = self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
-           
+        #We create two tricounts
+        self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+        self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 2", "newtricount_description":"description 2", "newtricount_category":"Coloc"})
+    
         #We go on the list of the tricounts
         response = self.client.get('/count/')
-        soup = BeautifulSoup(response.content, 'html.parser')
-        link = soup.select_one('a#link-tricount')['href'] 
 
-        self.assertEqual(link,'/count/tricount')
+        soup = BeautifulSoup(response.content, 'html.parser')
+        link = soup.select_one('a#link-tricount-2')['href'] 
+
+        self.assertEqual(link,'/count/tricount/2')
+
+        soup = BeautifulSoup(response.content, 'html.parser')
+        link = soup.select_one('a#link-tricount-1')['href'] 
+
+        self.assertEqual(link,'/count/tricount/1')
+

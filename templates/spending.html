@@ -13,8 +13,8 @@
         <nav class = "header-nav"> 
             <a href="/count" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
             <div class = "tricount-characteristics" >
-                <p>Name tricount</p>
-                <p>Tricount participants</p>
+                <p class = "tricount-title">{{count.title}}</p>
+                <p class = "tricount-participants">{{2}}</p>
             </div>
             <a href=""><img width = 20px src="{%static 'images/loupe.png'%}" alt="loupe de recherche"></a>
             <a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>

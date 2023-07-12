@@ -60,10 +60,12 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `ajouter les symboles`
     -faire en sorte que l'url de la dépense soit associée au tricount (que chaque tricount ait sa page dépense).
         `commencer par transformer les counts de listecount en liens vers la page tricount.`
-        associer l'id du tricount à l'url : url à changer, view à changer (passer le nom du tricount et des participts grâce à l'id du count qui sera pk).
-        changer le test count en créant deux url et en vérifiant qu'on tombe bien sur deux url différentes.
-        -ajouter les données du tricount dans spending.html (remplacer name tricount).
-        test fonctionnel : cliquer sur deux liens différents et voir si on tombe sur deux url uniques associées au bon tricount. Vérifier que le bon nom de tricount est inscrit.
+        `associer l'id du tricount à l'url : url à changer, view à changer (passer le nom du tricount et des participts grâce à l'id du count qui sera pk).`
+        `Modifier aussi la fonction addcount pr rediriger vers la bonne url.`
+        `Faire en sorte que quand on clique sur le tricount dans index on soit dirigé vers le bon tricount.`
+        `changer le test count en créant deux url et en vérifiant qu'on tombe bien sur deux url différentes.`
+        -ajouter les données du tricount dans spending.html (remplacer name tricount et syr tout les participants). Comment récupérer le nom des participants?
+        test fonctionnel : cliquer sur deux liens différents et voir si on tombe sur deux url uniques associées au bon tricount. Vérifier que le bon nom de tricount et les participants est inscrit.
     - voir comment obliger à ce qu'il y ait au moins un participant pour valider le tricount.
     
 
