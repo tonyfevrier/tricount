@@ -207,3 +207,80 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.check_links_of_listecounts_leads_to_the_good_tricount(1,'Jean')
         self.check_links_of_listecounts_leads_to_the_good_tricount(2, 'Tony', 'Dulcinée', 'Annie')
         
+class RegisterSpending(StaticLiveServerTestCase):
+    def setUp(self) -> None:
+        self.browser = webdriver.Firefox()
+        self.browser.implicitly_wait(3)
+    
+    def tearDown(self) -> None:
+        self.browser.quit()
+
+    def create_a_tricount(self,title, description, category,*participants):
+        self.browser.get(self.live_server_url+ '/count')
+
+        #Clicks to add a tricount
+        link = self.browser.find_element(By.ID,'id_newcount') 
+        link.send_keys(Keys.ENTER)
+        time.sleep(2)  
+
+        #Enter the participants
+        participantbox = self.browser.find_element(By.NAME,"new_participant")
+        buttonbox = self.browser.find_element(By.CLASS_NAME,"add_participant")
+        for participant in participants:
+            participantbox.send_keys(participant)
+            buttonbox.send_keys(Keys.ENTER)
+
+        #Enter  the other characteristics
+        titlebox = self.browser.find_element(By.NAME,"newtricount_title")
+        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description") 
+        categorybox = self.browser.find_element(By.ID,f"{category}") 
+        submitbox = self.browser.find_element(By.NAME,"submit")
+        
+        titlebox.send_keys(title)
+        descriptionbox.send_keys(description) 
+        categorybox.click()
+
+        #He chooses to go on the currency page: 
+        submitbox.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+    def click_on_an_exiting_tricount(self,tricount_number):
+        """
+        Function which clicks on a tricount and check the title and the participants are the good ones.
+        participants : the participants we want to verify the presence.
+        """
+        link = self.browser.find_element(By.ID,"link-tricount-" + str(tricount_number))
+        link.send_keys(Keys.ENTER)
+        time.sleep(2) 
+
+    def click_on_create_spending(self):
+        link_spending = self.browser.find_element(By.CLASS_NAME,'new-spending')
+        link_spending.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+    def test_spending_creation(self):
+        #A tricount is created et come back to the listecount page
+        self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri")
+        back = self.browser.find_element(By.CLASS_NAME,'backtolistecount')
+        back.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+        #The user clicks on an existing tricount 
+        self.click_on_an_exiting_tricount(1)
+
+        #The user clicks to add a new spending
+        self.click_on_create_spending()
+
+        self.assertEqual(self.browser.current_url,self.live_server_url + '/count/tricount/1/spending')
+
+
+        #He enters the title, amount the payer and for who the payer paid
+
+        #He is then redirected to the spending list.
+
+        #He forgets to put a title, a message of error appears and he stays on the page.
+
+        #He forgets to put who is the payer, by default it is the first participant.
+
+        #He forgets to put for who he pays, by default it's for all participants.
+        

@@ -161,7 +161,7 @@ label[for="other"]::before{
 }
 
 
-.error{
+.error,.participant-error{
     color: red;
     font-size: 10px;
 }

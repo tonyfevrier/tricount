@@ -9,4 +9,5 @@ urlpatterns = [
     path('newcount/addcount/addparticipant',countviews.addparticipant, name = "addparticipant"),
     path('newcount/currency',countviews.choosecurrency,name = "choosecurrency"),
     path('tricount/<int:id_count>', countviews.spending, name = "spending"), 
+    path('tricount/<int:id_count>/spending', countviews.newspending,name = "newspending")
 ]

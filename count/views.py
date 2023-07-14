@@ -81,3 +81,6 @@ def spending(request,id_count):
     participants = count.participants.filter(number = count.id)
     participants_name = [participant.name for participant in participants]
     return render(request, "spending.html", context = {'count':count,'names':participants_name})
+
+def newspending(request,id_count):
+    return render(request, 'newspending.html')

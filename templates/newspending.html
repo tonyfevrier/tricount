@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New spending</title>
+    <link rel="stylesheet" href="{% static 'css/newspending.css'' %}">
+</head>
+<body>
+    <header>
+        <a href="" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <p class = "header-title">Nouvelle dépense</p>
+    </header>
+    <main>
+        <form action="">
+            <input class = "title" type="text" placeholder="Titre">
+            <input class = "amount" type="text" placeholder="Montant" id="amount">
+            <label for="amount">EUR</label>
+            <select class = "spender" name="spender" id="spender">
+                <option value="">Participant 1</option>
+                <option value="">Participant 2</option>
+            </select> 
+            <p class = "forwho">Pour qui</p>
+            <input class = "receiver" type="checkbox" name="" id="Participant1">
+            <label for="Participant1">Participant 1</label>
+            <input class = "receiver" type="checkbox" name="" id="Participant2">
+            <label for="Participant2">Participant 2</label>
+        </form>
+    </main>
+</body>
+</html>
