@@ -11,31 +11,9 @@
 </head>
 <body>
     <header> 
-        <a href="/count" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="/count/" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <div class = "titre">Nouveau tricount</div>
-    </header>
-    <!--<div class = "header_images">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-    </div>-->
+    </header> 
     <main>
         <form method="POST" class = "newtricount" action="/count/newcount/addcount">
             <input class = "newtricount_title" placeholder="Titre" name = "newtricount_title"> 
@@ -77,6 +55,9 @@
             </div>
             <input name="new_participant" class ='new_participant' placeholder="Autre participant">
             <button class = "add_participant">Ajouter</button>
+            {% if ptcpt == False %}
+                <p class="participant-error">Il faut au moins un participant.</p>
+            {% endif %}
             {% csrf_token %}
         </form>
     </main>

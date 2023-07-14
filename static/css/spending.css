@@ -32,7 +32,8 @@ header{
     font-size: 1.2em;
 }
 
-.tricount-characteristics p:last-child{
+.tricount-participants{
+    display: inline;
     font-size: 0.8em;
     opacity: 0.9;
 }

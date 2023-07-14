@@ -58,15 +58,20 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `Modifier la fonction vue newcount pour qu'on arrive sur l'html des dépenses quand on valide le tricount.` 
     -`Améliorer le style de spending.html.`
         `ajouter les symboles`
-    -faire en sorte que l'url de la dépense soit associée au tricount (que chaque tricount ait sa page dépense).
+    `-faire en sorte que l'url de la dépense soit associée au tricount (que chaque tricount ait sa page dépense).`
         `commencer par transformer les counts de listecount en liens vers la page tricount.`
         `associer l'id du tricount à l'url : url à changer, view à changer (passer le nom du tricount et des participts grâce à l'id du count qui sera pk).`
         `Modifier aussi la fonction addcount pr rediriger vers la bonne url.`
         `Faire en sorte que quand on clique sur le tricount dans index on soit dirigé vers le bon tricount.`
         `changer le test count en créant deux url et en vérifiant qu'on tombe bien sur deux url différentes.`
-        -ajouter les données du tricount dans spending.html (remplacer name tricount et syr tout les participants). Comment récupérer le nom des participants?
-        test fonctionnel : cliquer sur deux liens différents et voir si on tombe sur deux url uniques associées au bon tricount. Vérifier que le bon nom de tricount et les participants est inscrit.
-    - voir comment obliger à ce qu'il y ait au moins un participant pour valider le tricount.
+        `ajouter les données du tricount dans spending.html (remplacer name tricount et syr tout les participants). Comment récupérer le nom des participants?`
+        `comment mesurer le nombre d'objets d'un query set.`
+        `test fonctionnel : cliquer sur deux liens différents et voir si on tombe sur deux url uniques associées au bon tricount. Vérifier que le bon nom de tricount et les participants est inscrit.`
+        `Bug : quand on reclique sur le tricount 2 (fin de test fonctionnel) le titre est là, en revanche les participants ont disparu.`
+        `voir comment obliger à ce qu'il y ait au moins un participant pour valider le tricount : le bug est lié au fait qu'on peut créer un count sans participant du coup dans listecount on passe dans la condition d'élimination des participants;`
+        `Factoriser le test fonctionnel , factoriser les fonctions check aussi en plusieurs fonctions élémentaires.`
+        `dans spending et newcount, voir si /count ou /count/ (les tests fonc marchent avec les deux mais pas les tests unitaires qu'il faut débugger avec /count/)`
+    
     
 
 

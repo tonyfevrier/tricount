@@ -7,7 +7,7 @@ from count.func import majuscule
 
 def listecount(request):    
     #If tricount is not created, participants created are deleted    
-    if Participants.objects.last() != None:
+    if Participants.objects.last() != None: 
         if Participants.objects.last().number != Counts.objects.count():
             Participants.objects.filter(number = Participants.objects.last().number).delete()
 
@@ -24,18 +24,31 @@ def addcount(request):
     """
     titre = request.POST["newtricount_title"]
     descption = request.POST["newtricount_description"]
-    participants = Participants.objects.all()
-    if titre != "":
-        if descption != "":
-            count = Counts.objects.create(title = majuscule(titre), description = majuscule(descption),category = request.POST["newtricount_category"] )
+    last_participant = Participants.objects.last() 
+
+    if titre != "":# and last_participant != None and last_participant.number == Counts.objects.count() + 1:
+        if last_participant == None or last_participant.number != Counts.objects.count() + 1:
+            #No participants have been added.
+            return render(request,'newcount.html', context={'ptcpt':False})
         else:
-            count = Counts.objects.create(title = majuscule(titre), description = "Pas de description",category = request.POST["newtricount_category"] )
-        #We associate new participants to the tricount
-        for participant in participants:
-            if participant.number == Counts.objects.count() :
-                count.participants.add(participant) 
-        return redirect('/count/tricount/'+ str(count.id))
-    else: 
+            if descption != "":
+                count = Counts.objects.create(title = majuscule(titre), description = majuscule(descption),category = request.POST["newtricount_category"] )
+            else:
+                count = Counts.objects.create(title = majuscule(titre), description = "Pas de description",category = request.POST["newtricount_category"] )
+
+            #We associate new participants to the tricount
+            participants = Participants.objects.filter(number = Counts.objects.count())
+    
+            #print(participants.count())
+            #If there is no participant, the count is not validated.
+            #if participants.count() == 0:
+            #    return render(request,'newcount.html')
+            #else:
+            for participant in participants:
+                if participant.number == Counts.objects.count() :
+                    count.participants.add(participant) 
+            return redirect('/count/tricount/'+ str(count.id))
+    else:  
         return render(request,'newcount.html', context={'titre':False})
     
 def addparticipant(request):
@@ -64,6 +77,7 @@ def spending(request,id_count):
     Function which leads to the spending of a given tricount.
     """
     count = Counts.objects.get(id=id_count) 
-    participt = Participants.objects.filter(number = count.id) 
-    print(participt)
-    return render(request, "spending.html", context = {'count':count})
+    #participt = Participants.objects.filter(number = count.id) 
+    participants = count.participants.filter(number = count.id)
+    participants_name = [participant.name for participant in participants]
+    return render(request, "spending.html", context = {'count':count,'names':participants_name})

@@ -38,6 +38,8 @@ class NewcountTest(TestCase):
         """
         Fonction qui teste si les données entrées par l'utilisateur sont bien récupérées et si la redirection vers la page d'origine est effective.
         """
+
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
         response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
         
         count = Counts.objects.first()
@@ -49,16 +51,30 @@ class NewcountTest(TestCase):
 
     def test_lack_title_newcountinputs(self):
         """
-        Fonction qui regarde si lorsqu'on tente de créer un tricount sans titre ou sans catégorie, il n'y a pas de nouvel objet dans la bdd
+        Fonction qui regarde si lorsqu'on tente de créer un tricount sans titre, il n'y a pas de nouvel objet dans la bdd
         et on a dans la réponse html un message en rouge indiquant que le titre et la catégorie doivent être remplis.
         """    
         one = Counts.objects.count()
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
         response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
         two = Counts.objects.count() 
 
         self.assertEqual(one,two)
         self.assertTemplateUsed(response,"newcount.html")
         self.assertContains(response,"Le titre doit comporter au moins un caractère.")
+
+    def test_lack_participant_newcountinputs(self):
+        """
+        Fonction qui regarde si lorsqu'on tente de créer un tricount sans participant, il n'y a pas de nouvel objet dans la bdd
+        et on a dans la réponse html un message en rouge indiquant qu'il faut un participant.
+        """    
+        one = Counts.objects.count()
+        response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"Tricount sans participant", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+        two = Counts.objects.count() 
+
+        self.assertEqual(one,two)
+        self.assertTemplateUsed(response,"newcount.html")
+        self.assertContains(response,"Il faut au moins un participant")
 
     def test_redirection_when_add_participants(self):
         """
@@ -110,7 +126,7 @@ class NewcountTest(TestCase):
 
         soup = BeautifulSoup(response.content,'html.parser')
         link = soup.select_one('a#backtotricount')['href'] #on clique sur le + : sorte de send_keys 
-        response2 = self.client.get(link+'/')
+        response2 = self.client.get(link)
         self.assertEqual(number,Participants.objects.count())
 
     def test_click_on_count(self):
@@ -118,7 +134,11 @@ class NewcountTest(TestCase):
         Function checking if we go on the good link after clicking on a tricount.
         """ 
         #We create two tricounts
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
         self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+       
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Roberto"})
         self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 2", "newtricount_description":"description 2", "newtricount_category":"Coloc"})
     
         #We go on the list of the tricounts
@@ -133,4 +153,8 @@ class NewcountTest(TestCase):
         link = soup.select_one('a#link-tricount-1')['href'] 
 
         self.assertEqual(link,'/count/tricount/1')
+
+        response = self.client.get(link)
+
+        self.assertIn(b'Henri',response.content)
 
