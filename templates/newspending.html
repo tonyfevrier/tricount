@@ -16,17 +16,21 @@
     <main>
         <form action="">
             <input class = "title" type="text" placeholder="Titre">
-            <input class = "amount" type="text" placeholder="Montant" id="amount">
-            <label for="amount">EUR</label>
+            <div class = "div-amount">
+                <input class = "amount" type="text" placeholder="Montant" id="amount">
+                <label for="amount">EUR</label>
+            </div>
             <select class = "spender" name="spender" id="spender">
                 <option value="">Participant 1</option>
                 <option value="">Participant 2</option>
             </select> 
             <p class = "forwho">Pour qui</p>
-            <input class = "receiver" type="checkbox" name="" id="Participant1">
-            <label for="Participant1">Participant 1</label>
-            <input class = "receiver" type="checkbox" name="" id="Participant2">
-            <label for="Participant2">Participant 2</label>
+            <div class = "div-receiver">
+                <input class = "receiver" type="checkbox" name="" id="Participant">
+                <label for="Participant">Participant 1</label> 
+            </div>
+            <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button> 
+            {% csrf_token %}
         </form>
     </main>
 </body>
