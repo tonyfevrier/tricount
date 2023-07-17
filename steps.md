@@ -71,9 +71,14 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `voir comment obliger à ce qu'il y ait au moins un participant pour valider le tricount : le bug est lié au fait qu'on peut créer un count sans participant du coup dans listecount on passe dans la condition d'élimination des participants;`
         `Factoriser le test fonctionnel , factoriser les fonctions check aussi en plusieurs fonctions élémentaires.`
         `dans spending et newcount, voir si /count ou /count/ (les tests fonc marchent avec les deux mais pas les tests unitaires qu'il faut débugger avec /count/)`
-    -css : en rouge le msg d'erreyr pour les participants + les bords deviennent rouges si non remplis
+    -`css : en rouge le msg d'erreur pour les participants + les bords deviennent rouges si non remplis`
     -créer l'entrée d'une dépense.
-        -créer un nouveau html avec les catégories factices, l'url est la vue associées.
+        `-créer un nouveau html avec les catégories factices, l'url est la vue associées.`
+    -créer le module de calcul des équilibres après dépense.
+        voir comment intégrer lisiblt les dettes par binôme. Chaque participant doit avoir à tout instant la donnée de ses n-1 dettes vis à vis des n-1 autres ptctpt : matrices de taille n^2 : Mij = le participant i doit à j tant + un endroit où convertir les participants en numéro.
+
+
+
 
     -voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.
     

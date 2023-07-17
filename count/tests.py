@@ -3,6 +3,7 @@ from django.urls import resolve
 from count.views import listecount
 from bs4 import BeautifulSoup
 from count.models import Counts, Participants
+from count.calculation import tricount
 
 # Create your tests here.
 
@@ -158,3 +159,63 @@ class NewcountTest(TestCase):
 
         self.assertIn(b'Henri',response.content)
 
+class TestCalculator(TestCase):
+
+    def test_class_creation(self):
+        """
+        Testing if data are well created.
+        """
+        participants = ['Tony', 'Marine', 'Henri', 'Yann']
+        count = tricount(*participants)
+        
+        self.assertEqual(count.credits.shape,(4,4))
+        self.assertEqual(len(count.participants_expense.keys()),4)
+        self.assertEqual(len(count.correspondance.keys()),4)
+
+    def test_nullity(self):
+        """
+        Function which test a spending of amount 0. Nothing changes
+        """
+        participants = ['Tony', 'Marine', 'Henri', 'Yann']
+        count = tricount(*participants)
+        old_expense = count.participants_expense 
+        count.spending_update({'Tony':0.}, {'Marine':0., 'Tony':0.})
+        
+        self.assertEqual(old_expense,count.participants_expense)
+        self.assertEqual(old_spent, count.participants_spent)
+        
+        #for participant in participants:
+        #    self.assertEqual(old_expense[participant],count.participants_expense[participant])
+        #    self.assertEqual(old_spent[participant],count.participants_spent[participant])
+
+
+    def test_two_participants(self):
+        """
+        We test a spending between two participants from a group of four to verify that the amount is correct and
+        that the others credits are not modified.
+        """
+        count = tricount('Tony', 'Marine', 'Henri', 'Yann')
+        old_expense = count.participants_expense
+        old_spent = count.participants_spent
+        count.spending_update({'Tony':100.}, {'Marine':50., 'Tony':50})
+        
+        for participant in ['Yann', 'Henri']:
+            self.assertEqual(old_expense[participant],count.participants_expense[participant])
+            self.assertEqual(old_spent[participant],count.participants_spent[participant])
+
+        self.assertEqual(count.participants_spent['Tony'], old_spent['Tony'] + 100.)
+        self.assertEqual(count.participants_expense['Tony'], old_expense['Tony'] + 50.)
+
+
+    def test_participants(self):
+        """
+        We test a spending between all participants from a group of four to verify that the amount is correct.
+        """
+        pass
+
+    
+    def test_moneytransfer(self):
+        pass
+
+
+    
