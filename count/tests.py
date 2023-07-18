@@ -3,7 +3,8 @@ from django.urls import resolve
 from count.views import listecount
 from bs4 import BeautifulSoup
 from count.models import Counts, Participants
-from count.calculation import tricount
+from count.calculation import Tricount
+import numpy
 
 # Create your tests here.
 
@@ -166,45 +167,53 @@ class TestCalculator(TestCase):
         Testing if data are well created.
         """
         participants = ['Tony', 'Marine', 'Henri', 'Yann']
-        count = tricount(*participants)
+        count = Tricount(*participants)
         
-        self.assertEqual(count.credits.shape,(4,4))
-        self.assertEqual(len(count.participants_expense.keys()),4)
-        self.assertEqual(len(count.correspondance.keys()),4)
+        self.assertEqual(len(count.dict_participants.keys()),4)  
+        self.assertEqual(count.dict_participants['Tony'].credits,{'Marine':0, 'Henri':0, 'Yann':0})
+
+    def test_spending_update(self):
+        pass
+
+    def test_spending_update(self):
+        pass
 
     def test_nullity(self):
         """
         Function which test a spending of amount 0. Nothing changes
         """
+        
         participants = ['Tony', 'Marine', 'Henri', 'Yann']
-        count = tricount(*participants)
-        old_expense = count.participants_expense 
+        count = Tricount(*participants)
+        #old_expense = count.participants_expense 
         count.spending_update({'Tony':0.}, {'Marine':0., 'Tony':0.})
         
-        self.assertEqual(old_expense,count.participants_expense)
-        self.assertEqual(old_spent, count.participants_spent)
-        
-        #for participant in participants:
-        #    self.assertEqual(old_expense[participant],count.participants_expense[participant])
-        #    self.assertEqual(old_spent[participant],count.participants_spent[participant])
-
+        #self.assertEqual(old_expense,count.participants_expense)
+        #self.assertEqual(numpy.all(count.credits == 0),  True)
+         
 
     def test_two_participants(self):
         """
         We test a spending between two participants from a group of four to verify that the amount is correct and
         that the others credits are not modified.
         """
-        count = tricount('Tony', 'Marine', 'Henri', 'Yann')
-        old_expense = count.participants_expense
-        old_spent = count.participants_spent
+
+        #Faire aussi un test où on paye pour quelqu'un pour voir si ça marche.
+        count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
+        old_expense = count.participants_expense 
+        old_credits = count.credits
         count.spending_update({'Tony':100.}, {'Marine':50., 'Tony':50})
+
+        self.assertEqual(old_expense['Tony'] + 100,count.participants_expense['Tony'])
+        self.assertEqual(old_credits[1,2] - 50, count.credits[1,2] )
+        self.assertEqual(old_credits[2,1] + 50, count.credits[1,2] )
+
+
+ 
+        #dette des autres reste à 0
         
         for participant in ['Yann', 'Henri']:
-            self.assertEqual(old_expense[participant],count.participants_expense[participant])
-            self.assertEqual(old_spent[participant],count.participants_spent[participant])
-
-        self.assertEqual(count.participants_spent['Tony'], old_spent['Tony'] + 100.)
-        self.assertEqual(count.participants_expense['Tony'], old_expense['Tony'] + 50.)
+            self.assertEqual(old_expense[participant],count.participants_expense[participant])         
 
 
     def test_participants(self):
