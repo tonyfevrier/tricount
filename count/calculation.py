@@ -51,8 +51,9 @@ class Tricount():
             self.dict_participants[spender].expense += payer[spender] 
 
             for receiver in forwho.keys():
-                if receiver != spender:
-                    self.money_transfer(spender,receiver,forwho[receiver]) 
+                if receiver != spender: 
+                    self.dict_participants[spender].credits[receiver] -= forwho[receiver]
+                    self.dict_participants[receiver].credits[spender] += forwho[receiver]
 
         return self 
     
@@ -75,7 +76,10 @@ class Tricount():
     def calculate_total_credit(self):
         """
         Function which calculates for each participant the total credit/debt
+
+        Output : dict {name:total credit}. total credit can be negative.
         """
+
         total_credit = {}
         
         for payer in self.dict_participants.keys():
@@ -85,23 +89,86 @@ class Tricount():
 
         return total_credit
     
-    def resolve_solution(self):
+    def reimburse_one_debitor(self,debitor, creditors,transferts_to_equilibrium):
+        """
+        Function which offers a repartition to reimburse ONE debitor. It completes transferts_to_equilibrium.
+
+        Input : tuple debitor := (name,amount)
+                dict creditors : the creditors as keys and the amount to credit as values
+                dict transferts_to_equilibrium :  dict {name debitor : {name1 creditor : amount, name2:amount,...}}. Dictionary whose values are dictionaries.
+        
+        Output : dict transferts_to_equilibrium completed.
+        """
+
+        #We create a dictionary for the debitor whose values give people who have to reimbuse him plus the amount.
+        transferts_to_equilibrium[debitor[0]] = {}
+        amount_reimbursed = 0
+
+        for creditor in creditors.keys():
+            #soit on n'a pas encore complètement remboursé le débiteur
+            if amount_reimbursed + creditors[creditor] <= debitor[1]:
+                transferts_to_equilibrium[debitor[0]][creditor] = creditors[creditor]
+                amount_reimbursed += creditors[creditor]
+                creditors[creditor] = 0
+            else:
+                transferts_to_equilibrium[debitor[0]][creditor] = debitor[1] - amount_reimbursed 
+                creditors[creditor] -= debitor[1] - amount_reimbursed 
+                break
+        
+        return transferts_to_equilibrium
+
+    def resolve_solution(self,total_credit):
         """
         Function which propose a solution of payment to get perfect equilibrium.
-        """
-        pass
 
-    def update_process(self):
-        """
-        Function which combines the previous functions to update after a spending.
-        """
-        pass
+        Input : dict {name:total credit}
+        Output transferts_to_equilibrium : dict {name debitor : {name1 creditor : amount, name2:amount,...}}. Dictionary whose values are dictionaries. It gives the solution to reach the equilibrium.
 
-    def money_transfer(self,owner, receiver,amount):
+        The principle: the most important debitor receives money from creditors while he is not reimbursed completely. 
+        A dictionnary transferts_to_equilibrium is fulled with the name of the debitor and the names of the creditor with the amount they must give to him. 
+        After, the algorithm continues on the second most important debitor and so on.  
+        """
+        transferts_to_equilibrium = {}
+
+        #creation of two dictionnaries for creditors and debitors :
+        creditors = {}
+        debitors = {}
+        for key, value in total_credit.items():
+            if value > 0:
+                creditors[key] = value
+            elif value < 0 :
+                debitors[key] = -value
+
+        for debitor in debitors.items():
+            transferts_to_equilibrium = self.reimburse_one_debitor(debitor,creditors,transferts_to_equilibrium) 
+
+        return transferts_to_equilibrium
+
+    def update_process(self, payer, forwho, transfert = 'spend'):
+        """
+        Function which combines the previous functions to update after a spending : to get a solution for getting the equilibrium.
+        """
+        if transfert == 'spend':
+            self.spending_update(payer,forwho)
+        elif transfert == 'receive':
+            self.receiving_update(payer,forwho)
+        else:
+            self.money_transfer(payer,forwho)
+
+        total_credit = self.calculate_total_credit()
+        transfert_to_equilibrium = self.resolve_solution(total_credit)
+        
+        return total_credit,transfert_to_equilibrium 
+
+    def money_transfer(self,payer, forwho):
         """
         Function which transfer money from the owner to the receiver
-        """
-        self.dict_participants[owner].credits[receiver] -= amount
-        self.dict_participants[receiver].credits[owner] += amount
+        """ 
+    
+        for spender in payer.keys():
+            for receiver in forwho.keys():
+                if receiver != spender: 
+                    self.dict_participants[spender].credits[receiver] -= forwho[receiver]
+                    self.dict_participants[receiver].credits[spender] += forwho[receiver]
 
-        return self
+        return self 

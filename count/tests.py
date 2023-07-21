@@ -209,9 +209,11 @@ class TestCalculator(TestCase):
         We test a spending between all participants from a group of four to verify that the amount is correct.
         """
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
+        old_total_cost = count.total_cost
         old_dict_participants = deepcopy(count.dict_participants)  
         count.spending_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
 
+        self.assertEqual(old_total_cost + 100,count.total_cost)
         self.assertEqual(old_dict_participants['Tony'].expense + 100,count.dict_participants['Tony'].expense)
         self.assertEqual(old_dict_participants['Tony'].credits['Marine'] - 25, count.dict_participants['Tony'].credits['Marine'])
         self.assertEqual(old_dict_participants['Marine'].credits['Tony'] + 25, count.dict_participants['Marine'].credits['Tony'])
@@ -229,9 +231,60 @@ class TestCalculator(TestCase):
                 
         
     def test_receiving_update(self):
-        pass
+        """
+        We test a money input between all participants from a group of four to verify that the amount is correct.
+        """
+        count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
+        old_dict_participants = deepcopy(count.dict_participants)  
+        count.receiving_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
 
-    
+        self.assertEqual(old_dict_participants['Tony'].expense - 100,count.dict_participants['Tony'].expense)
+        self.assertEqual(old_dict_participants['Tony'].credits['Marine'] + 25, count.dict_participants['Tony'].credits['Marine'])
+        self.assertEqual(old_dict_participants['Marine'].credits['Tony'] - 25, count.dict_participants['Marine'].credits['Tony'])
+        self.assertEqual(old_dict_participants['Tony'].credits['Yann'] + 50, count.dict_participants['Tony'].credits['Yann'])
+        self.assertEqual(old_dict_participants['Yann'].credits['Tony'] - 50, count.dict_participants['Yann'].credits['Tony'])
+        self.assertEqual(old_dict_participants['Tony'].credits['Henri'] + 25, count.dict_participants['Tony'].credits['Henri'])
+        self.assertEqual(old_dict_participants['Henri'].credits['Tony'] - 25, count.dict_participants['Henri'].credits['Tony'])
+        
+        for firstparticipant in ['Marine', 'Henri', 'Yann']: 
+            self.assertEqual(old_dict_participants[firstparticipant].expense,count.dict_participants[firstparticipant].expense)
+            for secondparticipant in ['Marine', 'Henri', 'Yann']:
+                if secondparticipant != firstparticipant:
+                    self.assertEqual(old_dict_participants[firstparticipant].credits[secondparticipant], count.dict_participants[firstparticipant].credits[secondparticipant])
+                    self.assertEqual(old_dict_participants[secondparticipant].credits[firstparticipant], count.dict_participants[secondparticipant].credits[firstparticipant])
+       
+    def test_calculate_total_credit(self):
+        """
+        Function which tests if the total credit of each participant is correct.
+        """
+        count = Tricount('Tony', 'Marine', 'Henri', 'Yann') 
+        count.receiving_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
+        count.receiving_update({'Marine':200.}, {'Marine':150., 'Tony':50})
+        count.receiving_update({'Henri':150.}, {'Marine':25., 'Yann':50, 'Tony':25,'Henri':50})
+        
+        total_credit = count.calculate_total_credit()
+
+        self.assertEqual(total_credit['Tony'], 25)
+        self.assertEqual(total_credit['Marine'], 0)
+        self.assertEqual(total_credit['Yann'],-100)
+        self.assertEqual(total_credit['Henri'],75)
+
+    def test_resolve_solution(self):
+        count = Tricount('Tony', 'Marine', 'Henri', 'Yann') 
+        count.receiving_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
+        count.receiving_update({'Marine':200.}, {'Marine':150., 'Tony':50})
+        count.receiving_update({'Henri':150.}, {'Marine':25., 'Yann':50, 'Tony':25,'Henri':50})
+        count.receiving_update({'Yann':180.}, {'Marine':50., 'Yann':50, 'Tony':50,'Henri':30})
+        
+
+        total_credit = count.calculate_total_credit()
+        transfert_to_equilibrium = count.resolve_solution(total_credit)
+
+        self.assertEqual(sum(transfert_to_equilibrium['Tony'].values()),25)
+        self.assertEqual(sum(transfert_to_equilibrium['Marine'].values()),50)
+        
+        
+
     def test_moneytransfer(self):
         pass
 
