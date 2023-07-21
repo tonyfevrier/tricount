@@ -75,7 +75,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -créer l'entrée d'une dépense.
         `-créer un nouveau html avec les catégories factices, l'url est la vue associées.`
     -créer le module de calcul des équilibres après dépense.
-        voir comment intégrer lisiblt les dettes par binôme. Chaque participant doit avoir à tout instant la donnée de ses n-1 dettes vis à vis des n-1 autres ptctpt : matrices de taille n^2 : Mij = le participant i doit à j tant + un endroit où convertir les participants en numéro.
+        fabriquer des tests pour chacune des fonctions créée.
 
 
 

@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from count.models import Counts, Participants
 from count.calculation import Tricount
 import numpy
+from copy import deepcopy
 
 # Create your tests here.
 
@@ -172,11 +173,6 @@ class TestCalculator(TestCase):
         self.assertEqual(len(count.dict_participants.keys()),4)  
         self.assertEqual(count.dict_participants['Tony'].credits,{'Marine':0, 'Henri':0, 'Yann':0})
 
-    def test_spending_update(self):
-        pass
-
-    def test_spending_update(self):
-        pass
 
     def test_nullity(self):
         """
@@ -185,41 +181,54 @@ class TestCalculator(TestCase):
         
         participants = ['Tony', 'Marine', 'Henri', 'Yann']
         count = Tricount(*participants)
-        #old_expense = count.participants_expense 
+        old_dict_participants = count.dict_participants
         count.spending_update({'Tony':0.}, {'Marine':0., 'Tony':0.})
-        
-        #self.assertEqual(old_expense,count.participants_expense)
-        #self.assertEqual(numpy.all(count.credits == 0),  True)
+
+        self.assertEqual(old_dict_participants,count.dict_participants) 
          
 
-    def test_two_participants(self):
+    def test_spending_update_first(self):
         """
         We test a spending between two participants from a group of four to verify that the amount is correct and
         that the others credits are not modified.
         """
 
-        #Faire aussi un test où on paye pour quelqu'un pour voir si ça marche.
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
-        old_expense = count.participants_expense 
-        old_credits = count.credits
-        count.spending_update({'Tony':100.}, {'Marine':50., 'Tony':50})
+        old_dict_participants = deepcopy(count.dict_participants)   
+        count.spending_update({'Tony':100.}, {'Marine':50., 'Tony':50}) 
 
-        self.assertEqual(old_expense['Tony'] + 100,count.participants_expense['Tony'])
-        self.assertEqual(old_credits[1,2] - 50, count.credits[1,2] )
-        self.assertEqual(old_credits[2,1] + 50, count.credits[1,2] )
+        #Change for Tony expense and for Tony and Marine credits but no changes for others.
+        self.assertEqual(old_dict_participants['Tony'].expense + 100,count.dict_participants['Tony'].expense)
+        self.assertEqual(old_dict_participants['Tony'].credits['Marine'] - 50, count.dict_participants['Tony'].credits['Marine'])
+        self.assertEqual(old_dict_participants['Marine'].credits['Tony'] + 50, count.dict_participants['Marine'].credits['Tony'])
+        self.assertDictEqual(old_dict_participants['Yann'].credits, count.dict_participants['Yann'].credits)
+        self.assertDictEqual(old_dict_participants['Henri'].credits, count.dict_participants['Henri'].credits)
 
-
- 
-        #dette des autres reste à 0
-        
-        for participant in ['Yann', 'Henri']:
-            self.assertEqual(old_expense[participant],count.participants_expense[participant])         
-
-
-    def test_participants(self):
+    def test_spending_update_second(self):
         """
         We test a spending between all participants from a group of four to verify that the amount is correct.
         """
+        count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
+        old_dict_participants = deepcopy(count.dict_participants)  
+        count.spending_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
+
+        self.assertEqual(old_dict_participants['Tony'].expense + 100,count.dict_participants['Tony'].expense)
+        self.assertEqual(old_dict_participants['Tony'].credits['Marine'] - 25, count.dict_participants['Tony'].credits['Marine'])
+        self.assertEqual(old_dict_participants['Marine'].credits['Tony'] + 25, count.dict_participants['Marine'].credits['Tony'])
+        self.assertEqual(old_dict_participants['Tony'].credits['Yann'] - 50, count.dict_participants['Tony'].credits['Yann'])
+        self.assertEqual(old_dict_participants['Yann'].credits['Tony'] + 50, count.dict_participants['Yann'].credits['Tony'])
+        self.assertEqual(old_dict_participants['Tony'].credits['Henri'] - 25, count.dict_participants['Tony'].credits['Henri'])
+        self.assertEqual(old_dict_participants['Henri'].credits['Tony'] + 25, count.dict_participants['Henri'].credits['Tony'])
+        
+        for firstparticipant in ['Marine', 'Henri', 'Yann']: 
+            self.assertEqual(old_dict_participants[firstparticipant].expense,count.dict_participants[firstparticipant].expense)
+            for secondparticipant in ['Marine', 'Henri', 'Yann']:
+                if secondparticipant != firstparticipant:
+                    self.assertEqual(old_dict_participants[firstparticipant].credits[secondparticipant], count.dict_participants[firstparticipant].credits[secondparticipant])
+                    self.assertEqual(old_dict_participants[secondparticipant].credits[firstparticipant], count.dict_participants[secondparticipant].credits[firstparticipant])
+                
+        
+    def test_receiving_update(self):
         pass
 
     

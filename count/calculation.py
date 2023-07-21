@@ -29,6 +29,7 @@ class Tricount():
         self.dict_participants = {}
         self.dict_participants[participants[0]] = Participant(participants[0],participants[1:])
         self.dict_participants[participants[self.number-1]] = Participant(participants[self.number-1],participants[0:self.number])
+        
         for i in range(1,len(participants)-1):
             owner = participants[i]
             receivers = participants[0:i]+participants[i+1:]
@@ -46,13 +47,12 @@ class Tricount():
 
         #The payer expense and credits change.
         for spender in payer.keys():
-            self.total_cost += payer[spender]
-            self.dict_participants[spender].expense += payer[spender]
+            self.total_cost += payer[spender] 
+            self.dict_participants[spender].expense += payer[spender] 
 
             for receiver in forwho.keys():
                 if receiver != spender:
-                    self.dict_participants[spender].credits[receiver] -= forwho[receiver]
-                    self.dict_participants[receiver].credits[spender] += forwho[receiver]
+                    self.money_transfer(spender,receiver,forwho[receiver]) 
 
         return self 
     
@@ -97,8 +97,11 @@ class Tricount():
         """
         pass
 
-    def money_transfer(self):
+    def money_transfer(self,owner, receiver,amount):
         """
-        Function which transfer money 
+        Function which transfer money from the owner to the receiver
         """
-        pass
+        self.dict_participants[owner].credits[receiver] -= amount
+        self.dict_participants[receiver].credits[owner] += amount
+
+        return self
