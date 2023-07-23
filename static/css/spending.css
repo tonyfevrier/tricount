@@ -89,7 +89,7 @@ body{
 }
 
 
-.spending-reason p:first-child, .spending-amount p:first-child{
+.spending-reason p:first-child, .spending-amount-div p:first-child{
     color:var(--color)
  
 }
@@ -99,7 +99,7 @@ body{
     opacity: 0.8;
 } 
 
-.spending-amount p:last-child{
+.spending-amount-div p:last-child{
     font-size:0.7em;
     opacity: 0.5; 
     text-align: end;

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from count.models import Counts, Participants
+from count.models import Counts, Participants, Spending
 from count.func import majuscule
 
 # Create your views here.
@@ -38,12 +38,7 @@ def addcount(request):
 
             #We associate new participants to the tricount
             participants = Participants.objects.filter(number = Counts.objects.count())
-    
-            #print(participants.count())
-            #If there is no participant, the count is not validated.
-            #if participants.count() == 0:
-            #    return render(request,'newcount.html')
-            #else:
+     
             for participant in participants:
                 if participant.number == Counts.objects.count() :
                     count.participants.add(participant) 
@@ -76,11 +71,23 @@ def spending(request,id_count):
     """
     Function which leads to the spending of a given tricount.
     """
-    count = Counts.objects.get(id=id_count) 
-    #participt = Participants.objects.filter(number = count.id) 
+    count = Counts.objects.get(id=id_count)  
     participants = count.participants.filter(number = count.id)
     participants_name = [participant.name for participant in participants]
-    return render(request, "spending.html", context = {'count':count,'names':participants_name})
+    spending = Spending.objects.filter(number = id_count)
+    return render(request, "spending.html", context = {'count':count,'names':participants_name, 'spending' : spending})
 
 def newspending(request,id_count):
-    return render(request, 'newspending.html')
+    """
+    Function which render the template when we want to add a new spending
+    """
+    participants = Participants.objects.filter(number = id_count)
+    return render(request, 'newspending.html',context={'idcount': id_count, 'participants':participants})
+
+def addspending(request,id_count):
+    """
+    Function to recover the data of the form of newspending and redirect to the spending list. 
+    """ 
+    Spending.objects.create(title = request.POST["title"], amount = float(request.POST["amount"]) , payer = request.POST["spender"], receivers = request.POST.getlist("receiver"), number = id_count)
+
+    return redirect(f'/count/tricount/{id_count}')

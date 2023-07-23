@@ -14,21 +14,25 @@
         <p class = "header-title">Nouvelle dépense</p>
     </header>
     <main>
-        <form action="">
-            <input class = "title" type="text" placeholder="Titre">
+        <form action="/count/tricount/{{idcount}}/addspending" method = "post">
+            <input class = "title" type="text" placeholder="Titre" name = "title">
             <div class = "div-amount">
-                <input class = "amount" type="text" placeholder="Montant" id="amount">
+                <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount">
                 <label for="amount">EUR</label>
             </div>
             <select class = "spender" name="spender" id="spender">
-                <option value="">Participant 1</option>
-                <option value="">Participant 2</option>
+                {% for participant in participants%}
+                <option class = "spender-participant" value="{{participant.name}}">{{participant.name}}</option> 
+                {%endfor%}
             </select> 
             <p class = "forwho">Pour qui</p>
+            {% for participant in participants%}
             <div class = "div-receiver">
-                <input class = "receiver" type="checkbox" name="" id="Participant">
-                <label for="Participant">Participant 1</label> 
-            </div>
+                <input class = "receiver" type="checkbox" name="receiver" id="{{participant.name}}" value = "{{participant.name}}">
+                <label class = "receiver-participant" for="{{participant.name}}">{{participant.name}}</label> 
+                <p class = "receiver-amount"> 100 eur</p>
+            </div> 
+            {% endfor %}
             <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button> 
             {% csrf_token %}
         </form>

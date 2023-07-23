@@ -74,8 +74,16 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`css : en rouge le msg d'erreur pour les participants + les bords deviennent rouges si non remplis`
     -créer l'entrée d'une dépense.
         `-créer un nouveau html avec les catégories factices, l'url est la vue associées.`
-    -créer le module de calcul des équilibres après dépense.
-        fabriquer des tests pour chacune des fonctions créée.
+        -`passer à l'html le nom des participants au tricount et ajouter les montants dans le css`
+        -`test fonctionnel`
+        - `modifier model pour les données.`
+        - `modifier la vue addspending pour récupérer les données : titre, montant, payeur.`
+        - `test unitaire  : les données sont bien dans la bdd.`
+        - `test fonctionnel : le nom des participants apparaît. Le montant apparaît bien.`
+        - `ajouter dans l'html spending les data du spending pour faire passer le test fonctionnel.` 
+        - ajouter le calcul auto des montants pr chaque participant coché (cas équitable).
+    -`créer le module de calcul des équilibres après dépense.`
+        `fabriquer des tests pour chacune des fonctions créée.`
 
 
 
@@ -107,6 +115,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - GET(Pk=1) différent de first() : first() ne correspond pas forcément à pk=1 quand on veut récupérer un objet. Il se peut qu'on ait créé des objets avant comme pour ma classe participants par exemple. 
     - FORM SUBMIT : Il semble que si on remplace le input ayant la classe submit par un button avec la même classe, l'envoie des données se fasse alors que si on choisit un a cela n'envoie plus les données.
     - SELECTONE ID : attention quand on sélectionne un élément via a#qqch, qqch est l'identifiant (repéré par un # comme en css). qqch ne peut être la classe.
+    - TYPE FLOAT BDD : Si on entre un float ou int dans la bdd via un request, celui-ci est convertit en str par request.POST. Donc ne pas oublier de le convertir si on a utilisé un champ FloatField.
     
 
 # Mes difficultés principales

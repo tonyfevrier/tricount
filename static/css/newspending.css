@@ -103,14 +103,21 @@ input, select, .div-receiver{
     transform: translateY(2.5em);
 }
 
-.div-receiver{
-    display: block;
+.div-receiver{ 
+    display: flex;
     padding: 1em 0;
     align-items: center;
 }
 
 .div-receiver label{
     padding-left: 0.5em;
+}
+
+
+.receiver-amount{
+    margin-left: auto;
+    text-transform: uppercase;
+    color: gray;
 }
 
 .submit-spending{ 

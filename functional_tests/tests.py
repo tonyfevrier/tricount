@@ -224,11 +224,12 @@ class RegisterSpending(StaticLiveServerTestCase):
         time.sleep(2)  
 
         #Enter the participants
-        participantbox = self.browser.find_element(By.NAME,"new_participant")
-        buttonbox = self.browser.find_element(By.CLASS_NAME,"add_participant")
-        for participant in participants:
+        for participant in participants: 
+            participantbox = self.browser.find_element(By.NAME,"new_participant")
+            buttonbox = self.browser.find_element(By.CLASS_NAME,"add_participant") 
             participantbox.send_keys(participant)
             buttonbox.send_keys(Keys.ENTER)
+            time.sleep(2)
 
         #Enter  the other characteristics
         titlebox = self.browser.find_element(By.NAME,"newtricount_title")
@@ -258,6 +259,25 @@ class RegisterSpending(StaticLiveServerTestCase):
         link_spending.send_keys(Keys.ENTER)
         time.sleep(2)
 
+    def create_a_spending(self,title,amount,payer,receivers):
+        """
+        Function creating a new spending
+        """
+        titlebox = self.browser.find_element(By.NAME, 'title')
+        amountbox = self.browser.find_element(By.NAME, 'amount')
+        spenderbox = self.browser.find_element(By.NAME, 'spender')
+        receiverbox = self.browser.find_element(By.NAME, 'receiver')
+        submitbox = self.browser.find_element(By.NAME,'submit') 
+
+        titlebox.send_keys(title)
+        amountbox.send_keys(amount)
+        spenderbox.send_keys(payer)
+        receiverbox.send_keys(receivers)
+        submitbox.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+
+
     def test_spending_creation(self):
         #A tricount is created et come back to the listecount page
         self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri")
@@ -268,15 +288,33 @@ class RegisterSpending(StaticLiveServerTestCase):
         #The user clicks on an existing tricount 
         self.click_on_an_exiting_tricount(1)
 
-        #The user clicks to add a new spending
+        #The user clicks to add a new spending, he has the choice between the participants previously created
         self.click_on_create_spending()
 
         self.assertEqual(self.browser.current_url,self.live_server_url + '/count/tricount/1/spending')
+        
+        spender_participant = self.browser.find_elements(By.CLASS_NAME, "spender-participant")
+        receiver_participants = self.browser.find_elements(By.CLASS_NAME, "receiver-participant")
 
+        self.assertIn("Jean",[name.text for name in spender_participant])
+        self.assertIn("Henri",[name.text for name in spender_participant])
+        self.assertIn("Jean",[name.text for name in receiver_participants])
+        self.assertIn("Henri",[name.text for name in receiver_participants])
 
         #He enters the title, amount the payer and for who the payer paid
+        self.create_a_spending('Dépense1', 100., 'Jean', ['Henri','Jean'])
 
-        #He is then redirected to the spending list.
+        #He is then redirected to the spending list where the name, the amount, the payer appears
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount/1')
+        
+        spending_title = self.browser.find_elements(By.CLASS_NAME,"spending-title")
+        spending_amount = self.browser.find_elements(By.CLASS_NAME,"spending-amount")
+        spending_payer = self.browser.find_elements(By.CLASS_NAME,"spending-payer")
+         
+        self.assertIn('Dépense1',[name.text for name in spending_title])
+        self.assertIn(100.,[float(name.text) for name in spending_amount])
+        self.assertIn('Jean',[name.text for name in spending_payer])
+
 
         #He forgets to put a title, a message of error appears and he stays on the page.
 

@@ -28,16 +28,18 @@
         </div>
     </header>
     <main>
+        {%for spend in spending%}
         <div class = "spending">
             <div class = "spending-reason">
-                <p>Logement Lausanne</p>
-                <p>payé par moi</p>
+                <p class = "spending-title">{{spend.title}}</p>
+                <p class = "spending-payer">{{spend.payer}}</p>
             </div>
-            <div class = "spending-amount">
-                <p>250 euros</p>
-                <p>Hier</p>
+            <div class = "spending-amount-div">
+                <p class = "spending-amount">{{spend.amount}}</p>
+                <p class = "spending-date">Hier</p>
             </div>
         </div>
+        {%endfor%}
     </main>
     
     

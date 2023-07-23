@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import resolve
 from count.views import listecount
 from bs4 import BeautifulSoup
-from count.models import Counts, Participants
+from count.models import Counts, Participants, Spending
 from count.calculation import Tricount
 import numpy
 from copy import deepcopy
@@ -286,7 +286,49 @@ class TestCalculator(TestCase):
         
 
     def test_moneytransfer(self):
-        pass
+        count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
+        old_total_cost = count.total_cost
+        old_dict_participants = deepcopy(count.dict_participants)   
+        count.money_transfer({'Tony':100.}, {'Marine':100.}) 
 
+        #Change for Tony expense and for Tony and Marine credits but no changes for others.
+        self.assertEqual(old_total_cost,count.total_cost)
+        self.assertEqual(old_dict_participants['Tony'].expense,count.dict_participants['Tony'].expense)
+        self.assertEqual(old_dict_participants['Tony'].credits['Marine'] - 100, count.dict_participants['Tony'].credits['Marine'])
+        self.assertEqual(old_dict_participants['Marine'].credits['Tony'] + 100, count.dict_participants['Marine'].credits['Tony'])
+        self.assertDictEqual(old_dict_participants['Yann'].credits, count.dict_participants['Yann'].credits)
+        self.assertDictEqual(old_dict_participants['Henri'].credits, count.dict_participants['Henri'].credits)
 
+class TestSpending(TestCase):
+    
+    def test_redirect_after_newspending_inputs(self):
+        """
+        We enter a newspending and we see if data are integrated into the database.
+        """
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
+        self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+       
+        response = self.client.post('/count/tricount/1/addspending', data = {'title': 'dépense1', 'amount': 100, 'spender': 'Jean',  'receiver': ['Henri','Jean']})
+        
+        self.assertRedirects(response,'/count/tricount/1') 
+    
+    def test_bdd_newspending_inputs(self):
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
+        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
+        self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+       
+        number = Spending.objects.count()
+        self.client.post('/count/tricount/1/addspending', data = {'title': 'dépense1', 'amount': 100, 'spender': 'Jean',  'receiver': ['Henri','Jean']})
+        
+        self.assertEqual(number+1, Spending.objects.count())
+
+        spending = Spending.objects.get(pk = 1)
+
+        self.assertEqual(spending.title, 'dépense1')
+        self.assertEqual(spending.amount, 100)
+        self.assertEqual(spending.payer, 'Jean')
+        self.assertListEqual(spending.receivers, ['Henri','Jean'])
+        self.assertEqual(spending.number, 1)
+ 
     
