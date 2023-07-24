@@ -81,9 +81,21 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         - `test unitaire  : les données sont bien dans la bdd.`
         - `test fonctionnel : le nom des participants apparaît. Le montant apparaît bien.`
         - `ajouter dans l'html spending les data du spending pour faire passer le test fonctionnel.` 
+        -`checkbox toutes cochées par défaut.`
+        - `ajouter le retour en arrière qui retourne à la liste des dépenses.`
+        - `si pas de titre, titre obligatoire.`
+        - `si pas de montant, le montant par défaut est 0`
+        - `test unitaire : commencer à créér une dépense revenir en arrière, rien dans la bdd`
+        - `test unitaire : pas de montant, la bdd augmente avec le montant 0.`
+        - `test unitaire : pas de titre, la bdd n'augmente pas.`
         - ajouter le calcul auto des montants pr chaque participant coché (cas équitable).
+        - `test fonc créer une seconde dépense et voir si ça se passe bien.`
+        - `test fonctionnel : retour en arrière, création sans titre puis sans montant. A débugger`
+        - factoriser le code testfonctionnel en utilisant les fonctions élémentaires sans tests qu'on met éventuellement dans un autre fichier.
+        - factoriser aussi les redondances sur les tests unitaires (les blocs d'assert qui se répètent, les beautiful soup...).
     -`créer le module de calcul des équilibres après dépense.`
         `fabriquer des tests pour chacune des fonctions créée.`
+    -comparer les css et voir si factorisable en un fichier avec structure minimale commune et des spécificités par ailleurs. Voir alors comment importer dans un css la structure commune.
 
 
 

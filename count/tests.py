@@ -300,24 +300,27 @@ class TestCalculator(TestCase):
         self.assertDictEqual(old_dict_participants['Henri'].credits, count.dict_participants['Henri'].credits)
 
 class TestSpending(TestCase):
-    
+
+    def create_a_tricount(self,titre,description,category,*participants):
+        
+        for participant in participants:
+            self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":participant}) 
+        
+        self.client.post('/count/newcount/addcount',data = {"newtricount_title":titre, "newtricount_description":description, "newtricount_category":category})
+
     def test_redirect_after_newspending_inputs(self):
         """
         We enter a newspending and we see if data are integrated into the database.
         """
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
-        self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
-       
+        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
+
         response = self.client.post('/count/tricount/1/addspending', data = {'title': 'dépense1', 'amount': 100, 'spender': 'Jean',  'receiver': ['Henri','Jean']})
         
         self.assertRedirects(response,'/count/tricount/1') 
     
     def test_bdd_newspending_inputs(self):
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
-        self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
-       
+        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
+
         number = Spending.objects.count()
         self.client.post('/count/tricount/1/addspending', data = {'title': 'dépense1', 'amount': 100, 'spender': 'Jean',  'receiver': ['Henri','Jean']})
         
@@ -330,5 +333,46 @@ class TestSpending(TestCase):
         self.assertEqual(spending.payer, 'Jean')
         self.assertListEqual(spending.receivers, ['Henri','Jean'])
         self.assertEqual(spending.number, 1)
+    
+    def test_goback_bdd_unchanged(self):
+        """
+        test : we begin to create a spending and go back. No new spend must appear in the bdd.
+        """
+        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
+        response = self.client.get('/count/tricount/1/spending') 
+
+        nb_spending = Spending.objects.count()
+        soup = BeautifulSoup(response.content,'html.parser')
+        soup.select_one('a#backtospending')['href']
+
+        self.assertEqual(nb_spending,Spending.objects.count()) 
+
+        
+
+    def test_notitle_bdd_unchanged(self):
+        """
+        test : we create a spending, we forget the title. No new spend must appear in the bdd and we stay on the same template.
+        """
+        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
+        
+        nb_spending = Spending.objects.count()
+        response = self.client.post('/count/tricount/1/addspending', data = {'title': '', 'amount': 100, 'spender': 'Jean',  'receiver': ['Henri','Jean']}) 
+ 
+        self.assertEqual(nb_spending,Spending.objects.count()) 
+        self.assertTemplateUsed(response,'newspending.html')
+        
+
+    def test_noamount_nullspending(self):
+        """
+        test : we create a spending with no amount. A new spend must appear in the bdd with amount 0 and we must be redirected.
+        """
+        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
+        
+        nb_spending = Spending.objects.count()
+        self.client.post('/count/tricount/1/addspending', data = {'title': 'dépense1', 'amount': '', 'spender': 'Jean',  'receiver': ['Henri','Jean']}) 
+
+        spending = Spending.objects.get(pk = 1)
+        self.assertEqual(nb_spending + 1,Spending.objects.count()) 
+        self.assertEqual(spending.amount, 0)
  
     

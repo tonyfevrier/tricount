@@ -10,12 +10,15 @@
 </head>
 <body>
     <header>
-        <a href="" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="/count/tricount/{{idcount}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <p class = "header-title">Nouvelle dépense</p>
     </header>
     <main>
         <form action="/count/tricount/{{idcount}}/addspending" method = "post">
             <input class = "title" type="text" placeholder="Titre" name = "title">
+            {%if titre == False%}
+                <p class = "notitle">Titre non valable</p>
+            {%endif%}
             <div class = "div-amount">
                 <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount">
                 <label for="amount">EUR</label>
@@ -28,7 +31,7 @@
             <p class = "forwho">Pour qui</p>
             {% for participant in participants%}
             <div class = "div-receiver">
-                <input class = "receiver" type="checkbox" name="receiver" id="{{participant.name}}" value = "{{participant.name}}">
+                <input class = "receiver" type="checkbox" name="receiver" id="{{participant.name}}" value = "{{participant.name}}" checked>
                 <label class = "receiver-participant" for="{{participant.name}}">{{participant.name}}</label> 
                 <p class = "receiver-amount"> 100 eur</p>
             </div> 

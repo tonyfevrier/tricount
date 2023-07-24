@@ -26,7 +26,7 @@ def addcount(request):
     descption = request.POST["newtricount_description"]
     last_participant = Participants.objects.last() 
 
-    if titre != "":# and last_participant != None and last_participant.number == Counts.objects.count() + 1:
+    if titre != "": 
         if last_participant == None or last_participant.number != Counts.objects.count() + 1:
             #No participants have been added.
             return render(request,'newcount.html', context={'ptcpt':False})
@@ -88,6 +88,18 @@ def addspending(request,id_count):
     """
     Function to recover the data of the form of newspending and redirect to the spending list. 
     """ 
-    Spending.objects.create(title = request.POST["title"], amount = float(request.POST["amount"]) , payer = request.POST["spender"], receivers = request.POST.getlist("receiver"), number = id_count)
+    
+    #Spending.objects.create(title = request.POST["title"], amount = float(request.POST["amount"]) , payer = request.POST["spender"], receivers = request.POST.getlist("receiver"), number = id_count)
 
-    return redirect(f'/count/tricount/{id_count}')
+    titre =  request.POST["title"]
+    amount = request.POST["amount"]
+
+    if titre != '':
+        if amount == '':
+            amount = 0.
+        Spending.objects.create(title = titre, amount = float(amount) , payer = request.POST["spender"], receivers = request.POST.getlist("receiver"), number = id_count)
+        return redirect(f'/count/tricount/{id_count}')
+    else: 
+        participants = Participants.objects.filter(number = id_count)
+        return render(request, 'newspending.html',context={'idcount': id_count, 'participants':participants,'titre':False})
+        

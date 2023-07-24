@@ -245,7 +245,7 @@ class RegisterSpending(StaticLiveServerTestCase):
         submitbox.send_keys(Keys.ENTER)
         time.sleep(2)
 
-    def click_on_an_exiting_tricount(self,tricount_number):
+    def click_on_an_existing_tricount(self,tricount_number):
         """
         Function which clicks on a tricount and check the title and the participants are the good ones.
         participants : the participants we want to verify the presence.
@@ -286,7 +286,7 @@ class RegisterSpending(StaticLiveServerTestCase):
         time.sleep(2)
 
         #The user clicks on an existing tricount 
-        self.click_on_an_exiting_tricount(1)
+        self.click_on_an_existing_tricount(1)
 
         #The user clicks to add a new spending, he has the choice between the participants previously created
         self.click_on_create_spending()
@@ -316,7 +316,20 @@ class RegisterSpending(StaticLiveServerTestCase):
         self.assertIn('Jean',[name.text for name in spending_payer])
 
 
-        #He forgets to put a title, a message of error appears and he stays on the page.
+        #He tries to create a second spending. He forgets to put a title, a message of error appears and he stays on the page.
+        self.click_on_create_spending()
+        self.create_a_spending('', 100., 'Jean', ['Henri','Jean'])
+
+        notitle = self.browser.find_element(By.CLASS_NAME,"notitle")
+        self.assertEqual(notitle.text, "Titre non valable")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1/addspending")
+
+        #He forgets to put the amount, a spending is created with amount 0.
+        self.create_a_spending('Dépense2', '', 'Jean', ['Henri','Jean'])
+
+        amounts = self.browser.find_elements(By.CLASS_NAME,"spending-amount")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1")
+        self.assertIn('0.0',[amount.text for amount in amounts])
 
         #He forgets to put who is the payer, by default it is the first participant.
 
