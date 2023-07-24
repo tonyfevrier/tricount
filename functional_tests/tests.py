@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 from count.models import Counts
+from functional_tests import user_experience 
 
 class NewVisitorTest(StaticLiveServerTestCase): 
 
@@ -17,195 +18,153 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def check_participant_appear_on_newcount_page(self,name_participant):
-        """
-        Fonction qui entre un participant dans un tricount donné et qui regarde si les participants apparaissent
-        sur la page
-        """
-        participantbox = self.browser.find_element(By.NAME,"new_participant")
-        buttonbox = self.browser.find_element(By.CLASS_NAME,"add_participant")
-        participantbox.send_keys(name_participant)
-        buttonbox.send_keys(Keys.ENTER)
-        time.sleep(2)
-
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/newcount")
-        participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
-        self.assertIn(name_participant, [participant.text for participant in participants])
-
-        
-    def check_inputs_appear_on_listecount_Page(self,inputs):
-        """
-        Fonction qui entre un nouveau tricount et vérifie si les données apparaissent sur la page recensant les tricount.
-        """
-
-        #Il remplit les données d'un nouveau tricount et les envoie
-        titlebox = self.browser.find_element(By.NAME,"newtricount_title")
-        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description") 
-        categorybox = self.browser.find_element(By.ID,f"{inputs[2]}")
-        participants = self.browser.find_elements(By.CLASS_NAME,'printparticipant')
-        submitbox = self.browser.find_element(By.NAME,"submit")
-        
-        titlebox.send_keys(inputs[0])
-        descriptionbox.send_keys(inputs[1]) 
-        categorybox.click()
-
-        #He chooses to go on the currency page:
-        #To complete when JS learned.
-        submitbox.send_keys(Keys.ENTER)
-
-        time.sleep(3)
-
-        #Il met un titre :
-        if inputs[0] != "" :    
-            if len(participants) == 0:
-                self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount/addcount')
-
-                participant_error = self.browser.find_element(By.CLASS_NAME,'participant-error')
-                self.assertIn("Il faut au moins un participant",participant_error.text) 
-            else:
-                id_count = Counts.objects.count()
-                self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount/' + str(id_count) ) 
-
-                back = self.browser.find_element(By.CLASS_NAME,'backtolistecount')
-                back.send_keys(Keys.ENTER)
-                time.sleep(2)
-
-                self.assertEqual(self.browser.current_url, self.live_server_url + '/count/') 
-
-                self.assertIn('Tricount',self.browser.title)
-
-                #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
-                title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
-                description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
-                self.assertIn(inputs[0],[titre.text for titre in title]) 
-                self.assertIn(inputs[1] or 'Pas de description',[desc.text for desc in description])
-        
-        #Il oublie de mettre un titre.
-        else:
-            self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount/addcount')
-            msg = self.browser.find_element(By.CLASS_NAME,'error')
-            self.assertIn('Le titre doit comporter au moins un caractère.',msg.text)
-    
-    def check_links_of_listecounts_leads_to_the_good_tricount(self,tricount_number,*participants):
-        """
-        Function which clicks on a tricount and check the title and the participants are the good ones.
-        participants : the participants we want to verify the presence.
-        """
-        link = self.browser.find_element(By.ID,"link-tricount-" + str(tricount_number))
-        link.send_keys(Keys.ENTER)
-        time.sleep(2) 
-
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/" + str(tricount_number))
-
-        tricount_title = self.browser.find_element(By.CLASS_NAME,"tricount-title")
-        tricount_participants = self.browser.find_elements(By.CLASS_NAME,"tricount-participants")
-
-        count = Counts.objects.get(id=tricount_number)
-        self.assertEqual(tricount_title.text, count.title)
- 
-        for participant in participants:
-            self.assertIn(participant, [name.text for name in tricount_participants])  
-        
-        back = self.browser.find_element(By.CLASS_NAME,'backtolistecount')
-        back.send_keys(Keys.ENTER)
-        time.sleep(2)
-
     def test_tricount_creation(self):
-        
         #Le visiteur arrive sur la page il voit le titre. 
         url = self.live_server_url  
         self.browser.get(url + '/count')  
-        
-        time.sleep(2) 
+        time.sleep(2)
+
         self.assertIn('Tricount',self.browser.title)
+
+        click = user_experience.Click(self.browser,self.live_server_url)
         
         #Il voit la liste des tricount présents ou absents et clique sur le lien pour créer un nouveau tricount
-        link = self.browser.find_element(By.ID,'id_newcount') 
-        link.send_keys(Keys.ENTER)
-        time.sleep(2)  
-
+        click.click_on_a_link(By.ID,'id_newcount')
+         
         self.assertEqual(self.browser.current_url, url + '/count/newcount') 
     
         #Il commence par remplir les différents participants à son premier tricount : les participants apparaissent sur la page du tricount ainsi que le nombre de participants qui s'incrémente
-        self.check_participant_appear_on_newcount_page('Jean')
-        number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants")
-        self.assertEqual(number_participants.text,"Participants (1/50)")
+        click.add_participants('Jean')
 
-        self.check_participant_appear_on_newcount_page('Heeeeeenri')
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/newcount")
+        
+        participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
         number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants")
+
+        self.assertIn('Jean', [participant.text for participant in participants])
+        self.assertEqual(number_participants.text,"Participants (1/50)") 
+
+        click.add_participants('Heeeeeenri')
+        participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
+        number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants")
+
+        self.assertIn('Heeeeeenri', [participant.text for participant in participants])
         self.assertEqual(number_participants.text,"Participants (2/50)")
 
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
-        self.check_inputs_appear_on_listecount_Page(['Tricount 1','Description 1','trip'])
+        click.add_tricount_characteristics('Tricount 1','Description 1','trip')
+
+        #He arrives on the good url 
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount/1')
+
+        click.click_on_a_link(By.CLASS_NAME,'backtolistecount')
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/')
+        self.assertIn('Tricount',self.browser.title)
+
+        #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
+        title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
+        description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
+        
+        self.assertIn('Tricount 1',[titre.text for titre in title]) 
+        self.assertIn('Description 1',[desc.text for desc in description])
        
-        #Il reclique pour recréer un second tricount.
-        link = self.browser.find_element(By.ID,'id_newcount') 
-        link.send_keys(Keys.ENTER)
-        time.sleep(2)  
+        #Il reclique pour recréer un second tricount. 
+        click.click_on_a_link(By.ID,'id_newcount')
         
         self.assertEqual(self.browser.current_url, url + '/count/newcount') 
         
         #Il remplit les différents participants d'un second tricount : les participants apparaissent sur la page du tricount mais pas ceux du tricount précédemment créé.
-        self.check_participant_appear_on_newcount_page('Tony')
-        self.check_participant_appear_on_newcount_page('Dulcinée')
-        self.check_participant_appear_on_newcount_page('Annie')
-
+        click.add_participants('Tony','Dulcinée','Annie')
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
+
         self.assertNotIn('Jean', [participant.text for participant in participants])
         self.assertNotIn('Heeeeeenri', [participant.text for participant in participants])
 
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
-        self.check_inputs_appear_on_listecount_Page(['Tricount 2','Description 2','project'])
+        click.add_tricount_characteristics('Tricount 2','Description 2','project')
+
+        #He arrives on the good url 
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount/2' )
+ 
+        click.click_on_a_link(By.CLASS_NAME,'backtolistecount')
+
+        #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
+        title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
+        description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
+
+        self.assertIn('Tricount 2',[titre.text for titre in title]) 
+        self.assertIn('Description 2',[desc.text for desc in description])
         
-        #Il reclique pour recréer un second tricount
-        link = self.browser.find_element(By.ID,'id_newcount') 
-        link.send_keys(Keys.ENTER)
-        time.sleep(2)  
-        
+        #Il reclique pour recréer un second tricount 
+        click.click_on_a_link(By.ID,'id_newcount')
 
         #Il remplit les données d'un nouveau tricount mais oublie de mettre un titre
-        # Il est renvoyé vers l'url de remplissagedu tricount avec un message d'erreur affiché en rouge
-        self.check_inputs_appear_on_listecount_Page(['','description 3','project'])
+        # Il est renvoyé vers l'url de remplissagedu tricount avec un message d'erreur affiché en rouge 
+        click.add_tricount_characteristics('','description 3','project')
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount/addcount')
+
+        msg = self.browser.find_element(By.CLASS_NAME,'error')
+
+        self.assertIn('Le titre doit comporter au moins un caractère.',msg.text)
  
-        #Du coup, il rajoute un titre mais oublie de mettre des participants:   
-        self.check_inputs_appear_on_listecount_Page(['Tricount 3','','project'])
+        #Du coup, il rajoute un titre mais oublie de mettre des participants:    
+        click.add_tricount_characteristics('Tricount 3','','project')
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount/addcount')
+
+        participant_error = self.browser.find_element(By.CLASS_NAME,'participant-error')
+
+        self.assertIn("Il faut au moins un participant",participant_error.text) 
  
-        #Il met des participants puis crée son tricount.
-        self.check_participant_appear_on_newcount_page('Totolitoto')
-        self.check_participant_appear_on_newcount_page('Biloute')
-        self.check_participant_appear_on_newcount_page('Anne')
-        self.check_inputs_appear_on_listecount_Page(['Tricount 3','','project'])
+        #Il met des participants puis crée son tricount. 
+        click.create_a_tricount('Tricount 3','','project','Totolitoto','Biloute','Anne')
+
+        click.click_on_a_link(By.CLASS_NAME,'backtolistecount')
+        description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
+        self.assertIn('Pas de description',[desc.text for desc in description])
 
         #Il veut créer un nouveau tricount mais change d'avis et après avoir rentré un participant appuie sur le bouton retour en arrière
-        #Il atterrit à nouveau sur la liste des tricount.
-        link = self.browser.find_element(By.ID,'id_newcount') 
-        link.send_keys(Keys.ENTER)
-        time.sleep(2)  
-
-        self.check_participant_appear_on_newcount_page('Jeanine')
-        back = self.browser.find_element(By.CLASS_NAME,'backtotricount')
-        back.send_keys(Keys.ENTER)
-        time.sleep(2)
-
+        #Il atterrit à nouveau sur la liste des tricount. 
+        click.click_on_a_link(By.ID,'id_newcount') 
+        click.add_participants('Jeanine') 
+        click.click_on_a_link(By.CLASS_NAME,'backtotricount')
 
         self.assertEqual(self.browser.current_url, url + '/count/')
         
         #Il clique pour créer un nouveau tricount et voit que les participants précédemment entrés ne sont pas sur la page
-        link = self.browser.find_element(By.ID,'id_newcount') 
-        link.send_keys(Keys.ENTER)
-        time.sleep(2)  
-
+        click.click_on_a_link(By.ID,'id_newcount')
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
+
         self.assertNotIn('Jeanine',[participant.text for participant in participants])
 
-        back = self.browser.find_element(By.CLASS_NAME,'backtotricount')
-        back.send_keys(Keys.ENTER)
-        time.sleep(2)
-        
-        #Il clique maintenant sur les tricounts existant pour vérifier que les informations du tricount sont correctes. 
+        click.click_on_a_link(By.CLASS_NAME,'backtotricount')
 
-        self.check_links_of_listecounts_leads_to_the_good_tricount(1,'Jean')
-        self.check_links_of_listecounts_leads_to_the_good_tricount(2, 'Tony', 'Dulcinée', 'Annie')
+        #Il clique maintenant sur les tricounts existant pour vérifier que les informations du tricount sont correctes. 
+        click.click_on_an_existing_tricount(1)
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1")
+
+        tricount_title = self.browser.find_element(By.CLASS_NAME,"tricount-title")
+        tricount_participants = self.browser.find_elements(By.CLASS_NAME,"tricount-participants")
+        count = Counts.objects.get(id=1)
+        
+        self.assertEqual(tricount_title.text, count.title)
+        self.assertIn('Jean', [name.text for name in tricount_participants])  
+        
+        click.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
+        click.click_on_an_existing_tricount(2)
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/2")
+
+        tricount_title = self.browser.find_element(By.CLASS_NAME,"tricount-title")
+        tricount_participants = self.browser.find_elements(By.CLASS_NAME,"tricount-participants")
+        count = Counts.objects.get(id=2)
+        
+        self.assertEqual(tricount_title.text, count.title)
+        self.assertIn('Dulcinée', [name.text for name in tricount_participants]) 
+        self.assertIn('Annie', [name.text for name in tricount_participants]) 
         
 class RegisterSpending(StaticLiveServerTestCase):
     def setUp(self) -> None:
@@ -215,81 +174,18 @@ class RegisterSpending(StaticLiveServerTestCase):
     def tearDown(self) -> None:
         self.browser.quit()
 
-    def create_a_tricount(self,title, description, category,*participants):
-        self.browser.get(self.live_server_url+ '/count')
-
-        #Clicks to add a tricount
-        link = self.browser.find_element(By.ID,'id_newcount') 
-        link.send_keys(Keys.ENTER)
-        time.sleep(2)  
-
-        #Enter the participants
-        for participant in participants: 
-            participantbox = self.browser.find_element(By.NAME,"new_participant")
-            buttonbox = self.browser.find_element(By.CLASS_NAME,"add_participant") 
-            participantbox.send_keys(participant)
-            buttonbox.send_keys(Keys.ENTER)
-            time.sleep(2)
-
-        #Enter  the other characteristics
-        titlebox = self.browser.find_element(By.NAME,"newtricount_title")
-        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description") 
-        categorybox = self.browser.find_element(By.ID,f"{category}") 
-        submitbox = self.browser.find_element(By.NAME,"submit")
-        
-        titlebox.send_keys(title)
-        descriptionbox.send_keys(description) 
-        categorybox.click()
-
-        #He chooses to go on the currency page: 
-        submitbox.send_keys(Keys.ENTER)
-        time.sleep(2)
-
-    def click_on_an_existing_tricount(self,tricount_number):
-        """
-        Function which clicks on a tricount and check the title and the participants are the good ones.
-        participants : the participants we want to verify the presence.
-        """
-        link = self.browser.find_element(By.ID,"link-tricount-" + str(tricount_number))
-        link.send_keys(Keys.ENTER)
-        time.sleep(2) 
-
-    def click_on_create_spending(self):
-        link_spending = self.browser.find_element(By.CLASS_NAME,'new-spending')
-        link_spending.send_keys(Keys.ENTER)
-        time.sleep(2)
-
-    def create_a_spending(self,title,amount,payer,receivers):
-        """
-        Function creating a new spending
-        """
-        titlebox = self.browser.find_element(By.NAME, 'title')
-        amountbox = self.browser.find_element(By.NAME, 'amount')
-        spenderbox = self.browser.find_element(By.NAME, 'spender')
-        receiverbox = self.browser.find_element(By.NAME, 'receiver')
-        submitbox = self.browser.find_element(By.NAME,'submit') 
-
-        titlebox.send_keys(title)
-        amountbox.send_keys(amount)
-        spenderbox.send_keys(payer)
-        receiverbox.send_keys(receivers)
-        submitbox.send_keys(Keys.ENTER)
-        time.sleep(2)
-
-
-
     def test_spending_creation(self):
+        click = user_experience.Click(self.browser,self.live_server_url)
+
         #A tricount is created et come back to the listecount page
-        self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri")
-        back = self.browser.find_element(By.CLASS_NAME,'backtolistecount')
-        back.send_keys(Keys.ENTER)
-        time.sleep(2)
+        click.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri")
+        click.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
 
         #The user clicks on an existing tricount 
-        self.click_on_an_existing_tricount(1)
+        click.click_on_an_existing_tricount(1)
 
         #The user clicks to add a new spending, he has the choice between the participants previously created
-        self.click_on_create_spending()
+        click.click_on_create_spending()
 
         self.assertEqual(self.browser.current_url,self.live_server_url + '/count/tricount/1/spending')
         
@@ -302,7 +198,7 @@ class RegisterSpending(StaticLiveServerTestCase):
         self.assertIn("Henri",[name.text for name in receiver_participants])
 
         #He enters the title, amount the payer and for who the payer paid
-        self.create_a_spending('Dépense1', 100., 'Jean', ['Henri','Jean'])
+        click.create_a_spending('Dépense1', 100., 'Jean', ['Henri','Jean'])
 
         #He is then redirected to the spending list where the name, the amount, the payer appears
         self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount/1')
@@ -315,17 +211,16 @@ class RegisterSpending(StaticLiveServerTestCase):
         self.assertIn(100.,[float(name.text) for name in spending_amount])
         self.assertIn('Jean',[name.text for name in spending_payer])
 
-
         #He tries to create a second spending. He forgets to put a title, a message of error appears and he stays on the page.
-        self.click_on_create_spending()
-        self.create_a_spending('', 100., 'Jean', ['Henri','Jean'])
+        click.click_on_create_spending()
+        click.create_a_spending('', 100., 'Jean', ['Henri','Jean'])
 
         notitle = self.browser.find_element(By.CLASS_NAME,"notitle")
         self.assertEqual(notitle.text, "Titre non valable")
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1/addspending")
 
         #He forgets to put the amount, a spending is created with amount 0.
-        self.create_a_spending('Dépense2', '', 'Jean', ['Henri','Jean'])
+        click.create_a_spending('Dépense2', '', 'Jean', ['Henri','Jean'])
 
         amounts = self.browser.find_elements(By.CLASS_NAME,"spending-amount")
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1")

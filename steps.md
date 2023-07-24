@@ -91,7 +91,9 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         - ajouter le calcul auto des montants pr chaque participant coché (cas équitable).
         - `test fonc créer une seconde dépense et voir si ça se passe bien.`
         - `test fonctionnel : retour en arrière, création sans titre puis sans montant. A débugger`
-        - factoriser le code testfonctionnel en utilisant les fonctions élémentaires sans tests qu'on met éventuellement dans un autre fichier.
+        -regarder comment Romain importe ses sous fichiers si ceux ci sont constitués de classes. Est-ce qu'on est obligé d'instancier une classe?
+        - factoriser le code testfonctionnel en utilisant les fonctions élémentaires sans tests qu'on met éventuellement dans un autre fichier. Commencer par testspendingcreation.
+        -transformer addaparticipant en add participants.
         - factoriser aussi les redondances sur les tests unitaires (les blocs d'assert qui se répètent, les beautiful soup...).
     -`créer le module de calcul des équilibres après dépense.`
         `fabriquer des tests pour chacune des fonctions créée.`
