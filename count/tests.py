@@ -3,9 +3,10 @@ from django.urls import resolve
 from count.views import listecount
 from bs4 import BeautifulSoup
 from count.models import Counts, Participants, Spending
-from count.calculation import Tricount
-import numpy
+from count.calculation import Tricount 
 from copy import deepcopy
+
+from count.tests_functions import UnitaryTestMethods
 
 # Create your tests here.
 
@@ -16,6 +17,7 @@ class resolveUrl(TestCase):
         On crée d'abord l'url de la page en question et on vérifie que l'url est associée à la bonne fonction de views.
         """
         found = resolve('/count/')
+
         self.assertEqual(found.func,listecount) 
 
 class HomepageTest(TestCase):
@@ -25,14 +27,13 @@ class HomepageTest(TestCase):
         self.assertIn(b'Tricount',response.content)
         self.assertTemplateUsed(response,'index.html')
 
-class NewcountTest(TestCase):
+class NewcountTest(UnitaryTestMethods):
     def test_newcount(self):
         """
         Fonction qui à partir de la page de la liste des tricount clique sur "créer un nouveau tricount" et vérifie qu'on utilise le bon template
         """ 
         response = self.client.get('/count/')
-        soup = BeautifulSoup(response.content,'html.parser')
-        link = soup.select_one('a#id_newcount')['href'] #on clique sur le + : sorte de send_keys
+        link = self.extract_and_click_on_link(response.content , 'id_newcount')
         response2 = self.client.get(link)
 
         self.assertTemplateUsed(response2, 'newcount.html') 
@@ -41,10 +42,7 @@ class NewcountTest(TestCase):
         """
         Fonction qui teste si les données entrées par l'utilisateur sont bien récupérées et si la redirection vers la page d'origine est effective.
         """
-
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
-        response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
-        
+        response = self.create_a_tricount("tricount 1","description 1","Voyage",'Jean')
         count = Counts.objects.first()
 
         self.assertEqual("Tricount 1",count.title)
@@ -58,8 +56,7 @@ class NewcountTest(TestCase):
         et on a dans la réponse html un message en rouge indiquant que le titre et la catégorie doivent être remplis.
         """    
         one = Counts.objects.count()
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
-        response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+        response = self.create_a_tricount("","description 1","Voyage",'Jean') 
         two = Counts.objects.count() 
 
         self.assertEqual(one,two)
@@ -72,7 +69,7 @@ class NewcountTest(TestCase):
         et on a dans la réponse html un message en rouge indiquant qu'il faut un participant.
         """    
         one = Counts.objects.count()
-        response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":"Tricount sans participant", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+        response = self.add_tricount_characteristics("Tricount sans participant", "description 1", "Voyage")
         two = Counts.objects.count() 
 
         self.assertEqual(one,two)
@@ -92,14 +89,13 @@ class NewcountTest(TestCase):
         Elle teste ensuite lorsqu'on poste un titre, une description, une catégorie, que les participants sont bien associés au tricount.
         Enfin elle crée un second tricount et vérifie que la bdd associe bien le bon nombre de participants au tricount et qu'elle n'associe par des noms du premier tricount au second.
         """
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
+
+        self.add_participants("Jean","Henri")
         participant = Participants.objects.first()
 
         self.assertEqual(participant.name,'Jean') 
 
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
-
-        self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
+        self.add_tricount_characteristics("tricount 1","description 1","Voyage")
         count = Counts.objects.first() 
 
         self.assertIn('Jean', count.participants.first().name)
@@ -107,11 +103,7 @@ class NewcountTest(TestCase):
         self.assertEqual(1,count.participants.first().number)
         self.assertEqual(2,count.participants.count())
 
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henriette"})
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Tony"})
-
-        self.client.post("/count/newcount/addcount",data = {"newtricount_title":"tricount2", "newtricount_description":"description 2", "newtricount_category":"Voyage"})
+        self.create_a_tricount("tricount 2","description 2","Voyage","Henri","Henriette","Tony")
         count2 = Counts.objects.get(pk=2) 
         self.assertEqual(3,count2.participants.count())
 
@@ -123,13 +115,12 @@ class NewcountTest(TestCase):
         Vérifie si les participants créés dans la bdd sont bien supprimés.
         """
         number = Participants.objects.count()
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
+        self.add_participants("Henri","Jean")
         response = self.client.get('/count/newcount') 
 
-        soup = BeautifulSoup(response.content,'html.parser')
-        link = soup.select_one('a#backtotricount')['href'] #on clique sur le + : sorte de send_keys 
+        link = self.extract_and_click_on_link(response.content , 'backtotricount') 
         response2 = self.client.get(link)
+
         self.assertEqual(number,Participants.objects.count())
 
     def test_click_on_count(self):
@@ -137,23 +128,16 @@ class NewcountTest(TestCase):
         Function checking if we go on the good link after clicking on a tricount.
         """ 
         #We create two tricounts
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Henri"})
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
-        self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 1", "newtricount_description":"description 1", "newtricount_category":"Voyage"})
-       
-        self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Roberto"})
-        self.client.post('/count/newcount/addcount',data = {"newtricount_title":"tricount 2", "newtricount_description":"description 2", "newtricount_category":"Coloc"})
-    
+        self.create_a_tricount("tricount 1", "description 1", "Voyage", "Henri", "Jean")
+        self.create_a_tricount("tricount 2", "description 2", "Coloc", "Roberto")
+        
         #We go on the list of the tricounts
         response = self.client.get('/count/')
-
-        soup = BeautifulSoup(response.content, 'html.parser')
-        link = soup.select_one('a#link-tricount-2')['href'] 
+        link = self.extract_and_click_on_link(response.content , 'link-tricount-2') 
 
         self.assertEqual(link,'/count/tricount/2')
 
-        soup = BeautifulSoup(response.content, 'html.parser')
-        link = soup.select_one('a#link-tricount-1')['href'] 
+        link = self.extract_and_click_on_link(response.content , 'link-tricount-1')  
 
         self.assertEqual(link,'/count/tricount/1')
 
@@ -299,35 +283,25 @@ class TestCalculator(TestCase):
         self.assertDictEqual(old_dict_participants['Yann'].credits, count.dict_participants['Yann'].credits)
         self.assertDictEqual(old_dict_participants['Henri'].credits, count.dict_participants['Henri'].credits)
 
-class TestSpending(TestCase):
-
-    def create_a_tricount(self,titre,description,category,*participants):
-        
-        for participant in participants:
-            self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":participant}) 
-        
-        self.client.post('/count/newcount/addcount',data = {"newtricount_title":titre, "newtricount_description":description, "newtricount_category":category})
+class TestSpending(UnitaryTestMethods):
 
     def test_redirect_after_newspending_inputs(self):
         """
         We enter a newspending and we see if data are integrated into the database.
         """
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
+        response = self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean'])  
 
-        response = self.client.post('/count/tricount/1/addspending', data = {'title': 'dépense1', 'amount': 100, 'spender': 'Jean',  'receiver': ['Henri','Jean']})
-        
         self.assertRedirects(response,'/count/tricount/1') 
     
     def test_bdd_newspending_inputs(self):
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
 
         number = Spending.objects.count()
-        self.client.post('/count/tricount/1/addspending', data = {'title': 'dépense1', 'amount': 100, 'spender': 'Jean',  'receiver': ['Henri','Jean']})
+        self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean'])  
+        spending = Spending.objects.get(pk = 1)
         
         self.assertEqual(number+1, Spending.objects.count())
-
-        spending = Spending.objects.get(pk = 1)
-
         self.assertEqual(spending.title, 'dépense1')
         self.assertEqual(spending.amount, 100)
         self.assertEqual(spending.payer, 'Jean')
@@ -340,10 +314,8 @@ class TestSpending(TestCase):
         """
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
         response = self.client.get('/count/tricount/1/spending') 
-
         nb_spending = Spending.objects.count()
-        soup = BeautifulSoup(response.content,'html.parser')
-        soup.select_one('a#backtospending')['href']
+        self.extract_and_click_on_link(response.content , 'backtospending')  
 
         self.assertEqual(nb_spending,Spending.objects.count()) 
 
@@ -353,11 +325,10 @@ class TestSpending(TestCase):
         """
         test : we create a spending, we forget the title. No new spend must appear in the bdd and we stay on the same template.
         """
-        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
-        
+        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")     
         nb_spending = Spending.objects.count()
-        response = self.client.post('/count/tricount/1/addspending', data = {'title': '', 'amount': 100, 'spender': 'Jean',  'receiver': ['Henri','Jean']}) 
- 
+        response = self.create_a_spending('', 100, 'Jean', ['Henri','Jean'])   
+        
         self.assertEqual(nb_spending,Spending.objects.count()) 
         self.assertTemplateUsed(response,'newspending.html')
         
@@ -367,11 +338,10 @@ class TestSpending(TestCase):
         test : we create a spending with no amount. A new spend must appear in the bdd with amount 0 and we must be redirected.
         """
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
-        
         nb_spending = Spending.objects.count()
-        self.client.post('/count/tricount/1/addspending', data = {'title': 'dépense1', 'amount': '', 'spender': 'Jean',  'receiver': ['Henri','Jean']}) 
-
+        self.create_a_spending('dépense1', '', 'Jean', ['Henri','Jean'])  
         spending = Spending.objects.get(pk = 1)
+
         self.assertEqual(nb_spending + 1,Spending.objects.count()) 
         self.assertEqual(spending.amount, 0)
  

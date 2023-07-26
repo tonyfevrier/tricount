@@ -98,6 +98,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -`créer le module de calcul des équilibres après dépense.`
         `fabriquer des tests pour chacune des fonctions créée.`
     -comparer les css et voir si factorisable en un fichier avec structure minimale commune et des spécificités par ailleurs. Voir alors comment importer dans un css la structure commune.
+    - Bug à comprendre : quand je lance mes deux tests fonctionnels, le second bugge, quand je le lance seul il tourne.
+    - voir test.resolvesolution et test calculate total credit si je ne me suis pas trompé dans le calcul des crédits (si les signes ne sont pas inverses) : car j'ai mis receiving update au lieu de spending update.
 
 
 
@@ -134,3 +136,6 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
 
 # Mes difficultés principales
     - Non connaissance des syntaxes du client django pour faire des tests unitaires. Idem pour les fonctionnels.
+
+# Des enseignements intéressants :
+    -pour rendre les tests lisibles : créer des fonctions sans tests avec des noms équivoques et mettre les tests en dehors. L'idée est que quand je lis le test fonctionnel, je comprenne ce qu'on fait. J'ai créé un module avec une classe de fonctions élémentaires sans tests. Chaque fonction idéalement doit avoir une action. 
