@@ -1,11 +1,9 @@
 from django.test import TestCase
 from django.urls import resolve
-from count.views import listecount
-from bs4 import BeautifulSoup
+from count.views import listecount 
 from count.models import Counts, Participants, Spending
 from count.calculation import Tricount 
 from copy import deepcopy
-
 from count.tests_functions import UnitaryTestMethods
 
 # Create your tests here.
@@ -157,7 +155,6 @@ class TestCalculator(TestCase):
         self.assertEqual(len(count.dict_participants.keys()),4)  
         self.assertEqual(count.dict_participants['Tony'].credits,{'Marine':0, 'Henri':0, 'Yann':0})
 
-
     def test_nullity(self):
         """
         Function which test a spending of amount 0. Nothing changes
@@ -170,13 +167,11 @@ class TestCalculator(TestCase):
 
         self.assertEqual(old_dict_participants,count.dict_participants) 
          
-
     def test_spending_update_first(self):
         """
         We test a spending between two participants from a group of four to verify that the amount is correct and
         that the others credits are not modified.
         """
-
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
         old_dict_participants = deepcopy(count.dict_participants)   
         count.spending_update({'Tony':100.}, {'Marine':50., 'Tony':50}) 
@@ -213,7 +208,6 @@ class TestCalculator(TestCase):
                     self.assertEqual(old_dict_participants[firstparticipant].credits[secondparticipant], count.dict_participants[firstparticipant].credits[secondparticipant])
                     self.assertEqual(old_dict_participants[secondparticipant].credits[firstparticipant], count.dict_participants[secondparticipant].credits[firstparticipant])
                 
-        
     def test_receiving_update(self):
         """
         We test a money input between all participants from a group of four to verify that the amount is correct.
@@ -242,9 +236,9 @@ class TestCalculator(TestCase):
         Function which tests if the total credit of each participant is correct.
         """
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann') 
-        count.receiving_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
-        count.receiving_update({'Marine':200.}, {'Marine':150., 'Tony':50})
-        count.receiving_update({'Henri':150.}, {'Marine':25., 'Yann':50, 'Tony':25,'Henri':50})
+        count.spending_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
+        count.spending_update({'Marine':200.}, {'Marine':150., 'Tony':50})
+        count.spending_update({'Henri':150.}, {'Marine':25., 'Yann':50, 'Tony':25,'Henri':50})
         
         total_credit = count.calculate_total_credit()
 
@@ -255,19 +249,16 @@ class TestCalculator(TestCase):
 
     def test_resolve_solution(self):
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann') 
-        count.receiving_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
-        count.receiving_update({'Marine':200.}, {'Marine':150., 'Tony':50})
-        count.receiving_update({'Henri':150.}, {'Marine':25., 'Yann':50, 'Tony':25,'Henri':50})
-        count.receiving_update({'Yann':180.}, {'Marine':50., 'Yann':50, 'Tony':50,'Henri':30})
+        count.spending_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
+        count.spending_update({'Marine':200.}, {'Marine':150., 'Tony':50})
+        count.spending_update({'Henri':150.}, {'Marine':25., 'Yann':50, 'Tony':25,'Henri':50})
+        count.spending_update({'Yann':180.}, {'Marine':50., 'Yann':50, 'Tony':50,'Henri':30})
         
-
         total_credit = count.calculate_total_credit()
         transfert_to_equilibrium = count.resolve_solution(total_credit)
 
         self.assertEqual(sum(transfert_to_equilibrium['Tony'].values()),25)
         self.assertEqual(sum(transfert_to_equilibrium['Marine'].values()),50)
-        
-        
 
     def test_moneytransfer(self):
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
@@ -319,8 +310,6 @@ class TestSpending(UnitaryTestMethods):
 
         self.assertEqual(nb_spending,Spending.objects.count()) 
 
-        
-
     def test_notitle_bdd_unchanged(self):
         """
         test : we create a spending, we forget the title. No new spend must appear in the bdd and we stay on the same template.
@@ -332,7 +321,6 @@ class TestSpending(UnitaryTestMethods):
         self.assertEqual(nb_spending,Spending.objects.count()) 
         self.assertTemplateUsed(response,'newspending.html')
         
-
     def test_noamount_nullspending(self):
         """
         test : we create a spending with no amount. A new spend must appear in the bdd with amount 0 and we must be redirected.

@@ -85,11 +85,12 @@ class Tricount():
         for payer in self.dict_participants.keys():
             total_credit[payer] = 0
             for receiver in self.dict_participants[payer].credits.keys():
-                total_credit[payer] += self.dict_participants[payer].credits[receiver]
+                total_credit[payer] -= self.dict_participants[payer].credits[receiver]
 
         return total_credit
     
-    def reimburse_one_debitor(self,debitor, creditors,transferts_to_equilibrium):
+
+    def reimburse_one_creditor(self,creditor, debitors,transferts_to_equilibrium):
         """
         Function which offers a repartition to reimburse ONE debitor. It completes transferts_to_equilibrium.
 
@@ -100,19 +101,19 @@ class Tricount():
         Output : dict transferts_to_equilibrium completed.
         """
 
-        #We create a dictionary for the debitor whose values give people who have to reimbuse him plus the amount.
-        transferts_to_equilibrium[debitor[0]] = {}
+        #We create a dictionary for the creditor whose values give people who have to reimbuse him plus the amount.
+        transferts_to_equilibrium[creditor[0]] = {}
         amount_reimbursed = 0
 
-        for creditor in creditors.keys():
+        for debitor in debitors.keys():
             #soit on n'a pas encore complètement remboursé le débiteur
-            if amount_reimbursed + creditors[creditor] <= debitor[1]:
-                transferts_to_equilibrium[debitor[0]][creditor] = creditors[creditor]
-                amount_reimbursed += creditors[creditor]
-                creditors[creditor] = 0
+            if amount_reimbursed + debitors[debitor] <= creditor[1]:
+                transferts_to_equilibrium[creditor[0]][debitor] = debitors[debitor]
+                amount_reimbursed += debitors[debitor]
+                debitors[debitor] = 0
             else:
-                transferts_to_equilibrium[debitor[0]][creditor] = debitor[1] - amount_reimbursed 
-                creditors[creditor] -= debitor[1] - amount_reimbursed 
+                transferts_to_equilibrium[creditor[0]][debitor] = creditor[1] - amount_reimbursed 
+                debitors[debitor] -= creditor[1] - amount_reimbursed 
                 break
         
         return transferts_to_equilibrium
@@ -124,7 +125,7 @@ class Tricount():
         Input : dict {name:total credit}
         Output transferts_to_equilibrium : dict {name debitor : {name1 creditor : amount, name2:amount,...}}. Dictionary whose values are dictionaries. It gives the solution to reach the equilibrium.
 
-        The principle: the most important debitor receives money from creditors while he is not reimbursed completely. 
+        The principle: a debitor receives money from creditors while he is not reimbursed completely. 
         A dictionnary transferts_to_equilibrium is fulled with the name of the debitor and the names of the creditor with the amount they must give to him. 
         After, the algorithm continues on the second most important debitor and so on.  
         """
@@ -135,12 +136,12 @@ class Tricount():
         debitors = {}
         for key, value in total_credit.items():
             if value > 0:
-                creditors[key] = value
+                debitors[key] = value
             elif value < 0 :
-                debitors[key] = -value
+                creditors[key] = -value
 
-        for debitor in debitors.items():
-            transferts_to_equilibrium = self.reimburse_one_debitor(debitor,creditors,transferts_to_equilibrium) 
+        for creditor in creditors.items():
+            transferts_to_equilibrium = self.reimburse_one_creditor(creditor,debitors,transferts_to_equilibrium) 
 
         return transferts_to_equilibrium
 

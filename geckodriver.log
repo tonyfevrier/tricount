@@ -11858,3 +11858,25 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: http://l
 console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:63728."
 1690399028659	Marionette	INFO	Stopped listening on port 63741
 Dynamically enable window occlusion 1
+1690404776999	geckodriver	INFO	Listening on 127.0.0.1:54019
+1690404780059	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "54020" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileKT3zH5"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1690404780623	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1690404780725	Marionette	INFO	Listening on port 54032
+WebDriver BiDi listening on ws://127.0.0.1:54020
+Read port: 54032
+1690404780994	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:54020/devtools/browser/a56057cd-0c54-4c29-84bb-0f4eb6a36d90
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:54018."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:54018."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:54018."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:54018."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:54018."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:54018."
+1690404805796	Marionette	INFO	Stopped listening on port 54032
+Dynamically enable window occlusion 1
+1690840071752	geckodriver	INFO	Listening on 127.0.0.1:53183
+1690840074799	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53184" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofiley4yhfE"
+1690840077330	geckodriver	INFO	Listening on 127.0.0.1:53204

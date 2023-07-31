@@ -72,7 +72,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `Factoriser le test fonctionnel , factoriser les fonctions check aussi en plusieurs fonctions élémentaires.`
         `dans spending et newcount, voir si /count ou /count/ (les tests fonc marchent avec les deux mais pas les tests unitaires qu'il faut débugger avec /count/)`
     -`css : en rouge le msg d'erreur pour les participants + les bords deviennent rouges si non remplis`
-    -créer l'entrée d'une dépense.
+    -`créer l'entrée d'une dépense.`
         `-créer un nouveau html avec les catégories factices, l'url est la vue associées.`
         -`passer à l'html le nom des participants au tricount et ajouter les montants dans le css`
         -`test fonctionnel`
@@ -88,19 +88,22 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         - `test unitaire : commencer à créér une dépense revenir en arrière, rien dans la bdd`
         - `test unitaire : pas de montant, la bdd augmente avec le montant 0.`
         - `test unitaire : pas de titre, la bdd n'augmente pas.`
-        - ajouter le calcul auto des montants pr chaque participant coché (cas équitable).
         - `test fonc créer une seconde dépense et voir si ça se passe bien.`
         - `test fonctionnel : retour en arrière, création sans titre puis sans montant. A débugger`
-        -regarder comment Romain importe ses sous fichiers si ceux ci sont constitués de classes. Est-ce qu'on est obligé d'instancier une classe?
-        - factoriser le code testfonctionnel en utilisant les fonctions élémentaires sans tests qu'on met éventuellement dans un autre fichier. Commencer par testspendingcreation.
-        -transformer addaparticipant en add participants.
-        - factoriser aussi les redondances sur les tests unitaires (les blocs d'assert qui se répètent, les beautiful soup...).
+        -`regarder comment Romain importe ses sous fichiers si ceux ci sont constitués de classes. Est-ce qu'on est obligé d'instancier une classe?`
+        - `factoriser le code testfonctionnel en utilisant les fonctions élémentaires sans tests qu'on met éventuellement dans un autre fichier. Commencer par testspendingcreation.`
+        - `transformer addaparticipant en add participants.`
+        - `factoriser aussi les redondances sur les tests unitaires (les blocs d'assert qui se répètent, les beautiful soup...).`
     -`créer le module de calcul des équilibres après dépense.`
-        `fabriquer des tests pour chacune des fonctions créée.`
+        `fabriquer des tests pour chacune des fonctions créée.`    
+        - ajouter le calcul auto des montants pr chaque participant coché (cas équitable).
+    - `voir test.resolvesolution et test calculate total credit si je ne me suis pas trompé dans le calcul des crédits (si les signes ne sont pas inverses) : car j'ai mis receiving update au lieu de spending update.`
     -comparer les css et voir si factorisable en un fichier avec structure minimale commune et des spécificités par ailleurs. Voir alors comment importer dans un css la structure commune.
     - Bug à comprendre : quand je lance mes deux tests fonctionnels, le second bugge, quand je le lance seul il tourne.
-    - voir test.resolvesolution et test calculate total credit si je ne me suis pas trompé dans le calcul des crédits (si les signes ne sont pas inverses) : car j'ai mis receiving update au lieu de spending update.
-
+    -création de la page d'une dépense donnée :
+        -créer nouvelle url, vue qui renvoit vers l'html élémentaire.
+        -transférer les données de la dépense à la page.
+        -améliorer html et css.
 
 
 
