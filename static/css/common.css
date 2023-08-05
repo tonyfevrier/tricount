@@ -1,0 +1,27 @@
+*{
+    box-sizing: border-box;
+    margin : 0;
+    font-size: 14px;
+}
+
+:root{
+    --padding:0.5em;
+    --color:rgb(71, 71, 199);
+}
+
+header{
+    display: flex; 
+    align-items: center;
+    background-color: var(--color);
+    padding: 1em 0;
+    z-index: 1;
+    color:white;
+}
+
+body{
+    background-color: lightgray;
+}
+
+main{
+    background-color: white;   
+}

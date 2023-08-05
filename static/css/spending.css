@@ -1,3 +1,4 @@
+
 *{
     box-sizing: border-box;
     margin : 0;
@@ -14,6 +15,19 @@ header{
     background-color: var(--color);
     color: white;
     height: 7em;
+}
+
+main{
+    background-color: white;   
+}
+
+body{
+    background-color: lightgray;
+}
+
+
+header{
+    height : 7em;
 }
 
 .header-nav{
@@ -70,14 +84,6 @@ header{
     transform: translate(0,1.25em);
 }
 
-main{
-    background-color: white;
-    
-}
-
-body{
-    background-color: lightgray;
-}
 
 .spending{
     display: flex;
