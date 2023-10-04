@@ -1,3 +1,4 @@
+
 /*
 header::before{
     position: fixed;
@@ -13,6 +14,7 @@ header::before{
     background-repeat: no-repeat; 
     z-index: 0;
 }*/
+
 
 header{
     justify-content: space-between;
@@ -35,10 +37,7 @@ header{
 .header_images{
     position: absolute;
     top : 0px;
-    left: 0px;
-    /*display: flex;
-    justify-content: center;
-    flex-wrap: wrap;*/
+    left: 0px; 
     opacity: 0.3;
     height: 3.5em;
 }
@@ -55,9 +54,32 @@ header{
 
 .premium{
     padding-right: var(--padding);
+    cursor: pointer;
 }
 
+.parameters{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
 
+.parameters-options, .help-options, .conditions-options{ 
+    position: absolute;
+    right: 5px;
+    top : 5px;
+    background-color: white;
+    z-index: 1;
+}
+
+.parameters-options > *, .help-options > *, .conditions-options > *{
+    margin: 20px;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    font-weight: 400;
+    color: black;
+}
 
 .link-tricount{
     text-decoration: none;

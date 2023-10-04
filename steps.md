@@ -98,8 +98,14 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `fabriquer des tests pour chacune des fonctions créée.`    
         - ajouter le calcul auto des montants pr chaque participant coché (cas équitable).
     - `voir test.resolvesolution et test calculate total credit si je ne me suis pas trompé dans le calcul des crédits (si les signes ne sont pas inverses) : car j'ai mis receiving update au lieu de spending update.`
-    -comparer les css et voir si factorisable en un fichier avec structure minimale commune et des spécificités par ailleurs. Voir alors comment importer dans un css la structure commune.
-    - Bug à comprendre : quand je lance mes deux tests fonctionnels, le second bugge, quand je le lance seul il tourne.
+    - `comparer les css et voir si factorisable en un fichier avec structure minimale commune et des spécificités par ailleurs. Voir alors comment importer dans un css la structure commune.`
+    - `Ecriture d'un event onclick sur la première page prenant en compte juste le premier bouton.`
+    - ecriture du html et js pour display options
+    - ajouter le comportement lorsqu'on clique sur parameters-options.
+    - Modif du + pour créer un élt qui lui va mener vers la page du nouveau tricount ou une page rejoindre un tricount.
+    -Modifier les tests unitaires et fonctionnels en conséquence pr que ça tourne toujours.
+    - écrire les tests pr mon JS de la page.
+    - Bug : réussir à supprimer la bdd à distance après le premier test. linktricount-1 échoue car la bdd à distance contient 3 tricounts après le premier test.
     -création de la page d'une dépense donnée :
         -créer nouvelle url, vue qui renvoit vers l'html élémentaire.
         -transférer les données de la dépense à la page.
@@ -135,6 +141,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - FORM SUBMIT : Il semble que si on remplace le input ayant la classe submit par un button avec la même classe, l'envoie des données se fasse alors que si on choisit un a cela n'envoie plus les données.
     - SELECTONE ID : attention quand on sélectionne un élément via a#qqch, qqch est l'identifiant (repéré par un # comme en css). qqch ne peut être la classe.
     - TYPE FLOAT BDD : Si on entre un float ou int dans la bdd via un request, celui-ci est convertit en str par request.POST. Donc ne pas oublier de le convertir si on a utilisé un champ FloatField.
+    - SEVERAL FUNCTIONAL TESTS : when we launch tests, it creates a database and destroys it at the end of all tests. So to avoid bugs, don't forget to erase the database created by the first test.
+    - Le JS apparaît et disparaît : c'est sûrement dû à un comportement par défaut. Dans mon cas c'était un lien a qui par défaut envoie vers une autre page.
     
 
 # Mes difficultés principales

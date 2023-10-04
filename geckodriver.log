@@ -12226,3 +12226,795 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: http://l
 console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50222."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50222."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50222."
+1691232753025	geckodriver	INFO	Listening on 127.0.0.1:50805
+1691232756081	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50806" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofile8eRtcb"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691232756318	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691232756396	Marionette	INFO	Listening on port 50817
+WebDriver BiDi listening on ws://127.0.0.1:50806
+Read port: 50817
+1691232756518	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:50806/devtools/browser/85d47f40-451c-4579-acde-ecc1a91fa50a
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+[Parent 9904, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9908, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50804."
+1691232821648	Marionette	INFO	Stopped listening on port 50817
+Dynamically enable window occlusion 1
+[Parent 9904, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9908, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 9904, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9908, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 9904, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9908, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 9904, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9908, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 9904, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9908, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691232829251	geckodriver	INFO	Listening on 127.0.0.1:50946
+1691232832296	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50947" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileyJjTGE"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691232832542	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691232832614	Marionette	INFO	Listening on port 50958
+WebDriver BiDi listening on ws://127.0.0.1:50947
+Read port: 50958
+1691232832733	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:50947/devtools/browser/ee13b9a6-a3eb-4121-a118-b82f8dfc75f9
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50945."
+[Parent 18452, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 23044, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50945."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50945."
+1691234853325	Marionette	INFO	Stopped listening on port 50958
+Dynamically enable window occlusion 1
+[Parent 18452, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 23044, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18452, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 23044, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18452, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 23044, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18452, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 23044, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691235349089	geckodriver	INFO	Listening on 127.0.0.1:51237
+1691235352146	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51238" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofile48EqbM"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691235352380	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691235352454	Marionette	INFO	Listening on port 51251
+WebDriver BiDi listening on ws://127.0.0.1:51238
+Read port: 51251
+1691235352626	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51238/devtools/browser/0d1c9b03-1d10-4d04-bd0b-2905fd93f08d
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51236."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51236."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51236."
+[Parent 10424, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 7020, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51236."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51236."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51236."
+1691235377336	Marionette	INFO	Stopped listening on port 51251
+Dynamically enable window occlusion 1
+[Parent 10424, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 7020, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 10424, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 7020, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 10424, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 7020, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691235438954	geckodriver	INFO	Listening on 127.0.0.1:51403
+1691235442019	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51404" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofile8pN2eL"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691235442264	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691235442336	Marionette	INFO	Listening on port 51414
+WebDriver BiDi listening on ws://127.0.0.1:51404
+Read port: 51414
+1691235442457	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51404/devtools/browser/80d69737-b927-4755-8ca6-d7ddcaa8de55
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51402."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51402."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51402."
+[Parent 11212, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21216, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51402."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51402."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51402."
+1691235467030	Marionette	INFO	Stopped listening on port 51414
+Dynamically enable window occlusion 1
+[Parent 11212, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21216, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 11212, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21216, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 11212, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21216, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 11212, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21216, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 11212, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21216, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691235571819	geckodriver	INFO	Listening on 127.0.0.1:51598
+1691235574864	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51599" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileSinock"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691235575118	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691235575202	Marionette	INFO	Listening on port 51609
+WebDriver BiDi listening on ws://127.0.0.1:51599
+Read port: 51609
+1691235575400	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51599/devtools/browser/5a18ddab-bd3b-43fa-b76b-e4dfd18ecc5c
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+[Parent 18640, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19744, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51597."
+1691235640364	Marionette	INFO	Stopped listening on port 51609
+Dynamically enable window occlusion 1
+[Parent 18640, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19744, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18640, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19744, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18640, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19744, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18640, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19744, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18640, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19744, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691235648457	geckodriver	INFO	Listening on 127.0.0.1:51739
+1691235651515	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51740" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofile83mxHp"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691235651760	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691235651832	Marionette	INFO	Listening on port 51750
+WebDriver BiDi listening on ws://127.0.0.1:51740
+Read port: 51750
+1691235651955	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51740/devtools/browser/9e2cf264-cb80-4bea-bdbb-4a3624c11d04
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51738."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51738."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51738."
+[Parent 4740, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12092, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691235667046	Marionette	INFO	Stopped listening on port 51750
+Dynamically enable window occlusion 1
+[Parent 4740, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12092, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 4740, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12092, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 4740, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12092, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 4740, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12092, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691235878069	geckodriver	INFO	Listening on 127.0.0.1:52031
+1691235881135	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52032" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileo3GFO0"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691235881364	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691235881437	Marionette	INFO	Listening on port 52043
+WebDriver BiDi listening on ws://127.0.0.1:52032
+Read port: 52043
+1691235881616	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:52032/devtools/browser/28176100-7c21-4615-82d3-ed1051d425e4
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+[Parent 11272, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12044, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52030."
+1691235946867	Marionette	INFO	Stopped listening on port 52043
+Dynamically enable window occlusion 1
+[Parent 11272, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12044, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 11272, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12044, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 11272, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12044, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 11272, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12044, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691235954557	geckodriver	INFO	Listening on 127.0.0.1:52170
+1691235957607	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52171" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileioJcmp"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691235957858	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691235957936	Marionette	INFO	Listening on port 52182
+Read port: 52182
+WebDriver BiDi listening on ws://127.0.0.1:52171
+1691235957992	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:52171/devtools/browser/e0c41cf8-80fb-4191-a936-2eacad8b14d5
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52169."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52169."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52169."
+[Parent 19180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21112, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691235972990	Marionette	INFO	Stopped listening on port 52182
+Dynamically enable window occlusion 1
+[Parent 19180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21112, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 19180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21112, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 19180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21112, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 19180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21112, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 19180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 21112, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691235975773	geckodriver	INFO	Listening on 127.0.0.1:52235
+1691235978831	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52236" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofilem41Lj9"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691235979069	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691235979143	Marionette	INFO	Listening on port 52246
+WebDriver BiDi listening on ws://127.0.0.1:52236
+Read port: 52246
+1691235979263	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:52236/devtools/browser/339f83ce-3c63-4d28-b6ea-f1d18782c4d3
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52169."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52169."
+[Parent 18108, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 10060, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52169."
+1691235991561	Marionette	INFO	Stopped listening on port 52246
+Dynamically enable window occlusion 1
+[Parent 18108, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 10060, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18108, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 10060, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18108, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 10060, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18108, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 10060, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691236051987	geckodriver	INFO	Listening on 127.0.0.1:52368
+1691236055057	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52369" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofile6K0Qxd"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691236055291	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691236055364	Marionette	INFO	Listening on port 52379
+WebDriver BiDi listening on ws://127.0.0.1:52369
+Read port: 52379
+1691236055536	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:52369/devtools/browser/344e4a49-fdf3-4f8e-be99-ff2ff11f3654
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52367."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52367."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52367."
+[Parent 15056, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19464, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52367."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52367."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52367."
+1691236079681	Marionette	INFO	Stopped listening on port 52379
+Dynamically enable window occlusion 1
+[Parent 15056, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19464, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 15056, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19464, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 15056, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19464, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691236161543	geckodriver	INFO	Listening on 127.0.0.1:52536
+1691236164599	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52537" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileBZiGbc"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691236164831	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691236164902	Marionette	INFO	Listening on port 52547
+WebDriver BiDi listening on ws://127.0.0.1:52537
+Read port: 52547
+1691236165083	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:52537/devtools/browser/99341c47-c2e0-47c6-9ca3-84bb0a358d6a
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52535."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52535."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52535."
+[Parent 14180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 6956, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52535."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52535."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52535."
+1691236189485	Marionette	INFO	Stopped listening on port 52547
+Dynamically enable window occlusion 1
+[Parent 14180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 6956, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 14180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 6956, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 14180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 6956, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 14180, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 6956, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691236197221	geckodriver	INFO	Listening on 127.0.0.1:52620
+1691236200297	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52621" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileKyX604"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691236200529	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691236200603	Marionette	INFO	Listening on port 52631
+WebDriver BiDi listening on ws://127.0.0.1:52621
+Read port: 52631
+1691236200777	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:52621/devtools/browser/9628fe8b-9142-4edf-8d1d-bc6d0efbc697
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52535."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52535."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52535."
+[Parent 23144, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 20592, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691236212486	Marionette	INFO	Stopped listening on port 52631
+Dynamically enable window occlusion 1
+[Parent 23144, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 20592, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 23144, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 20592, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 23144, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 20592, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 23144, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 20592, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 23144, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 20592, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691242850470	geckodriver	INFO	Listening on 127.0.0.1:50179
+1691242853530	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50180" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileoDCiUV"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691242853806	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691242853895	Marionette	INFO	Listening on port 50190
+WebDriver BiDi listening on ws://127.0.0.1:50180
+Read port: 50190
+1691242854101	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:50180/devtools/browser/6b72f34d-d94c-48a7-9f06-f5e36820af8f
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+[Parent 16596, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 24628, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50178."
+1691242919499	Marionette	INFO	Stopped listening on port 50190
+Dynamically enable window occlusion 1
+[Parent 16596, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 24628, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 16596, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 24628, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 16596, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 24628, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 16596, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 24628, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691242926642	geckodriver	INFO	Listening on 127.0.0.1:50310
+1691242929693	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50311" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileLM4eog"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691242929939	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691242930010	Marionette	INFO	Listening on port 50322
+WebDriver BiDi listening on ws://127.0.0.1:50311
+Read port: 50322
+1691242930064	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:50311/devtools/browser/d931e3d3-9d15-485d-a58a-08ad52829363
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50309."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50309."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50309."
+[Parent 256, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 22796, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691242945237	Marionette	INFO	Stopped listening on port 50322
+Dynamically enable window occlusion 1
+[Parent 256, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 22796, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 256, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 22796, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 256, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 22796, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 256, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 22796, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691243104026	geckodriver	INFO	Listening on 127.0.0.1:50540
+1691243107078	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50541" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofilefToKxd"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691243107328	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691243107404	Marionette	INFO	Listening on port 50551
+Read port: 50551
+WebDriver BiDi listening on ws://127.0.0.1:50541
+1691243107455	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:50541/devtools/browser/088cbc72-af50-4120-b298-57c11cfdde63
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+[Parent 6500, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 22420, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50539."
+1691243172391	Marionette	INFO	Stopped listening on port 50551
+Dynamically enable window occlusion 1
+[Parent 6500, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 22420, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 6500, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 22420, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 6500, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 22420, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 6500, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 22420, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691243179616	geckodriver	INFO	Listening on 127.0.0.1:50666
+1691243182683	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50667" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileHvlOfB"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691243182910	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691243182985	Marionette	INFO	Listening on port 50678
+WebDriver BiDi listening on ws://127.0.0.1:50667
+Read port: 50678
+1691243183164	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:50667/devtools/browser/f4fa6e76-0cc4-4fa4-9d01-e033b81b5371
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50665."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50665."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:50665."
+[Parent 4280, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9056, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691243197882	Marionette	INFO	Stopped listening on port 50678
+Dynamically enable window occlusion 1
+[Parent 4280, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9056, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 4280, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9056, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 4280, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9056, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 4280, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9056, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 4280, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 9056, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691243576894	geckodriver	INFO	Listening on 127.0.0.1:51143
+1691243579952	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51144" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofilehJPnLm"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691243580203	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691243580275	Marionette	INFO	Listening on port 51154
+Read port: 51154
+WebDriver BiDi listening on ws://127.0.0.1:51144
+1691243580325	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51144/devtools/browser/0af4ea81-9d4b-4449-8f8a-c7203d981dcb
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+[Parent 18176, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 2080, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51142."
+1691243646142	Marionette	INFO	Stopped listening on port 51154
+Dynamically enable window occlusion 1
+[Parent 18176, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 2080, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18176, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 2080, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18176, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 2080, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 18176, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[Parent 18176, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 2080, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[GPU 2080, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691243654131	geckodriver	INFO	Listening on 127.0.0.1:51302
+1691243657194	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51303" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofile9DY3MQ"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691243657498	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691243657591	Marionette	INFO	Listening on port 51317
+WebDriver BiDi listening on ws://127.0.0.1:51303
+Read port: 51317
+1691243657812	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51303/devtools/browser/c93fa2fb-02d7-43c4-b299-c9723154b7c2
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51300."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51300."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51300."
+[Parent 10040, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12484, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691243672908	Marionette	INFO	Stopped listening on port 51317
+Dynamically enable window occlusion 1
+[Parent 10040, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12484, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 10040, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12484, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 10040, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12484, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 10040, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12484, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 10040, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 12484, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691243686680	geckodriver	INFO	Listening on 127.0.0.1:51385
+1691243689733	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51386" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofilekbDDiM"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691243690070	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691243690161	Marionette	INFO	Listening on port 51397
+WebDriver BiDi listening on ws://127.0.0.1:51386
+Read port: 51397
+1691243690317	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51386/devtools/browser/ac2b34a3-aaef-41c8-b864-7d3cf458c564
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+[Parent 23892, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 1088, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51384."
+1691243756387	Marionette	INFO	Stopped listening on port 51397
+Dynamically enable window occlusion 1
+[Parent 23892, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 1088, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 23892, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 1088, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 23892, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 1088, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 23892, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 1088, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 23892, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 1088, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691243764096	geckodriver	INFO	Listening on 127.0.0.1:51525
+1691243767151	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51526" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileBKVL2y"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691243767462	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691243767553	Marionette	INFO	Listening on port 51536
+WebDriver BiDi listening on ws://127.0.0.1:51526
+Read port: 51536
+1691243767781	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51526/devtools/browser/e6def52a-06ae-471e-b018-7d4c5f837361
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51524."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51524."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51524."
+[Parent 24588, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 23616, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691243829057	geckodriver	INFO	Listening on 127.0.0.1:51636
+1691243832112	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51637" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofile8Lk54R"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691243832480	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691243832591	Marionette	INFO	Listening on port 51648
+WebDriver BiDi listening on ws://127.0.0.1:51637
+Read port: 51648
+1691243832829	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51637/devtools/browser/db20a030-eb9b-431e-b061-75143b9f46e7
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+[Parent 17796, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 4812, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51635."
+1691243898605	Marionette	INFO	Stopped listening on port 51648
+Dynamically enable window occlusion 1
+[Parent 17796, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 4812, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 17796, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 4812, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 17796, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 4812, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 17796, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 4812, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691243907405	geckodriver	INFO	Listening on 127.0.0.1:51775
+1691243910443	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51776" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileg9BBCU"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691243910789	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691243910889	Marionette	INFO	Listening on port 51787
+WebDriver BiDi listening on ws://127.0.0.1:51776
+Read port: 51787
+1691243911142	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51776/devtools/browser/ee0468c8-71df-45da-8ed8-1212878d273f
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51774."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51774."
+[Parent 18908, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 16084, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51774."
+1691244035651	geckodriver	INFO	Listening on 127.0.0.1:51954
+1691244038724	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51955" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofiletp0vdk"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691244039036	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691244039131	Marionette	INFO	Listening on port 51966
+WebDriver BiDi listening on ws://127.0.0.1:51955
+Read port: 51966
+1691244039292	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:51955/devtools/browser/ef4ef37b-b4f9-46ee-8184-18538a3d2291
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+[Parent 12536, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 17984, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:51953."
+1691244106149	Marionette	INFO	Stopped listening on port 51966
+Dynamically enable window occlusion 1
+[Parent 12536, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 17984, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 12536, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 17984, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 12536, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 17984, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 12536, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 17984, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 12536, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 17984, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691244114559	geckodriver	INFO	Listening on 127.0.0.1:52096
+1691244117615	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "52097" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofilex5KBi0"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691244117949	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691244118044	Marionette	INFO	Listening on port 52108
+Read port: 52108
+WebDriver BiDi listening on ws://127.0.0.1:52097
+1691244118108	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:52097/devtools/browser/b2fe19ba-fee2-4f26-bac5-b5e30a6b35c7
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52095."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52095."
+[Parent 9460, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19504, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:52095."
+1691244133660	Marionette	INFO	Stopped listening on port 52108
+Dynamically enable window occlusion 1
+[Parent 9460, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19504, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 9460, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19504, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 9460, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 19504, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691248451863	geckodriver	INFO	Listening on 127.0.0.1:59426
+1691248454942	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "59427" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileqBZ1ry"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691248455331	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691248455429	Marionette	INFO	Listening on port 59438
+WebDriver BiDi listening on ws://127.0.0.1:59427
+Read port: 59438
+1691248455681	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:59427/devtools/browser/e9afd848-5b57-4560-8db9-eb4a1c486959
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+[Parent 1360, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 15504, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59425."
+1691248521783	Marionette	INFO	Stopped listening on port 59438
+Dynamically enable window occlusion 1
+[Parent 1360, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 15504, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 1360, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 15504, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 1360, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 15504, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 1360, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 15504, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 1360, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 15504, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691248529428	geckodriver	INFO	Listening on 127.0.0.1:59561
+1691248532492	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "59562" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileQDEsRa"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1691248532808	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1691248532903	Marionette	INFO	Listening on port 59575
+WebDriver BiDi listening on ws://127.0.0.1:59562
+Read port: 59575
+1691248533128	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:59562/devtools/browser/e5e02ef5-365e-4cd9-bf6f-d025e9f3483a
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59560."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59560."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:59560."
+[Parent 1380, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 3932, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+1691248548350	Marionette	INFO	Stopped listening on port 59575
+Dynamically enable window occlusion 1
+[Parent 1380, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 3932, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 1380, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 3932, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443
+[Parent 1380, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:621
+[GPU 3932, IPC I/O Child] WARNING: pipe error: 232: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:443

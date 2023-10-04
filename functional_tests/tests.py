@@ -1,21 +1,31 @@
 #from django.test import LiveServerTestCase
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.db import connections
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 
-from count.models import Counts
+from count.models import Counts,Participants
 from functional_tests import user_experience 
 
 class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click): 
-
+    """
+    @classmethod
+    def tearDownClass(cls):
+        for db_name in connections:
+            connection = connections[db_name]
+            with connection.cursor() as cursor:
+                cursor.execute('DROP SCHEMA public CASCADE; CREATE SCHEMA public;')
+        super().tearDownClass()
+    """
+    
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3)
     
-    def tearDown(self):
+    def tearDown(self): 
         self.browser.quit()
 
     def test_tricount_creation(self):
@@ -165,15 +175,18 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.assertIn('Annie', [name.text for name in tricount_participants]) 
         
 class RegisterSpending(StaticLiveServerTestCase,user_experience.Click):
-    def setUp(self) -> None:
+    
+    def setUp(self):
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3)
     
-    def tearDown(self) -> None:
+    def tearDown(self):
         self.browser.quit()
 
     def test_spending_creation(self): 
         #A tricount is created et come back to the listecount page
+
+        print(Counts.objects.all())
         self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri")
         self.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
 

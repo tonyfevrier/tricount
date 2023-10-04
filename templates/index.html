@@ -15,31 +15,54 @@
         <div class="titre"> tricount</div>
         <nav class = "header_data">
             <a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>
-            <a href="" class="options"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </a>
+            <button data-button="JS" class="parameters"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </button>
         </nav>
     </header>
-    <div class = "header_images">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
+
+    <div data-div = "hidden" class = "parameters-options" hidden>
+        <a href=""> Premium </a>
+        <a href=""> Mes paramètres </a>
+        <button data-button="JS" class = "share"> Partagez l'app </button>
+        <a href=""> Evaluez l'app</a>
+        <button data-button="JS" class = "help"> Aide </button>
+        <button data-button="JS" class = "conditions"> Conditions et confidentialité </button>
     </div>
+
+    <div data-div = "hidden" class = "help-options" hidden>
+        <a href="">A propos</a>
+        <a href="">Questions fréquentes</a>
+        <a href="">Contacter tricount</a>
+    </div>
+
+    <div data-div = "hidden" class = "conditions-options" hidden>
+        <a href=""> Conditions générales</a>
+        <a href=""> Politique de vie privée</a>
+        <a href=""> Gestion des cookies</a>
+    </div>
+
+
+    <!--<div class = "header_images">
+        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
+        <img src="{% static 'images/scale.png' %}" alt="scale">
+        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
+        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
+        <img src="{% static 'images/scale.png' %}" alt="scale">
+        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
+        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
+        <img src="{% static 'images/scale.png' %}" alt="scale">
+        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
+        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
+        <img src="{% static 'images/scale.png' %}" alt="scale">
+        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
+        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
+        <img src="{% static 'images/scale.png' %}" alt="scale">
+        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
+        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
+        <img src="{% static 'images/scale.png' %}" alt="scale">
+        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
+        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
+        <img src="{% static 'images/scale.png' %}" alt="scale">
+    </div>-->
 
     <main>
         {% for count in counts %}
@@ -51,8 +74,20 @@
         </a>
         {% endfor %}
     </main>
+    <div class = "create-tricount" hidden>
+        <a class = "link-join-tricount" href="">
+            <p>Rejoindre un tricount</p>
+            <p>Importer un tricount existant</p>
+        </a>
+        <a class = "link-create-tricount" href="">
+            <p>Nouveau tricount</p>
+            <p>Faire ses comptes entre amis</p>
+        </a>
+    </div>
     <footer>
-        <a class ="id_newcount" id = "id_newcount" href="/count/newcount"> + </a>
+        <a data-button="JS" class ="id_newcount" id = "id_newcount" href="/count/newcount"> + </a>
     </footer>
+    <script src="{% static 'js/index2.js' %}"></script>
+
 </body>
 </html>
