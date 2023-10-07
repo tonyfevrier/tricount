@@ -100,8 +100,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `voir test.resolvesolution et test calculate total credit si je ne me suis pas trompé dans le calcul des crédits (si les signes ne sont pas inverses) : car j'ai mis receiving update au lieu de spending update.`
     - `comparer les css et voir si factorisable en un fichier avec structure minimale commune et des spécificités par ailleurs. Voir alors comment importer dans un css la structure commune.`
     - `Ecriture d'un event onclick sur la première page prenant en compte juste le premier bouton.`
-    - ecriture du html et js pour display options
-    - ajouter le comportement lorsqu'on clique sur parameters-options.
+    - `écriture du html et js pour display options`
+    - `ajouter le comportement lorsqu'on clique sur parameters-options.`
     - Modif du + pour créer un élt qui lui va mener vers la page du nouveau tricount ou une page rejoindre un tricount.
     -Modifier les tests unitaires et fonctionnels en conséquence pr que ça tourne toujours.
     - écrire les tests pr mon JS de la page.

@@ -12,15 +12,29 @@ let parameter = document.querySelector('.parameters');
 let parameters_options = document.querySelector('.parameters-options'); 
 let elemtsInitiallyHidden = document.body.querySelectorAll('[data-div = hidden]');
  
-parameter.addEventListener("click", parameters);
+parameter.addEventListener("click", clickOnParameter);
+parameters_options.addEventListener("click",clickOnParameterOptions);
 
 /*Events handlers */
-function parameters(event) { 
+function clickOnParameter(event) { 
     if (event.currentTarget == parameter){ 
         toggle(parameters_options);  
         display_block_for_children(parameters_options)
         event.stopPropagation(); //éviter que le listener goback soit lancé
     }
+}
+
+function clickOnParameterOptions(event){
+    if (!event.target.dataset.button) return;
+    /*on récupère la classe de l'élément JS
+    on fait apparaître l'élément dont le nom est le nom de la classe -options.
+    on cache parameter options*/
+    const classname = event.target.className;
+    toggle(parameters_options);  
+    const child = document.body.querySelector(`.${classname}-options`)
+    toggle(child);
+    display_block_for_children(child);
+    event.stopPropagation();
 }
 
 function goback(event){ 

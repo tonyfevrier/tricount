@@ -63,7 +63,7 @@ header{
     border: none;
 }
 
-.parameters-options, .help-options, .conditions-options{ 
+.parameters-options, .help-options, .conditions-options, .share-options{ 
     position: absolute;
     right: 5px;
     top : 5px;
@@ -71,14 +71,16 @@ header{
     z-index: 1;
 }
 
-.parameters-options > *, .help-options > *, .conditions-options > *{
-    margin: 20px;
+.parameters-options > *, .help-options > *, .conditions-options > *, .share-options > *{
+    padding: 20px;
     text-decoration: none;
     background-color: transparent;
     border: none;
     font-size: 1em;
     font-weight: 400;
     color: black;
+    width: 100%;
+    text-align: left;
 }
 
 .link-tricount{
