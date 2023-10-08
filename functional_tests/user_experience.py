@@ -82,3 +82,17 @@ class Click():
         receiverbox.send_keys(receivers)
         submitbox.send_keys(Keys.ENTER)
         time.sleep(2)
+
+class Check():
+    def __init__(self,browser,live_server_url) -> None:
+        self.browser = browser
+        self.live_server_url = live_server_url
+
+    def check_if_popup_displayed(self,classname,bool):
+        """
+        Inputs : 
+            classname : name of the class of the html elt
+            bool : True or False to see if the popup is displayed or not.
+        """
+        popup = self.browser.find_element(By.CLASS_NAME, classname)
+        self.assertEqual(popup.is_displayed(),bool) 

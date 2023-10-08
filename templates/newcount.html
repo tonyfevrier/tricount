@@ -17,11 +17,11 @@
     </header> 
     <main>
         <form method="POST" class = "newtricount" action="/count/newcount/addcount">
-            <input class = "newtricount_title" placeholder="Titre" name = "newtricount_title"> 
+            <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title"> 
             {% if titre == False %}
                 <p class="error">Le titre doit comporter au moins un caractère.</p>
             {% endif %}
-            <input class = "newtricount_description" placeholder="Description" name = "newtricount_description">
+            <input type ="text" class = "newtricount_description" placeholder="Description" name = "newtricount_description">
             
             
 
@@ -54,13 +54,15 @@
                 </div>
                 {% endfor %}
             </div>
-            <input name="new_participant" class ='new_participant' placeholder="Autre participant">
+            <input type ="text" name="new_participant" class ='new_participant' placeholder="Autre participant">
             <button class = "add_participant">Ajouter</button>
             {% if ptcpt == False %}
                 <p class="participant-error">Il faut au moins un participant.</p>
             {% endif %}
             {% csrf_token %}
         </form>
+        <script src = "{%static 'js/newcount.js'%}"></script> 
+        
     </main>
 </body>
 </html>

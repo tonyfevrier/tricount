@@ -185,8 +185,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click):
 
     def test_spending_creation(self): 
         #A tricount is created et come back to the listecount page
-
-        print(Counts.objects.all())
+ 
         self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri")
         self.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
 
@@ -240,3 +239,44 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click):
 
         #He forgets to put for who he pays, by default it's for all participants.
         
+class JSTest(StaticLiveServerTestCase,user_experience.Click,user_experience.Check):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+        self.browser.implicitly_wait(3)
+    
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_JS_of_listecount_page(self):
+        #The user arrives on listecount page, no popup is opened : 
+        self.browser.get(self.live_server_url+ '/count')
+        popup_children = self.browser.find_elements(By.CSS_SELECTOR, "[data-div = hidden] > *")
+
+        for elt in popup_children:
+            self.assertEqual(elt.is_displayed(),False) 
+
+        #He creates a tricount and come back.
+        self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri")
+        self.click_on_a_link(By.CLASS_NAME,'backtolistecount')  
+
+        # he clicks on parameters, a popup appears
+        self.click_on_a_link(By.CLASS_NAME,"parameters")
+        self.check_if_popup_displayed("parameters-options",True) 
+        
+        #He clicks on a JS button of the popup, an other popup replaces the previous one.
+        self.click_on_a_link(By.CLASS_NAME, "conditions") 
+        self.check_if_popup_displayed("parameters-options",False)
+        self.check_if_popup_displayed("conditions-options",True)
+
+        #He clicks on the link of the tricount and no popup is visible and he stays on the same page.
+        self.click_on_a_link(By.CLASS_NAME,"link-tricount")
+
+        popup_children = self.browser.find_elements(By.CSS_SELECTOR, "[data-div = hidden] > *")
+
+        for elt in popup_children:
+            self.assertEqual(elt.is_displayed(),False)
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/")
+
+
+
+

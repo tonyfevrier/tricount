@@ -103,8 +103,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `écriture du html et js pour display options`
     - `ajouter le comportement lorsqu'on clique sur parameters-options.`
     - Modif du + pour créer un élt qui lui va mener vers la page du nouveau tricount ou une page rejoindre un tricount.
-    -Modifier les tests unitaires et fonctionnels en conséquence pr que ça tourne toujours.
-    - écrire les tests pr mon JS de la page.
+    -`Modifier les tests unitaires et fonctionnels en conséquence pr que ça tourne toujours.`
+    - écrire les tests pr le JS de la page de newcount.
     - Bug : réussir à supprimer la bdd à distance après le premier test. linktricount-1 échoue car la bdd à distance contient 3 tricounts après le premier test.
     -création de la page d'une dépense donnée :
         -créer nouvelle url, vue qui renvoit vers l'html élémentaire.
