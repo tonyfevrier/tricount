@@ -277,6 +277,37 @@ class JSTest(StaticLiveServerTestCase,user_experience.Click,user_experience.Chec
             self.assertEqual(elt.is_displayed(),False)
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/")
 
+    def test_JS_of_newcount_page(self):
+        #The client goes to the creation of a new count
+        self.browser.get(self.live_server_url+ '/count')
+        self.click_on_a_link(By.CLASS_NAME,'id_newcount')
+
+        #He enters a title and a description, a counter appears and the number of letters corresponds to the length of the word.
+        titlebox = self.browser.find_element(By.NAME,"newtricount_title")
+        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")  
+        
+        titlebox.click()
+        counter = self.browser.find_element(By.CLASS_NAME, "compteur")
+        
+        self.assertEqual(counter.text, '0/50')
+        self.assertEqual(counter.is_displayed(),True) 
+
+        #He tries to put a more than fifty letters title but he is blocked 
+        titlebox.send_keys('t'*51)
+        self.assertEqual(counter.text, '50/50')
+        titlebox.clear()
+
+        #So he writes a shorter title
+        titlebox.send_keys('titre')
+        self.assertEqual(counter.text, '5/50')
+
+        descriptionbox.send_keys('description')
+        self.assertEqual(counter.text, '11/500')
+        time.sleep(2)
+
+        
+        
+
 
 
 

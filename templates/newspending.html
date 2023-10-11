@@ -20,6 +20,7 @@
             {%if titre == False%}
                 <p class = "notitle">Titre non valable</p>
             {%endif%}
+            <p class = "counter">0/50</p>
             <div class = "div-amount">
                 <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount">
                 <label for="amount">EUR</label>
@@ -30,16 +31,19 @@
                 {%endfor%}
             </select> 
             <p class = "forwho">Pour qui</p>
-            {% for participant in participants%}
-            <div class = "div-receiver">
-                <input class = "receiver" type="checkbox" name="receiver" id="{{participant.name}}" value = "{{participant.name}}" checked>
-                <label class = "receiver-participant" for="{{participant.name}}">{{participant.name}}</label> 
-                <p class = "receiver-amount"> 100 eur</p>
-            </div> 
-            {% endfor %}
+            <div class = "list-receivers">
+                {% for participant in participants%}
+                <div class = "div-receiver">
+                    <input class = "receiver" type="checkbox" name="receiver" id="{{participant.name}}" value = "{{participant.name}}" checked>
+                    <label class = "receiver-participant" for="{{participant.name}}">{{participant.name}}</label> 
+                    <p class = "{{participant.name}}-amount"> 0.00 eur</p>
+                </div> 
+                {% endfor %}
+            </div>
             <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button> 
             {% csrf_token %}
         </form>
     </main>
+    <script src = "{%static 'js/newspending.js'%}"></script>
 </body>
 </html>

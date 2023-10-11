@@ -95,7 +95,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         - `transformer addaparticipant en add participants.`
         - `factoriser aussi les redondances sur les tests unitaires (les blocs d'assert qui se répètent, les beautiful soup...).`
     -`créer le module de calcul des équilibres après dépense.`
-        `fabriquer des tests pour chacune des fonctions créée.`    
+        `fabriquer des tests pour chacune des fonctions créée.`
         - ajouter le calcul auto des montants pr chaque participant coché (cas équitable).
     - `voir test.resolvesolution et test calculate total credit si je ne me suis pas trompé dans le calcul des crédits (si les signes ne sont pas inverses) : car j'ai mis receiving update au lieu de spending update.`
     - `comparer les css et voir si factorisable en un fichier avec structure minimale commune et des spécificités par ailleurs. Voir alors comment importer dans un css la structure commune.`
@@ -104,27 +104,20 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `ajouter le comportement lorsqu'on clique sur parameters-options.`
     - Modif du + pour créer un élt qui lui va mener vers la page du nouveau tricount ou une page rejoindre un tricount.
     -`Modifier les tests unitaires et fonctionnels en conséquence pr que ça tourne toujours.`
-    - écrire les tests pr le JS de la page de newcount.
+    - `écrire les tests pr le JS de la page de newcount.`
     - Bug : réussir à supprimer la bdd à distance après le premier test. linktricount-1 échoue car la bdd à distance contient 3 tricounts après le premier test.
     -création de la page d'une dépense donnée :
         -créer nouvelle url, vue qui renvoit vers l'html élémentaire.
         -transférer les données de la dépense à la page.
         -améliorer html et css.
-
-
-
     -voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.
-    
-
-
     Points qui nécessitent sûrement JS.
-        -Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à   50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel.
+        -`Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à   50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel).`
         -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la  petite croix. Pour le moment quand je clique sur les croix, ça ajoute des    participants. (Je pense que j'ai besoin de JS aussi).
         -Ajouter dans devise.html la recherche de currency (JS sûrement nécessaire).
         -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il   semble que JS soit nécessaire pour revenir.
         - Test fonctionnel. 
-        -Ajouter à l'html les devises via le json.
-        -Faire le css de l'html
+        -Ajouter à l'html les devises via le json. 
         -Test fonctionnel pour voir si tout est affiché et si on va vers la bonne url.
         -pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : 
         -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît.
