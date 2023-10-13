@@ -123,6 +123,14 @@ input, select, .div-receiver{
     color: gray;
 }
 
+.div-receiver p input{
+    width: 40px;
+    color:gray;
+    outline: none;
+    border-color: grey;
+    
+}
+
 .submit-spending{ 
     border: none;
     background: transparent;

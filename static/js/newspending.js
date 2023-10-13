@@ -1,7 +1,6 @@
 /*
 clic sur avancé : apparition de parts pour chaque participant et du mot simple à la place de "avancé"
-    changement des parts : recalcul des montants de chaque personne cochée.
-clic sur simple : disparition des parts et apparition de avancé.
+    changement des parts : recalcul des montants de chaque personne cochée. 
 clic sur dépense : élément avec choix. 
 clic sur eur : élement avec Eur et plus
 */
@@ -12,6 +11,7 @@ let counter = document.body.querySelector(".counter");
 let checkboxDiv = document.body.querySelector(".list-receivers");  
 let receivers = document.body.querySelectorAll(".receiver");
 let toggleCheckbox = document.body.querySelector(".toggle-checkboxes");
+let toggleAvance = document.body.querySelector('.special-parameters'); 
 
 
 title.addEventListener("input", userWriting);
@@ -19,6 +19,7 @@ title.addEventListener("keydown", userTaping);
 amount.addEventListener("input", userAmount);
 checkboxDiv.addEventListener("click",userChecking);
 toggleCheckbox.addEventListener("click",userToggle);
+toggleAvance.addEventListener("click", userAvance);
 
 
 let click = new Event("click", {bubbles: true,});
@@ -38,7 +39,7 @@ function userTaping(event){
     } 
 }
 
-function userAmount(event){
+function userAmount(){
     //Quand l'utilisateur écrit un montant, il est partagé sur les personnes cochées.
     let table = calculateIndividualAmountsAndStoreSpendingParticipants(); 
     attributeIndividualAmount(table[0],table[1],table[2]); 
@@ -49,7 +50,7 @@ function userChecking(event){
     //Clic sur une checkbox : le participant est décoché ou coché 
     if (event.target.type !== 'checkbox') return; 
     //si on coche quelqu'un, on recalcule la répartition des montants. 
-    userAmount(event); 
+    userAmount(); 
 
     //si on décoche un participant, on décoche le checkbox principal */
     if (!event.target.checked) toggleCheckbox.checked = false;
@@ -70,6 +71,14 @@ function userToggle(event){
         }
     }
 }
+
+function userAvance(event){
+    /*apparition/disparition de nouveau hidden + chgt en simple ou avancé */
+    insertOrRemovePartsForSpending(toggleAvance.innerHTML);
+    event.preventDefault();
+}
+
+
 
 function calculateIndividualAmountsAndStoreSpendingParticipants(){
     /*on compte le nb de personnes cochées et on les liste*/
@@ -108,4 +117,32 @@ function NumberOfCheckedPeople(){
         }  
     } 
     return nb_checked;
+}
+
+function insertOrRemovePartsForSpending(innerHTML){
+    /*Si on clique sur avancé, on fait apparaître les parts de chacun et l'utilisateur peut modifier le nombre de parts, ce qui recalcule les montants*/
+    if (innerHTML === "Avancé"){ 
+        toggleAvance.innerHTML = "Simple"; 
+        for (let receiver of receivers){
+            montant = document.body.querySelector(`.${receiver.id}-amount`); 
+            if (receiver.checked){
+                montant.insertAdjacentHTML("afterbegin",`<input type = "text" class = "${receiver.id}-parts" value = "1" >`); 
+            } else {  
+                montant.insertAdjacentHTML("afterbegin",`<input type = "text" class = "${receiver.id}-parts" value = "0">`); 
+            }
+            document.body.querySelector(`.${receiver.id}-parts`).addEventListener("input",userAmountParts);
+        }
+    } else {
+        toggleAvance.innerHTML = "Avancé";
+        for (let receiver of receivers){
+            document.body.querySelector(`.${receiver.id}-parts`).remove();
+        }
+    }
+    
+}
+
+function userAmountParts(event){
+    /* */
+    console.log(5);
+    //userAmount();
 }
