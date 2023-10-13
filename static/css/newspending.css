@@ -8,11 +8,25 @@
 
 
 .forwho{
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
     background-color: lightgray;
     padding: 1em 1em;
     text-transform: uppercase;
     color: gray;
     font-size: 0.8em;
+    width:100%
+}
+
+.div-forwho{
+    display: inline-block;
+}
+
+.special-parameters{ 
+    background-color: transparent;
+    border:none;
+    color: var(--color);
 }
 
 .title{
@@ -29,6 +43,17 @@
 
 .title, .div-amount, .div-receiver, .spender, .notitle{
     margin: 0 1em ;
+}
+
+.cancel-checkbox{
+    margin-right:1em;
+}
+
+.counter{
+    color: gray;
+    text-align:end;
+    font-size: 0.8em;
+    width : 95%;
 }
 
 .notitle{

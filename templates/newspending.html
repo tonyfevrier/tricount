@@ -29,8 +29,14 @@
                 {% for participant in participants%}
                 <option class = "spender-participant" value="{{participant.name}}">{{participant.name}}</option> 
                 {%endfor%}
-            </select> 
-            <p class = "forwho">Pour qui</p>
+            </select>  
+            <div class = "forwho">
+                <div class ="div-forwho">
+                    <input class = "toggle-checkboxes" type="checkbox" checked>
+                    Pour qui
+                </div>
+                <button class = "special-parameters">Avancé</button>
+            </div> 
             <div class = "list-receivers">
                 {% for participant in participants%}
                 <div class = "div-receiver">
