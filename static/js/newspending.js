@@ -1,6 +1,4 @@
 /*
-clic sur avancé : apparition de parts pour chaque participant et du mot simple à la place de "avancé"
-    changement des parts : recalcul des montants de chaque personne cochée. 
 clic sur dépense : élément avec choix. 
 clic sur eur : élement avec Eur et plus
 */
@@ -25,7 +23,7 @@ toggleAvance.addEventListener("click", userAvance);
 let click = new Event("click", {bubbles: true,});
 
 
-
+/*Handlers */
 function userWriting(event){ 
     //Afficher le compteur quand le nombre de lettres change. 
     counter.innerHTML = `${title.value.length}/50`;
@@ -41,8 +39,10 @@ function userTaping(event){
 
 function userAmount(){
     //Quand l'utilisateur écrit un montant, il est partagé sur les personnes cochées.
-    let table = calculateIndividualAmountsAndStoreSpendingParticipants(); 
-    attributeIndividualAmount(table[0],table[1],table[2]); 
+         
+    let table = calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(); 
+    attributeIndividualAmountWithParts(table[0],table[1],table[2]); 
+
 }
 
 
@@ -78,34 +78,28 @@ function userAvance(event){
     event.preventDefault();
 }
 
+ 
 
 
-function calculateIndividualAmountsAndStoreSpendingParticipants(){
-    /*on compte le nb de personnes cochées et on les liste*/
+
+
+/*Useful functions */
+
+ 
+
+function calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(event){
     let list_of_checked = [];
     let list_of_non_checked = [];
-    let nb_checked = 0;
+    /*On regarde qui est coché et on calcule le nombre de parts total */
+    let nb_parts = 0;
     for (let receiver of receivers){
         if (receiver.checked){
-            nb_checked += 1;
-            list_of_checked.push(receiver.id);
-        } else {
-            list_of_non_checked.push(receiver.id);
-        }
-    }
-
-    /*on calcule le montant par personne*/ 
-    let individualAmount = amount.value/nb_checked; 
-    return [individualAmount, list_of_checked,list_of_non_checked];
-}
-
-function calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(){
-    let list_of_checked = [];
-    let list_of_non_checked = [];
-    let nb_checked = 0;
-    for (let receiver of receivers){
-        if (receiver.checked){
-            nb_checked += 1;
+            //On regarde si les parts sont affichées ou non.
+            if (document.body.querySelector(`.${receiver.id}-parts`)) {
+                nb_parts += Number(document.body.querySelector(`.${receiver.id}-parts`).value);
+            } else {
+                nb_parts += 1;
+            }
             list_of_checked.push(receiver.id);
         } else {
             list_of_non_checked.push(receiver.id);
@@ -113,18 +107,30 @@ function calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(){
     }
 
     /*on calcule le montant par personne*/  
-    
-    return [individualAmount, list_of_checked,list_of_non_checked];
-}
+    let individualAmountDico = {};
 
-function attributeIndividualAmount(individualAmount, list_of_checked,list_of_non_checked){
+    for (let checkman of list_of_checked){
+        let poids = 1;
+        if (document.body.querySelector(`.${checkman}-parts`)) { 
+            poids =  Number(document.body.querySelector(`.${checkman}-parts`).value); 
+        } 
+        individualAmountDico[checkman] = amount.value * poids/nb_parts;
+    } 
+
+    return [individualAmountDico, list_of_checked,list_of_non_checked];
+}
+ 
+function attributeIndividualAmountWithParts(individualAmountDico, list_of_checked,list_of_non_checked){
+    
     for (let checked_receiver of list_of_checked){
-        document.body.querySelector(`.${checked_receiver}-amount`).innerHTML = `${individualAmount.toFixed(2)} eur`;
+        document.body.querySelector(`.${checked_receiver}-amount`).innerHTML = `${individualAmountDico[checked_receiver].toFixed(2)} eur`;
     }
     for (let non_checked_receiver of list_of_non_checked){
         document.body.querySelector(`.${non_checked_receiver}-amount`).innerHTML = `0.00 eur`;
     }
 }
+
+
 
 function NumberOfCheckedPeople(){
     let nb_checked = 0; 
@@ -147,19 +153,15 @@ function insertOrRemovePartsForSpending(innerHTML){
             } else {  
                 montant.insertAdjacentHTML("beforebegin",`<input type = "text" class = "${receiver.id}-parts" value = "0">`); 
             }
-            document.body.querySelector(`.${receiver.id}-parts`).addEventListener("input",userAmountParts);
+            document.body.querySelector(`.${receiver.id}-parts`).addEventListener("input",userAmount);
         }
     } else { 
         toggleAvance.innerHTML = "Avancé";
         for (let receiver of receivers){
-            document.body.querySelector(`.${receiver.id}-parts`).removeEventListener("input",userAmountParts);
+            document.body.querySelector(`.${receiver.id}-parts`).removeEventListener("input",userAmount);
             document.body.querySelector(`.${receiver.id}-parts`).remove();
         }
     }
     
 }
 
-function userAmountParts(event){
-    /* */ 
-    userAmount();
-}
