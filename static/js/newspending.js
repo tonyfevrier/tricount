@@ -94,9 +94,26 @@ function calculateIndividualAmountsAndStoreSpendingParticipants(){
         }
     }
 
-    /*on calcule le montant par personne*/
-    //let individualAmount = event.target.value/nb_checked; 
+    /*on calcule le montant par personne*/ 
     let individualAmount = amount.value/nb_checked; 
+    return [individualAmount, list_of_checked,list_of_non_checked];
+}
+
+function calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(){
+    let list_of_checked = [];
+    let list_of_non_checked = [];
+    let nb_checked = 0;
+    for (let receiver of receivers){
+        if (receiver.checked){
+            nb_checked += 1;
+            list_of_checked.push(receiver.id);
+        } else {
+            list_of_non_checked.push(receiver.id);
+        }
+    }
+
+    /*on calcule le montant par personne*/  
+    
     return [individualAmount, list_of_checked,list_of_non_checked];
 }
 
@@ -126,15 +143,16 @@ function insertOrRemovePartsForSpending(innerHTML){
         for (let receiver of receivers){
             montant = document.body.querySelector(`.${receiver.id}-amount`); 
             if (receiver.checked){
-                montant.insertAdjacentHTML("afterbegin",`<input type = "text" class = "${receiver.id}-parts" value = "1" >`); 
+                montant.insertAdjacentHTML("beforebegin",`<input type = "text" class = "${receiver.id}-parts" value = "1" >`); 
             } else {  
-                montant.insertAdjacentHTML("afterbegin",`<input type = "text" class = "${receiver.id}-parts" value = "0">`); 
+                montant.insertAdjacentHTML("beforebegin",`<input type = "text" class = "${receiver.id}-parts" value = "0">`); 
             }
             document.body.querySelector(`.${receiver.id}-parts`).addEventListener("input",userAmountParts);
         }
-    } else {
+    } else { 
         toggleAvance.innerHTML = "Avancé";
         for (let receiver of receivers){
+            document.body.querySelector(`.${receiver.id}-parts`).removeEventListener("input",userAmountParts);
             document.body.querySelector(`.${receiver.id}-parts`).remove();
         }
     }
@@ -142,7 +160,6 @@ function insertOrRemovePartsForSpending(innerHTML){
 }
 
 function userAmountParts(event){
-    /* */
-    console.log(5);
-    //userAmount();
+    /* */ 
+    userAmount();
 }

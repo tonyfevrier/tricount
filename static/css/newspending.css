@@ -109,7 +109,7 @@ input, select, .div-receiver{
 .div-receiver{ 
     display: flex;
     padding: 1em 0;
-    align-items: center;
+    align-items: center;  
 }
 
 .div-receiver label{
@@ -117,13 +117,15 @@ input, select, .div-receiver{
 }
 
 
-.div-receiver p{
+.amount-and-parts{
+    display: flex;
+    align-items: center;
     margin-left: auto;
     text-transform: uppercase;
     color: gray;
 }
 
-.div-receiver p input{
+.div-receiver input{
     width: 40px;
     color:gray;
     outline: none;

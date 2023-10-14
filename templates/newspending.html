@@ -42,7 +42,9 @@
                 <div class = "div-receiver">
                     <input class = "receiver" type="checkbox" name="receiver" id="{{participant.name}}" value = "{{participant.name}}" checked>
                     <label class = "receiver-participant" for="{{participant.name}}">{{participant.name}}</label> 
-                    <p class = "{{participant.name}}-amount"> 0.00 eur</p>
+                    <div class = "amount-and-parts">
+                        <p class = "{{participant.name}}-amount"> 0.00 eur</p>
+                    </div>
                 </div> 
                 {% endfor %}
             </div>
