@@ -1,0 +1,65 @@
+header{
+    display: block;
+    padding:1.5em;
+}
+
+header nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modify-spending {
+    text-decoration: none;
+    color:white;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.title-spending, .price-spending{
+    width : auto;
+    margin:auto;
+    text-align: center;
+    text-transform: uppercase;
+    padding-top: 1em;
+}
+ 
+
+.payer-date > p{
+    opacity: 0.7;
+}
+  
+main{
+    height: 600px;
+    background-color: lightgray;
+}
+
+.forwho{
+    padding: 1em;
+    background-color: lightgray;
+}
+
+.participant{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgray;
+    padding: 1em;
+    background-color: white;
+}
+
+footer{
+    background-color: var(--color);
+    padding: 1em;
+}
+
+.following{
+    width:200px;
+    margin-left: auto;
+    text-align: end;
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.8em;
+}

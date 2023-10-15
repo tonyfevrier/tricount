@@ -1,0 +1,44 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'css/common.css'%}">
+    <link rel="stylesheet" href="{%static 'css/spending-details.css'%}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/count/...." class = "backtospending" id = "backtospending"><img src="{%static 'images/back.png' %}" width = "20px" alt="Retour en arrière"></a>
+            <a href="" class = "modify-spending">Modifier</a>
+        </nav>
+        <h1 class = "title-spending">
+            Titre
+        </h1>
+        <h2 class = "price-spending">
+            Prix
+        </h2>
+        <nav class = "payer-date">
+            <p> Payé par ...</p>
+            <p> Date</p>
+        </nav>
+    </header>
+    <main>
+        <div class = "forwho"> Pour NB participants, dont </div>
+        <div class = "participant">
+            <p> PARTICPT</p>
+            <p> Montant</p>
+        </div>
+        <div class = "participant">
+            <p> PARTICPT</p>
+            <p> Montant</p>
+        </div>
+    </main>
+    <footer>
+        <p class = "following">Suivant</p>
+    </footer>
+</body>
+</html>

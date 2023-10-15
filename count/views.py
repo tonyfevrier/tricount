@@ -103,3 +103,9 @@ def addspending(request,id_count):
         participants = Participants.objects.filter(number = id_count)
         return render(request, 'newspending.html',context={'idcount': id_count, 'participants':participants,'titre':False})
         
+def spending_details(request, id_count, id_spending):
+    """
+    Function to see the details of a given spending
+    """
+    return render(request,"spending-details.html")
+    

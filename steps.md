@@ -107,9 +107,10 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `écrire les tests pr le JS de la page de newcount.`
     - Bug : réussir à supprimer la bdd à distance après le premier test. linktricount-1 échoue car la bdd à distance contient 3 tricounts après le premier test.
     -création de la page d'une dépense donnée :
-        -créer nouvelle url, vue qui renvoit vers l'html élémentaire.
+        -`créer nouvelle url, vue qui renvoit vers l'html élémentaire.`
         -transférer les données de la dépense à la page.
-        -améliorer html et css.
+        -écrire le js qui permet de passer d'une dépense à une autre.
+        -`améliorer html et css.`
     -voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.
     Points qui nécessitent sûrement JS.
         -`Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à   50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel).`
