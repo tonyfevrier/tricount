@@ -110,6 +110,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`créer nouvelle url, vue qui renvoit vers l'html élémentaire.`
         -transférer les données de la dépense à la page.
         -écrire le js qui permet de passer d'une dépense à une autre.
+        -écrire le test fonctionnel et les éventuels tests unitaires.
         -`améliorer html et css.`
     -voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.
     Points qui nécessitent sûrement JS.

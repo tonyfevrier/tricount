@@ -107,5 +107,7 @@ def spending_details(request, id_count, id_spending):
     """
     Function to see the details of a given spending
     """
-    return render(request,"spending-details.html")
+    spending = Spending.objects.get(id = id_spending)
+    context = {'idcount' : id_count, 'idspending' : id_spending, 'spending': spending}
+    return render(request,"spending-details.html",context)
     

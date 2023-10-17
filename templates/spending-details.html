@@ -12,33 +12,31 @@
 <body>
     <header>
         <nav>
-            <a href="/count/...." class = "backtospending" id = "backtospending"><img src="{%static 'images/back.png' %}" width = "20px" alt="Retour en arrière"></a>
+            <a href="/count/tricount/{{idcount}}/spending" class = "backtospending" id = "backtospending"><img src="{%static 'images/back.png' %}" width = "20px" alt="Retour en arrière"></a>
             <a href="" class = "modify-spending">Modifier</a>
         </nav>
         <h1 class = "title-spending">
-            Titre
+            {{spending.title}}
         </h1>
         <h2 class = "price-spending">
-            Prix
+            {{spending.amount}}
         </h2>
         <nav class = "payer-date">
-            <p> Payé par ...</p>
+            <p> Payé par {{spending.payer}}</p>
             <p> Date</p>
         </nav>
     </header>
     <main>
-        <div class = "forwho"> Pour NB participants, dont </div>
+        <div class = "forwho"> Pour {{spending.receivers.len}} participants, dont </div>
+        {% for participant in spending.receivers %}
         <div class = "participant">
-            <p> PARTICPT</p>
+            <p> {{participant}}</p>
             <p> Montant</p>
-        </div>
-        <div class = "participant">
-            <p> PARTICPT</p>
-            <p> Montant</p>
-        </div>
+        </div> 
+        {% endfor%}
     </main>
     <footer>
-        <p class = "following">Suivant</p>
+        <a class = "following" href = "/count/tricount/{{idcount}}/spending/{{idspending}}">Suivant</a>
     </footer>
 </body>
 </html>

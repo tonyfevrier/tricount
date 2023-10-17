@@ -238,6 +238,22 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click):
         #He forgets to put who is the payer, by default it is the first participant.
 
         #He forgets to put for who he pays, by default it's for all participants.
+
+    def test_the_page_of_a_spending(self):
+        #L'utilisateur crée une dépense et clique dessus
+
+        #Il arrive sur la page et il y voit toutes les données qu'il a enregistrées.
+
+        #Il revient en arrière et crée trois autres dépenses
+
+        #Il clique à nouveau sur la première dépense puis sur suivant
+
+        #Il voit alors les infos de la seconde dépense et le bouton précédent apparaître
+
+        #Il clique sur suivant deux fois et voit le bouton suivant disparaître
+
+        #Il clique sur précédent trois fois et voit les infos des trois précédentes dépenses.
+        pass
         
 class JSTest(StaticLiveServerTestCase,user_experience.Click,user_experience.Check):
     def setUp(self):
