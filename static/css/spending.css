@@ -92,6 +92,11 @@ header{
     border-bottom-width: 1px;
     border-bottom-style: solid;
     padding: 0.5em 1em;
+    text-decoration: none;
+}
+ 
+.spending-date, .spending-payer{
+    color:gray;
 }
 
 

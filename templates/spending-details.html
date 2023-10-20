@@ -12,7 +12,7 @@
 <body>
     <header>
         <nav>
-            <a href="/count/tricount/{{idcount}}/spending" class = "backtospending" id = "backtospending"><img src="{%static 'images/back.png' %}" width = "20px" alt="Retour en arrière"></a>
+            <a href="/count/tricount/{{idcount}}" class = "backtospending" id = "backtospending"><img src="{%static 'images/back.png' %}" width = "20px" alt="Retour en arrière"></a>
             <a href="" class = "modify-spending">Modifier</a>
         </nav>
         <h1 class = "title-spending">
@@ -22,7 +22,7 @@
             {{spending.amount}}
         </h2>
         <nav class = "payer-date">
-            <p> Payé par {{spending.payer}}</p>
+            <p class = "payer"> Payé par {{spending.payer}}</p>
             <p> Date</p>
         </nav>
     </header>
@@ -30,13 +30,20 @@
         <div class = "forwho"> Pour {{spending.receivers.len}} participants, dont </div>
         {% for participant in spending.receivers %}
         <div class = "participant">
-            <p> {{participant}}</p>
+            <p class = "participant-name"> {{participant}}</p>
             <p> Montant</p>
         </div> 
         {% endfor%}
     </main>
     <footer>
-        <a class = "following" href = "/count/tricount/{{idcount}}/spending/{{idspending}}">Suivant</a>
+        {% if idspending != 1 %}
+            <a class = "previous" href = "/count/tricount/{{idcount}}/spending/{{previousidspending}}">Précédent</a>
+        {% endif %}
+        {% if idspending != number_of_spending %}
+            <a class = "following" href = "/count/tricount/{{idcount}}/spending/{{followingidspending}}">Suivant</a>
+        {% endif %}
+        
     </footer>
+    <script src = "{%static 'js/spending-details.js' %}"></script>
 </body>
 </html>

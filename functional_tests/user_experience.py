@@ -83,6 +83,16 @@ class Click():
         submitbox.send_keys(Keys.ENTER)
         time.sleep(2)
 
+    def click_on_an_existing_spending(self,spending_number):
+        """
+        Function which clicks on a tricount and check the title and the participants are the good ones.
+        participants : the participants we want to verify the presence.
+        """
+        link = self.browser.find_element(By.ID,"spending-" + str(spending_number))
+        link.send_keys(Keys.ENTER)
+        time.sleep(2) 
+
+
 class Check():
     def __init__(self,browser,live_server_url) -> None:
         self.browser = browser
@@ -96,3 +106,17 @@ class Check():
         """
         popup = self.browser.find_element(By.CLASS_NAME, classname)
         self.assertEqual(popup.is_displayed(),bool) 
+
+    def check_informations_of_a_spending(self,titre,prix,payeur,ptcpts):
+        title = self.browser.find_element(By.CLASS_NAME,"title-spending")
+        price = self.browser.find_element(By.CLASS_NAME,"price-spending")
+        payer = self.browser.find_element(By.CLASS_NAME,"payer")
+        participants = self.browser.find_elements(By.CLASS_NAME,"participant-name")
+
+        self.assertEqual(title.text, titre)
+        self.assertEqual(price.text, prix)
+        self.assertEqual(payer.text, payeur)
+
+        for ptcpt in ptcpts:
+            self.assertIn(ptcpt,[participant.text for participant in participants])
+             

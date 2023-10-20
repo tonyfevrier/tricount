@@ -30,7 +30,7 @@ header nav{
 }
   
 main{
-    height: 600px;
+    height: 300px;
     background-color: lightgray;
 }
 
@@ -53,6 +53,13 @@ main{
 footer{
     background-color: var(--color);
     padding: 1em;
+}
+
+.previous{
+    width:200px; 
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.8em;
 }
 
 .following{

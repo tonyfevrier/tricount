@@ -108,10 +108,14 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - Bug : réussir à supprimer la bdd à distance après le premier test. linktricount-1 échoue car la bdd à distance contient 3 tricounts après le premier test.
     -création de la page d'une dépense donnée :
         -`créer nouvelle url, vue qui renvoit vers l'html élémentaire.`
-        -transférer les données de la dépense à la page.
-        -écrire le js qui permet de passer d'une dépense à une autre.
-        -écrire le test fonctionnel et les éventuels tests unitaires.
+        -`rentrer l'adresse href du a dans spending pour cliquer sur une dépense donnée`
+        -`débugger le premier jet des tests fonctionnels.`
+        -`écrire le test fonctionnel et les éventuels tests unitaires.`
+        -`css sur la liste des dépenses à améliorer.`
         -`améliorer html et css.`
+        -placer en css précédent et suivant.
+        -transférer les données de la dépense à la page : ajouter à la bdd la date et les montants payés par chacun.
+        -faire fonctionner le bouton modifier.
     -voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.
     Points qui nécessitent sûrement JS.
         -`Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à   50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel).`

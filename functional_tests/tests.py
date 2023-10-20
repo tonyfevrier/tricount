@@ -174,7 +174,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.assertIn('Dulcinée', [name.text for name in tricount_participants]) 
         self.assertIn('Annie', [name.text for name in tricount_participants]) 
         
-class RegisterSpending(StaticLiveServerTestCase,user_experience.Click):
+class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_experience.Check):
     
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -241,20 +241,46 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click):
 
     def test_the_page_of_a_spending(self):
         #L'utilisateur crée une dépense et clique dessus
+        self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri") 
+
+        self.click_on_create_spending()
+        self.create_a_spending('Depense1', 100., 'Jean', ['Henri','Jean'])
+
+        self.click_on_an_existing_spending(1)
+        time.sleep(3)
 
         #Il arrive sur la page et il y voit toutes les données qu'il a enregistrées.
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1/spending/1")
+        self.check_informations_of_a_spending('DEPENSE1', '100.0', 'Payé par Jean', ['Henri','Jean'])
 
         #Il revient en arrière et crée trois autres dépenses
+        self.click_on_a_link(By.CLASS_NAME,"backtospending")
+ 
+        self.click_on_create_spending()
+        self.create_a_spending('Depense2', 10., 'Henri', ['Henri','Jean']) 
+        self.click_on_create_spending()
+        self.create_a_spending('Depense3', 2., 'Henri', ['Henri','Jean'])
 
         #Il clique à nouveau sur la première dépense puis sur suivant
+        self.click_on_an_existing_spending(1)
+        self.click_on_a_link(By.CLASS_NAME,"following")
 
         #Il voit alors les infos de la seconde dépense et le bouton précédent apparaître
+        self.check_informations_of_a_spending('DEPENSE2', '10.0', 'Payé par Henri', ['Henri','Jean'])
+        self.assertIsNotNone(self.browser.find_element(By.CLASS_NAME,'previous'))
 
-        #Il clique sur suivant deux fois et voit le bouton suivant disparaître
+        #Il clique sur suivant une fois et voit le bouton suivant disparaître
+        self.click_on_a_link(By.CLASS_NAME,"following") 
+        self.check_informations_of_a_spending('DEPENSE3', '2.0', 'Payé par Henri', ['Henri','Jean'])
+        #self.assertIsNone(self.browser.find_element(By.CLASS_NAME,'following'))
 
-        #Il clique sur précédent trois fois et voit les infos des trois précédentes dépenses.
+        #Il clique sur précédent trois fois.
+        self.click_on_a_link(By.CLASS_NAME,"previous")
+        self.click_on_a_link(By.CLASS_NAME,"previous")
+
+    def test_modify_a_created_spending(self):
         pass
-        
+
 class JSTest(StaticLiveServerTestCase,user_experience.Click,user_experience.Check):
     def setUp(self):
         self.browser = webdriver.Firefox()

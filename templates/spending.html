@@ -30,7 +30,7 @@
     </header>
     <main>
         {%for spend in spending%}
-        <div class = "spending">
+        <a class = "spending" id="spending-{{spend.id}}" href = '/count/tricount/{{count.id}}/spending/{{spend.id}}'>
             <div class = "spending-reason">
                 <p class = "spending-title">{{spend.title}}</p>
                 <p class = "spending-payer">{{spend.payer}}</p>
@@ -39,7 +39,7 @@
                 <p class = "spending-amount">{{spend.amount}}</p>
                 <p class = "spending-date">Hier</p>
             </div>
-        </div>
+        </a>
         {%endfor%}
     </main>
     
