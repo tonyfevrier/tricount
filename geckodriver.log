@@ -15748,3 +15748,53 @@ console.warn: LoginRecipes: "Falling back to a synchronous message for: http://l
 console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:53681."
 1697903557074	Marionette	INFO	Stopped listening on port 53694
 Dynamically enable window occlusion 1
+1697910819862	geckodriver	INFO	Listening on 127.0.0.1:62007
+1697910822942	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "62008" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileFS0zE3"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1697910823213	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1697910823294	Marionette	INFO	Listening on port 62018
+WebDriver BiDi listening on ws://127.0.0.1:62008
+Read port: 62018
+1697910823475	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:62008/devtools/browser/30a9bb6e-9691-44e7-84e2-9ceb8dd0953c
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62006."
+1697910846020	geckodriver	INFO	Listening on 127.0.0.1:62078
+1697910849083	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "62079" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileMKstc9"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1697910849310	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1697910849381	Marionette	INFO	Listening on port 62089
+WebDriver BiDi listening on ws://127.0.0.1:62079
+Read port: 62089
+1697910849546	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:62079/devtools/browser/97a51391-be51-43f2-8d41-3421bf0a9d5b
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62077."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62077."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62077."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62077."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62077."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62077."
+1697910875701	Marionette	INFO	Stopped listening on port 62089
+Dynamically enable window occlusion 1
+1697910900956	geckodriver	INFO	Listening on 127.0.0.1:62184
+1697910904029	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "62185" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\tonyf\\AppData\\Local\\Temp\\rust_mozprofileRVGqzv"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1697910904257	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1697910904330	Marionette	INFO	Listening on port 62195
+WebDriver BiDi listening on ws://127.0.0.1:62185
+Read port: 62195
+1697910904495	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+DevTools listening on ws://127.0.0.1:62185/devtools/browser/e4cecbee-3d4c-4bba-a57f-e2968bec7ced
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62183."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62183."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62183."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62183."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62183."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: http://localhost:62183."
+1697910932619	Marionette	INFO	Stopped listening on port 62195
+Dynamically enable window occlusion 1

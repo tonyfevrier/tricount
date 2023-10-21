@@ -122,15 +122,16 @@ input, select, .div-receiver{
     align-items: center;
     margin-left: auto;
     text-transform: uppercase;
-    color: gray;
+    color: gray; 
 }
-
+ 
+.amount-and-parts input{
+    width:80px;
+}
 .div-receiver input{
-    width: 40px;
     color:gray;
     outline: none;
     border-color: grey;
-    
 }
 
 .submit-spending{ 

@@ -96,7 +96,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         - `factoriser aussi les redondances sur les tests unitaires (les blocs d'assert qui se répètent, les beautiful soup...).`
     -`créer le module de calcul des équilibres après dépense.`
         `fabriquer des tests pour chacune des fonctions créée.`
-        - ajouter le calcul auto des montants pr chaque participant coché (cas équitable).
+        `ajouter le calcul auto des montants pr chaque participant coché (cas équitable).`
     - `voir test.resolvesolution et test calculate total credit si je ne me suis pas trompé dans le calcul des crédits (si les signes ne sont pas inverses) : car j'ai mis receiving update au lieu de spending update.`
     - `comparer les css et voir si factorisable en un fichier avec structure minimale commune et des spécificités par ailleurs. Voir alors comment importer dans un css la structure commune.`
     - `Ecriture d'un event onclick sur la première page prenant en compte juste le premier bouton.`
@@ -114,6 +114,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`css sur la liste des dépenses à améliorer.`
         -`améliorer html et css.`
         -`placer en css précédent et suivant.`
+        -ajouter à la bdd les montants que chacun doit payer pour une dépense donnée : récupérer les montants calculés en JS.
+        -test unitaire à modifier.
         -transférer les données de la dépense à la page : ajouter à la bdd la date et les montants payés par chacun.
         -faire fonctionner le bouton modifier.
     -faire la page équilibre de spending.html:
@@ -121,9 +123,9 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `créer l html`
         `préparer le css`
         `créer la vue qui passe les données à cette page`
-        ajouter à la vue toutes les infos à passer sur les comptes notamment.
+        ajouter à la vue toutes les infos à passer sur les comptes notamment : participants, leur crédit, la solution de paiment pour équilibrer (update_process donne tout).
         `transformer les boutons dépenses et équilibres en a avec href`
-        tests fonctionnels associés
+        `tests fonctionnels associés`
     -voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.
     Points qui nécessitent sûrement JS.
         -`Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à   50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel).`

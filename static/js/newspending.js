@@ -4,7 +4,7 @@ clic sur eur : élement avec Eur et plus
 */
 
 const title = document.body.querySelector("[placeholder = 'Titre']");
-const amount = document.body.querySelector(".amount");
+const amount = document.body.querySelector(".amount"); 
 let counter = document.body.querySelector(".counter");
 let checkboxDiv = document.body.querySelector(".list-receivers");  
 let receivers = document.body.querySelectorAll(".receiver");
@@ -38,8 +38,7 @@ function userTaping(event){
 }
 
 function userAmount(){
-    //Quand l'utilisateur écrit un montant, il est partagé sur les personnes cochées.
-         
+    //Quand l'utilisateur écrit un montant, il est partagé sur les personnes cochées. 
     let table = calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(); 
     attributeIndividualAmountWithParts(table[0],table[1],table[2]); 
 
@@ -123,10 +122,13 @@ function calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(event){
 function attributeIndividualAmountWithParts(individualAmountDico, list_of_checked,list_of_non_checked){
     
     for (let checked_receiver of list_of_checked){
-        document.body.querySelector(`.${checked_receiver}-amount`).innerHTML = `${individualAmountDico[checked_receiver].toFixed(2)} eur`;
+        //document.body.querySelector(`.${checked_receiver}-amount`).innerHTML = `${individualAmountDico[checked_receiver].toFixed(2)} eur`; 
+        document.body.querySelector(`.${checked_receiver}-amount`).value = `${individualAmountDico[checked_receiver].toFixed(2)} eur`;
+
     }
     for (let non_checked_receiver of list_of_non_checked){
-        document.body.querySelector(`.${non_checked_receiver}-amount`).innerHTML = `0.00 eur`;
+        //document.body.querySelector(`.${non_checked_receiver}-amount`).innerHTML = `0.00 eur`;
+        document.body.querySelector(`.${non_checked_receiver}-amount`).value = `0.00 eur`;
     }
 }
 

@@ -235,6 +235,14 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1")
         self.assertIn('0.0',[amount.text for amount in amounts])
 
+        #He wants to check the current equilibria
+        self.click_on_a_link(By.CLASS_NAME,"gotoequilibria")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1/equilibria")
+
+        #He clicks back
+        self.click_on_a_link(By.CLASS_NAME,"gotospending")
+        self.assertEqual(self.browser.current_url,  self.live_server_url + "/count/tricount/1")
+
         #He forgets to put who is the payer, by default it is the first participant.
 
         #He forgets to put for who he pays, by default it's for all participants.
@@ -278,6 +286,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
         self.click_on_a_link(By.CLASS_NAME,"previous")
         self.click_on_a_link(By.CLASS_NAME,"previous")
 
+    
     def test_modify_a_created_spending(self):
         pass
 

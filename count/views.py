@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from count.models import Counts, Participants, Spending
 from count.func import majuscule
+from count import calculation
 
 # Create your views here.
 

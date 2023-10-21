@@ -73,6 +73,19 @@ class Tricount():
 
         return self.spending_update(payer,forwho)
     
+    def money_transfer(self,payer, forwho):
+        """
+        Function which transfer money from the owner to the receiver
+        """ 
+    
+        for spender in payer.keys():
+            for receiver in forwho.keys():
+                if receiver != spender: 
+                    self.dict_participants[spender].credits[receiver] -= forwho[receiver]
+                    self.dict_participants[receiver].credits[spender] += forwho[receiver]
+
+        return self 
+    
     def calculate_total_credit(self):
         """
         Function which calculates for each participant the total credit/debt
@@ -94,8 +107,8 @@ class Tricount():
         """
         Function which offers a repartition to reimburse ONE debitor. It completes transferts_to_equilibrium.
 
-        Input : tuple debitor := (name,amount)
-                dict creditors : the creditors as keys and the amount to credit as values
+        Input : tuple creditor := (name,amount)
+                dict debitors : the debitors as keys and the amount to credit as values
                 dict transferts_to_equilibrium :  dict {name debitor : {name1 creditor : amount, name2:amount,...}}. Dictionary whose values are dictionaries.
         
         Output : dict transferts_to_equilibrium completed.
@@ -161,15 +174,4 @@ class Tricount():
         
         return total_credit,transfert_to_equilibrium 
 
-    def money_transfer(self,payer, forwho):
-        """
-        Function which transfer money from the owner to the receiver
-        """ 
     
-        for spender in payer.keys():
-            for receiver in forwho.keys():
-                if receiver != spender: 
-                    self.dict_participants[spender].credits[receiver] -= forwho[receiver]
-                    self.dict_participants[receiver].credits[spender] += forwho[receiver]
-
-        return self 
