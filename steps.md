@@ -113,21 +113,28 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`écrire le test fonctionnel et les éventuels tests unitaires.`
         -`css sur la liste des dépenses à améliorer.`
         -`améliorer html et css.`
-        -placer en css précédent et suivant.
+        -`placer en css précédent et suivant.`
         -transférer les données de la dépense à la page : ajouter à la bdd la date et les montants payés par chacun.
         -faire fonctionner le bouton modifier.
+    -faire la page équilibre de spending.html:
+        `créer nouvelle url`
+        `créer l html`
+        `préparer le css`
+        `créer la vue qui passe les données à cette page`
+        ajouter à la vue toutes les infos à passer sur les comptes notamment.
+        `transformer les boutons dépenses et équilibres en a avec href`
+        tests fonctionnels associés
     -voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.
     Points qui nécessitent sûrement JS.
         -`Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à   50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel).`
         -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la  petite croix. Pour le moment quand je clique sur les croix, ça ajoute des    participants. (Je pense que j'ai besoin de JS aussi).
         -Ajouter dans devise.html la recherche de currency (JS sûrement nécessaire).
-        -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il   semble que JS soit nécessaire pour revenir.
-        - Test fonctionnel. 
+        -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il   semble que JS soit nécessaire pour revenir. 
         -Ajouter à l'html les devises via le json. 
         -Test fonctionnel pour voir si tout est affiché et si on va vers la bonne url.
         -pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : 
         -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît.
-
+    Tests JS : voir comment en faire facilement sans selenium.
 
 # Bugs intéressants 
     - TIME SEND KEYS : Après send_Keys, il faut laisser du temps pour que la page se charge.

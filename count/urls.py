@@ -9,6 +9,7 @@ urlpatterns = [
     path('newcount/addcount/addparticipant',countviews.addparticipant, name = "addparticipant"),
     path('newcount/currency',countviews.choosecurrency,name = "choosecurrency"),
     path('tricount/<int:id_count>', countviews.spending, name = "spending"), 
+    path('tricount/<int:id_count>/equilibria', countviews.spendingEquilibria, name = "spending-equilibria"), 
     path('tricount/<int:id_count>/spending', countviews.newspending,name = "newspending"),
     path('tricount/<int:id_count>/addspending', countviews.addspending,name = "addspending"),
     path('tricount/<int:id_count>/spending/<int:id_spending>', countviews.spending_details, name = "spending-details"),

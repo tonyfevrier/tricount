@@ -77,6 +77,15 @@ def spending(request,id_count):
     spending = Spending.objects.filter(number = id_count)
     return render(request, "spending.html", context = {'count':count,'names':participants_name, 'spending' : spending})
 
+def spendingEquilibria(request,id_count):
+    """
+    Function which leads to the equilibria of a given tricount.
+    """
+    count = Counts.objects.get(id=id_count)  
+    participants = count.participants.filter(number = count.id)
+    participants_name = [participant.name for participant in participants] 
+    return render(request, "spendingEquilibria.html", context = {'count':count,'names':participants_name})
+
 def newspending(request,id_count):
     """
     Function which render the template when we want to add a new spending

@@ -41,6 +41,16 @@ header{
     text-decoration: none;
     color : white;
 }
+
+.share{
+    background-color: transparent;
+    outline: none;
+    color: white;
+    text-transform: uppercase;
+    border : none;
+    cursor: pointer;
+    font-size: 0.8em;
+}
  
 .tricount-characteristics p:first-child{
     font-size: 1.2em;
@@ -86,88 +96,67 @@ header{
     transform: translate(0,1.25em);
 }
 
-
-.spending{
+.credits{
     display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    border-bottom-width: 1px;
+    align-items: center;
     border-bottom-style: solid;
-    padding: 0.5em 1em;
-    text-decoration: none;
-}
- 
-.spending-date, .spending-payer{
+    border-bottom-width:1px;
+    border-bottom-color: lightgray;
+    padding: 1em;
     color:gray;
 }
 
-
-.spending-reason p:first-child, .spending-amount-div p:first-child{
-    color:var(--color)
- 
-}
-
-.spending-reason p:last-child{
-    font-size: 0.8em;
-    opacity: 0.8;
-} 
-
-.spending-amount-div p:last-child{
-    font-size:0.7em;
-    opacity: 0.5; 
+.participant{
+    flex:1;
     text-align: end;
 }
 
-
-footer{
-    position: absolute;
-    bottom :0;
-    width:100%; 
+.amount{
+    flex:1;
 }
 
-.footer{
-    display: flex;
-    padding: 0.5em 1em;
-    background-color: black;
-}
 
-.total-cost{ 
-    width:50%;
-    margin-right: auto;
-}
-
-.total-cost p:first-child, .total-spending p:first-child{
-    color: grey;
+.equilibrating{
+    padding:1em;
     text-transform: uppercase;
-    font-size: 0.8em;
+    background-color: lightgray;
+    color: gray;
 }
 
-.total-cost p:last-child, .total-spending p:last-child{
-    color: white;
+.reimbursement{
+    margin : 1em;
+    border-color: gray;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 1px;
 }
 
-.total-spending p:last-child{
-    text-align: end;
+.reimbursement-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
+}
+    
+.reimbursement-amount{
+    padding: 0.5em;
 }
 
-
-.total-amount{ 
-    width: 50%; 
+.who{
+    color: var(--color);
 }
 
-.new-spending{
-    transform: translate(200px,20px);
-    display: inline-block;
-    color: white;
-    background-color: var(--color);
-    border-radius: 50%; 
-    font-size: 1.6em;
-    font-weight: 700;
-    color: white;
-    width:1.8em;
-    height : 1.8em;
-    text-decoration: none;
-    text-align: center; 
-    padding-top: 0.35em;
+.dueto{
+    font-size: 0.5em;
+    color: grey;
 }
 
+.more-options{
+    font-size: 0.7em;
+    font-weight: 600;
+    background-color: lightgray;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding:0.5em;
+    color: gray;
+}

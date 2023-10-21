@@ -51,22 +51,34 @@ main{
 }
 
 footer{
+    position: relative;
     background-color: var(--color);
     padding: 1em;
 }
 
 .previous{
+    position: absolute;
+    top : 0.5em;
+    left : 1em;
+    bottom: 0.5em;
     width:200px; 
     color: white;
     text-transform: uppercase;
     font-size: 0.8em;
+    text-decoration: none;
+    outline: none;
 }
 
 .following{
-    width:200px;
-    margin-left: auto;
+    position: absolute;
+    top : 0.5em;
+    right: 1em;
+    bottom: 0.5em;
+    width:200px; 
     text-align: end;
     color: white;
     text-transform: uppercase;
     font-size: 0.8em;
+    text-decoration: none;
+    outline: none;
 }

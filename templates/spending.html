@@ -5,8 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spending</title>
-    <!--<link rel="stylesheet" href="{% static 'css/common.css' %}">-->
+    <title>Spending</title> 
     <link rel="stylesheet" href="{% static 'css/spending.css'%}">
 </head>
 <body>
@@ -24,8 +23,8 @@
             <a href="" class="options"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </a>
         </nav>
         <div class = header-spending>
-            <button>Dépenses</button>
-            <button>Equilibres</button>
+            <a href = "/count/tricount/{{count.id}}">Dépenses</a>
+            <a href = "/count/tricount/{{count.id}}/equilibria">Equilibres</a>
         </div>
     </header>
     <main>
