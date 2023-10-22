@@ -11,15 +11,6 @@ from count.models import Counts,Participants
 from functional_tests import user_experience 
 
 class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click): 
-    """
-    @classmethod
-    def tearDownClass(cls):
-        for db_name in connections:
-            connection = connections[db_name]
-            with connection.cursor() as cursor:
-                cursor.execute('DROP SCHEMA public CASCADE; CREATE SCHEMA public;')
-        super().tearDownClass()
-    """
     
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -184,6 +175,9 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
         self.browser.quit()
 
     def test_spending_creation(self): 
+
+        #MODIFIER check IN : normalement pas besoin de modifier create spending : devrait créer un dico 
+
         #A tricount is created et come back to the listecount page
  
         self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri")
@@ -259,7 +253,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
 
         #Il arrive sur la page et il y voit toutes les données qu'il a enregistrées.
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1/spending/1")
-        self.check_informations_of_a_spending('DEPENSE1', '100.0', 'Payé par Jean', ['Henri','Jean'])
+        self.check_informations_of_a_spending('DEPENSE1', '100.0', 'Payé par Jean', ['Henri','Jean'],['50.00 eur', '50.00 eur'])
 
         #Il revient en arrière et crée trois autres dépenses
         self.click_on_a_link(By.CLASS_NAME,"backtospending")
@@ -274,12 +268,12 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
         self.click_on_a_link(By.CLASS_NAME,"following")
 
         #Il voit alors les infos de la seconde dépense et le bouton précédent apparaître
-        self.check_informations_of_a_spending('DEPENSE2', '10.0', 'Payé par Henri', ['Henri','Jean'])
+        self.check_informations_of_a_spending('DEPENSE2', '10.0', 'Payé par Henri', ['Henri','Jean'],['5.00 eur', '5.00 eur'])
         self.assertIsNotNone(self.browser.find_element(By.CLASS_NAME,'previous'))
 
         #Il clique sur suivant une fois et voit le bouton suivant disparaître
         self.click_on_a_link(By.CLASS_NAME,"following") 
-        self.check_informations_of_a_spending('DEPENSE3', '2.0', 'Payé par Henri', ['Henri','Jean'])
+        self.check_informations_of_a_spending('DEPENSE3', '2.0', 'Payé par Henri', ['Henri','Jean'],['1.00 eur', '1.00 eur'])
         #self.assertIsNone(self.browser.find_element(By.CLASS_NAME,'following'))
 
         #Il clique sur précédent trois fois.

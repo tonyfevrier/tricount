@@ -66,7 +66,7 @@ class Click():
         link_spending.send_keys(Keys.ENTER)
         time.sleep(2)
 
-    def create_a_spending(self,title,amount,payer,receivers):
+    def create_a_spending(self,title,amount,payer,receivers):#,respective_amounts):
         """
         Function creating a new spending
         """
@@ -80,6 +80,14 @@ class Click():
         amountbox.send_keys(amount)
         spenderbox.send_keys(payer)
         receiverbox.send_keys(receivers)
+
+        """
+        #association of the respective amounts to receivers
+        for i in range(len(receivers)):
+            participantbox = self.browser.find_element(By.NAME,receivers[i])
+            participantbox.send_keys(respective_amounts[i])
+        """
+
         submitbox.send_keys(Keys.ENTER)
         time.sleep(2)
 
@@ -107,16 +115,20 @@ class Check():
         popup = self.browser.find_element(By.CLASS_NAME, classname)
         self.assertEqual(popup.is_displayed(),bool) 
 
-    def check_informations_of_a_spending(self,titre,prix,payeur,ptcpts):
+    def check_informations_of_a_spending(self,titre,prix,payeur,ptcpts,amnts):
         title = self.browser.find_element(By.CLASS_NAME,"title-spending")
         price = self.browser.find_element(By.CLASS_NAME,"price-spending")
         payer = self.browser.find_element(By.CLASS_NAME,"payer")
         participants = self.browser.find_elements(By.CLASS_NAME,"participant-name")
+        amounts = self.browser.find_elements(By.CLASS_NAME,"participant-amount")
+        Date = self.browser.find_element(By.CLASS_NAME,"date")
 
         self.assertEqual(title.text, titre)
         self.assertEqual(price.text, prix)
         self.assertEqual(payer.text, payeur)
 
-        for ptcpt in ptcpts:
-            self.assertIn(ptcpt,[participant.text for participant in participants])
+        for i in range(len(ptcpts)):
+            self.assertIn(ptcpts[i],[participant.text for participant in participants])
+            self.assertIn(amnts[i],[amount.text for amount in amounts])
+
              

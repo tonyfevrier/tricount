@@ -5,6 +5,7 @@ from count.models import Counts, Participants, Spending
 from count.calculation import Tricount 
 from copy import deepcopy
 from count.tests_functions import UnitaryTestMethods
+from datetime import date
 
 # Create your tests here.
 
@@ -299,6 +300,7 @@ class TestSpending(UnitaryTestMethods):
         self.assertEqual(spending.payer, 'Jean')
         self.assertDictEqual(spending.receivers, {'Henri':'50','Jean':'50'})
         self.assertEqual(spending.number, 1)
+        self.assertEqual(spending.date, date.today())
     
     def test_goback_bdd_unchanged(self):
         """

@@ -116,8 +116,11 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`placer en css précédent et suivant.`  
         -`Décommenter la nouvelle vue de add spending pour voir si cette fois les données sont récupérées et si ça tourne.`
         -`ajouter à la bdd les montants que chacun doit payer pour une dépense donnée : récupérer les montants calculés en JS.`
-        -`test unitaire à modifier.`
-        -transférer les données de la dépense à la page : ajouter à la bdd la date et les montants payés par chacun.
+        -`test unitaire à modifier.` 
+        -`transférer les données de la dépense à la page : ajouter à la bdd les montants payés par chacun.`
+        -`ajouter la date à la bdd et lors de la création de la dépense.`
+        -`modifier le test unitaire pour voir si la date est passée.`
+        -`modifier les tests fonctionnels de spending-details.`
         -faire fonctionner le bouton modifier.
     -faire la page équilibre de spending.html:
         `créer nouvelle url`

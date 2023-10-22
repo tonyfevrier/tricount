@@ -23,15 +23,15 @@
         </h2>
         <nav class = "payer-date">
             <p class = "payer"> Payé par {{spending.payer}}</p>
-            <p> Date</p>
+            <p class = "date"> {{spending.date}} </p>
         </nav>
     </header>
     <main>
         <div class = "forwho"> Pour {{spending.receivers.len}} participants, dont </div>
-        {% for participant in spending.receivers %}
+        {% for participant,amount in spending.receivers.items %}
         <div class = "participant">
             <p class = "participant-name"> {{participant}}</p>
-            <p> Montant</p>
+            <p class = "participant-amount"> {{amount}} </p>
         </div> 
         {% endfor%}
     </main>

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from count.models import Counts, Participants, Spending
 from count.func import majuscule
 from count import calculation
+from datetime import date
 
 # Create your views here.
 
@@ -114,9 +115,8 @@ def addspending(request,id_count):
         dico_receivers = {}
         for receiver in receivers: 
             dico_receivers[receiver] = request.POST[receiver] 
-        Spending.objects.create(title = titre, amount = float(amount) , payer = request.POST["spender"], receivers = dico_receivers, number = id_count)
+        Spending.objects.create(title = titre, amount = float(amount) , payer = request.POST["spender"], receivers = dico_receivers, number = id_count, date = date.today())
         
-        #Spending.objects.create(title = titre, amount = float(amount) , payer = request.POST["spender"], receivers = request.POST.getlist("receiver"), number = id_count)
         return redirect(f'/count/tricount/{id_count}')
     else: 
         participants = Participants.objects.filter(number = id_count)

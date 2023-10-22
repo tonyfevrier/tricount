@@ -1,5 +1,6 @@
 from django.db import models
 from jsonfield import JSONField
+from datetime import date
 
 
 # Create your models here.
@@ -19,3 +20,4 @@ class Spending(models.Model):
     payer = models.TextField(default='')
     receivers = JSONField(default = dict)
     number = models.IntegerField(default = 0)
+    date = models.DateField(default = date(2023,1,1)) 
