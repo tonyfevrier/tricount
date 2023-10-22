@@ -113,9 +113,10 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`écrire le test fonctionnel et les éventuels tests unitaires.`
         -`css sur la liste des dépenses à améliorer.`
         -`améliorer html et css.`
-        -`placer en css précédent et suivant.`
-        -ajouter à la bdd les montants que chacun doit payer pour une dépense donnée : récupérer les montants calculés en JS.
-        -test unitaire à modifier.
+        -`placer en css précédent et suivant.`  
+        -`Décommenter la nouvelle vue de add spending pour voir si cette fois les données sont récupérées et si ça tourne.`
+        -`ajouter à la bdd les montants que chacun doit payer pour une dépense donnée : récupérer les montants calculés en JS.`
+        -`test unitaire à modifier.`
         -transférer les données de la dépense à la page : ajouter à la bdd la date et les montants payés par chacun.
         -faire fonctionner le bouton modifier.
     -faire la page équilibre de spending.html:
@@ -138,6 +139,10 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît.
     Tests JS : voir comment en faire facilement sans selenium.
 
+
+# Bug non résolu : 
+    
+
 # Bugs intéressants 
     - TIME SEND KEYS : Après send_Keys, il faut laisser du temps pour que la page se charge.
     - URL : Faire bien attention à respecter le fait qu'il y ait ou non / dans les adresses (faire pareil que dans le path : si j'ai mis count/ dans le path il faut le mettre après dans les redirections) sinon on aura une réponse inappropriée ( 404 ou autre).
@@ -151,7 +156,25 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - TYPE FLOAT BDD : Si on entre un float ou int dans la bdd via un request, celui-ci est convertit en str par request.POST. Donc ne pas oublier de le convertir si on a utilisé un champ FloatField.
     - SEVERAL FUNCTIONAL TESTS : when we launch tests, it creates a database and destroys it at the end of all tests. So to avoid bugs, don't forget to erase the database created by the first test.
     - Le JS apparaît et disparaît : c'est sûrement dû à un comportement par défaut. Dans mon cas c'était un lien a qui par défaut envoie vers une autre page.
-    
+    - DEFAULTVALUENOTSUBMITTEDBYpost : Quand j'introduis un input avec value (par défaut) et que j'utilise la méthode post : la valeur n'est pas transmise. Pourquoi? C'est la méthode post du client django qui ne les soumet pas, elle envoie les données qu'on spécifie et ne permet pas de récupérer les spécifiées. En revanche quand un utilisateur soumet, les valeurs par défaut sont bien envoyées. Une solution : on peut récupérer les valeurs par défaut avec un get puis les passer dans le post.
+        # Récupérez la page du formulaire avec self.client.get
+        response = self.client.get("/count/newcount/addcount")
+
+        # Extrayez les valeurs par défaut des champs depuis le contenu de la réponse HTML
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(response.content, 'html.parser')
+        default_test_value = soup.find("input", {"name": "test"})["value"]
+
+        # Utilisez les valeurs par défaut extraites pour construire le dictionnaire de données
+        form_data = {
+            "newtricount_title": title,
+            "newtricount_description": description,
+            "newtricount_category": category,
+            "test": default_test_value  # Utilisez la valeur par défaut
+        }
+
+        # Soumettez le formulaire avec self.client.post
+        response = self.client.post("/count/newcount/addcount", data=form_data)
 
 # Mes difficultés principales
     - Non connaissance des syntaxes du client django pour faire des tests unitaires. Idem pour les fonctionnels.

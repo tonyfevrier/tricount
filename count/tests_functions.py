@@ -1,5 +1,5 @@
 from django.test import TestCase
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup 
 
 class UnitaryTestMethods(TestCase):
     def extract_and_click_on_link(self,content,id):
@@ -37,7 +37,7 @@ class UnitaryTestMethods(TestCase):
         response = self.add_tricount_characteristics(title,description,category) 
         return response
     
-    def create_a_spending(self,title,amount,spender, receivers):
+    def create_a_spending(self,title,amount,spender, receivers, respective_amounts):
         """
         Inputs :
             title : str
@@ -47,8 +47,12 @@ class UnitaryTestMethods(TestCase):
 
         Output : 
             response : object
-        """
-        response = self.client.post('/count/tricount/1/addspending', data = {'title': title, 'amount': amount, 'spender': spender,  'receiver': receivers})
+        """ 
+        data = {'title': title, 'amount': amount, 'spender': spender,  'receiver': receivers} 
+        for i in range(len(receivers)):
+            data[receivers[i]] = respective_amounts[i]
+
+        response = self.client.post('/count/tricount/1/addspending', data)
         return response
 
         

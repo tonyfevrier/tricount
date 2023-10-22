@@ -73,7 +73,7 @@ class Click():
         titlebox = self.browser.find_element(By.NAME, 'title')
         amountbox = self.browser.find_element(By.NAME, 'amount')
         spenderbox = self.browser.find_element(By.NAME, 'spender')
-        receiverbox = self.browser.find_element(By.NAME, 'receiver')
+        receiverbox = self.browser.find_element(By.NAME, 'receiver') 
         submitbox = self.browser.find_element(By.NAME,'submit') 
 
         titlebox.send_keys(title)

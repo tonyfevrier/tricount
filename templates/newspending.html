@@ -16,7 +16,8 @@
     </header>
     <main>
         <form action="/count/tricount/{{idcount}}/addspending" method = "post">
-            <input class = "title" type="text" placeholder="Titre" name = "title">
+            <input class = "title" type="text" placeholder="Titre" name = "title"> 
+
             {%if titre == False%}
                 <p class = "notitle">Titre non valable</p>
             {%endif%}
@@ -42,14 +43,15 @@
                 <div class = "div-receiver">
                     <input class = "receiver" type="checkbox" name="receiver" id="{{participant.name}}" value = "{{participant.name}}" checked>
                     <label class = "receiver-participant" for="{{participant.name}}">{{participant.name}}</label> 
-                    <div class = "amount-and-parts">
-                        <!--<p class = "{{participant.name}}-amount"> 0.00 eur</p>-->
-                        <input data-key="{{participant.name}}" type = "text" class = "{{participant.name}}-amount" value = "0.00 eur">
+                    <div class = "amount-and-parts"> 
+                        <input name = "{{participant.name}}" type = "text" class = "{{participant.name}}-amount" value = "0.00 eur">
                     </div>
                 </div> 
                 {% endfor %}
             </div>
-            <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button> 
+            <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button>
+            
+            
             {% csrf_token %}
         </form>
     </main>

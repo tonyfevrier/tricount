@@ -98,16 +98,25 @@ def addspending(request,id_count):
     """
     Function to recover the data of the form of newspending and redirect to the spending list. 
     """ 
-    
-    #Spending.objects.create(title = request.POST["title"], amount = float(request.POST["amount"]) , payer = request.POST["spender"], receivers = request.POST.getlist("receiver"), number = id_count)
+     
 
     titre =  request.POST["title"]
-    amount = request.POST["amount"]
+    amount = request.POST["amount"] 
 
     if titre != '':
         if amount == '':
             amount = 0.
-        Spending.objects.create(title = titre, amount = float(amount) , payer = request.POST["spender"], receivers = request.POST.getlist("receiver"), number = id_count)
+        
+
+        receivers = request.POST.getlist("receiver")
+
+        #On récupère aussi les montants des personnes cochées pour les mettre dans un dictionnaire.
+        dico_receivers = {}
+        for receiver in receivers: 
+            dico_receivers[receiver] = request.POST[receiver] 
+        Spending.objects.create(title = titre, amount = float(amount) , payer = request.POST["spender"], receivers = dico_receivers, number = id_count)
+        
+        #Spending.objects.create(title = titre, amount = float(amount) , payer = request.POST["spender"], receivers = request.POST.getlist("receiver"), number = id_count)
         return redirect(f'/count/tricount/{id_count}')
     else: 
         participants = Participants.objects.filter(number = id_count)

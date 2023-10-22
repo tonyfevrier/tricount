@@ -281,7 +281,8 @@ class TestSpending(UnitaryTestMethods):
         We enter a newspending and we see if data are integrated into the database.
         """
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
-        response = self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean'])  
+        response = self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean'], [50,50]) 
+        #response = self.create_a_spending('dépense1', 100, 'Jean', {'Henri':50,'Jean':50})  
 
         self.assertRedirects(response,'/count/tricount/1') 
     
@@ -289,14 +290,14 @@ class TestSpending(UnitaryTestMethods):
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
 
         number = Spending.objects.count()
-        self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean'])  
+        self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean'], [50,50])  
         spending = Spending.objects.get(pk = 1)
         
         self.assertEqual(number+1, Spending.objects.count())
         self.assertEqual(spending.title, 'dépense1')
         self.assertEqual(spending.amount, 100)
         self.assertEqual(spending.payer, 'Jean')
-        self.assertListEqual(spending.receivers, ['Henri','Jean'])
+        self.assertDictEqual(spending.receivers, {'Henri':'50','Jean':'50'})
         self.assertEqual(spending.number, 1)
     
     def test_goback_bdd_unchanged(self):
@@ -316,7 +317,7 @@ class TestSpending(UnitaryTestMethods):
         """
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")     
         nb_spending = Spending.objects.count()
-        response = self.create_a_spending('', 100, 'Jean', ['Henri','Jean'])   
+        response = self.create_a_spending('', 100, 'Jean', ['Henri','Jean'],[50,50])   
         
         self.assertEqual(nb_spending,Spending.objects.count()) 
         self.assertTemplateUsed(response,'newspending.html')
@@ -327,7 +328,7 @@ class TestSpending(UnitaryTestMethods):
         """
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
         nb_spending = Spending.objects.count()
-        self.create_a_spending('dépense1', '', 'Jean', ['Henri','Jean'])  
+        self.create_a_spending('dépense1', '', 'Jean', ['Henri','Jean'],[0,0])  
         spending = Spending.objects.get(pk = 1)
 
         self.assertEqual(nb_spending + 1,Spending.objects.count()) 

@@ -17,7 +17,8 @@
     </header> 
     <main>
         <form method="POST" class = "newtricount" action="/count/newcount/addcount">
-            <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title"> 
+            <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title">  
+
             {% if titre == False %}
                 <p class="error">Le titre doit comporter au moins un caractère.</p>
             {% endif %}
