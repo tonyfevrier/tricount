@@ -103,6 +103,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - `écriture du html et js pour display options`
     - `ajouter le comportement lorsqu'on clique sur parameters-options.`
     - Modif du + pour créer un élt qui lui va mener vers la page du nouveau tricount ou une page rejoindre un tricount.
+    -`page de nouvelle dépense : JS quand on clique sur  simple, on revient à une répartition équitable des parts de chacun.`
     -`Modifier les tests unitaires et fonctionnels en conséquence pr que ça tourne toujours.`
     - `écrire les tests pr le JS de la page de newcount.`
     - Bug : réussir à supprimer la bdd à distance après le premier test. linktricount-1 échoue car la bdd à distance contient 3 tricounts après le premier test.
@@ -121,15 +122,26 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`ajouter la date à la bdd et lors de la création de la dépense.`
         -`modifier le test unitaire pour voir si la date est passée.`
         -`modifier les tests fonctionnels de spending-details.`
-        -faire fonctionner le bouton modifier.
+        - faire fonctionner le bouton modifier.
     -faire la page équilibre de spending.html:
         `créer nouvelle url`
         `créer l html`
         `préparer le css`
         `créer la vue qui passe les données à cette page`
+        créer l'objet tricount de calculation quand un tricount est créé, ajouter cet objet à la bdd. (vue addcount)
+        quand une dépense est ajoutée, modifier l'objet de la bdd. (vue addspending)
+        dans spending equilibria, récupérer l'objet et lancer updateprocess pour passer en arg totalcredit et transferttoeq.
         ajouter à la vue toutes les infos à passer sur les comptes notamment : participants, leur crédit, la solution de paiment pour équilibrer (update_process donne tout).
         `transformer les boutons dépenses et équilibres en a avec href`
         `tests fonctionnels associés`
+    -suppression de la classe Participant dans la bdd
+        voir comment avec POST je pourrais récupérer la liste des participants ajoutés. (request.POST.lists()) 
+        supprimer de model
+        supprimer la fonction vue addparticipant
+        supprimer l'url addparticpt
+        récupérer les participants seulement quand on crée le tricount pas avant
+        modifier les tests unitaires et fonctionnels
+        les patcpts ne doivent être ajoutés enlevés que via le JS qui rajoute un elt : ce doit être un input text car on veut le récupérer.
     -voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.
     Points qui nécessitent sûrement JS.
         -`Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à   50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel).`

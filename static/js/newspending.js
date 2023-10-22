@@ -82,18 +82,16 @@ function userAvance(event){
 
 
 
-/*Useful functions */
-
- 
+/*Useful functions for handlers*/
 
 function calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(event){
     let list_of_checked = [];
     let list_of_non_checked = [];
     /*On regarde qui est coché et on calcule le nombre de parts total */
     let nb_parts = 0;
-    for (let receiver of receivers){
+    for (let receiver of receivers){ 
         if (receiver.checked){
-            //On regarde si les parts sont affichées ou non.
+            //On regarde si les parts sont affichées ou non. 
             if (document.body.querySelector(`.${receiver.id}-parts`)) {
                 nb_parts += Number(document.body.querySelector(`.${receiver.id}-parts`).value);
             } else {
@@ -162,8 +160,8 @@ function insertOrRemovePartsForSpending(innerHTML){
         for (let receiver of receivers){
             document.body.querySelector(`.${receiver.id}-parts`).removeEventListener("input",userAmount);
             document.body.querySelector(`.${receiver.id}-parts`).remove();
-        }
+        } 
+        userAmount()
     }
-    
 }
 
