@@ -1,0 +1,6 @@
+tricount/__pycache__/
+count/migrations/
+count/__pycache__/
+functional_tests/__pycache__/
+*.log
+db.sqlite3

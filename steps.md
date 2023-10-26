@@ -150,7 +150,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il   semble que JS soit nécessaire pour revenir. 
         -Ajouter à l'html les devises via le json. 
         -Test fonctionnel pour voir si tout est affiché et si on va vers la bonne url.
-        -pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : 
+        -pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)
         -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît.
     Tests JS : voir comment en faire facilement sans selenium.
 
