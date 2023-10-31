@@ -13,28 +13,12 @@ class UnitaryTestMethods(TestCase):
         link = soup.select_one(f'a#{id}')['href'] #on clique sur le + : sorte de send_keys 
         return link
     
-    def add_participants(self,*participants):
-        """
-        Function to add participants before creating a tricount.
-
-        participants : list of str
-        """
-        for participant in participants:
-            self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":participant})
-
-    def add_tricount_characteristics(self,title, description,category):
-        """
-        Function to add characteristics after creating participants.
-        """
-        response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":title, "newtricount_description":description, "newtricount_category":category})
-        return response
-    
     def create_a_tricount(self,title,description,category,*participants):  
         """
         Function to create a tricount.
-        """
-        self.add_participants(*participants)
-        response = self.add_tricount_characteristics(title,description,category) 
+        """  
+        response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":title, "newtricount_description":description, "newtricount_category":category, "nameparticipant": participants})
+        
         return response
     
     def create_a_spending(self,title,amount,spender, receivers, respective_amounts):

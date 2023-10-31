@@ -5,8 +5,7 @@ from count import views as countviews
 urlpatterns = [
     path('',countviews.listecount,name = 'listecount'),
     path('newcount',countviews.newcount, name = 'newcount'),
-    path('newcount/addcount', countviews.addcount, name = 'addcount'),
-    path('newcount/addcount/addparticipant',countviews.addparticipant, name = "addparticipant"),
+    path('newcount/addcount', countviews.addcount, name = 'addcount'), 
     path('newcount/currency',countviews.choosecurrency,name = "choosecurrency"),
     path('tricount/<int:id_count>', countviews.spending, name = "spending"), 
     path('tricount/<int:id_count>/equilibria', countviews.spendingEquilibria, name = "spending-equilibria"), 

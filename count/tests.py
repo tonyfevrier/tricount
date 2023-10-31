@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import resolve
 from count.views import listecount 
-from count.models import Counts, Participants, Spending
+from count.models import Counts, Spending
 from count.calculation import Tricount 
 from copy import deepcopy
 from count.tests_functions import UnitaryTestMethods
@@ -68,59 +68,33 @@ class NewcountTest(UnitaryTestMethods):
         et on a dans la réponse html un message en rouge indiquant qu'il faut un participant.
         """    
         one = Counts.objects.count()
-        response = self.add_tricount_characteristics("Tricount sans participant", "description 1", "Voyage")
+        response = self.create_a_tricount("Tricount sans participant", "description 1", "Voyage")
         two = Counts.objects.count() 
 
         self.assertEqual(one,two)
         self.assertTemplateUsed(response,"newcount.html")
         self.assertContains(response,"Il faut au moins un participant")
 
-    def test_redirection_when_add_participants(self):
-        """
-        Fonction qui teste, si lorsqu'on ajoute un participant, on est bien redirigé vers la page newcount.
-        """
-        response = self.client.post("/count/newcount/addcount/addparticipant",data = {"new_participant":"Jean"})
-        self.assertRedirects(response,'/count/newcount')
 
-    def test_bdd_when_add_participants(self):
+    def test_bdd_when_tricounts_created(self):
         """
         Fonction qui teste, si lorsqu'on ajoute un participant, la bdd des participants est bien incrémentée.
         Elle teste ensuite lorsqu'on poste un titre, une description, une catégorie, que les participants sont bien associés au tricount.
         Enfin elle crée un second tricount et vérifie que la bdd associe bien le bon nombre de participants au tricount et qu'elle n'associe par des noms du premier tricount au second.
-        """
+        """  
+        self.create_a_tricount("tricount 1","description 1","Voyage","Jean","Henri")
 
-        self.add_participants("Jean","Henri")
-        participant = Participants.objects.first()
-
-        self.assertEqual(participant.name,'Jean') 
-
-        self.add_tricount_characteristics("tricount 1","description 1","Voyage")
         count = Counts.objects.first() 
 
-        self.assertIn('Jean', count.participants.first().name)
-        self.assertIn('Henri',count.participants.get(pk=2).name)
-        self.assertEqual(1,count.participants.first().number)
-        self.assertEqual(2,count.participants.count())
+        self.assertEqual('Jean', count.participants[0])
+        self.assertEqual('Henri',count.participants[1]) 
+        self.assertEqual(2,len(count.participants))
 
         self.create_a_tricount("tricount 2","description 2","Voyage","Henri","Henriette","Tony")
         count2 = Counts.objects.get(pk=2) 
-        self.assertEqual(3,count2.participants.count())
+        self.assertEqual(3,len(count2.participants))
 
-        self.assertNotIn('Jean', [count2.participants.get(pk=i+3).name for i in range(count2.participants.count())])
-
-    def test_back_to_listecount_page(self):
-        """
-        Fonction qui lance la création d'un tricount, ne valide pas le tricount et revient en arrière.
-        Vérifie si les participants créés dans la bdd sont bien supprimés.
-        """
-        number = Participants.objects.count()
-        self.add_participants("Henri","Jean")
-        response = self.client.get('/count/newcount') 
-
-        link = self.extract_and_click_on_link(response.content , 'backtotricount') 
-        response2 = self.client.get(link)
-
-        self.assertEqual(number,Participants.objects.count())
+        self.assertNotIn('Jean', count2.participants)
 
     def test_click_on_count(self):
         """

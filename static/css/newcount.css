@@ -170,6 +170,8 @@ label[for="other"]::before{
 }
 .nameparticipant{
     padding: 0.5em 0;
+    outline: none;
+    border: none;
 }
 
 

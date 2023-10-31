@@ -28,7 +28,7 @@
             </div>
             <select class = "spender" name="spender" id="spender">
                 {% for participant in participants%}
-                <option class = "spender-participant" value="{{participant.name}}">{{participant.name}}</option> 
+                <option class = "spender-participant" value="{{participant}}">{{participant}}</option> 
                 {%endfor%}
             </select>  
             <div class = "forwho">
@@ -41,10 +41,10 @@
             <div class = "list-receivers">
                 {% for participant in participants%}
                 <div class = "div-receiver">
-                    <input class = "receiver" type="checkbox" name="receiver" id="{{participant.name}}" value = "{{participant.name}}" checked>
-                    <label class = "receiver-participant" for="{{participant.name}}">{{participant.name}}</label> 
+                    <input class = "receiver" type="checkbox" name="receiver" id="{{participant}}" value = "{{participant}}" checked>
+                    <label class = "receiver-participant" for="{{participant}}">{{participant}}</label> 
                     <div class = "amount-and-parts"> 
-                        <input name = "{{participant.name}}" type = "text" class = "{{participant.name}}-amount" value = "0.00 eur">
+                        <input name = "{{participant}}" type = "text" class = "{{participant}}-amount" value = "0.00 eur">
                     </div>
                 </div> 
                 {% endfor %}

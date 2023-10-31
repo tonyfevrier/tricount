@@ -17,6 +17,7 @@
     </header> 
     <main>
         <form method="POST" class = "newtricount" action="/count/newcount/addcount">
+            {% csrf_token %}
             <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title">  
 
             {% if titre == False %}
@@ -43,25 +44,15 @@
             </div>
 
             <button class = "submittricount" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
-            {% csrf_token %}
+            
+            <div class = "nb_participants"> Participants (0/50)</div>
+            
         </form>
-        <div class = "nb_participants"> Participants ({{number_participants}}/50)</div>
-        <form method="post" class = "addparticipant" action="/count/newcount/addcount/addparticipant">
-            <div class = "participants">
-                {% for participant in participants %}
-                <div class = "printparticipant">
-                    <p class = "nameparticipant"> {{participant.name}}</p>
-                    <button class = "closeparticipant"><img src="{%static 'images/close.png'%}" alt="fermeture"></button>
-                </div>
-                {% endfor %}
-            </div>
             <input type ="text" name="new_participant" class ='new_participant' placeholder="Autre participant">
             <button class = "add_participant">Ajouter</button>
             {% if ptcpt == False %}
                 <p class="participant-error">Il faut au moins un participant.</p>
             {% endif %}
-            {% csrf_token %}
-        </form>
         <script src = "{%static 'js/newcount.js'%}"></script> 
         
     </main>

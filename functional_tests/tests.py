@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 
-from count.models import Counts,Participants
+from count.models import Counts
 from functional_tests import user_experience 
 
 class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click): 
@@ -38,9 +38,9 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/newcount")
         
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
-        number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants")
+        number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants") 
 
-        self.assertIn('Jean', [participant.text for participant in participants])
+        self.assertIn('Jean', [participant.get_attribute("value") for participant in participants])
         self.assertEqual(number_participants.text,"Participants (1/50)") 
 
         self.add_participants('Heeeeeenri')
@@ -48,7 +48,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
         number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants")
 
-        self.assertIn('Heeeeeenri', [participant.text for participant in participants])
+        self.assertIn('Heeeeeenri', [participant.get_attribute("value") for participant in participants])
         self.assertEqual(number_participants.text,"Participants (2/50)")
 
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
@@ -339,11 +339,13 @@ class JSTest(StaticLiveServerTestCase,user_experience.Click,user_experience.Chec
 
         #He tries to put a more than fifty letters title but he is blocked 
         titlebox.send_keys('t'*51)
+        time.sleep(2)
         self.assertEqual(counter.text, '50/50')
         titlebox.clear()
 
         #So he writes a shorter title
         titlebox.send_keys('titre')
+        time.sleep(2)
         self.assertEqual(counter.text, '5/50')
 
         descriptionbox.send_keys('description')
