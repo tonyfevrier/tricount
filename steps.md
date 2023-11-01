@@ -143,12 +143,13 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `faire marcher testnewcountinputs de test.count :`
             `-Pb de client.post : dans test_functions create tricount: comment passer les participants un à un (normalement avec l'input new_participant) comme on le ferait sur la page avec le client. Il est possible qu'on ne puisse pas sans sendkeys de selenium (et que ça marche même si testnewcountinputs ne marche pas) (quand j'affiche request.POST, new_participant contient bien la liste, mais les éléments nameparticipant n'ont pas été créés.2506). Essayer dans test_functions de faire un post directement avec nameparticipant (comme si on les avait entré un par un avant).`
             -`Autre pb sûrement indépendant: comment récupérer les participants dans views.addcount (normalement avec les éléments nameparticipant). Voir avec request.post.lists la syntaxe et tenter de créer un tricount sur la page web. Jusqu'ici, quand je valide le form, il n'arrive pas à récupérer les partcpts et m'affiche "il faut au moins un ptcpt". Pb semble lié au JS car quand je mets deux participants direct dans le html, il voit bien des participants (et le static close passe bien).   ptet que pb dû au fait que le input new_participant soit hors du form.oui`
-        modifier les tests unitaires (au moins les premiers pour créer un tricount) et fonctionnels
+        `modifier les tests unitaires (au moins les premiers pour créer un tricount) et fonctionnels`
         `modifier ensuite toutes les fonctions de vue une à une puis le test unitaire associé. (J(ai mis un repère à l'endroit à partir duquel modifier.))`
         `les patcpts ne doivent être ajoutés enlevés que via le JS qui rajoute un elt : ce doit être un input text car on veut le récupérer.`
-        newcount.js : faire en sorte que l'image static pour fermer les participants soit acceptée.
+        `newcount.js : faire en sorte que l'image static pour fermer les participants soit acceptée.`
         voir si dans mes tests_fonctionnels, j'ai un morceau où j'enlève des participants et qu'ils disparaissent de la page.
-        améliorer le css de newcount.
+        `améliorer le css de newcount.`
+        `JS : faire qu'on ne puisse pas ajouter des participants vides.`
         `newcount.js : changer le nb de participants dans nb_participants à chaque ajout de participant. (vérifier que mes mises à jour dans userAddingParticipant et userClosingParticipant fonctionnent).`
     -`voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.`
     Points qui nécessitent sûrement JS.
@@ -198,6 +199,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
 
         # Soumettez le formulaire avec self.client.post
         response = self.client.post("/count/newcount/addcount", data=form_data)
+    -TAGS DJANGO EN JS : il faut spécifier l'adresse d'un fichier static en JS. Il ne reconnaît pas les tags DJANGO côté client seulement côté serveur.
 
 # Mes difficultés principales
     - Non connaissance des syntaxes du client django pour faire des tests unitaires. Idem pour les fonctionnels.

@@ -48,11 +48,11 @@
             <div class = "nb_participants"> Participants (0/50)</div>
             
         </form>
-            <input type ="text" name="new_participant" class ='new_participant' placeholder="Autre participant">
-            <button class = "add_participant">Ajouter</button>
-            {% if ptcpt == False %}
-                <p class="participant-error">Il faut au moins un participant.</p>
-            {% endif %}
+        <input type ="text" name="new_participant" class ='new_participant' placeholder="Autre participant">
+        <button class = "add_participant">Ajouter</button>
+        {% if ptcpt == False %}
+            <p class="participant-error">Il faut au moins un participant.</p>
+        {% endif %}
         <script src = "{%static 'js/newcount.js'%}"></script> 
         
     </main>

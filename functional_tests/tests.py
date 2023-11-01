@@ -32,8 +32,12 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         
         self.assertEqual(self.browser.current_url, url + '/count/newcount') 
     
-        #Il commence par remplir les différents participants à son premier tricount : les participants apparaissent sur la page du tricount ainsi que le nombre de participants qui s'incrémente
+        #Il commence par remplir les différents participants à son premier tricount : les participants apparaissent sur la page du tricount ainsi que le nombre de participants qui s'incrémente.
+        #Il en met deux puis se ravise, l'enlève puis le remet.
         self.add_participants('Jean')
+        self.add_participants('Henri')
+        self.click_on_a_link(By.CSS_SELECTOR,".closeparticipant[name = 'Henri']")
+        time.sleep(2)
 
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/newcount")
         

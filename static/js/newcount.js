@@ -66,13 +66,13 @@ function displayCounter(event){
 function userAddingParticipant(event){
     /*Function which adds html elements when user adds a participant*/
     
-    if (new_participant.value === 'Autre participant') return;
+    if (new_participant.value === 'Autre participant' || new_participant.value === '') return;
 
     //Creation of a participant
     let printparticipant = document.createElement('div');
     printparticipant.className = "printparticipant";
-    printparticipant.innerHTML = `<input class = "nameparticipant" type="text" value = "${new_participant.value}" name = "nameparticipant">
-    <button class = "closeparticipant"><img src="{%static 'images/close.png'%}" alt="fermeture"></button>`;
+    printparticipant.innerHTML = `<input class = "nameparticipant" type="text" value = "${new_participant.value}" name = "nameparticipant"><button class = "closeparticipant" name = "${new_participant.value}" ><img src="/static/images/close.png" alt="fermeture"></button>`;
+
     form.append(printparticipant); 
 
     //Mise à jour de différentes valeurs.
