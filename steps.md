@@ -128,10 +128,18 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `créer l html`
         `préparer le css`
         `créer la vue qui passe les données à cette page`
-        créer l'objet tricount de calculation quand un tricount est créé, ajouter cet objet à la bdd. (vue addcount)
-        quand une dépense est ajoutée, modifier l'objet de la bdd. (vue addspending)
+        `créer l'objet tricount de calculation quand un tricount est créé, ajouter cet objet à la bdd. (vue addcount)`
+        `modifier les tests unitaires (avec assertJSONequal). Voir pourquoi receivers contient deux noms (pb de create a tricount?).`
+        `comprendre comment marche cls : je pense qu'il faut que dans ma fonction fromjson je crée l'objet et mette à jour puis je retourne l'objet.`
+        `A chaque sérialisation, je perds l'objet, il faut donc recréer les objets après chaque déserialisation : attention, en l'état actuel, chaque création remet les valeurs des crédits à 0. Il faut donc réinitialiser en veillant bien à remplacer les valeurs de départ par les dernières valeurs calculées (sont concernés: dict_participants et total_cost).`
+        `quand une dépense est ajoutée, modifier l'objet de la bdd. (vue addspending) (essayer la première désérialisation en mettant bien à jour).`
+        modifier les tests unitaires, notamment faire un test avec deux dépenses successives pour voir si les crédits sont corrects : test_multiple_spending.
         dans spending equilibria, récupérer l'objet et lancer updateprocess pour passer en arg totalcredit et transferttoeq.
+        modifier les tests unitaires
         ajouter à la vue toutes les infos à passer sur les comptes notamment : participants, leur crédit, la solution de paiment pour équilibrer (update_process donne tout).
+        modifier les tests unitaires
+        tests fonctionnels
+        Prendre en compte dans la vue addspending que ce soit une dépense ou un reçu.
         `transformer les boutons dépenses et équilibres en a avec href`
         `tests fonctionnels associés`
     -`suppression de la classe Participant dans la bdd`
@@ -147,19 +155,22 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `modifier ensuite toutes les fonctions de vue une à une puis le test unitaire associé. (J(ai mis un repère à l'endroit à partir duquel modifier.))`
         `les patcpts ne doivent être ajoutés enlevés que via le JS qui rajoute un elt : ce doit être un input text car on veut le récupérer.`
         `newcount.js : faire en sorte que l'image static pour fermer les participants soit acceptée.`
-        voir si dans mes tests_fonctionnels, j'ai un morceau où j'enlève des participants et qu'ils disparaissent de la page.
+        `voir si dans mes tests_fonctionnels, j'ai un morceau où j'enlève des participants et qu'ils disparaissent de la page.`
         `améliorer le css de newcount.`
         `JS : faire qu'on ne puisse pas ajouter des participants vides.`
         `newcount.js : changer le nb de participants dans nb_participants à chaque ajout de participant. (vérifier que mes mises à jour dans userAddingParticipant et userClosingParticipant fonctionnent).`
     -`voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.`
+    -ajouter le loggage : 
+        -ajouter ensuite dans tout tricount créé le participant loggé. 
+        -si c'est nécessaire, modifiez la vue pour qu'on oblige à au moins un participant.
     Points qui nécessitent sûrement JS.
         -`Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à   50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel).`
-        -Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la  petite croix. Pour le moment quand je clique sur les croix, ça ajoute des    participants. (Je pense que j'ai besoin de JS aussi).
+        -`Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la  petite croix. Pour le moment quand je clique sur les croix, ça ajoute des    participants. (Je pense que j'ai besoin de JS aussi).`
         -Ajouter dans devise.html la recherche de currency (JS sûrement nécessaire).
         -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il   semble que JS soit nécessaire pour revenir. 
         -Ajouter à l'html les devises via le json. 
         -Test fonctionnel pour voir si tout est affiché et si on va vers la bonne url.
-        -pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)
+        -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`
         -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît.
     Tests JS : voir comment en faire facilement sans selenium.
 

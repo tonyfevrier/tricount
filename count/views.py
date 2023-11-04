@@ -1,19 +1,14 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from count.models import Counts, Spending #, Participants
-from count.func import majuscule
+from count.models import Counts, Spending
+from count.func import *
 from count import calculation
 from datetime import date
+from count.calculation import *
 
 # Create your views here.
 
 def listecount(request):    
-
-    """ #If tricount is not created, participants created are deleted    
-    if Participants.objects.last() != None: 
-        if Participants.objects.last().number != Counts.objects.count():
-            Participants.objects.filter(number = Participants.objects.last().number).delete() """
-
     items = Counts.objects.all() 
     return render(request,'index.html',context ={'counts' : items})
 
@@ -30,14 +25,17 @@ def addcount(request):
     participts = request.POST.getlist('nameparticipant')
 
     if titre != "": 
-        if len(participts) == 0:
+        if len(participts) <= 1:
             #No participants have been added.
             return render(request,'newcount.html', context={'ptcpt':False})
         else:
             if descption != "": 
-                count = Counts.objects.create(title = majuscule(titre), description = majuscule(descption),category = request.POST["newtricount_category"], participants = participts)
+                phrase = majuscule(descption)
             else:
-                count = Counts.objects.create(title = majuscule(titre), description = "Pas de description",category = request.POST["newtricount_category"], participants = participts)
+                phrase = "Pas de description" 
+            #Creation of the object for calculations
+            tricount = Tricount(*participts)
+            count = Counts.objects.create(title = majuscule(titre), description = phrase,category = request.POST["newtricount_category"], participants = participts, data = tricount.to_json())
             return redirect('/count/tricount/'+ str(count.id))
     else:  
         return render(request,'newcount.html', context={'titre':False})
@@ -85,17 +83,19 @@ def addspending(request,id_count):
         if amount == '':
             amount = 0.
         
-
         receivers = request.POST.getlist("receiver")
+        spender = request.POST["spender"]
 
-        #On récupère aussi les montants des personnes cochées pour les mettre dans un dictionnaire.
+        #On récupère aussi les montants des personnes cochées pour les mettre dans un dictionnaire passé à la bdd.
         dico_receivers = {}
         for receiver in receivers: 
-            dico_receivers[receiver] = request.POST[receiver] 
-        Spending.objects.create(title = titre, amount = float(amount) , payer = request.POST["spender"], receivers = dico_receivers, number = id_count, date = date.today())
+            dico_receivers[receiver] = float(request.POST[receiver]) 
+        
+        Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, number = id_count, date = date.today())
+        update_tricount_after_new_spending(id_count, {spender : float(amount)}, dico_receivers)
         
         return redirect(f'/count/tricount/{id_count}')
-    else: 
+    else: #Lack of title needs an error message.
         count = Counts.objects.get(id = id_count)
         participants = count.participants
         return render(request, 'newspending.html',context={'idcount': id_count, 'participants':participants,'titre':False})
@@ -109,3 +109,4 @@ def spending_details(request, id_count, id_spending):
     context = {'idcount' : id_count, 'idspending' : id_spending,'previousidspending' : id_spending - 1 , 'followingidspending' : id_spending + 1,'spending': spending, 'number_of_spending' : number_of_spending}
     return render(request,"spending-details.html",context)
     
+

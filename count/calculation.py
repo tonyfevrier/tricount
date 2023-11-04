@@ -1,4 +1,5 @@
 import numpy 
+import json
  
 
 class Participant():
@@ -7,13 +8,40 @@ class Participant():
         Participant owner : the first element of the list.
         expense : what he has to pay
         credits : dictionnary containing debts or credits towards other participants : what they have to spend for each participant (key)
+        receivers : other participants of the tricount. 
         """
-        self.name = owner
+        self.owner = owner
+        self.receivers = receivers
         self.expense = 0
         self.credits = {}
 
-        for participant in receivers:
+        for participant in self.receivers:
             self.credits[participant] = 0
+
+    def to_json(self):
+        """
+        Convertir l'objet Participant en un dictionnaire
+        """
+
+        data = {
+            'owner': self.owner,
+            'expense': self.expense,
+            'credits' : self.credits, 
+            'receivers' : self.receivers,
+        }
+        return json.dumps(data)
+
+    @classmethod
+    def from_json(cls, json_data):
+        """
+        Convertir un dictionnaire JSON en instance de Participant
+        """
+
+        data = json.loads(json_data)
+        participant = cls(owner = data['owner'], receivers = data['receivers'])
+        participant.expense = data['expense']
+        participant.credits = data['credits']
+        return participant
 
 
 class Tricount():
@@ -24,15 +52,16 @@ class Tricount():
         dict_participants : dict (keys : name of the participant, values : the object associated to the name).
         """
 
-        self.number = len(participants)
+        self.participants = participants
+        number = len(participants)
 
         self.dict_participants = {}
         self.dict_participants[participants[0]] = Participant(participants[0],participants[1:])
-        self.dict_participants[participants[self.number-1]] = Participant(participants[self.number-1],participants[0:self.number])
+        self.dict_participants[participants[number-1]] = Participant(participants[number-1],participants[0:number - 1])
         
-        for i in range(1,len(participants)-1):
+        for i in range(1,number-1):
             owner = participants[i]
-            receivers = participants[0:i]+participants[i+1:]
+            receivers = participants[0:i] + participants[i+1:]
             self.dict_participants[owner] = Participant(owner,receivers)
 
         self.total_cost = 0
@@ -41,11 +70,12 @@ class Tricount():
         """
         Function updating after a spending the two dictionnaries.
         
-        payer : dictionary {participant:str: amount:float}
+        payer : dictionary {participant (str): amount(float)}
         forwho : dictionary of participants involved in the shared spending and the positive amount which was paid for them.
         """
 
         #The payer expense and credits change.
+
         for spender in payer.keys():
             self.total_cost += payer[spender] 
             self.dict_participants[spender].expense += payer[spender] 
@@ -105,7 +135,7 @@ class Tricount():
 
     def reimburse_one_creditor(self,creditor, debitors,transferts_to_equilibrium):
         """
-        Function which offers a repartition to reimburse ONE debitor. It completes transferts_to_equilibrium.
+        Function which offers a repartition to reimburse ONE debitor. It completes transferts_to_equilibrium. Used only in resolve_solution.
 
         Input : tuple creditor := (name,amount)
                 dict debitors : the debitors as keys and the amount to credit as values
@@ -174,4 +204,40 @@ class Tricount():
         
         return total_credit,transfert_to_equilibrium 
 
-    
+    def to_json(self):
+        """
+        Convertir l'objet Tricount en un dictionnaire
+        """
+
+        #Sérialiser en JSON toutes les instances de participants.
+        dict_participants_json = {}
+        for key, participantObject in self.dict_participants.items():
+            dict_participants_json[key] = participantObject.to_json()
+
+        #Sérialiser l'instance de tricount.
+        data = {
+            'participants' : self.participants,
+            'dict_participants': dict_participants_json,
+            'total_cost' : self.total_cost, 
+        }
+
+        return json.dumps(data)
+
+    @classmethod
+    def from_json(cls, json_data):
+        """
+        Convertir un dictionnaire JSON en instance de Tricount
+        """
+
+        #Désérialiser l'instance de tricount
+        data = json.loads(json_data)
+
+        #Désérialiser tous les participants et recréer l'objet tricount:
+        dict_participants_instances = {}
+        for key, participantJSON in data['dict_participants'].items():
+            dict_participants_instances[key] = Participant.from_json(participantJSON)
+
+        tricount = cls(*data['participants']) 
+        tricount.dict_participants = dict_participants_instances
+        tricount.total_cost = data['total_cost']
+        return tricount
