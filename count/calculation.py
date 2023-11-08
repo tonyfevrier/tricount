@@ -1,6 +1,4 @@
-import numpy 
-import json
- 
+import json 
 
 class Participant():
     def __init__(self,owner,receivers) -> None:
@@ -18,9 +16,9 @@ class Participant():
         for participant in self.receivers:
             self.credits[participant] = 0
 
-    def to_json(self):
+    def to_dict(self):
         """
-        Convertir l'objet Participant en un dictionnaire
+        Convertir l'objet Participant en un dictionnaire python
         """
 
         data = {
@@ -29,18 +27,19 @@ class Participant():
             'credits' : self.credits, 
             'receivers' : self.receivers,
         }
-        return json.dumps(data)
+        return data 
 
     @classmethod
-    def from_json(cls, json_data):
+    def from_dict(cls, dico):
         """
-        Convertir un dictionnaire JSON en instance de Participant
-        """
+        Convertir un dictionnaire python en instance de la classe Participant (recréer l'objet Participant à partir de ses attributs)
 
-        data = json.loads(json_data)
-        participant = cls(owner = data['owner'], receivers = data['receivers'])
-        participant.expense = data['expense']
-        participant.credits = data['credits']
+        Inputs : 
+            - dico (dict) : le dictionnaire qui va permettre de reconstruire l'instance de Participant.
+        """
+        participant = cls(owner = dico['owner'], receivers = dico['receivers'])
+        participant.expense = dico['expense']
+        participant.credits = dico['credits']
         return participant
 
 
@@ -187,6 +186,15 @@ class Tricount():
             transferts_to_equilibrium = self.reimburse_one_creditor(creditor,debitors,transferts_to_equilibrium) 
 
         return transferts_to_equilibrium
+    
+    def calculate_total_credit_and_resolve_solution(self):
+        """
+        Function which do the same as update_process but spendingupdate has been already done.
+        """
+        total_credit = self.calculate_total_credit()
+        transfert_to_equilibrium = self.resolve_solution(total_credit)
+        
+        return total_credit,transfert_to_equilibrium 
 
     def update_process(self, payer, forwho, transfert = 'spend'):
         """
@@ -209,15 +217,15 @@ class Tricount():
         Convertir l'objet Tricount en un dictionnaire
         """
 
-        #Sérialiser en JSON toutes les instances de participants.
-        dict_participants_json = {}
-        for key, participantObject in self.dict_participants.items():
-            dict_participants_json[key] = participantObject.to_json()
+        #Sérialiser en dictionnaire python toutes les instances de participants.
+        dict_participants_python = {}
+        for key, participantObject in self.dict_participants.items(): 
+            dict_participants_python[key] = participantObject.to_dict()
 
         #Sérialiser l'instance de tricount.
         data = {
             'participants' : self.participants,
-            'dict_participants': dict_participants_json,
+            'dict_participants': dict_participants_python,
             'total_cost' : self.total_cost, 
         }
 
@@ -227,6 +235,9 @@ class Tricount():
     def from_json(cls, json_data):
         """
         Convertir un dictionnaire JSON en instance de Tricount
+
+        Inputs : 
+            -json_data (str) : c'est l'objet JSON qui va permettre de reconstruire l'instance de Tricount.  
         """
 
         #Désérialiser l'instance de tricount
@@ -234,8 +245,8 @@ class Tricount():
 
         #Désérialiser tous les participants et recréer l'objet tricount:
         dict_participants_instances = {}
-        for key, participantJSON in data['dict_participants'].items():
-            dict_participants_instances[key] = Participant.from_json(participantJSON)
+        for key, participantDico in data['dict_participants'].items():
+            dict_participants_instances[key] = Participant.from_dict(participantDico)
 
         tricount = cls(*data['participants']) 
         tricount.dict_participants = dict_participants_instances

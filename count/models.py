@@ -20,7 +20,8 @@ class Counts(models.Model):
     description = models.TextField(default='')
     category = models.TextField(default='')
     participants = JSONField(default=dict)
-    data = JSONField(default = dict)
+    data = models.TextField(default='')
+    #data = JSONField(default = dict)
 
 class Spending(models.Model):
     title = models.TextField(default='')

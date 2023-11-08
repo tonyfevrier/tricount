@@ -60,8 +60,11 @@ def spendingEquilibria(request,id_count):
     Function which leads to the equilibria of a given tricount.
     """
     count = Counts.objects.get(id=id_count)  
-    participants = count.participants
-    return render(request, "spendingEquilibria.html", context = {'count':count,'names':participants})
+
+    #Deserialisation and calculation of ways to go the equilibrium
+    tricount = Tricount.from_json(count.data)
+    total_credit,transfert_to_equilibrium = tricount.calculate_total_credit_and_resolve_solution() 
+    return render(request, "spendingEquilibria.html", context = {'count':count,'total_credit' : total_credit,'transfert_to_equilibrium' : transfert_to_equilibrium})
 
 def newspending(request,id_count):
     """

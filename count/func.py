@@ -22,3 +22,6 @@ def update_tricount_after_new_spending(id_count, spender, dico_receivers):
     tricount.spending_update(spender, dico_receivers)
     count.data = tricount.to_json()
     count.save()
+
+
+    
