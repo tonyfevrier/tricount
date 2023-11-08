@@ -121,12 +121,12 @@ function attributeIndividualAmountWithParts(individualAmountDico, list_of_checke
     
     for (let checked_receiver of list_of_checked){
         //document.body.querySelector(`.${checked_receiver}-amount`).innerHTML = `${individualAmountDico[checked_receiver].toFixed(2)} eur`; 
-        document.body.querySelector(`.${checked_receiver}-amount`).value = `${individualAmountDico[checked_receiver].toFixed(2)} eur`;
+        document.body.querySelector(`.${checked_receiver}-amount`).value = `${individualAmountDico[checked_receiver].toFixed(2)}`;
 
     }
     for (let non_checked_receiver of list_of_non_checked){
         //document.body.querySelector(`.${non_checked_receiver}-amount`).innerHTML = `0.00 eur`;
-        document.body.querySelector(`.${non_checked_receiver}-amount`).value = `0.00 eur`;
+        document.body.querySelector(`.${non_checked_receiver}-amount`).value = `0.00`;
     }
 }
 

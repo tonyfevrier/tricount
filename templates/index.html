@@ -69,7 +69,7 @@
         <img src="{% static 'images/scale.png' %}" alt="scale">
     </div>-->
 
-    <main>
+    <main> 
         {% for count in counts %}
         <a class = "link-tricount" id="link-tricount-{{count.id}}" href="/count/tricount/{{count.id}}">
             <div class="tricount"> 
@@ -77,7 +77,7 @@
                 <p class = "tricount_description"> {{count.description}} </p>
             </div>
         </a>
-        {% endfor %}
+        {% endfor %} 
     </main>
     <div class = "create-tricount" hidden>
         <a class = "link-join-tricount" href="">

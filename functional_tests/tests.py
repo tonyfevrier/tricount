@@ -245,7 +245,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
 
         #He forgets to put for who he pays, by default it's for all participants.
 
-    def test_the_page_of_a_spending(self):
+    def test_the_page_of_some_spendings(self):
         #L'utilisateur crée une dépense et clique dessus
         self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri") 
 
@@ -257,7 +257,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
 
         #Il arrive sur la page et il y voit toutes les données qu'il a enregistrées.
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1/spending/1")
-        self.check_informations_of_a_spending('DEPENSE1', '100.0', 'Payé par Jean', ['Henri','Jean'],['50.00 eur', '50.00 eur'])
+        self.check_informations_of_a_spending('DEPENSE1', '100.0', 'Payé par Jean', ['Henri','Jean'],['50.0', '50.0'])
 
         #Il revient en arrière et crée trois autres dépenses
         self.click_on_a_link(By.CLASS_NAME,"backtospending")
@@ -272,19 +272,43 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
         self.click_on_a_link(By.CLASS_NAME,"following")
 
         #Il voit alors les infos de la seconde dépense et le bouton précédent apparaître
-        self.check_informations_of_a_spending('DEPENSE2', '10.0', 'Payé par Henri', ['Henri','Jean'],['5.00 eur', '5.00 eur'])
+        self.check_informations_of_a_spending('DEPENSE2', '10.0', 'Payé par Henri', ['Henri','Jean'],['5.0', '5.0'])
         self.assertIsNotNone(self.browser.find_element(By.CLASS_NAME,'previous'))
 
         #Il clique sur suivant une fois et voit le bouton suivant disparaître
         self.click_on_a_link(By.CLASS_NAME,"following") 
-        self.check_informations_of_a_spending('DEPENSE3', '2.0', 'Payé par Henri', ['Henri','Jean'],['1.00 eur', '1.00 eur'])
+        self.check_informations_of_a_spending('DEPENSE3', '2.0', 'Payé par Henri', ['Henri','Jean'],['1.0', '1.0'])
         #self.assertIsNone(self.browser.find_element(By.CLASS_NAME,'following'))
 
         #Il clique sur précédent trois fois.
         self.click_on_a_link(By.CLASS_NAME,"previous")
         self.click_on_a_link(By.CLASS_NAME,"previous")
 
-    
+    def test_equilibria_with_multiple_spendings(self):
+        self.create_a_tricount('Tricount1',"Je décris", "project","Henri", "Yann", "Marine", "Tony") 
+
+        self.click_on_create_spending() 
+        self.create_a_spending('dépense1', 100, 'Tony', ['Henri','Yann','Marine','Tony']) 
+        self.click_on_create_spending()
+        self.create_a_spending('dépense2', 200, 'Marine', ['Henri','Yann','Marine','Tony']) 
+        self.click_on_create_spending()
+        self.create_a_spending('dépense3', 150, 'Henri', ['Henri','Yann','Marine','Tony']) 
+        self.click_on_create_spending()
+        self.create_a_spending('dépense4', 180, 'Yann', ['Henri','Yann','Marine','Tony']) 
+        self.click_on_a_link(By.CLASS_NAME, "gotoequilibria")
+        time.sleep(4)
+
+        #Vérification des crédits totaux des participants
+        credits = self.browser.find_elements(By.CLASS_NAME,"credits")
+        for credit in credits:
+            participant = credit.find_element(By.CLASS_NAME,"participant")
+            amount = credit.find_element(By.CLASS_NAME,"amount")
+            self.assertIn([participant.text,amount.text], [["Tony","-57.5 eur"],["Henri","-7.5 eur"],["Yann","22.5 eur"],["Marine","42.5 eur"]])
+        
+        #Vérification de la sol
+        #On regarde si les crédits totaux sont corrects et si ce que doit untel à un tel est correct.
+         
+
     def test_modify_a_created_spending(self):
         pass
 

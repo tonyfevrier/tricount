@@ -133,13 +133,16 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `comprendre comment marche cls : je pense qu'il faut que dans ma fonction fromjson je crée l'objet et mette à jour puis je retourne l'objet.`
         `A chaque sérialisation, je perds l'objet, il faut donc recréer les objets après chaque déserialisation : attention, en l'état actuel, chaque création remet les valeurs des crédits à 0. Il faut donc réinitialiser en veillant bien à remplacer les valeurs de départ par les dernières valeurs calculées (sont concernés: dict_participants et total_cost).`
         `quand une dépense est ajoutée, modifier l'objet de la bdd. (vue addspending) (essayer la première désérialisation en mettant bien à jour).`
-        modifier les tests unitaires, notamment faire un test avec deux dépenses successives pour voir si les crédits sont corrects : test_multiple_spending.
-        dans spending equilibria, récupérer l'objet et lancer updateprocess pour passer en arg totalcredit et transferttoeq.
-        modifier les tests unitaires
-        ajouter à la vue toutes les infos à passer sur les comptes notamment : participants, leur crédit, la solution de paiment pour équilibrer (update_process donne tout).
-        modifier les tests unitaires
-        tests fonctionnels
+        `modifier les tests unitaires, notamment faire un test avec deux dépenses successives pour voir si les crédits sont corrects : test_multiple_spending (reprendre le test resolvesolution)`
+        `dans spending equilibria, récupérer l'objet et lancer updateprocess pour passer en arg totalcredit et transferttoeq.`
+        `ajouter à l'html toutes les infos à passer sur les comptes notamment : participants, leur crédit, la solution de paiment pour équilibrer (update_process donne tout). `
+        `débugger les tests fonctionnels existants : probable que cela vienne de ma page spendingequilibria.html. Comprendre pourquoi il désérialise dans test_multiplespending et pas dans spending equilibria. Essayer de désérialiser à d'autres endroits (notamment dans une autre vue), afficher le JSON pour voir si identique à plusieurs endroits. Lié au fait qu'on ait modifié l'objet dans la bdd suite à l'ajout d'une dépense? Voir comment on l'a déserialisé dans addspending. Peut-être que je l'ai mal resérialisé dans update_spending...`
+        `Voir ptet pour transformer dico python les obj participants puis les envoyer dans le dico de Tricount et ne sérialiser en json qu'à ce moment-là (éviter d'avoir un JSON dans un JSON). (reviendrait à ne pas mettre les participants en json mais juste en python).`
+        `modifier le test fonctionnel qui doit voir apparaître les crédits et la solution : créer de multiples dépenses comme testmultiplespending et vérifier que les bonnes infos sont affichées.`
         Prendre en compte dans la vue addspending que ce soit une dépense ou un reçu.
+        dans spending equilibria mettre les noms des participants en alternance à gauche ou à droite.
+        Améliorer le css de spending equilibria pour faire des barres de taille correspondant au total_credit.
+        Fusionner la branche.
         `transformer les boutons dépenses et équilibres en a avec href`
         `tests fonctionnels associés`
     -`suppression de la classe Participant dans la bdd`
@@ -160,6 +163,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `JS : faire qu'on ne puisse pas ajouter des participants vides.`
         `newcount.js : changer le nb de participants dans nb_participants à chaque ajout de participant. (vérifier que mes mises à jour dans userAddingParticipant et userClosingParticipant fonctionnent).`
     -`voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.`
+    -pour la prochaine grosse fonctionnalité, créer une branche puis essayer de la merger.
     -ajouter le loggage : 
         -ajouter ensuite dans tout tricount créé le participant loggé. 
         -si c'est nécessaire, modifiez la vue pour qu'on oblige à au moins un participant.
@@ -210,7 +214,9 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
 
         # Soumettez le formulaire avec self.client.post
         response = self.client.post("/count/newcount/addcount", data=form_data)
-    -TAGS DJANGO EN JS : il faut spécifier l'adresse d'un fichier static en JS. Il ne reconnaît pas les tags DJANGO côté client seulement côté serveur.
+    -TAGS DJANGO EN JS : dans un fichier JS qui crée un html avec un tag django, il faut spécifier l'adresse d'un fichier static (ne pas utiliser les tags mais "/static/...). Il ne reconnaît pas les tags DJANGO côté client seulement côté serveur.
+    -JSONfield : Attention pour stocker des chaînes JSON, mieux vaut utiliser models.Textfield que JsonField car celui-ci rend un objet JsonStr qui est différent d'un str et si on veut utiliser json.loads pour recréer un dico python, cela peut bugger du fait du type de l'objet. 
+    -NOSUCHTABLE : pb de bdd, supprimer la base, vérifier que le dossier migrations et init existent bien et refaire les migrations.
 
 # Mes difficultés principales
     - Non connaissance des syntaxes du client django pour faire des tests unitaires. Idem pour les fonctionnels.
