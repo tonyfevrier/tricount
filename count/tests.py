@@ -41,7 +41,7 @@ class NewcountTest(UnitaryTestMethods):
     def test_newcount_inputs(self):
         """
         Fonction qui teste si les données entrées par l'utilisateur sont bien récupérées et si la redirection vers la page d'origine est effective.
-        """
+        """ 
         response = self.create_a_tricount("tricount 1","description 1","Voyage",'Jean','Henri')
         count = Counts.objects.first()
 

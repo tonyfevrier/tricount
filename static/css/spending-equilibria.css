@@ -98,22 +98,44 @@ header{
 
 .credits{
     display: flex;
+    justify-content:center;
     align-items: center;
     border-bottom-style: solid;
-    border-bottom-width:1px;
+    border-bottom-width: 1px;
     border-bottom-color: lightgray;
     padding: 1em;
     color:gray;
 }
 
-.participant{
-    flex:1;
-    text-align: end;
+.credits > div{
+    width:50%;
 }
 
-.amount{
-    flex:1;
+div[name = "credits-positive"] .participant{
+    text-align: end;
+    padding-right: 1em;
 }
+
+div[name = "credits-positive"] .amount{
+    text-align: start;
+    padding: 1em;
+    background-color: lightgreen; 
+    width: fit-content;
+}
+
+div[name = "credits-negative"] .amount{
+    margin-left: auto;
+    text-align: end;
+    padding: 1em;
+    background-color: lightcoral;
+    width:fit-content;
+}
+
+div[name = "credits-negative"] .participant{
+    padding-left: 1em;
+    text-align: start;
+}
+
 
 
 .equilibrating{
