@@ -140,8 +140,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `Voir ptet pour transformer dico python les obj participants puis les envoyer dans le dico de Tricount et ne sérialiser en json qu'à ce moment-là (éviter d'avoir un JSON dans un JSON). (reviendrait à ne pas mettre les participants en json mais juste en python).`
         `modifier le test fonctionnel qui doit voir apparaître les crédits et la solution : créer de multiples dépenses comme testmultiplespending et vérifier que les bonnes infos sont affichées.`
         Prendre en compte dans la vue addspending que ce soit une dépense ou un reçu.
-        dans spending equilibria mettre les noms des participants en alternance à gauche ou à droite.
-        Améliorer le css de spending equilibria pour faire des barres de taille correspondant au total_credit.
+        `dans spending equilibria mettre les noms des participants en alternance à gauche ou à droite.`
+        `Améliorer le css de spending equilibria pour faire des barres de taille correspondant au total_credit.`
         Fusionner la branche.
         `transformer les boutons dépenses et équilibres en a avec href`
         `tests fonctionnels associés`

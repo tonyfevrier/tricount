@@ -27,10 +27,17 @@
     </header>
     <main> 
         {% for name,credit in total_credit.items %} 
-        <div class = "credits">
-             <p class = participant> {{name}}</p> 
-             <p class = "amount"> {{credit}} eur</p>  
-        </div>   
+            {% if credit >= 0 %}
+            <div class = "credits" name = "credits-positive">
+                <div><p class = participant> {{name}} </p></div>
+                <div><p class = "amount"> {{credit}} eur</p></div>
+            </div> 
+            {% else %}
+            <div class = "credits" name = "credits-negative">
+                <div><p class = "amount"> {{credit}} eur</p></div>
+                <div><p class = participant> {{name}}</p> </div>
+            </div> 
+            {% endif %}
         {% endfor %}
 
         <p class = "equilibrating">
