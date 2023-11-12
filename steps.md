@@ -163,9 +163,30 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `newcount.js : changer le nb de participants dans nb_participants à chaque ajout de participant. (vérifier que mes mises à jour dans userAddingParticipant et userClosingParticipant fonctionnent).`
     -`voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.`
     -pour la prochaine grosse fonctionnalité, créer une branche puis essayer de la merger.
-    -ajouter le loggage : 
-        -ajouter ensuite dans tout tricount créé le participant loggé. 
+    -ajouter le loggage :
+        `-recenser les choses à modifier dans les différentes pages.`
+        -créer l'adresse de login et le html de login (en cours)
+        -ce html doit contenir l'option créer un compte ou se connecter. (en cours)
+        -JS associé : suivant qu'on clique sur créer un compte ou se connecter, le action du form est changé.
+        -créer l'url de logout et le html de logout (c'est la page obtenue en cliquant sur Mes paramètres.) + css (en cours)
+        -rediriger mes paramètres vers l'url de logout.
+        -créer une vue login qui rend login.html
+        -test fonctionnel (arrivée sur login.html et clic sur mes paramètres : arrivée vers logout) 
+        -ajouter dans models une classe Owner qui contient un nom, un surnom et un statut connecté ou déconnecté.
+        -créer une url et vue obtenue quand on crée un nouvel utilisateur et qui remplit la bdd avec le compte.
+        -test unitaire + test fonctionnel
+        -créer une url et vue obtenue quand on se connecte, qui va regarder si l'user est dans la bdd et rediriger vers la bonne page.
+        -test unitaire + test fonctionnel
+        -créer une url et vue obtenue quand on se délogge, qui va délogger le participant et rediriger vers la page de connection.
+        -test unitaire + test fonctionnel
+        -revoir comment on fait en django avec auth.
+        -mettre en première proposition dans tout tricount créé le participant loggé. 
+        -enlever des tests fonctionnels de création de tricount le participant loggé qui doit être automatiquement créé.
         -si c'est nécessaire, modifiez la vue pour qu'on oblige à au moins un participant.
+        -associer au tricount le nom du créateur (propriétaire du compte).
+        -afficher en bas de la liste des dépenses, le coût total du loggé.
+        -page spending equilibria : proprio en gras + les équilibrages concernant le proprio doivent être dans Comment puis-je équilibrer? 
+        -merger la branche puis créer un dépôt distant github et y déposer mon git supprimer ma branche puis travailler avec gitflow pour apprendre.
     -Ajouter la possibilité d'une arrivée d'argent et d'un transfert et pas juste une dépense:
         Ajouter au html et au css le bouton correspondant
         Faire le JS correspondant.
@@ -219,11 +240,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         response = self.client.post("/count/newcount/addcount", data=form_data)
     -TAGS DJANGO EN JS : dans un fichier JS qui crée un html avec un tag django, il faut spécifier l'adresse d'un fichier static (ne pas utiliser les tags mais "/static/...). Il ne reconnaît pas les tags DJANGO côté client seulement côté serveur.
     -JSONfield : Attention pour stocker des chaînes JSON, mieux vaut utiliser models.Textfield que JsonField car celui-ci rend un objet JsonStr qui est différent d'un str et si on veut utiliser json.loads pour recréer un dico python, cela peut bugger du fait du type de l'objet. 
-<<<<<<< HEAD
-
-=======
     -NOSUCHTABLE : pb de bdd, supprimer la base, vérifier que le dossier migrations et init existent bien et refaire les migrations.
->>>>>>> CSSbar
 
 # Mes difficultés principales
     - Non connaissance des syntaxes du client django pour faire des tests unitaires. Idem pour les fonctionnels.

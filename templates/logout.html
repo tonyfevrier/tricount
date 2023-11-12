@@ -1,0 +1,47 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/logout.css' %}">
+</head>
+<body>
+    <header>
+        <nav class = "navbar">
+            <a href="/count/" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" width="20px" alt="Retour en arrière"></a>
+            <p>Mes paramètres</p>
+        </nav>
+        <div class = "owner-title">
+            <p class = "firstletter"> T </p>
+            <p class = "hello"> Bonjour Owner</p>
+            <p class = "mail"> Mail</p>
+        </div>
+    </header>
+    <main>
+        <div class="main-sections">Mes paramètres</div>
+        <form action = "" class = "myparameters">
+            <div class = name>
+                <p>Nom complet</p>
+                <input type="text" placeholder="Owner">
+            </div>
+            <div class = name>
+                <p>Surnom</p>
+                <input type="text" placeholder="Owner">
+            </div>
+            <input type="text" placeholder="IBAN" class="iban">
+            <p class = "textIBAN">Renseignez votre IBAN. Il sera communiqué à vos amis qui vous doivent de l'argent. Vous serez remboursé(e) au plus vite</p>
+        </form>
+        <div class="main-sections">Préférences</div>
+        <div class = "notifications">
+            <p>Notifications</p>
+            <input type="range" name="range" min="0" max="1"/>
+        </div>
+    </main>
+    <form action="">
+        <button class = "logout"> Déconnexion </button>
+    </form> 
+</body>
+</html>

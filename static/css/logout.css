@@ -1,0 +1,130 @@
+*{
+    box-sizing: border-box;
+    margin : 0;
+    font-size: 14px;
+}
+
+:root{
+    --padding:0.5em;
+    --color:rgb(71, 71, 199);
+}
+
+header{
+    background-color: var(--color);
+    padding: 1em; 
+    color:white;
+}
+
+.navbar p{
+    padding: 0 1em;
+}
+
+body{
+    background-color: lightgray;
+}
+
+main{
+    background-color: white;   
+}
+
+button {
+    cursor: pointer;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    padding: 1em 0;
+}
+
+.navbar p{
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.owner-title{
+    width : fit-content;
+    margin: auto;
+}
+
+.firstletter{
+    font-size: xx-large;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: red;
+    border-radius: 100%;
+    width:80px;
+    height : 80px;
+    padding: 20px;
+    margin: auto;
+    text-align: center; 
+}
+
+.hello{
+    font-size: 1.2em;
+    padding : 0.5em 0;
+}
+
+.main-sections{
+    padding : 1em;
+    background-color: lightgray;
+    color: grey;
+}
+
+.myparameters{
+    padding:1em;
+}
+
+.name p{
+    color:lightgray;
+    font-size: 0.7em;
+}
+
+.name input, .iban{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    outline : none;
+    width:100%;
+    margin: 0.5em 0;
+}
+
+.name input:focus, .iban:focus{
+    border-color: var(--color);
+}
+
+.iban::placeholder{
+    color:lightgray;
+}
+
+.textIBAN{
+    font-size: 0.7em;
+    color: lightgray;
+}
+
+.notifications{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding : 1em;
+}
+
+.notifications input{
+    width: 40px;  
+}
+
+.logout{
+    display: block;
+    width:fit-content;
+    margin: auto;
+    border:none;
+    background-color: transparent;
+    color:grey;
+    padding: 0.5em 0;
+}
+
+.logout::placeholder{
+    text-transform: uppercase;
+    color:gray;
+}
+
