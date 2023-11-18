@@ -1,5 +1,6 @@
-from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.shortcuts import render,redirect 
+from django.contrib import messages
+from django.contrib.auth.models import User, auth
 from count.models import Counts, Spending
 from count.func import *
 from count import calculation
@@ -7,6 +8,53 @@ from datetime import date
 from count.calculation import *
 
 # Create your views here.
+
+def welcome(request):
+    return render("welcome.html")
+
+def login(request):
+    return render("login.html")
+    
+
+def register(request):
+    """
+    Function registering a new user and redirecting to an empty counts page. It verifies 
+    if the username and the email is not already used. 
+    """ 
+
+    username = request.POST["Username"]
+    password = request.POST["password"]
+    email = request.POST["email"] 
+ 
+    if User.objects.filter(username = username).exists():
+        messages.info('This username already exists')
+        return redirect('/welcome/')
+    elif User.objects.filter(email = email).exists():
+        messages.info('This email already exists')
+        return redirect('/welcome/')
+    else:
+        user = User.objects.create_user(username = username, password = password, email = email)
+        user.save()
+        return redirect('/login/')
+
+def log(request):
+    """
+    Function logging the user and redirecting to the list of counts page of the corresponding user. 
+    """ 
+
+    username = request.POST["Username"]
+    password = request.POST["password"]
+
+    user = auth.authenticate(username = username, password = password)
+    if user is not None:
+        auth.login(request,user)
+    return redirect('/count/') #l'adresse devra être spécifique à l'utilisateur.
+
+def logout(request):
+    """
+    Function to go to the logout page containing the parameters.
+    """
+    return render(request, "logout.html")
 
 def listecount(request):    
     items = Counts.objects.all() 
@@ -111,12 +159,4 @@ def spending_details(request, id_count, id_spending):
     number_of_spending = Spending.objects.count()
     context = {'idcount' : id_count, 'idspending' : id_spending,'previousidspending' : id_spending - 1 , 'followingidspending' : id_spending + 1,'spending': spending, 'number_of_spending' : number_of_spending}
     return render(request,"spending-details.html",context)
-    
-def login(request):
-    pass
 
-def logout(request):
-    """
-    Function to go to the logout page containing the parameters.
-    """
-    return render(request, "logout.html")

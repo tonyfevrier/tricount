@@ -4,6 +4,8 @@ from count import views as countviews
 
 urlpatterns = [
     path('',countviews.listecount,name = 'listecount'),
+    path('welcome/register', countviews.register, name = 'register'),
+    path('login/log', countviews.log, name = 'register'),
     path('logout',countviews.logout,name = 'logout'),
     path('newcount',countviews.newcount, name = 'newcount'),
     path('newcount/addcount', countviews.addcount, name = 'addcount'), 
