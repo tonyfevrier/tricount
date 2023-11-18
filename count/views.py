@@ -9,11 +9,11 @@ from count.calculation import *
 
 # Create your views here.
 
-def welcome(request):
-    return render("welcome.html")
+def welcome(request): 
+    return render(request, "welcome.html")
 
-def login(request):
-    return render("login.html")
+def login(request): 
+    return render(request, "login.html")
     
 
 def register(request):
@@ -22,15 +22,15 @@ def register(request):
     if the username and the email is not already used. 
     """ 
 
-    username = request.POST["Username"]
+    username = request.POST["username"]
     password = request.POST["password"]
     email = request.POST["email"] 
  
     if User.objects.filter(username = username).exists():
-        messages.info('This username already exists')
+        messages.info(request, 'This username already exists')
         return redirect('/welcome/')
     elif User.objects.filter(email = email).exists():
-        messages.info('This email already exists')
+        messages.info(request, 'This email already exists')
         return redirect('/welcome/')
     else:
         user = User.objects.create_user(username = username, password = password, email = email)
@@ -42,7 +42,7 @@ def log(request):
     Function logging the user and redirecting to the list of counts page of the corresponding user. 
     """ 
 
-    username = request.POST["Username"]
+    username = request.POST["username"]
     password = request.POST["password"]
 
     user = auth.authenticate(username = username, password = password)
@@ -56,7 +56,14 @@ def logout(request):
     """
     return render(request, "logout.html")
 
-def listecount(request):    
+def delog(request):
+    """
+    Function which is delogging the user
+    """
+    auth.logout(request)
+    return redirect('/welcome/')
+
+def listecount(request): 
     items = Counts.objects.all() 
     return render(request,'index.html',context ={'counts' : items})
 

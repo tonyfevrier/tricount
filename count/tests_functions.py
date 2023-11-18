@@ -39,5 +39,14 @@ class UnitaryTestMethods(TestCase):
         response = self.client.post('/count/tricount/1/addspending', data)
         return response
 
-        
-        
+    def register_someone(self, username, password, email):
+        response = self.client.post('/welcome/register', data = {'username':username, 'password':password, 'email' : email})        
+        return response
+    
+    def login_someone(self, username, password):
+        response = self.client.post('/login/log', data = {'username':username, 'password':password}) 
+        return response
+    
+    def logout_someone(self):
+        response = self.client.post('/count/logout/delog')
+        return response

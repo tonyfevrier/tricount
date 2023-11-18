@@ -23,5 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('count/',include(list_urls)),
     path('welcome/', countviews.welcome, name = 'welcome'),
+    path('welcome/register', countviews.register, name = 'register'),
     path('login/', countviews.login, name = 'login'),
+    path('login/log', countviews.log, name = 'register'),
 ]

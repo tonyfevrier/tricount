@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import resolve
+from django.contrib.auth.models import User
 from count.views import listecount 
 from count.models import Counts, Spending
 from count.calculation import Tricount 
@@ -20,12 +21,53 @@ class resolveUrl(TestCase):
 
         self.assertEqual(found.func,listecount) 
 
-class HomepageTest(TestCase):
+class HomepageTest(UnitaryTestMethods):
     def test_title(self):
         response = self.client.get('/count/') 
 
         self.assertIn(b'Tricount',response.content)
         self.assertTemplateUsed(response,'index.html')
+
+    def test_registering_bdd(self):
+        """Verify that the registration is done only if the username and the password do
+        not already exist"""
+        #We create a user
+        response = self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
+        
+        self.assertEqual(User.objects.all().count(),1)
+        self.assertRedirects(response, '/login/')
+
+        #We tries to create a user with the same username and email.
+        response = self.register_someone('Tony','pwd', 'tony.fevrier@gmail.com')
+        response = self.register_someone('Dulcinée', 'pwd','tony.fevrier62@gmail.com')
+
+        self.assertEqual(User.objects.all().count(),1)
+        self.assertRedirects(response, '/welcome/')
+
+
+    def test_login(self):
+        """Verify that the authentification has been doned if password and username are correct,
+        refused otherwise"""
+       
+        response = self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
+        response = self.login_someone('Tony','pwd2') 
+        self.assertEqual(response.wsgi_request.user.is_authenticated, False)
+        
+        response = self.login_someone('Tonton','pwd') 
+        self.assertEqual(response.wsgi_request.user.is_authenticated, False)
+
+        response = self.login_someone('Tony','pwd') 
+        self.assertEqual(response.wsgi_request.user.is_authenticated, True)
+
+    def test_logout(self):
+        """Verify that the logout is correctly done"""
+        response = self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
+        response = self.login_someone('Tony','pwd') 
+        self.assertEqual(response.wsgi_request.user.is_authenticated, True)
+
+        response = self.logout_someone()
+        self.assertEqual(response.wsgi_request.user.is_authenticated, False)
+
 
 class NewcountTest(UnitaryTestMethods):
     def test_newcount(self):

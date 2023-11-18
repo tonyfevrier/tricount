@@ -167,25 +167,25 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `-recenser les choses à modifier dans les différentes pages.`
         `-créer l'adresse de register et le html de register (en cours).` 
         `-créer la vue register en redirigeant vers le login`
-        -JS de welcome et login : si on ne remplit pas un des champs on ne peut se logger ou s'enregistrer comme nouvel utilisateur..
+        -JS de welcome et login : si on ne remplit pas un des champs on ne peut se logger ou s'enregistrer comme nouvel utilisateur.
         `-créer l'url de logout et le html de logout (c'est la page obtenue en cliquant sur Mes paramètres.) + css (en cours)`
         -rediriger mes paramètres vers l'url de logout.
         `-créer une vue login qui rend login.html`
-        -test unitaire pour vérifier que la bdd est bien incrémentée avec register.
-        -test unitaire pour login?
+        -`test unitaire pour vérifier que la bdd est bien incrémentée avec register.`
+        -`test unitaire pour login?`
         -test fonctionnel (enregistrement arrivée sur login.html login et clic sur mes paramètres : arrivée vers logout modifier newvisitortest); 
-        -ajouter dans models une classe Owner qui contient un nom, un surnom et un statut connecté ou déconnecté. Inutile User le fait
-        -créer une url et vue obtenue quand on crée un nouvel utilisateur
-        -test unitaire + test fonctionnel
+        -passer à ma vue welcome les messages.info pour les afficher si on utilise un nom déjà utilisé. 
+        -test fonctionnel associé.
+        `-créer une url et vue obtenue quand on crée un nouvel utilisateur` 
         -créer une url et vue obtenue quand on se connecte, qui va regarder si l'user est dans la bdd et rediriger vers la bonne page.
         -test unitaire + test fonctionnel
         -créer une url et vue obtenue quand on se délogge, qui va délogger le participant et rediriger vers la page de connection.
         -test unitaire + test fonctionnel
-        -revoir comment on fait en django avec auth.
+        `-revoir comment on fait en django avec auth.`
         -mettre en première proposition dans tout tricount créé le participant loggé. 
         -enlever des tests fonctionnels de création de tricount le participant loggé qui doit être automatiquement créé.
         -si c'est nécessaire, modifiez la vue pour qu'on oblige à au moins un participant.
-        -associer au tricount le nom du créateur (propriétaire du compte) dans models.py.
+        - réfléchir à comment faire en sorte qu'un tricount ne soit vu que par les participants au tricount et pas par toute personne enregistrée (jouer sur les url : l'url est associée à l'username : 'username/count' plutôt que /count/?).
         -afficher en bas de la liste des dépenses, le coût total du loggé.
         -page spending equilibria : proprio en gras + les équilibrages concernant le proprio doivent être dans Comment puis-je équilibrer? 
         -merger la branche puis créer un dépôt distant github et y déposer mon git supprimer ma branche puis travailler avec gitflow pour apprendre.
@@ -221,7 +221,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     - TYPE FLOAT BDD : Si on entre un float ou int dans la bdd via un request, celui-ci est convertit en str par request.POST. Donc ne pas oublier de le convertir si on a utilisé un champ FloatField.
     - SEVERAL FUNCTIONAL TESTS : when we launch tests, it creates a database and destroys it at the end of all tests. So to avoid bugs, don't forget to erase the database created by the first test.
     - Le JS apparaît et disparaît : c'est sûrement dû à un comportement par défaut. Dans mon cas c'était un lien a qui par défaut envoie vers une autre page.
-    - DEFAULTVALUENOTSUBMITTEDBYpost : Quand j'introduis un input avec value (par défaut) et que j'utilise la méthode post : la valeur n'est pas transmise. Pourquoi? C'est la méthode post du client django qui ne les soumet pas, elle envoie les données qu'on spécifie et ne permet pas de récupérer les spécifiées. En revanche quand un utilisateur soumet, les valeurs par défaut sont bien envoyées. Une solution : on peut récupérer les valeurs par défaut avec un get puis les passer dans le post.
+    - DEFAULTVALUENOTSUBMITTEDBYpost : Quand j'introduis un input avec value (par défaut) et que j'utilise la méthode post du client django : la valeur n'est pas transmise. Pourquoi? C'est la méthode post du client django qui ne les soumet pas, elle envoie les données qu'on spécifie et ne permet pas de récupérer les spécifiées. En revanche quand un utilisateur soumet, les valeurs par défaut sont bien envoyées. Une solution : on peut récupérer les valeurs par défaut avec un get puis les passer dans le post.
         # Récupérez la page du formulaire avec self.client.get
         response = self.client.get("/count/newcount/addcount")
 
