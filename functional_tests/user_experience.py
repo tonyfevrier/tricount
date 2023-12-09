@@ -6,6 +6,54 @@ class Click():
     def __init__(self,browser,live_server_url) -> None:
         self.browser = browser
         self.live_server_url = live_server_url
+
+    def register_someone(self,username,email,password):
+        """
+        Function for registering a new user.
+        Inputs : 
+            -username (str)
+            -email (str)
+            -password (str)
+        """
+        user = self.browser.find_element(By.NAME, "username")
+        mail = self.browser.find_element(By.NAME, "email")
+        pwd = self.browser.find_element(By.NAME, "password")
+        submit = self.browser.find_element(By.CLASS_NAME, "submit")
+
+        user.send_keys(username)
+        mail.send_keys(email)
+        pwd.send_keys(password)
+        submit.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+    def login_someone(self,username,password):
+        """
+        Function for logging someone who is already registered
+        Inputs : 
+            -username (str) 
+            -password (str)
+        """
+        self.click_on_a_link(By.CLASS_NAME, "login")
+
+        user = self.browser.find_element(By.NAME, "username") 
+        pwd = self.browser.find_element(By.NAME, "password")
+        submit = self.browser.find_element(By.CLASS_NAME, "submit")
+
+        user.send_keys(username) 
+        pwd.send_keys(password)
+        submit.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+    def logout_someone_from_listecount_page(self):
+        """
+        Function which logout the user from the page listing the counts of the user
+        """
+        self.click_on_a_link(By.CLASS_NAME,"parameters")
+        self.click_on_a_link(By.CLASS_NAME,"myparameters")
+
+        logout = self.browser.find_element(By.CLASS_NAME, "logout")
+        logout.send_keys(Keys.ENTER)
+        time.sleep(2)
     
     def click_on_a_link(self,literal,name):
         """

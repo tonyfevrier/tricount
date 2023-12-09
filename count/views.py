@@ -7,8 +7,6 @@ from count import calculation
 from datetime import date
 from count.calculation import *
 
-# Create your views here.
-
 def welcome(request): 
     return render(request, "welcome.html")
 
@@ -18,7 +16,7 @@ def login(request):
 
 def register(request):
     """
-    Function registering a new user and redirecting to an empty counts page. It verifies 
+    Function registering a new user and redirecting to the login page. It verifies 
     if the username and the email is not already used. 
     """ 
 

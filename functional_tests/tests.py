@@ -20,11 +20,40 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.browser.quit()
 
     def test_tricount_creation(self):
-        #Le visiteur arrive sur la page il voit le titre. 
+        #Le visiteur arrive sur la page, il se crée un compte et se logge et est redirigé vers la page de login
         url = self.live_server_url  
-        self.browser.get(url + '/count')  
+        self.browser.get(url + "/welcome/")
+
+        self.register_someone("Tony","tony.fevrier62@gmail.com", "password")
+
+        self.assertEqual(self.browser.current_url, url + "/login/")
+
+        #Il se connecte et atterrit sur la liste des tricounts
+        self.login_someone("Tony", "password")
+
+        self.assertEqual(self.browser.current_url, url + "/count/")
+
+        #Il va dans paramètres et se délogge directement
+        self.logout_someone_from_listecount_page()
         time.sleep(2)
 
+        self.assertEqual(self.browser.current_url, url + "/welcome/")
+
+        #Il tente d'enregistrer un nouveau compte avec le même username puis avec le même mail mais est refusé
+        self.register_someone("Tony", "tony@gmail.com","pwd")
+        
+        self.assertEqual(self.browser.current_url, url + "/welcome/")
+
+        self.register_someone("Dulcinée", "tony.fevrier62@gmail.com","pwd")
+        
+        self.assertEqual(self.browser.current_url, url + "/welcome/")
+
+        
+        #Il va sur la page pour se reconnecter
+
+        self.login_someone("Tony", "password") 
+
+        #Le visiteur arrive sur la page il voit le titre.
         self.assertIn('Tricount',self.browser.title)
         
         #Il voit la liste des tricount présents ou absents et clique sur le lien pour créer un nouveau tricount
@@ -168,6 +197,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.assertEqual(tricount_title.text, count.title)
         self.assertIn('Dulcinée', [name.text for name in tricount_participants]) 
         self.assertIn('Annie', [name.text for name in tricount_participants]) 
+
         
 class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_experience.Check):
     

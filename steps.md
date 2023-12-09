@@ -173,7 +173,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `-créer une vue login qui rend login.html`
         -`test unitaire pour vérifier que la bdd est bien incrémentée avec register.`
         -`test unitaire pour login?`
-        -test fonctionnel (enregistrement arrivée sur login.html login et clic sur mes paramètres : arrivée vers logout modifier newvisitortest); 
+        -test fonctionnel (enregistrement arrivée sur login.html login et clic sur mes paramètres : arrivée vers logout modifier newvisitortest); Débugger afficher le html comprendre où on atterrit après l'enregistrement.
+        -factoriser le test fonctionnel avec une fonction pour l'enregistement et une pour le loggage.
         -passer à ma vue welcome les messages.info pour les afficher si on utilise un nom déjà utilisé. 
         -test fonctionnel associé.
         `-créer une url et vue obtenue quand on crée un nouvel utilisateur` 
@@ -184,6 +185,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `-revoir comment on fait en django avec auth.`
         -mettre en première proposition dans tout tricount créé le participant loggé. 
         -enlever des tests fonctionnels de création de tricount le participant loggé qui doit être automatiquement créé.
+        -il faudra ptet enlever la page welcome et tout ce qui lui est relié sauf si on introduit une première page autre que l'enregistrement/connection.
         -si c'est nécessaire, modifiez la vue pour qu'on oblige à au moins un participant.
         - réfléchir à comment faire en sorte qu'un tricount ne soit vu que par les participants au tricount et pas par toute personne enregistrée (jouer sur les url : l'url est associée à l'username : 'username/count' plutôt que /count/?).
         -afficher en bas de la liste des dépenses, le coût total du loggé.
@@ -245,7 +247,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -NOSUCHTABLE : pb de bdd, supprimer la base, vérifier que le dossier migrations et init existent bien et refaire les migrations.
 
 # Mes difficultés principales
-    - Non connaissance des syntaxes du client django pour faire des tests unitaires. Idem pour les fonctionnels.
+
 
 # Des enseignements intéressants :
     -pour rendre les tests lisibles : créer des fonctions sans tests avec des noms équivoques et mettre les tests en dehors. L'idée est que quand je lis le test fonctionnel, je comprenne ce qu'on fait. J'ai créé un module avec une classe de fonctions élémentaires sans tests. Chaque fonction idéalement doit avoir une action. 

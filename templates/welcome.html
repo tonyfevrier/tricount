@@ -7,14 +7,15 @@
 </head>
 <body>
     <header>
-        <a href="/welcome/"><button>Créer un compte</button></a>
-        <a href="/login/"><button>Se connecter</button></a>
+        <a class = "welcome" href="/welcome/"><button>Créer un compte</button></a>
+        <a class = "login" href="/login/"><button>Se connecter</button></a>
     </header>
-    <form action="/welcome/register/">
+    <form action="/welcome/register" method = "post">
+        {% csrf_token %}
         <input type="text" placeholder="Username" name = "username">
         <input type="email" placeholder="email" name = "email">
         <input type="password" placeholder="Password" name="password">
-        <input type="submit">
+        <input class = "submit" type="submit">
     </form>
 </body>
 </html>
