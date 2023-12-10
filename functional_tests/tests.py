@@ -25,32 +25,54 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.browser.get(url + "/welcome/")
 
         self.register_someone("Tony","tony.fevrier62@gmail.com", "password")
-
         self.assertEqual(self.browser.current_url, url + "/login/")
 
         #Il se connecte et atterrit sur la liste des tricounts
         self.login_someone("Tony", "password")
-
         self.assertEqual(self.browser.current_url, url + "/count/")
 
         #Il va dans paramètres et se délogge directement
         self.logout_someone_from_listecount_page()
-        time.sleep(2)
-
         self.assertEqual(self.browser.current_url, url + "/welcome/")
 
         #Il tente d'enregistrer un nouveau compte avec le même username puis avec le même mail mais est refusé
         self.register_someone("Tony", "tony@gmail.com","pwd")
-        
         self.assertEqual(self.browser.current_url, url + "/welcome/")
 
         self.register_someone("Dulcinée", "tony.fevrier62@gmail.com","pwd")
-        
         self.assertEqual(self.browser.current_url, url + "/welcome/")
 
+        #Il tente d'envoyer le formulaire sans username puis sans email et password, le formulaire n'est pas envoyé et des éléments apparaissent
         
-        #Il va sur la page pour se reconnecter
+        self.register_someone("", "tony.fevrier62@gmail.com","pwd")
+        userlacking = self.browser.find_element(By.CLASS_NAME,"userlacking")
 
+        self.assertEqual(userlacking.text, "A username is needed") 
+
+        self.clear_registration_inputs(self.browser.find_element(By.NAME, "username"),self.browser.find_element(By.NAME, "email"),self.browser.find_element(By.NAME, "password"))
+        
+        self.register_someone("Dulcinée", "", "") 
+        
+        emaillacking = self.browser.find_element(By.CLASS_NAME,"emaillacking")
+        pwdlacking = self.browser.find_element(By.CLASS_NAME,"pwdlacking")
+
+        self.assertEqual(emaillacking.text, "An email is needed")
+        self.assertEqual(pwdlacking.text, "A password is needed")  
+
+        #Il va sur la page pour se reconnecter, il tente de se connecter sans username puis sans mot de passe
+        self.login_someone("","password")
+        userlacking = self.browser.find_element(By.CLASS_NAME,"userlacking")
+
+        self.assertEqual(userlacking.text, "A username is needed") 
+        self.assertEqual(self.browser.current_url, url + "/login/")
+        
+        self.clear_registration_inputs(self.browser.find_element(By.NAME, "username"),self.browser.find_element(By.NAME, "password"))
+        self.login_someone("Tony", "")
+        pwdlacking = self.browser.find_element(By.CLASS_NAME,"pwdlacking")
+
+        self.assertEqual(pwdlacking.text, "A password is needed") 
+
+        #Il met enfin ses bons identifiants.
         self.login_someone("Tony", "password") 
 
         #Le visiteur arrive sur la page il voit le titre.

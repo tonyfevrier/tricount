@@ -167,14 +167,16 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `-recenser les choses à modifier dans les différentes pages.`
         `-créer l'adresse de register et le html de register (en cours).` 
         `-créer la vue register en redirigeant vers le login`
-        -JS de welcome et login : si on ne remplit pas un des champs on ne peut se logger ou s'enregistrer comme nouvel utilisateur.
+        `-JS de welcome et login : si on ne remplit pas un des champs on ne peut se logger ou s'enregistrer comme nouvel utilisateur.`
+        -améliorer le css de ces pages welcome et login.
+        `- test fonctionnel associé`
         `-créer l'url de logout et le html de logout (c'est la page obtenue en cliquant sur Mes paramètres.) + css (en cours)`
         -rediriger mes paramètres vers l'url de logout.
         `-créer une vue login qui rend login.html`
         -`test unitaire pour vérifier que la bdd est bien incrémentée avec register.`
         -`test unitaire pour login?`
-        -test fonctionnel (enregistrement arrivée sur login.html login et clic sur mes paramètres : arrivée vers logout modifier newvisitortest); Débugger afficher le html comprendre où on atterrit après l'enregistrement.
-        -factoriser le test fonctionnel avec une fonction pour l'enregistement et une pour le loggage.
+        -`test fonctionnel (enregistrement arrivée sur login.html login et clic sur mes paramètres : arrivée vers logout modifier newvisitortest); Débugger afficher le html comprendre où on atterrit après l'enregistrement.`
+        -`factoriser le test fonctionnel avec une fonction pour l'enregistement et une pour le loggage.`
         -passer à ma vue welcome les messages.info pour les afficher si on utilise un nom déjà utilisé. 
         -test fonctionnel associé.
         `-créer une url et vue obtenue quand on crée un nouvel utilisateur` 
@@ -191,6 +193,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -afficher en bas de la liste des dépenses, le coût total du loggé.
         -page spending equilibria : proprio en gras + les équilibrages concernant le proprio doivent être dans Comment puis-je équilibrer? 
         -merger la branche puis créer un dépôt distant github et y déposer mon git supprimer ma branche puis travailler avec gitflow pour apprendre.
+    - Ecrire un fichier de commande qui permet de lancer tous les tests fonctionnels ou alors certains d'entre eux.
     -Ajouter la possibilité d'une arrivée d'argent et d'un transfert et pas juste une dépense:
         Ajouter au html et au css le bouton correspondant
         Faire le JS correspondant.
@@ -245,6 +248,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -TAGS DJANGO EN JS : dans un fichier JS qui crée un html avec un tag django, il faut spécifier l'adresse d'un fichier static (ne pas utiliser les tags mais "/static/...). Il ne reconnaît pas les tags DJANGO côté client seulement côté serveur.
     -JSONfield : Attention pour stocker des chaînes JSON, mieux vaut utiliser models.Textfield que JsonField car celui-ci rend un objet JsonStr qui est différent d'un str et si on veut utiliser json.loads pour recréer un dico python, cela peut bugger du fait du type de l'objet. 
     -NOSUCHTABLE : pb de bdd, supprimer la base, vérifier que le dossier migrations et init existent bien et refaire les migrations.
+    -JS PREVENTDEFAULT : quand je cliquais sur un input submit avec un event click qui m'affichait 1, il n'affichait pas 1 car le comportement par défaut était de soumettre le formulaire.
+    -JS PREVENTDEFAULT 2 : quand on empêche l'event par défaut de submit, les inputs ne sont pas remis à 0 : cela implique que le texte précédemment tapé est toujours là.
 
 # Mes difficultés principales
 

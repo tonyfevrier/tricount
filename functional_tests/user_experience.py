@@ -22,9 +22,14 @@ class Click():
 
         user.send_keys(username)
         mail.send_keys(email)
-        pwd.send_keys(password)
+        pwd.send_keys(password) 
         submit.send_keys(Keys.ENTER)
         time.sleep(2)
+    
+    def clear_registration_inputs(self,*elements):
+        for element in elements:
+            element.clear()
+
 
     def login_someone(self,username,password):
         """

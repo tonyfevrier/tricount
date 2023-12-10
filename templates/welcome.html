@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,10 +14,11 @@
     </header>
     <form action="/welcome/register" method = "post">
         {% csrf_token %}
-        <input type="text" placeholder="Username" name = "username">
-        <input type="email" placeholder="email" name = "email">
-        <input type="password" placeholder="Password" name="password">
+        <input class = "username" type="text" placeholder="Username" name = "username">
+        <input class = "email" type="email" placeholder="email" name = "email">
+        <input class = "password" type="password" placeholder="Password" name="password">
         <input class = "submit" type="submit">
     </form>
+    <script src = "{% static 'js/welcome.js' %}"></script>
 </body>
 </html>
