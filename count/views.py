@@ -46,31 +46,31 @@ def log(request):
     user = auth.authenticate(username = username, password = password) 
     if user is not None:
         auth.login(request,user)
-        return redirect('/count/') #l'adresse devra être spécifique à l'utilisateur.
+        return redirect(f'/count/{username}') #l'adresse devra être spécifique à l'utilisateur.
     else:
         return redirect('/login/')
 
-def logout(request):
+def logout(request,user):
     """
     Function to go to the logout page containing the parameters.
     """
-    return render(request, "logout.html")
+    return render(request, "logout.html",context = {'user':user})
 
-def delog(request):
+def delog(request,user):
     """
     Function which is delogging the user
     """
     auth.logout(request)
     return redirect('/welcome/')
 
-def listecount(request): 
+def listecount(request, user): 
     items = Counts.objects.all() 
-    return render(request,'index.html',context ={'counts' : items})
+    return render(request,'index.html',context ={'counts' : items, 'user' : user})
 
-def newcount(request): 
-    return render(request, 'newcount.html')
+def newcount(request,user): 
+    return render(request, 'newcount.html',context={'user':user})
 
-def addcount(request):
+def addcount(request,user):
     """
     Fonction qui permet d'ajouter un nouveau tricount. S'il n'y a pas de titre, elle renvoie à la même page html.
     """ 
@@ -91,26 +91,26 @@ def addcount(request):
             #Creation of the object for calculations
             tricount = Tricount(*participts)
             count = Counts.objects.create(title = majuscule(titre), description = phrase,category = request.POST["newtricount_category"], participants = participts, data = tricount.to_json())
-            return redirect('/count/tricount/'+ str(count.id))
+            return redirect(f'/count/{user}/tricount/'+ str(count.id))
     else:  
         return render(request,'newcount.html', context={'titre':False})
 
-def choosecurrency(request):
+def choosecurrency(request,user ):
     """
     Function which leads to the choice of the payment currency
     """
     return render(request, 'currency.html')
 
-def spending(request,id_count):
+def spending(request,user ,id_count):
     """
     Function which leads to the spending of a given tricount.
     """
     count = Counts.objects.get(id=id_count)  
     participants = count.participants 
     spending = Spending.objects.filter(number = id_count)
-    return render(request, "spending.html", context = {'count':count,'names':participants, 'spending' : spending})
+    return render(request, "spending.html", context = {'user':user,'count':count,'names':participants, 'spending' : spending})
 
-def spendingEquilibria(request,id_count):
+def spendingEquilibria(request,user ,id_count):
     """
     Function which leads to the equilibria of a given tricount.
     """
@@ -119,17 +119,17 @@ def spendingEquilibria(request,id_count):
     #Deserialisation and calculation of ways to go the equilibrium
     tricount = Tricount.from_json(count.data)
     total_credit,transfert_to_equilibrium = tricount.calculate_total_credit_and_resolve_solution() 
-    return render(request, "spendingEquilibria.html", context = {'count':count,'total_credit' : total_credit,'transfert_to_equilibrium' : transfert_to_equilibrium})
+    return render(request, "spendingEquilibria.html", context = {'user':user,'count':count,'total_credit' : total_credit,'transfert_to_equilibrium' : transfert_to_equilibrium})
 
-def newspending(request,id_count):
+def newspending(request,user ,id_count):
     """
     Function which render the template when we want to add a new spending
     """
     count = Counts.objects.get(id = id_count)
     participants = count.participants
-    return render(request, 'newspending.html',context={'idcount': id_count, 'participants':participants})
+    return render(request, 'newspending.html',context={'user':user,'idcount': id_count, 'participants':participants})
 
-def addspending(request,id_count):
+def addspending(request,user ,id_count):
     """
     Function to recover the data of the form of newspending and redirect to the spending list. 
     """ 
@@ -152,18 +152,18 @@ def addspending(request,id_count):
         Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, number = id_count, date = date.today())
         update_tricount_after_new_spending(id_count, {spender : float(amount)}, dico_receivers)
         
-        return redirect(f'/count/tricount/{id_count}')
+        return redirect(f'/count/{user}/tricount/{id_count}')
     else: #Lack of title needs an error message.
         count = Counts.objects.get(id = id_count)
         participants = count.participants
         return render(request, 'newspending.html',context={'idcount': id_count, 'participants':participants,'titre':False})
         
-def spending_details(request, id_count, id_spending):
+def spending_details(request,user , id_count, id_spending):
     """
     Function to see the details of a given spending
     """
     spending = Spending.objects.get(id = id_spending)
     number_of_spending = Spending.objects.count()
-    context = {'idcount' : id_count, 'idspending' : id_spending,'previousidspending' : id_spending - 1 , 'followingidspending' : id_spending + 1,'spending': spending, 'number_of_spending' : number_of_spending}
+    context = {'user':user,'idcount' : id_count, 'idspending' : id_spending,'previousidspending' : id_spending - 1 , 'followingidspending' : id_spending + 1,'spending': spending, 'number_of_spending' : number_of_spending}
     return render(request,"spending-details.html",context)
 

@@ -29,7 +29,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
 
         #Il se connecte et atterrit sur la liste des tricounts
         self.login_someone("Tony", "password")
-        self.assertEqual(self.browser.current_url, url + "/count/")
+        self.assertEqual(self.browser.current_url, url + "/count/Tony")
 
         #Il va dans paramètres et se délogge directement
         self.logout_someone_from_listecount_page()
@@ -77,11 +77,11 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
 
         #Le visiteur arrive sur la page il voit le titre.
         self.assertIn('Tricount',self.browser.title)
-        
+
         #Il voit la liste des tricount présents ou absents et clique sur le lien pour créer un nouveau tricount
         self.click_on_a_link(By.ID,'id_newcount')
         
-        self.assertEqual(self.browser.current_url, url + '/count/newcount') 
+        self.assertEqual(self.browser.current_url, url + '/count/Tony/newcount') 
     
         #Il commence par remplir les différents participants à son premier tricount : les participants apparaissent sur la page du tricount ainsi que le nombre de participants qui s'incrémente.
         #Il en met deux puis se ravise, l'enlève puis le remet.
@@ -90,7 +90,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.click_on_a_link(By.CSS_SELECTOR,".closeparticipant[name = 'Henri']")
         time.sleep(2)
 
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/newcount")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Tony/newcount")
         
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
         number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants") 
@@ -110,11 +110,11 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.add_tricount_characteristics('Tricount 1','Description 1','trip')
 
         #He arrives on the good url 
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount/1')
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Tony/tricount/1')
 
         self.click_on_a_link(By.CLASS_NAME,'backtolistecount')
 
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/')
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Tony')
         self.assertIn('Tricount',self.browser.title)
 
         #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
@@ -123,11 +123,11 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
 
         self.assertIn('Tricount 1',[titre.text for titre in title]) 
         self.assertIn('Description 1',[desc.text for desc in description])
-       
+
         #Il reclique pour recréer un second tricount. 
         self.click_on_a_link(By.ID,'id_newcount')
         
-        self.assertEqual(self.browser.current_url, url + '/count/newcount') 
+        self.assertEqual(self.browser.current_url, url + '/count/Tony/newcount') 
         
         #Il remplit les différents participants d'un second tricount : les participants apparaissent sur la page du tricount mais pas ceux du tricount précédemment créé.
         self.add_participants('Tony','Dulcinée','Annie')
@@ -140,7 +140,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.add_tricount_characteristics('Tricount 2','Description 2','project')
 
         #He arrives on the good url 
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount/2' )
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Tony/tricount/2' )
  
         self.click_on_a_link(By.CLASS_NAME,'backtolistecount')
 
@@ -150,7 +150,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
 
         self.assertIn('Tricount 2',[titre.text for titre in title]) 
         self.assertIn('Description 2',[desc.text for desc in description])
-        
+
         #Il reclique pour recréer un second tricount 
         self.click_on_a_link(By.ID,'id_newcount')
 
@@ -158,7 +158,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         # Il est renvoyé vers l'url de remplissagedu tricount avec un message d'erreur affiché en rouge 
         self.add_tricount_characteristics('','description 3','project')
 
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount/addcount')
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Tony/newcount/addcount')
 
         msg = self.browser.find_element(By.CLASS_NAME,'error')
 
@@ -168,11 +168,12 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.add_tricount_characteristics('Tricount 3','','project')
         participant_error = self.browser.find_element(By.CLASS_NAME,'participant-error')
 
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/newcount/addcount')
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Tony/newcount/addcount')
         self.assertIn("Il faut au moins un participant",participant_error.text) 
- 
+     
         #Il met des participants puis crée son tricount. 
-        self.create_a_tricount('Tricount 3','','project','Totolitoto','Biloute','Anne')
+        self.add_participants('Totolitoto','Biloute','Anne')
+        self.add_tricount_characteristics('Tricount 3','','project')
 
         self.click_on_a_link(By.CLASS_NAME,'backtolistecount')
         description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
@@ -185,7 +186,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.add_participants('Jeanine') 
         self.click_on_a_link(By.CLASS_NAME,'backtotricount')
 
-        self.assertEqual(self.browser.current_url, url + '/count/')
+        self.assertEqual(self.browser.current_url, url + '/count/Tony')
         
         #Il clique pour créer un nouveau tricount et voit que les participants précédemment entrés ne sont pas sur la page
         self.click_on_a_link(By.ID,'id_newcount')
@@ -198,7 +199,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         #Il clique maintenant sur les tricounts existant pour vérifier que les informations du tricount sont correctes. 
         self.click_on_an_existing_tricount(1)
 
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Tony/tricount/1")
 
         tricount_title = self.browser.find_element(By.CLASS_NAME,"tricount-title")
         tricount_participants = self.browser.find_elements(By.CLASS_NAME,"tricount-participants")
@@ -210,7 +211,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
         self.click_on_an_existing_tricount(2)
 
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/2")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Tony/tricount/2")
 
         tricount_title = self.browser.find_element(By.CLASS_NAME,"tricount-title")
         tricount_participants = self.browser.find_elements(By.CLASS_NAME,"tricount-participants")
@@ -234,8 +235,10 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
 
         #MODIFIER check IN : normalement pas besoin de modifier create spending : devrait créer un dico 
 
-        #A tricount is created et come back to the listecount page
- 
+        #The user register and log in
+        self.register_and_login_someone("Dulciny","dulciny@dulciny.fr", "dulciny")
+
+        #A tricount is created et come back to the listecount page 
         self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri")
         self.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
 
@@ -245,7 +248,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
         #The user clicks to add a new spending, he has the choice between the participants previously created
         self.click_on_create_spending()
 
-        self.assertEqual(self.browser.current_url,self.live_server_url + '/count/tricount/1/spending')
+        self.assertEqual(self.browser.current_url,self.live_server_url + '/count/Dulciny/tricount/1/spending')
         
         spender_participant = self.browser.find_elements(By.CLASS_NAME, "spender-participant")
         receiver_participants = self.browser.find_elements(By.CLASS_NAME, "receiver-participant")
@@ -259,7 +262,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
         self.create_a_spending('Dépense1', 100., 'Jean', ['Henri','Jean'])
 
         #He is then redirected to the spending list where the name, the amount, the payer appears
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/tricount/1')
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Dulciny/tricount/1')
         
         spending_title = self.browser.find_elements(By.CLASS_NAME,"spending-title")
         spending_amount = self.browser.find_elements(By.CLASS_NAME,"spending-amount")
@@ -275,29 +278,32 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
 
         notitle = self.browser.find_element(By.CLASS_NAME,"notitle")
         self.assertEqual(notitle.text, "Titre non valable")
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1/addspending")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Dulciny/tricount/1/addspending")
 
         #He forgets to put the amount, a spending is created with amount 0.
         self.create_a_spending('Dépense2', '', 'Jean', ['Henri','Jean'])
 
         amounts = self.browser.find_elements(By.CLASS_NAME,"spending-amount")
         
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Dulciny/tricount/1")
         self.assertIn('0.0',[amount.text for amount in amounts])
 
         #He wants to check the current equilibria
         self.click_on_a_link(By.CLASS_NAME,"gotoequilibria")
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1/equilibria")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Dulciny/tricount/1/equilibria")
 
         #He clicks back
         self.click_on_a_link(By.CLASS_NAME,"gotospending")
-        self.assertEqual(self.browser.current_url,  self.live_server_url + "/count/tricount/1")
+        self.assertEqual(self.browser.current_url,  self.live_server_url + "/count/Dulciny/tricount/1")
 
         #He forgets to put who is the payer, by default it is the first participant.
 
         #He forgets to put for who he pays, by default it's for all participants.
 
     def test_the_page_of_some_spendings(self):
+        #The user register and log in
+        self.register_and_login_someone("Dulciny","dulciny@dulciny.fr", "dulciny")
+
         #L'utilisateur crée une dépense et clique dessus
         self.create_a_tricount('Tricount1',"Je décris", "project","Jean","Henri") 
 
@@ -308,7 +314,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
         time.sleep(3)
 
         #Il arrive sur la page et il y voit toutes les données qu'il a enregistrées.
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/tricount/1/spending/1")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Dulciny/tricount/1/spending/1")
         self.check_informations_of_a_spending('DEPENSE1', '100.0', 'Payé par Jean', ['Henri','Jean'],['50.0', '50.0'])
 
         #Il revient en arrière et crée trois autres dépenses
@@ -337,6 +343,9 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
         self.click_on_a_link(By.CLASS_NAME,"previous")
 
     def test_equilibria_with_multiple_spendings(self):
+        #The user register and log in
+        self.register_and_login_someone("Marine","dulciny@dulciny.fr", "dulciny")
+
         self.create_a_tricount('Tricount1',"Je décris", "project","Henri", "Yann", "Marine", "Tony") 
 
         self.click_on_create_spending() 
@@ -374,7 +383,7 @@ class JSTest(StaticLiveServerTestCase,user_experience.Click,user_experience.Chec
 
     def test_JS_of_listecount_page(self):
         #The user arrives on listecount page, no popup is opened : 
-        self.browser.get(self.live_server_url+ '/count')
+        self.browser.get(self.live_server_url+ '/count/Toto')
         popup_children = self.browser.find_elements(By.CSS_SELECTOR, "[data-div = hidden] > *")
 
         for elt in popup_children:
@@ -400,11 +409,11 @@ class JSTest(StaticLiveServerTestCase,user_experience.Click,user_experience.Chec
 
         for elt in popup_children:
             self.assertEqual(elt.is_displayed(),False)
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Toto")
 
     def test_JS_of_newcount_page(self):
         #The client goes to the creation of a new count
-        self.browser.get(self.live_server_url+ '/count')
+        self.browser.get(self.live_server_url+ '/count/Toto')
         self.click_on_a_link(By.CLASS_NAME,'id_newcount')
 
         #He enters a title and a description, a counter appears and the number of letters corresponds to the length of the word.

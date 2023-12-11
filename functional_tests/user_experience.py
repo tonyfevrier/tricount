@@ -49,6 +49,15 @@ class Click():
         submit.send_keys(Keys.ENTER)
         time.sleep(2)
 
+    def register_and_login_someone(self, username, email, password):
+        """
+        Function which register someone and log in him
+        """
+        url = self.live_server_url  
+        self.browser.get(url + "/welcome/")
+        self.register_someone(username, email, password)  
+        self.login_someone(username, password)
+
     def logout_someone_from_listecount_page(self):
         """
         Function which logout the user from the page listing the counts of the user
@@ -94,7 +103,6 @@ class Click():
         time.sleep(2)
 
     def create_a_tricount(self,title, description, category,*participants):
-        self.browser.get(self.live_server_url+ '/count')
 
         #Clicks to add a tricount 
         self.click_on_a_link(By.ID,'id_newcount') 

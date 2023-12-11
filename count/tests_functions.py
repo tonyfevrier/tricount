@@ -17,7 +17,7 @@ class UnitaryTestMethods(TestCase):
         """
         Function to create a tricount.
         """  
-        response = self.client.post("/count/newcount/addcount",data = {"newtricount_title":title, "newtricount_description":description, "newtricount_category":category, "nameparticipant": participants})
+        response = self.client.post("/count/Tony/newcount/addcount",data = {"newtricount_title":title, "newtricount_description":description, "newtricount_category":category, "nameparticipant": participants})
         
         return response
     
@@ -36,7 +36,7 @@ class UnitaryTestMethods(TestCase):
         for i in range(len(receivers)):
             data[receivers[i]] = respective_amounts[i]
 
-        response = self.client.post('/count/tricount/1/addspending', data)
+        response = self.client.post('/count/Tony/tricount/1/addspending', data)
         return response
 
     def register_someone(self, username, password, email):
@@ -48,5 +48,5 @@ class UnitaryTestMethods(TestCase):
         return response
     
     def logout_someone(self):
-        response = self.client.post('/count/logout/delog')
+        response = self.client.post('/count/Tony/logout/delog')
         return response

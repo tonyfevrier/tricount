@@ -21,7 +21,7 @@
 
     <div data-div = "hidden" class = "parameters-options" hidden>
         <a href=""> Premium </a>
-        <a class = "myparameters" href="/count/logout"> Mes paramètres </a>
+        <a class = "myparameters" href="/count/{{user}}/logout"> Mes paramètres </a>
         <button data-button="JS" class = "share"> Partagez l'app </button>
         <a href=""> Evaluez l'app</a>
         <button data-button="JS" class = "help"> Aide </button>
@@ -71,7 +71,7 @@
 
     <main> 
         {% for count in counts %}
-        <a class = "link-tricount" id="link-tricount-{{count.id}}" href="/count/tricount/{{count.id}}">
+        <a class = "link-tricount" id="link-tricount-{{count.id}}" href="/count/{{user}}/tricount/{{count.id}}">
             <div class="tricount"> 
                 <p class = "tricount_title"> {{count.title}} </p>
                 <p class = "tricount_description"> {{count.description}} </p>
@@ -90,7 +90,7 @@
         </a>
     </div>
     <footer>
-        <a data-button="JS" class ="id_newcount" id = "id_newcount" href="/count/newcount"> + </a>
+        <a data-button="JS" class ="id_newcount" id = "id_newcount" href="/count/{{user}}/newcount"> + </a>
     </footer>
     <script src="{% static 'js/index2.js' %}"></script>
 

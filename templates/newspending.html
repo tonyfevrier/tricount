@@ -11,11 +11,11 @@
 </head>
 <body>
     <header>
-        <a href="/count/tricount/{{idcount}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="/count/{{user}}/tricount/{{idcount}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <p class = "header-title">Nouvelle dépense</p>
     </header>
     <main>
-        <form action="/count/tricount/{{idcount}}/addspending" method = "post">
+        <form action="/count/{{user}}/tricount/{{idcount}}/addspending" method = "post">
             <input class = "title" type="text" placeholder="Titre" name = "title"> 
 
             {%if titre == False%}

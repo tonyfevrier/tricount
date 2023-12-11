@@ -181,6 +181,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -test fonctionnel associé.
         `-créer une url et vue obtenue quand on crée un nouvel utilisateur` 
         -créer une url et vue obtenue quand on se connecte, qui va regarder si l'user est dans la bdd et rediriger vers la bonne page.
+        -Débugger le NewVisitorTest et Modifier tous les tests fonctionnels et unitaires pr prendre en compte le str:user dans les url.
         -test unitaire + test fonctionnel
         -créer une url et vue obtenue quand on se délogge, qui va délogger le participant et rediriger vers la page de connection.
         -test unitaire + test fonctionnel

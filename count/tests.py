@@ -17,13 +17,13 @@ class resolveUrl(TestCase):
         """
         On crée d'abord l'url de la page en question et on vérifie que l'url est associée à la bonne fonction de views.
         """
-        found = resolve('/count/')
+        found = resolve('/count/Toto')
 
         self.assertEqual(found.func,listecount) 
 
 class HomepageTest(UnitaryTestMethods):
     def test_title(self):
-        response = self.client.get('/count/') 
+        response = self.client.get('/count/Tony') 
 
         self.assertIn(b'Tricount',response.content)
         self.assertTemplateUsed(response,'index.html')
@@ -74,7 +74,7 @@ class NewcountTest(UnitaryTestMethods):
         """
         Fonction qui à partir de la page de la liste des tricount clique sur "créer un nouveau tricount" et vérifie qu'on utilise le bon template
         """ 
-        response = self.client.get('/count/')
+        response = self.client.get('/count/Tony')
         link = self.extract_and_click_on_link(response.content , 'id_newcount')
         response2 = self.client.get(link)
 
@@ -90,7 +90,7 @@ class NewcountTest(UnitaryTestMethods):
         self.assertEqual("Tricount 1",count.title)
         self.assertEqual("Description 1", count.description)
         self.assertEqual("Voyage", count.category)
-        self.assertRedirects(response, '/count/tricount/1')  
+        self.assertRedirects(response, '/count/Tony/tricount/1')  
 
     def test_lack_title_newcountinputs(self):
         """
@@ -157,14 +157,14 @@ class NewcountTest(UnitaryTestMethods):
         self.create_a_tricount("tricount 2", "description 2", "Coloc", "Roberto",'Alfredo')
         
         #We go on the list of the tricounts
-        response = self.client.get('/count/')
+        response = self.client.get('/count/Tony')
         link = self.extract_and_click_on_link(response.content , 'link-tricount-2') 
 
-        self.assertEqual(link,'/count/tricount/2')
+        self.assertEqual(link,'/count/Tony/tricount/2')
 
         link = self.extract_and_click_on_link(response.content , 'link-tricount-1')  
 
-        self.assertEqual(link,'/count/tricount/1')
+        self.assertEqual(link,'/count/Tony/tricount/1')
 
         response = self.client.get(link)
 
@@ -310,7 +310,7 @@ class TestSpending(UnitaryTestMethods):
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Jean")
         response = self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean'], [50,50])  
 
-        self.assertRedirects(response,'/count/tricount/1') 
+        self.assertRedirects(response,'/count/Tony/tricount/1') 
     
     def test_bdd_newspending_inputs(self):
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Jean")
@@ -332,7 +332,7 @@ class TestSpending(UnitaryTestMethods):
         test : we begin to create a spending and go back. No new spend must appear in the bdd.
         """
         self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
-        response = self.client.get('/count/tricount/1/spending') 
+        response = self.client.get('/count/Tony/tricount/1/spending') 
         nb_spending = Spending.objects.count()
         self.extract_and_click_on_link(response.content , 'backtospending')  
 
