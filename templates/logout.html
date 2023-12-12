@@ -11,13 +11,13 @@
 <body>
     <header>
         <nav class = "navbar">
-            <a href="/count/" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" width="20px" alt="Retour en arrière"></a>
+            <a href="/count/{{userobject.username}}" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" width="20px" alt="Retour en arrière"></a>
             <p>Mes paramètres</p>
         </nav>
         <div class = "owner-title">
-            <p class = "firstletter"> T </p>
-            <p class = "hello"> Bonjour Owner</p>
-            <p class = "mail"> Mail</p>
+            <p class = "firstletter"> {{userobject.username.0}} </p>
+            <p class = "hello"> Bonjour {{userobject.username}}</p>
+            <p class = "mail"> {{userobject.email}}</p>
         </div>
     </header>
     <main>

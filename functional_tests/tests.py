@@ -31,8 +31,22 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.login_someone("Tony", "password")
         self.assertEqual(self.browser.current_url, url + "/count/Tony")
 
-        #Il va dans paramètres et se délogge directement
-        self.logout_someone_from_listecount_page()
+        #Il va dans paramètres, constate que ses données sont bien présentes et se délogge directement
+        self.click_on_a_link(By.CLASS_NAME,"parameters")
+        self.click_on_a_link(By.CLASS_NAME,"myparameters")
+
+        firstletter = self.browser.find_element(By.CLASS_NAME,"firstletter")
+        name = self.browser.find_element(By.CLASS_NAME,"hello")
+        mail = self.browser.find_element(By.CLASS_NAME,"mail")
+
+        self.assertEqual(firstletter.text, "T")
+        self.assertEqual(name.text, "Bonjour Tony")
+        self.assertEqual(mail.text, "tony.fevrier62@gmail.com")
+
+        logout = self.browser.find_element(By.CLASS_NAME, "logout")
+        logout.send_keys(Keys.ENTER)
+        time.sleep(2)
+
         self.assertEqual(self.browser.current_url, url + "/welcome/")
 
         #Il tente d'enregistrer un nouveau compte avec le même username puis avec le même mail mais est refusé
@@ -40,11 +54,10 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.assertEqual(self.browser.current_url, url + "/welcome/")
 
         self.register_someone("Dulcinée", "tony.fevrier62@gmail.com","pwd")
-        self.assertEqual(self.browser.current_url, url + "/welcome/")
-
+        self.assertEqual(self.browser.current_url, url + "/welcome/") 
         #Il tente d'envoyer le formulaire sans username puis sans email et password, le formulaire n'est pas envoyé et des éléments apparaissent
         
-        self.register_someone("", "tony.fevrier62@gmail.com","pwd")
+        self.register_someone("", "tony.fevrier6@gmail.com","pwd")
         userlacking = self.browser.find_element(By.CLASS_NAME,"userlacking")
 
         self.assertEqual(userlacking.text, "A username is needed") 

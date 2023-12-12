@@ -171,26 +171,24 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -améliorer le css de ces pages welcome et login.
         `- test fonctionnel associé`
         `-créer l'url de logout et le html de logout (c'est la page obtenue en cliquant sur Mes paramètres.) + css (en cours)`
-        -rediriger mes paramètres vers l'url de logout.
+        -`rediriger mes paramètres vers l'url de logout.`
         `-créer une vue login qui rend login.html`
         -`test unitaire pour vérifier que la bdd est bien incrémentée avec register.`
         -`test unitaire pour login?`
         -`test fonctionnel (enregistrement arrivée sur login.html login et clic sur mes paramètres : arrivée vers logout modifier newvisitortest); Débugger afficher le html comprendre où on atterrit après l'enregistrement.`
         -`factoriser le test fonctionnel avec une fonction pour l'enregistement et une pour le loggage.`
-        -passer à ma vue welcome les messages.info pour les afficher si on utilise un nom déjà utilisé. 
+        -`passer à ma vue welcome les messages.info pour les afficher si on utilise un nom déjà utilisé.` 
         -test fonctionnel associé.
         `-créer une url et vue obtenue quand on crée un nouvel utilisateur` 
-        -créer une url et vue obtenue quand on se connecte, qui va regarder si l'user est dans la bdd et rediriger vers la bonne page.
-        -Débugger le NewVisitorTest et Modifier tous les tests fonctionnels et unitaires pr prendre en compte le str:user dans les url.
-        -test unitaire + test fonctionnel
-        -créer une url et vue obtenue quand on se délogge, qui va délogger le participant et rediriger vers la page de connection.
-        -test unitaire + test fonctionnel
+        `-créer une url et vue obtenue quand on se connecte, qui va regarder si l'user est dans la bdd et rediriger vers la bonne page.`
+        `-Débugger le NewVisitorTest et Modifier tous les tests fonctionnels et unitaires pr prendre en compte le str:user dans les url.`
+        `-test unitaire + test fonctionnel`
+        `-créer une url et vue obtenue quand on se délogge, qui va délogger le participant et rediriger vers la page de connection.`
+        `-test unitaire + test fonctionnel`
         `-revoir comment on fait en django avec auth.`
         -mettre en première proposition dans tout tricount créé le participant loggé. 
         -enlever des tests fonctionnels de création de tricount le participant loggé qui doit être automatiquement créé.
-        -il faudra ptet enlever la page welcome et tout ce qui lui est relié sauf si on introduit une première page autre que l'enregistrement/connection.
-        -si c'est nécessaire, modifiez la vue pour qu'on oblige à au moins un participant.
-        - réfléchir à comment faire en sorte qu'un tricount ne soit vu que par les participants au tricount et pas par toute personne enregistrée (jouer sur les url : l'url est associée à l'username : 'username/count' plutôt que /count/?).
+        -il faudra ptet enlever la page welcome et tout ce qui lui est relié sauf si on introduit une première page autre que l'enregistrement/connection. 
         -afficher en bas de la liste des dépenses, le coût total du loggé.
         -page spending equilibria : proprio en gras + les équilibrages concernant le proprio doivent être dans Comment puis-je équilibrer? 
         -merger la branche puis créer un dépôt distant github et y déposer mon git supprimer ma branche puis travailler avec gitflow pour apprendre.

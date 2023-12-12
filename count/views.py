@@ -7,7 +7,7 @@ from count import calculation
 from datetime import date
 from count.calculation import *
 
-def welcome(request): 
+def welcome(request):  
     return render(request, "welcome.html")
 
 def login(request): 
@@ -19,7 +19,6 @@ def register(request):
     Function registering a new user and redirecting to the login page. It verifies 
     if the username and the email is not already used. 
     """ 
-
     username = request.POST["username"]
     password = request.POST["password"]
     email = request.POST["email"] 
@@ -27,7 +26,7 @@ def register(request):
     if User.objects.filter(username = username).exists():
         messages.info(request, 'This username already exists')
         return redirect('/welcome/')
-    elif User.objects.filter(email = email).exists():
+    elif User.objects.filter(email = email).exists(): 
         messages.info(request, 'This email already exists')
         return redirect('/welcome/')
     else:
@@ -54,7 +53,8 @@ def logout(request,user):
     """
     Function to go to the logout page containing the parameters.
     """
-    return render(request, "logout.html",context = {'user':user})
+    userObject = User.objects.get(username = user)
+    return render(request, "logout.html",context = {'userobject':userObject})
 
 def delog(request,user):
     """
