@@ -1,4 +1,5 @@
 let maxLetters = 50;
+let listparticipants = [document.body.querySelector('input[name = "owner"]').value];
  
 let compteur = document.createElement('p'); 
 compteur.className = "compteur"; 
@@ -7,7 +8,7 @@ const addparticipant = document.body.querySelector('.add_participant');
 const new_participant = document.body.querySelector('.new_participant');
 const form = document.body.querySelector('.newtricount');  
 const nb_participants = document.body.querySelector('.nb_participants');
-let number_ptcpt = 0;
+let number_ptcpt = 1;
 
 // Events carrying on inputs of type text.
 document.addEventListener("input", userWriting);
@@ -68,6 +69,11 @@ function userAddingParticipant(event){
     
     if (new_participant.value === 'Autre participant' || new_participant.value === '') return;
 
+    if (listparticipants.includes(new_participant.value)){
+        new_participant.value = '';
+        return;
+    } 
+
     //Creation of a participant
     let printparticipant = document.createElement('div');
     printparticipant.className = "printparticipant";
@@ -79,6 +85,7 @@ function userAddingParticipant(event){
     new_participant.value = '';  
     number_ptcpt += 1;
     nb_participants.innerHTML = `Participants (${number_ptcpt}/50)`;
+    listparticipants.push(new_participant.value);
 
     //Creation of event for closing the participants
     closeparticipants = document.body.querySelectorAll('.closeparticipant');

@@ -108,8 +108,9 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
         number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants") 
 
+        self.assertIn('Tony', [participant.get_attribute("value") for participant in participants])
         self.assertIn('Jean', [participant.get_attribute("value") for participant in participants])
-        self.assertEqual(number_participants.text,"Participants (1/50)") 
+        self.assertEqual(number_participants.text,"Participants (2/50)") 
 
         self.add_participants('Heeeeeenri')
 
@@ -117,7 +118,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants")
 
         self.assertIn('Heeeeeenri', [participant.get_attribute("value") for participant in participants])
-        self.assertEqual(number_participants.text,"Participants (2/50)")
+        self.assertEqual(number_participants.text,"Participants (3/50)")
 
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
         self.add_tricount_characteristics('Tricount 1','Description 1','trip')

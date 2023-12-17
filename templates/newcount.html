@@ -45,8 +45,11 @@
 
             <button class = "submittricount" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
             
-            <div class = "nb_participants"> Participants (0/50)</div>
-            
+            <div class = "nb_participants"> Participants (1/50)</div>
+            <div class = "printparticipant">
+                <input class = "nameparticipant" type="text" value = "{{user}}" name = "owner">
+                <button class = "closeparticipant" name = "{{user}}" ><img src="/static/images/close.png" alt="fermeture"></button>
+            </div> 
         </form>
         <input type ="text" name="new_participant" class ='new_participant' placeholder="Autre participant">
         <button class = "add_participant">Ajouter</button>

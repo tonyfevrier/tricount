@@ -168,7 +168,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `-créer l'adresse de register et le html de register (en cours).` 
         `-créer la vue register en redirigeant vers le login`
         `-JS de welcome et login : si on ne remplit pas un des champs on ne peut se logger ou s'enregistrer comme nouvel utilisateur.`
-        -améliorer le css de ces pages welcome et login.
+        `-améliorer le css de ces pages welcome et login.`
         `- test fonctionnel associé`
         `-créer l'url de logout et le html de logout (c'est la page obtenue en cliquant sur Mes paramètres.) + css (en cours)`
         -`rediriger mes paramètres vers l'url de logout.`
@@ -178,7 +178,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`test fonctionnel (enregistrement arrivée sur login.html login et clic sur mes paramètres : arrivée vers logout modifier newvisitortest); Débugger afficher le html comprendre où on atterrit après l'enregistrement.`
         -`factoriser le test fonctionnel avec une fonction pour l'enregistement et une pour le loggage.`
         -`passer à ma vue welcome les messages.info pour les afficher si on utilise un nom déjà utilisé.` 
-        -test fonctionnel associé.
+        `-test fonctionnel associé.`
         `-créer une url et vue obtenue quand on crée un nouvel utilisateur` 
         `-créer une url et vue obtenue quand on se connecte, qui va regarder si l'user est dans la bdd et rediriger vers la bonne page.`
         `-Débugger le NewVisitorTest et Modifier tous les tests fonctionnels et unitaires pr prendre en compte le str:user dans les url.`
@@ -186,8 +186,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `-créer une url et vue obtenue quand on se délogge, qui va délogger le participant et rediriger vers la page de connection.`
         `-test unitaire + test fonctionnel`
         `-revoir comment on fait en django avec auth.`
-        -mettre en première proposition dans tout tricount créé le participant loggé. 
-        -enlever des tests fonctionnels de création de tricount le participant loggé qui doit être automatiquement créé.
+        `-mettre en première proposition dans tout tricount créé le participant loggé.` 
+        `-enlever des tests fonctionnels de création de tricount le participant loggé qui doit être automatiquement créé. Modifier le newcount.JS pour refuser un participant déjà ajouté.`
         -il faudra ptet enlever la page welcome et tout ce qui lui est relié sauf si on introduit une première page autre que l'enregistrement/connection. 
         -afficher en bas de la liste des dépenses, le coût total du loggé.
         -page spending equilibria : proprio en gras + les équilibrages concernant le proprio doivent être dans Comment puis-je équilibrer? 

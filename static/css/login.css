@@ -1,0 +1,35 @@
+header{
+    justify-content: space-between;
+}
+
+header a{
+    padding: 0 1em;
+}
+
+header button{
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 0.8em;
+}
+
+form{
+    padding: 1em;
+    width: 50%;
+    margin: auto;
+}
+
+form input{
+    display: block;
+    margin: 0.5em 0;
+    border : none; 
+    font-size: 1em;
+    border-radius: 2px;
+}
+
+.submit{
+    background-color: transparent;
+    font-size: 0.9em;
+    cursor: pointer; 
+    margin-top: 0.5em;
+}
