@@ -1,5 +1,5 @@
 let maxLetters = 50;
-let listparticipants = [document.body.querySelector('input[name = "owner"]').value];
+let listparticipants = [document.body.querySelector('input[name = "nameparticipant"]').value];
  
 let compteur = document.createElement('p'); 
 compteur.className = "compteur"; 

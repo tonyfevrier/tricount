@@ -84,7 +84,7 @@ class NewcountTest(UnitaryTestMethods):
         """
         Fonction qui teste si les données entrées par l'utilisateur sont bien récupérées et si la redirection vers la page d'origine est effective.
         """ 
-        response = self.create_a_tricount("tricount 1","description 1","Voyage",'Jean','Henri')
+        response = self.create_a_tricount("tricount 1","description 1","Voyage",'Tony','Jean','Henri')
         count = Counts.objects.first()
 
         self.assertEqual("Tricount 1",count.title)
@@ -157,14 +157,14 @@ class NewcountTest(UnitaryTestMethods):
         self.create_a_tricount("tricount 2", "description 2", "Coloc", "Roberto",'Alfredo')
         
         #We go on the list of the tricounts
-        response = self.client.get('/count/Tony')
+        response = self.client.get('/count/Henri')
         link = self.extract_and_click_on_link(response.content , 'link-tricount-2') 
 
-        self.assertEqual(link,'/count/Tony/tricount/2')
+        self.assertEqual(link,'/count/Henri/tricount/2')
 
         link = self.extract_and_click_on_link(response.content , 'link-tricount-1')  
 
-        self.assertEqual(link,'/count/Tony/tricount/1')
+        self.assertEqual(link,'/count/Henri/tricount/1')
 
         response = self.client.get(link)
 
@@ -306,9 +306,9 @@ class TestSpending(UnitaryTestMethods):
     def test_redirect_after_newspending_inputs(self):
         """
         We enter a newspending and we see if data are integrated into the database.
-        """
-        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Jean")
-        response = self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean'], [50,50])  
+        """ 
+        self.create_a_tricount('tricount1', 'description', "Voyage", "Tony", "Henri", "Jean")
+        response = self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean','Tony'], [50,50,0])  
 
         self.assertRedirects(response,'/count/Tony/tricount/1') 
     

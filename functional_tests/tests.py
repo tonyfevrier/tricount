@@ -329,7 +329,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
 
         #Il arrive sur la page et il y voit toutes les données qu'il a enregistrées.
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Dulciny/tricount/1/spending/1")
-        self.check_informations_of_a_spending('DEPENSE1', '100.0', 'Payé par Jean', ['Henri','Jean'],['50.0', '50.0'])
+        self.check_informations_of_a_spending('DEPENSE1', '100.0', 'Payé par Jean', ['Dulciny','Henri','Jean'],['33.33', '33.33', '33.33'])
 
         #Il revient en arrière et crée trois autres dépenses
         self.click_on_a_link(By.CLASS_NAME,"backtospending")
@@ -344,12 +344,12 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
         self.click_on_a_link(By.CLASS_NAME,"following")
 
         #Il voit alors les infos de la seconde dépense et le bouton précédent apparaître
-        self.check_informations_of_a_spending('DEPENSE2', '10.0', 'Payé par Henri', ['Henri','Jean'],['5.0', '5.0'])
+        self.check_informations_of_a_spending('DEPENSE2', '10.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['3.33', '3.33', '3.33'])
         self.assertIsNotNone(self.browser.find_element(By.CLASS_NAME,'previous'))
 
         #Il clique sur suivant une fois et voit le bouton suivant disparaître
         self.click_on_a_link(By.CLASS_NAME,"following") 
-        self.check_informations_of_a_spending('DEPENSE3', '2.0', 'Payé par Henri', ['Henri','Jean'],['1.0', '1.0'])
+        self.check_informations_of_a_spending('DEPENSE3', '2.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['0.67', '0.67', '0.67'])
         #self.assertIsNone(self.browser.find_element(By.CLASS_NAME,'following'))
 
         #Il clique sur précédent trois fois.

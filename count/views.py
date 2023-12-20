@@ -95,7 +95,7 @@ def addcount(request,user):
     else:  
         return render(request,'newcount.html', context={'titre':False})
 
-def choosecurrency(request,user ):
+def choosecurrency(request,user):
     """
     Function which leads to the choice of the payment currency
     """
@@ -108,7 +108,11 @@ def spending(request,user ,id_count):
     count = Counts.objects.get(id=id_count)  
     participants = count.participants 
     spending = Spending.objects.filter(number = id_count)
-    return render(request, "spending.html", context = {'user':user,'count':count,'names':participants, 'spending' : spending})
+
+    tricount = Tricount.from_json(count.data) 
+    total_credit_owner = tricount.calculate_total_credit()[user] 
+    total_cost = tricount.total_cost 
+    return render(request, "spending.html", context = {'user':user,'count':count,'names':participants, 'spending' : spending, 'credit_owner' : total_credit_owner, 'totalcost' : total_cost})
 
 def spendingEquilibria(request,user ,id_count):
     """

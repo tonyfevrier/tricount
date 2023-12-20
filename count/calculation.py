@@ -122,8 +122,7 @@ class Tricount():
         Output : dict {name:total credit}. total credit can be negative.
         """
 
-        total_credit = {}
-        
+        total_credit = {} 
         for payer in self.dict_participants.keys():
             total_credit[payer] = 0
             for receiver in self.dict_participants[payer].credits.keys():

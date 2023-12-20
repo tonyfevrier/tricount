@@ -189,7 +189,9 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `-mettre en première proposition dans tout tricount créé le participant loggé.` 
         `-enlever des tests fonctionnels de création de tricount le participant loggé qui doit être automatiquement créé. Modifier le newcount.JS pour refuser un participant déjà ajouté.`
         -il faudra ptet enlever la page welcome et tout ce qui lui est relié sauf si on introduit une première page autre que l'enregistrement/connection. 
-        -afficher en bas de la liste des dépenses, le coût total du loggé.
+        `-afficher en bas de la liste des dépenses, le coût total du loggé.`
+        `-Débugger : comprendre pourquoi dans mon test fonc, quand je crée une dépense dans le tricount de Dulciny, Dulciny n'apparait dans le dict_participants. Bug dans la vue addcount le get list ne récupère pas le premier participant.`
+        `-Débugger, mes tests fonctionnels ne passent plus à cause de createspending qui répartit uniformément sur les participants alors que je voudrais que ce ne soit que sur Jean et Henri. Changer cela : la répartition est automatique sur les ptctps via JS donc ajouter le 3ème.`
         -page spending equilibria : proprio en gras + les équilibrages concernant le proprio doivent être dans Comment puis-je équilibrer? 
         -merger la branche puis créer un dépôt distant github et y déposer mon git supprimer ma branche puis travailler avec gitflow pour apprendre.
     - Ecrire un fichier de commande qui permet de lancer tous les tests fonctionnels ou alors certains d'entre eux.
