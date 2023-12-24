@@ -380,9 +380,14 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
             amount = credit.find_element(By.CLASS_NAME,"amount")
             self.assertIn([participant.text,amount.text], [["Tony","-57.5 eur"],["Henri","-7.5 eur"],["Yann","22.5 eur"],["Marine","42.5 eur"]])
         
-        #Vérification de la sol
-        #On regarde si les crédits totaux sont corrects et si ce que doit untel à un tel est correct.
-         
+        #Les crédits dettes du propriétaire sont présentées d'abord celles des autres dans la section suivante
+
+        usersolutions = self.browser.find_elements(By.NAME, "userinclude") 
+        for usersolution in usersolutions:
+            self.assertIn('Marine',[elt.text for elt in usersolution.find_elements(By.CLASS_NAME, 'who')])
+        othersolutions = self.browser.find_elements(By.NAME, "nouserinclude")
+        for othersolution in othersolutions:
+            self.assertNotIn('Marine',[elt.text for elt in othersolution.find_elements(By.CLASS_NAME, 'who')]) 
 
     def test_modify_a_created_spending(self):
         pass

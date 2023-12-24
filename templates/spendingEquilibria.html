@@ -29,13 +29,13 @@
         {% for name,credit in total_credit.items %} 
             {% if credit >= 0 %}
             <div class = "credits" name = "credits-positive">
-                <div><p class = participant> {{name}} </p></div>
+                <div><p class = participant name = "{% if name == user %}owner{%else%}other{%endif%}"> {{name}} </p></div>
                 <div><p class = "amount"> {{credit}} eur</p></div>
             </div> 
             {% else %}
             <div class = "credits" name = "credits-negative">
                 <div><p class = "amount"> {{credit}} eur</p></div>
-                <div><p class = participant> {{name}}</p> </div>
+                <div><p class = participant name = "{% if name == user %}owner{%else%}other{%endif%}"> {{name}}</p> </div>
             </div> 
             {% endif %}
         {% endfor %}
@@ -46,19 +46,23 @@
 
         {% for debitor, debitor_data in transfert_to_equilibrium.items %}
             {% for creditor, amount in debitor_data.items %}
-            <div class = "reimbursement">
-                <div class = "reimbursement-details">
-                    <div class = "onetoone">
-                        <p class = "who">{{debitor}}</p>
-                        <p class = "dueto">doit à </p>
-                        <p class = "who">{{creditor}}</p>
+                {% if debitor == user or creditor == user %}
+                {% if amount != 0%}
+                <div class = "reimbursement" name = "userinclude">
+                    <div class = "reimbursement-details">
+                        <div class = "onetoone">
+                            <p class = "who">{{debitor}}</p>
+                            <p class = "dueto">doit à </p>
+                            <p class = "who">{{creditor}}</p>
+                        </div>
+                        <p class = "reimbursement-amount">{{amount}} eur</p>
                     </div>
-                    <p class = "reimbursement-amount">{{amount}} eur</p>
+                    <div class = "more-options">
+                        Plus d'options
+                    </div>
                 </div>
-                <div class = "more-options">
-                    Plus d'options
-                </div>
-            </div>
+                {% endif %}
+                {% endif %}
             {%endfor%}
         {%endfor%}
 
@@ -66,6 +70,26 @@
         <p class = "equilibrating">
             Autres remboursements
         </p> 
+        {% for debitor, debitor_data in transfert_to_equilibrium.items %}
+            {% for creditor, amount in debitor_data.items %}
+                {% if debitor != user and creditor != user%}
+                <div class = "reimbursement" name = "nouserinclude">
+                    <div class = "reimbursement-details">
+                        <div class = "onetoone">
+                            <p class = "who">{{debitor}}</p>
+                            <p class = "dueto">doit à </p>
+                            <p class = "who">{{creditor}}</p>
+                        </div>
+                        <p class = "reimbursement-amount">{{amount}} eur</p>
+                    </div>
+                    <div class = "more-options">
+                        Plus d'options
+                    </div>
+                </div>
+                {% endif %}
+            {%endfor%}
+        {%endfor%}
     </main>
+
 </body>
 </html>

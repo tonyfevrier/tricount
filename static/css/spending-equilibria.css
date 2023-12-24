@@ -136,7 +136,9 @@ div[name = "credits-negative"] .participant{
     text-align: start;
 }
 
-
+.participant[name = "owner"]{
+    font-weight: bold;
+}
 
 .equilibrating{
     padding:1em;
