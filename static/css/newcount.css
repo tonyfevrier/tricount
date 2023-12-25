@@ -108,7 +108,7 @@ input[type="radio"].newtricount_category:first-child + label{
     margin-left: 0;
 }
 
-input[type="radio"].newtricount_category:focus + label {
+input[type="radio"].newtricount_category:checked + label {
     background-color: var(--color);
     color: white;
 }

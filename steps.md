@@ -202,12 +202,14 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`page newcount : input dans lequel on va passer la currency choisie.`
         -`test fonctionnel : dans la création du tricount, on clique sur la page des currency et on vérifie que la bonne monnaie est passée.`
         -`améliorer le css de currency.html`
-        - compléter newcount.js pour que lorsqu'on clique sur currency on mette ce qui est rempli dans le localstorage et quand on revient on préremplit avec ce localstorage.
-        -test fonctionnel modifier : retourner changer de currency après avoir mis des participants et vérifier s'ils sont toujours là.
+        -`compléter newcount.js pour que lorsqu'on clique sur currency on mette ce qui est rempli dans le localstorage et quand on revient on préremplit avec ce localstorage.`
+        -`deux bugs : quand je reviens en arrière et que je relance un tricount puis je clique sur currency, le localstorage des participants précédents réapparait.`
+        -`bug 2 : je peux mettre plusieurs fois le même participant.`
+        -`test fonctionnel modifier : retourner changer de currency après avoir mis des participants et vérifier s'ils sont toujours là.`
         -modifier la bdd et la création des tricounts.
         -modifier les tests unitaires pour contrôler les modifs dans la bdd.
-        -Ajouter dans devise.html la recherche de currency (JS sûrement nécessaire).
-        -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il semble que JS soit nécessaire pour revenir.  
+        -Modifier dans toutes les pages de dépenses EUR par la currency choisie.
+        -Ajouter dans devise.html la recherche de currency (JS).
         -Test fonctionnel pour voir si tout est affiché et si on va vers la bonne url.
     -branche chat :
     -modification des dépenses déjà entrées :

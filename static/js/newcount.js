@@ -16,6 +16,7 @@ document.addEventListener("click", userClicking);
 document.addEventListener("keydown", userTaping);
 addparticipant.addEventListener("click", userAddingParticipant);
 
+//Récupération de la monnaie dans l'url si on vient de la liste des monnaies.
 const url = window.location.search;
 const params = new URLSearchParams(url);
 let currency = document.querySelector('.newtricount_currency');
@@ -24,6 +25,12 @@ if (url.includes("parametre1")){
     currency.value = params.get('parametre1');
 }
 
+//Stocker puis récupérer les données préécrites lors du chargement de page
+let formulaire = document.querySelector('form')
+const link_to_currency = document.querySelector('.choose-currency');
+link_to_currency.addEventListener("click", currencyClicking);
+
+document.addEventListener('DOMContentLoaded',recoverItems)
 
 function userWriting(event){ 
     //Afficher le compteur quand le nombre de lettres change.
@@ -76,7 +83,7 @@ function userAddingParticipant(event){
     /*Function which adds html elements when user adds a participant*/
     
     if (new_participant.value === 'Autre participant' || new_participant.value === '') return;
-
+ 
     if (listparticipants.includes(new_participant.value)){
         new_participant.value = '';
         return;
@@ -89,11 +96,11 @@ function userAddingParticipant(event){
 
     form.append(printparticipant); 
 
-    //Mise à jour de différentes valeurs.
-    new_participant.value = '';  
+    //Mise à jour de différentes valeurs. 
     number_ptcpt += 1;
     nb_participants.innerHTML = `Participants (${number_ptcpt}/50)`;
     listparticipants.push(new_participant.value);
+    new_participant.value = ''; 
 
     //Creation of event for closing the participants
     closeparticipants = document.body.querySelectorAll('.closeparticipant');
@@ -110,4 +117,52 @@ function userClosingParticipant(event){
     number_ptcpt -= 1;
     nb_participants.innerHTML = `Participants (${number_ptcpt}/50)`;
 
+}
+
+
+function currencyClicking(event){
+    /*Function to put what the user writes in local storage */
+
+    event.preventDefault();
+
+    localStorage.clear();
+    //récupérer les données de description titre, category et participants
+    localStorage.setItem("titre", formulaire.newtricount_title.value);
+    localStorage.setItem("description", formulaire.newtricount_description.value); 
+
+    let category = document.body.querySelector('.newtricount_category:checked'); 
+    if (category) localStorage.setItem("category", category.value); 
+
+    let participants = formulaire.querySelectorAll('.nameparticipant');
+    for (let participant of participants){
+        localStorage.setItem(`${participant.value}`, participant.value);
+    }
+    
+
+    //remettre le comportement par défaut
+    window.location.href = link_to_currency.getAttribute("href");
+}
+
+function recoverItems(event){
+    /*Function to recover what has been to put in local storage if we come from the currency page*/
+    if (!document.referrer.includes('currency')) return;
+
+    formulaire.newtricount_title.value = localStorage.getItem("titre");
+    formulaire.newtricount_description.value = localStorage.getItem("description"); 
+ 
+    console.log(localStorage);
+    //si on une valeur dans newtricount_category, on checked la case correspondante.
+    category = localStorage.getItem("category"); 
+    if (category){ 
+        formulaire.querySelector(`[value = ${category}]`).checked = true; 
+    }
+
+    for (let i = 0; i < localStorage.length; i++){
+        let key = localStorage.key(i);
+        if (!["titre","description","category"].includes(key)){
+            new_participant.value = localStorage.getItem(key);
+            userAddingParticipant();
+        }
+    }
+     
 }

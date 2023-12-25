@@ -110,7 +110,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.click_on_a_link(By.CSS_SELECTOR,".closeparticipant[name = 'Henri']")
         time.sleep(2)
 
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Tony/newcount")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Tony/newcount?parametre1=AFN")
         
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
         number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants") 
@@ -120,6 +120,10 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.assertEqual(number_participants.text,"Participants (2/50)") 
 
         self.add_participants('Heeeeeenri')
+
+        #He changes of currency before validating the tricount
+        self.click_on_a_link(By.CLASS_NAME, "choose-currency")
+        self.click_on_a_link(By.CLASS_NAME,"EUR")
 
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
         number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants")
