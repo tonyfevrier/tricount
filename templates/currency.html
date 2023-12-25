@@ -11,11 +11,15 @@
         <p>Sélectionner une devise</p>
         <a href="" class = "currencyresearch">loupe</a>
     </nav>
-    <main>
-        <div class = "currency">
-            <p class = "currencyabbreviate"> EUR</p>
-            <p class = "currencyentire"> Euro</p>
-        </div>
+    <main> 
+            {% for acronym, currency in currencies.items%} 
+            <a href="/count/{{user}}/newcount?parametre1={{acronym}}" class = "{{acronym}}">
+                <p class = "{{acronym}}"> {{acronym}} </p>
+                <p class = "currencyentire"> {{currency}}</p> 
+            </a>
+            {% endfor %}
+            {% csrf_token %}
+        </form>
     </main>
 </body>
 </html>

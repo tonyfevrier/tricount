@@ -96,6 +96,13 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         
         self.assertEqual(self.browser.current_url, url + '/count/Tony/newcount') 
     
+        #Il choisit une monnaie et vérifie qu'elle a bien été prise en compte :
+        self.click_on_a_link(By.CLASS_NAME, "choose-currency")
+        self.click_on_a_link(By.CLASS_NAME,"AFN")
+
+        currency = self.browser.find_element(By.CLASS_NAME, "newtricount_currency")
+        self.assertEqual(currency.get_attribute("value"), "AFN")
+
         #Il commence par remplir les différents participants à son premier tricount : les participants apparaissent sur la page du tricount ainsi que le nombre de participants qui s'incrémente.
         #Il en met deux puis se ravise, l'enlève puis le remet.
         self.add_participants('Jean')

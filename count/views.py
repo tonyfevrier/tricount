@@ -6,6 +6,7 @@ from count.func import *
 from count import calculation
 from datetime import date
 from count.calculation import *
+import json
 
 def welcome(request):  
     return render(request, "welcome.html")
@@ -68,7 +69,12 @@ def listecount(request, user):
     return render(request,'index.html',context ={'counts' : items, 'user' : user})
 
 def newcount(request,user): 
-    return render(request, 'newcount.html',context={'user':user})
+    #if request.method == "POST":
+    #    currency = request.POST["acronym"]
+    #else :
+    currency = "EUR" 
+    return render(request, 'newcount.html',context={'user':user, 'currency': currency})
+    
 
 def addcount(request,user):
     """
@@ -98,8 +104,10 @@ def addcount(request,user):
 def choosecurrency(request,user):
     """
     Function which leads to the choice of the payment currency
-    """
-    return render(request, 'currency.html')
+    """  
+    file = open('static/json/currency.json','r')
+    currencies = json.load(file)  
+    return render(request, 'currency.html', context = {'currencies' : currencies, 'user':user})
 
 def spending(request,user ,id_count):
     """

@@ -8,6 +8,8 @@ from copy import deepcopy
 from count.tests_functions import UnitaryTestMethods
 from datetime import date
 import json
+from bs4 import BeautifulSoup 
+
 
 # Create your tests here.
 
@@ -79,6 +81,7 @@ class NewcountTest(UnitaryTestMethods):
         response2 = self.client.get(link)
 
         self.assertTemplateUsed(response2, 'newcount.html') 
+
 
     def test_newcount_inputs(self):
         """
@@ -169,6 +172,15 @@ class NewcountTest(UnitaryTestMethods):
         response = self.client.get(link)
 
         self.assertIn(b'Henri',response.content)
+
+    def test_currencies_passedto_currencyhtml(self):
+        response = self.client.get('/count/Toto/newcount/currency')
+        soup = BeautifulSoup(response.content,'html.parser')
+ 
+        self.assertIn("EUR", str(soup))
+        self.assertIn("Euro", str(soup))
+
+        
 
 class TestCalculator(TestCase):
 

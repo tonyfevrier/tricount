@@ -123,7 +123,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`modifier le test unitaire pour voir si la date est passée.`
         -`modifier les tests fonctionnels de spending-details.`
         - faire fonctionner le bouton modifier.
-    -faire la page équilibre de spending.html:
+    `-faire la page équilibre de spending.html:`
         `créer nouvelle url`
         `créer l html`
         `préparer le css`
@@ -162,8 +162,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `JS : faire qu'on ne puisse pas ajouter des participants vides.`
         `newcount.js : changer le nb de participants dans nb_participants à chaque ajout de participant. (vérifier que mes mises à jour dans userAddingParticipant et userClosingParticipant fonctionnent).`
     -`voir pour mettre des fichiers dans le gitignore : ce sont ces fichiers qui sont conflictuels.`
-    -pour la prochaine grosse fonctionnalité, créer une branche puis essayer de la merger.
-    -ajouter le loggage :
+    `-pour la prochaine grosse fonctionnalité, créer une branche puis essayer de la merger.`
+    `-ajouter le loggage :`
         `-recenser les choses à modifier dans les différentes pages.`
         `-créer l'adresse de register et le html de register (en cours).` 
         `-créer la vue register en redirigeant vers le login`
@@ -193,21 +193,26 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         `-Débugger : comprendre pourquoi dans mon test fonc, quand je crée une dépense dans le tricount de Dulciny, Dulciny n'apparait dans le dict_participants. Bug dans la vue addcount le get list ne récupère pas le premier participant.`
         `-Débugger, mes tests fonctionnels ne passent plus à cause de createspending qui répartit uniformément sur les participants alors que je voudrais que ce ne soit que sur Jean et Henri. Changer cela : la répartition est automatique sur les ptctps via JS donc ajouter le 3ème.`
         `-page spending equilibria : proprio en gras + les équilibrages concernant le proprio doivent être dans Comment puis-je équilibrer?` 
-        -merger la branche puis créer un dépôt distant github et y déposer mon git supprimer ma branche puis travailler avec gitflow pour apprendre.
+        `-merger la branche puis créer un dépôt distant github et y déposer mon git supprimer ma branche puis travailler avec gitflow pour apprendre.`
     - Ecrire un fichier de commande qui permet de lancer tous les tests fonctionnels ou alors certains d'entre eux.
-    -Ajouter la possibilité d'une arrivée d'argent et d'un transfert et pas juste une dépense:
-        Ajouter au html et au css le bouton correspondant
-        Faire le JS correspondant.
-        Prendre en compte dans la vue addspending que ce soit une dépense ou un reçu.
-    Points qui nécessitent sûrement JS.
         -`Ajouter le nombre de caractère écrit sous le titre et la description et le limiter à   50 (resp 500). (Javascript nécessaire pour récupérer des données en temps réel).`
         -`Ajouter la possibilité de supprimer les participants qu'on vient d'ajouter via la  petite croix. Pour le moment quand je clique sur les croix, ça ajoute des    participants. (Je pense que j'ai besoin de JS aussi).`
+    -branche currency
+        -`créer une page avec les currency qui sont des a qui redirigent vers la page newcount en passant l'argument de la currency.`
+        -`page newcount : input dans lequel on va passer la currency choisie.`
+        -`test fonctionnel : dans la création du tricount, on clique sur la page des currency et on vérifie que la bonne monnaie est passée.`
+        -améliorer le css de currency.html
+        - compléter newcount.js pour que lorsqu'on clique sur currency on mette ce qui est rempli dans le localstorage et quand on revient on préremplit avec ce localstorage.
+        -test fonctionnel modifier : retourner changer de currency après avoir mis des participants et vérifier s'ils sont toujours là.
+        -modifier la bdd et la création des tricounts.
+        -modifier les tests unitaires pour contrôler les modifs dans la bdd.
         -Ajouter dans devise.html la recherche de currency (JS sûrement nécessaire).
-        -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il   semble que JS soit nécessaire pour revenir. 
-        -Ajouter à l'html les devises via le json. 
+        -Ajouter dans newcount.html, le select de la devise qui mène à currency.html : il semble que JS soit nécessaire pour revenir.  
         -Test fonctionnel pour voir si tout est affiché et si on va vers la bonne url.
-        -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`
-        -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît.
+    -branche chat :
+    -modification des dépenses déjà entrées :
+    -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`
+    -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît. 
     Tests JS : voir comment en faire facilement sans selenium.
 
 

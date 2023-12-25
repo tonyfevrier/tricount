@@ -16,6 +16,14 @@ document.addEventListener("click", userClicking);
 document.addEventListener("keydown", userTaping);
 addparticipant.addEventListener("click", userAddingParticipant);
 
+const url = window.location.search;
+const params = new URLSearchParams(url);
+let currency = document.querySelector('.newtricount_currency');
+
+if (url.includes("parametre1")){
+    currency.value = params.get('parametre1');
+}
+
 
 function userWriting(event){ 
     //Afficher le compteur quand le nombre de lettres change.
