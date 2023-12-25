@@ -1,20 +1,42 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choice of the currency</title>
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/currency.css' %}">
 </head>
 <body>
-    <nav>
-        <a class = "backtonewcount" href = "">retour</a>
+    <header>
+        <a href="/count/{{user}}/newcount" class = "backtotricount" id = "backtonewcount"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <p>Sélectionner une devise</p>
         <a href="" class = "currencyresearch">loupe</a>
-    </nav>
+    </header>
+    <main>
+        <a href="/count/{{user}}/newcount?parametre1=EUR" class = "EUR" name = "link-newcount">
+            <p class = "acronym"> EUR </p>
+            <p class = "currencyentire"> {{currencies.EUR}}</p> 
+        </a>
+        <a href="/count/{{user}}/newcount?parametre1=CHF" class = "CHF" name = "link-newcount">
+            <p class = "acronym"> CHF </p>
+            <p class = "currencyentire"> {{currencies.CHF}}</p> 
+        </a>
+        <a href="/count/{{user}}/newcount?parametre1=GBP" class = "GBP" name = "link-newcount">
+            <p class = "acronym"> GBP </p>
+            <p class = "currencyentire"> {{currencies.GBP}}</p> 
+        </a>
+        <a href="/count/{{user}}/newcount?parametre1=USD" class = "USD" name = "link-newcount">
+            <p class = "acronym"> USD </p>
+            <p class = "currencyentire"> {{currencies.USD}}</p> 
+        </a>
+    </main>
+    <div class = 'currencies-list'> Toutes les devises </div>
     <main> 
             {% for acronym, currency in currencies.items%} 
-            <a href="/count/{{user}}/newcount?parametre1={{acronym}}" class = "{{acronym}}">
-                <p class = "{{acronym}}"> {{acronym}} </p>
+            <a href="/count/{{user}}/newcount?parametre1={{acronym}}" class = "{{acronym}}" name = "link-newcount">
+                <p class = "acronym"> {{acronym}} </p>
                 <p class = "currencyentire"> {{currency}}</p> 
             </a>
             {% endfor %}

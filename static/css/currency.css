@@ -1,0 +1,36 @@
+header{
+    justify-content: space-between;
+    padding: 1em;
+}
+
+a {
+    text-decoration: none;
+    color: black; 
+}
+
+a[name = "link-newcount"]{
+    display: flex;
+    align-items: center;
+    border-bottom: solid;
+    border-color: gray;
+    border-width: 1px;
+    padding: 0.5em 0;
+}
+
+main{
+    padding: 0.5em;
+}
+
+.acronym{
+    font-weight: bold;
+    width :3em;
+}
+
+.currencyentire{
+    color : gray;
+}
+
+.currencies-list{
+    color : gray;
+    padding : 0.5em;
+}

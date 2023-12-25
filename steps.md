@@ -201,7 +201,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`créer une page avec les currency qui sont des a qui redirigent vers la page newcount en passant l'argument de la currency.`
         -`page newcount : input dans lequel on va passer la currency choisie.`
         -`test fonctionnel : dans la création du tricount, on clique sur la page des currency et on vérifie que la bonne monnaie est passée.`
-        -améliorer le css de currency.html
+        -`améliorer le css de currency.html`
         - compléter newcount.js pour que lorsqu'on clique sur currency on mette ce qui est rempli dans le localstorage et quand on revient on préremplit avec ce localstorage.
         -test fonctionnel modifier : retourner changer de currency après avoir mis des participants et vérifier s'ils sont toujours là.
         -modifier la bdd et la création des tricounts.
