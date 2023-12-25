@@ -96,7 +96,7 @@ def addcount(request,user):
                 phrase = "Pas de description" 
             #Creation of the object for calculations
             tricount = Tricount(*participts)
-            count = Counts.objects.create(title = majuscule(titre), description = phrase,category = request.POST["newtricount_category"], participants = participts, data = tricount.to_json())
+            count = Counts.objects.create(title = majuscule(titre), description = phrase, currency = request.POST["newtricount_currency"], category = request.POST["newtricount_category"], participants = participts, data = tricount.to_json())
             return redirect(f'/count/{user}/tricount/'+ str(count.id))
     else:  
         return render(request,'newcount.html', context={'titre':False})
@@ -139,7 +139,8 @@ def newspending(request,user ,id_count):
     """
     count = Counts.objects.get(id = id_count)
     participants = count.participants
-    return render(request, 'newspending.html',context={'user':user,'idcount': id_count, 'participants':participants})
+    currency = count.currency
+    return render(request, 'newspending.html',context={'user':user,'idcount': id_count, 'participants':participants, 'currency': currency})
 
 def addspending(request,user ,id_count):
     """

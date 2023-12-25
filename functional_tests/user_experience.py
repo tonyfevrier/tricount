@@ -88,21 +88,23 @@ class Click():
             buttonbox.send_keys(Keys.ENTER)
             time.sleep(2)
 
-    def add_tricount_characteristics(self,title,description,category):
+    def add_tricount_characteristics(self,title,description,currency,category):
+        self.click_on_a_link(By.CLASS_NAME, "choose-currency")
+        self.click_on_a_link(By.CLASS_NAME,currency)
         titlebox = self.browser.find_element(By.NAME,"newtricount_title")
-        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description") 
+        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")  
         categorybox = self.browser.find_element(By.ID,f"{category}") 
         submitbox = self.browser.find_element(By.NAME,"submit")
         
         titlebox.send_keys(title)
-        descriptionbox.send_keys(description) 
+        descriptionbox.send_keys(description)  
         categorybox.click()
 
         #He chooses to go on the currency page: 
         submitbox.send_keys(Keys.ENTER)
         time.sleep(2)
 
-    def create_a_tricount(self,title, description, category,*participants):
+    def create_a_tricount(self,title, description, currency, category,*participants):
 
         #Clicks to add a tricount 
         self.click_on_a_link(By.ID,'id_newcount') 
@@ -111,7 +113,7 @@ class Click():
         self.add_participants(*participants) 
 
         #Enter  the other characteristics and click to validate
-        self.add_tricount_characteristics(title,description,category)
+        self.add_tricount_characteristics(title,description, currency, category)
 
     def click_on_an_existing_tricount(self,tricount_number):
         """

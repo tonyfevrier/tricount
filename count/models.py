@@ -19,6 +19,7 @@ class Counts(models.Model):
     #data is the object containing credits useful for calculations of equilibria.
     title = models.TextField(default='')
     description = models.TextField(default='')
+    currency = models.TextField(default = '')
     category = models.TextField(default='')
     participants = JSONField(default=dict)
     data = models.TextField(default='') 

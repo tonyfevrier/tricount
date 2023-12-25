@@ -87,12 +87,13 @@ class NewcountTest(UnitaryTestMethods):
         """
         Fonction qui teste si les données entrées par l'utilisateur sont bien récupérées et si la redirection vers la page d'origine est effective.
         """ 
-        response = self.create_a_tricount("tricount 1","description 1","Voyage",'Tony','Jean','Henri')
+        response = self.create_a_tricount("tricount 1","description 1","EUR","Voyage",'Tony','Jean','Henri')
         count = Counts.objects.first()
 
         self.assertEqual("Tricount 1",count.title)
         self.assertEqual("Description 1", count.description)
         self.assertEqual("Voyage", count.category)
+        self.assertEqual("EUR", count.currency)
         self.assertRedirects(response, '/count/Tony/tricount/1')  
 
     def test_lack_title_newcountinputs(self):
@@ -101,7 +102,7 @@ class NewcountTest(UnitaryTestMethods):
         et on a dans la réponse html un message en rouge indiquant que le titre et la catégorie doivent être remplis.
         """    
         one = Counts.objects.count()
-        response = self.create_a_tricount("","description 1","Voyage",'Jean') 
+        response = self.create_a_tricount("","description 1","EUR","Voyage",'Jean') 
         two = Counts.objects.count() 
 
         self.assertEqual(one,two)
@@ -114,7 +115,7 @@ class NewcountTest(UnitaryTestMethods):
         et on a dans la réponse html un message en rouge indiquant qu'il faut un participant.
         """    
         one = Counts.objects.count()
-        response = self.create_a_tricount("Tricount sans participant", "description 1", "Voyage")
+        response = self.create_a_tricount("Tricount sans participant", "description 1","EUR", "Voyage")
         two = Counts.objects.count() 
 
         self.assertEqual(one,two)
@@ -124,11 +125,10 @@ class NewcountTest(UnitaryTestMethods):
 
     def test_bdd_when_tricounts_created(self):
         """
-        Fonction qui teste, si lorsqu'on ajoute un participant, la bdd des participants est bien incrémentée.
-        Elle teste ensuite lorsqu'on poste un titre, une description, une catégorie, que les participants sont bien associés au tricount.
+        Fonction qui teste si lorsqu'on poste un titre, une description, une catégorie, que les participants sont bien associés au tricount.
         Enfin elle crée un second tricount et vérifie que la bdd associe bien le bon nombre de participants au tricount et qu'elle n'associe par des noms du premier tricount au second.
         """  
-        self.create_a_tricount("tricount 1","description 1","Voyage","Jean","Henri")
+        self.create_a_tricount("tricount 1","description 1","EUR","Voyage","Jean","Henri")
 
         count = Counts.objects.first() 
 
@@ -145,7 +145,7 @@ class NewcountTest(UnitaryTestMethods):
         self.assertDictEqual(data['dict_participants']["Jean"], {'owner' : 'Jean', 'expense': 0, 'credits':{'Henri':0}, 'receivers' : ['Henri']})
         self.assertDictEqual(data['dict_participants']["Henri"], {'owner' : 'Henri', 'expense': 0, 'credits':{'Jean':0}, 'receivers' : ['Jean']})
                                           
-        self.create_a_tricount("tricount 2","description 2","Voyage","Henri","Henriette","Tony")
+        self.create_a_tricount("tricount 2","description 2","EUR","Voyage","Henri","Henriette","Tony")
         count2 = Counts.objects.get(pk=2) 
         self.assertEqual(3,len(count2.participants))
 
@@ -156,8 +156,8 @@ class NewcountTest(UnitaryTestMethods):
         Function checking if we go on the good link after clicking on a tricount.
         """ 
         #We create two tricounts
-        self.create_a_tricount("tricount 1", "description 1", "Voyage", "Henri", "Jean")
-        self.create_a_tricount("tricount 2", "description 2", "Coloc", "Roberto",'Alfredo')
+        self.create_a_tricount("tricount 1", "description 1","EUR", "Voyage", "Henri", "Jean")
+        self.create_a_tricount("tricount 2", "description 2","EUR", "Coloc", "Roberto",'Alfredo')
         
         #We go on the list of the tricounts
         response = self.client.get('/count/Henri')
@@ -319,13 +319,13 @@ class TestSpending(UnitaryTestMethods):
         """
         We enter a newspending and we see if data are integrated into the database.
         """ 
-        self.create_a_tricount('tricount1', 'description', "Voyage", "Tony", "Henri", "Jean")
+        self.create_a_tricount('tricount1', 'description',"EUR", "Voyage", "Tony", "Henri", "Jean")
         response = self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean','Tony'], [50,50,0])  
 
         self.assertRedirects(response,'/count/Tony/tricount/1') 
     
     def test_bdd_newspending_inputs(self):
-        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Jean")
+        self.create_a_tricount('tricount1', 'description',"EUR", "Voyage", "Henri", "Jean")
 
         number = Spending.objects.count()
         self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean'], [50,50])  
@@ -343,7 +343,7 @@ class TestSpending(UnitaryTestMethods):
         """
         test : we begin to create a spending and go back. No new spend must appear in the bdd.
         """
-        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann")
+        self.create_a_tricount('tricount1', 'description',"EUR", "Voyage", "Henri", "Yann")
         response = self.client.get('/count/Tony/tricount/1/spending') 
         nb_spending = Spending.objects.count()
         self.extract_and_click_on_link(response.content , 'backtospending')  
@@ -354,7 +354,7 @@ class TestSpending(UnitaryTestMethods):
         """
         test : we create a spending, we forget the title. No new spend must appear in the bdd and we stay on the same template.
         """
-        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Jean")     
+        self.create_a_tricount('tricount1', 'description',"EUR", "Voyage", "Henri", "Jean")     
         nb_spending = Spending.objects.count()
         response = self.create_a_spending('', 100, 'Jean', ['Henri','Jean'],[50,50])   
         
@@ -365,7 +365,7 @@ class TestSpending(UnitaryTestMethods):
         """
         test : we create a spending with no amount. A new spend must appear in the bdd with amount 0 and we must be redirected.
         """
-        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Jean")
+        self.create_a_tricount('tricount1', 'description',"EUR", "Voyage", "Henri", "Jean")
         nb_spending = Spending.objects.count()
         self.create_a_spending('dépense1', '', 'Jean', ['Henri','Jean'],[0,0])  
         spending = Spending.objects.get(pk = 1)
@@ -374,7 +374,7 @@ class TestSpending(UnitaryTestMethods):
         self.assertEqual(spending.amount, 0)
  
     def test_multiple_spendings_gives_good_credits_in_bdd(self):
-        self.create_a_tricount('tricount1', 'description', "Voyage", "Henri", "Yann", "Marine", "Tony")
+        self.create_a_tricount('tricount1', 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
         self.create_a_spending('dépense1', 100, 'Tony', ['Henri','Yann','Marine','Tony'], [25,50,25,0]) 
         self.create_a_spending('dépense2', 200, 'Marine', ['Henri','Yann','Marine','Tony'], [0,0,150,50]) 
         self.create_a_spending('dépense3', 150, 'Henri', ['Henri','Yann','Marine','Tony'], [50,50,25,25]) 

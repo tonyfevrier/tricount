@@ -24,7 +24,7 @@
             <p class = "counter">0/50</p>
             <div class = "div-amount">
                 <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount">
-                <label for="amount">EUR</label>
+                <label for="amount">{{currency}}</label>
             </div>
             <select class = "spender" name="spender" id="spender">
                 {% for participant in participants%}
@@ -45,7 +45,7 @@
                     <label class = "receiver-participant" for="{{participant}}">{{participant}}</label> 
                     <div class = "amount-and-parts"> 
                         <input name = "{{participant}}" type = "text" class = "{{participant}}-amount" value = "0.00">
-                        <p>eur</p>
+                        <p>{{currency}}</p>
                     </div>
                 </div> 
                 {% endfor %}

@@ -206,11 +206,10 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`deux bugs : quand je reviens en arrière et que je relance un tricount puis je clique sur currency, le localstorage des participants précédents réapparait.`
         -`bug 2 : je peux mettre plusieurs fois le même participant.`
         -`test fonctionnel modifier : retourner changer de currency après avoir mis des participants et vérifier s'ils sont toujours là.`
-        -modifier la bdd et la création des tricounts.
-        -modifier les tests unitaires pour contrôler les modifs dans la bdd.
-        -Modifier dans toutes les pages de dépenses EUR par la currency choisie.
-        -Ajouter dans devise.html la recherche de currency (JS).
-        -Test fonctionnel pour voir si tout est affiché et si on va vers la bonne url.
+        -`modifier la bdd et la création des tricounts.`
+        -`modifier les tests unitaires pour contrôler les modifs dans la bdd.` 
+        -`Modifier dans toutes les pages de dépenses EUR par la currency choisie.`
+        -Ajouter dans devise.html la recherche de currency (JS). 
     -branche chat :
     -modification des dépenses déjà entrées :
     -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`
