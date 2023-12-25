@@ -209,8 +209,9 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`modifier la bdd et la création des tricounts.`
         -`modifier les tests unitaires pour contrôler les modifs dans la bdd.` 
         -`Modifier dans toutes les pages de dépenses EUR par la currency choisie.`
-        -Ajouter dans devise.html la recherche de currency (JS). 
-    -branche chat :
+        -`Ajouter dans devise.html la recherche de currency (JS).`
+        -écrire un test fonctionnel pour vérifier que ce JS fonctionne bien. 
+    -branche pour le chat entre les participants :
     -modification des dépenses déjà entrées :
     -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`
     -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît. 
@@ -257,6 +258,7 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
     -NOSUCHTABLE : pb de bdd, supprimer la base, vérifier que le dossier migrations et init existent bien et refaire les migrations.
     -JS PREVENTDEFAULT : quand je cliquais sur un input submit avec un event click qui m'affichait 1, il n'affichait pas 1 car le comportement par défaut était de soumettre le formulaire.
     -JS PREVENTDEFAULT 2 : quand on empêche l'event par défaut de submit, les inputs ne sont pas remis à 0 : cela implique que le texte précédemment tapé est toujours là.
+    -HIDDEN FLEX INLINE : attention certains types de display empêchent le paramètre hidden de fonctionner. Le display = none est un bon remplaçant.
 
 # Mes difficultés principales
 

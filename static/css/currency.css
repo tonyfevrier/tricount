@@ -9,6 +9,7 @@ a {
 }
 
 a[name = "link-newcount"]{
+    /*position: relative;*/
     display: flex;
     align-items: center;
     border-bottom: solid;
@@ -16,17 +17,23 @@ a[name = "link-newcount"]{
     border-width: 1px;
     padding: 0.5em 0;
 }
+ 
 
 main{
     padding: 0.5em;
 }
 
 .acronym{
+    /*position: absolute;*/
     font-weight: bold;
     width :3em;
 }
 
 .currencyentire{
+    /*position: absolute;
+    top:1em; 
+    left : 3em;
+    bottom :0;*/
     color : gray;
 }
 

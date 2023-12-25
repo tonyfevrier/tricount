@@ -10,12 +10,13 @@
 </head>
 <body>
     <header>
-        <a href="/count/{{user}}/newcount" class = "backtotricount" id = "backtonewcount"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-        <p>Sélectionner une devise</p>
-        <a href="" class = "currencyresearch">loupe</a>
+        <a href="/count/{{user}}/newcount" class = "backtonewcount" id = "backtonewcount"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <input type="text" hidden name="research" class ="research">
+        <p id = "select">Sélectionner une devise</p>
+        <button href="" class = "currencyresearch" id = "loupe">loupe</button>
     </header>
     <main>
-        <a href="/count/{{user}}/newcount?parametre1=EUR" class = "EUR" name = "link-newcount">
+        <a hidden href="/count/{{user}}/newcount?parametre1=EUR" class = "EUR" name = "link-newcount">
             <p class = "acronym"> EUR </p>
             <p class = "currencyentire"> {{currencies.EUR}}</p> 
         </a>
@@ -43,5 +44,6 @@
             {% csrf_token %}
         </form>
     </main>
+    <script src = "{% static 'js/currency.js'%}"></script>
 </body>
 </html>
