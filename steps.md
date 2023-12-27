@@ -210,7 +210,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`modifier les tests unitaires pour contrôler les modifs dans la bdd.` 
         -`Modifier dans toutes les pages de dépenses EUR par la currency choisie.`
         -`Ajouter dans devise.html la recherche de currency (JS).`
-        -écrire un test fonctionnel pour vérifier que ce JS fonctionne bien. 
+        -`écrire un test fonctionnel pour vérifier que ce JS fonctionne bien.`
+        - merger la branche puis la pousser vers le dépôt distant.
     -branche pour le chat entre les participants :
     -modification des dépenses déjà entrées :
     -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`

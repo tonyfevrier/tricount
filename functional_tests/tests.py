@@ -471,6 +471,40 @@ class JSTest(StaticLiveServerTestCase,user_experience.Click,user_experience.Chec
         self.assertEqual(counter.text, '11/500')
         time.sleep(2)
 
+    def test_JS_currency_research_bar(self):
+        #The client creates a new count and begins to create a tricount.
+        self.browser.get(self.live_server_url+ '/count/Toto')
+        self.click_on_a_link(By.CLASS_NAME,'id_newcount')
+        self.click_on_a_link(By.CLASS_NAME, "choose-currency")
+        loupe = self.browser.find_element(By.CLASS_NAME, "currencyresearch") 
+        self.assertEqual(loupe.is_displayed(),True) 
+
+        #He clicks on the loop and the research bar appears.
+        self.click_on_a_link(By.CLASS_NAME, "currencyresearch")
+        research = self.browser.find_element(By.CLASS_NAME, "research") 
+        self.assertEqual(research.is_displayed(),True) 
+        self.assertEqual(loupe.is_displayed(),False) 
+
+        #He puts Euro and only one currency is suggested. 
+        research.send_keys('euro')
+        time.sleep(2)
+        currencies = self.browser.find_elements(By.NAME,"link-newcount")
+        displayed_currencies = 0
+        for currency in currencies:
+            if currency.is_displayed():
+                displayed_currencies += 1
+        self.assertEqual(displayed_currencies,3)
+
+        #He then chooses to delete the research bar by pressing the backtonewcount arrow and it stays on the same page
+        self.click_on_a_link(By.CLASS_NAME, "backtonewcount")
+        self.assertEqual(self.browser.current_url, self.live_server_url+ '/count/Toto/newcount/currency')
+
+        #He clicks an other time to go back to newcount page.
+        self.click_on_a_link(By.CLASS_NAME, "backtonewcount")
+        self.assertEqual(self.browser.current_url, self.live_server_url+ '/count/Toto/newcount')
+
+
+
         
         
 
