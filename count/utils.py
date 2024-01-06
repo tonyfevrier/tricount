@@ -1,5 +1,6 @@
 from count.models import Counts
 from count.calculation import Tricount
+import requests
 
 def majuscule(chaine):
     """
@@ -22,6 +23,27 @@ def update_tricount_after_new_spending(id_count, spender, dico_receivers):
     tricount.spending_update(spender, dico_receivers)
     count.data = tricount.to_json()
     count.save()
+
+def useAPICurrency(currency_to, currency_from):
+    """
+    Fonction qui donne le taux de change d'une monnaie à une autre.
+
+    Inputs : 
+        -currency_to (str): monnaie dont veut le taux pour 1 unité de la monnaie convertie. 
+        -currency_from (str): monnaie qu'on veut convertir.
+    
+    Output : 
+        - response.json() (str) : le taux de change. 
+    """
+    url = "https://currency-exchange.p.rapidapi.com/exchange"
+    querystring = {"to":currency_to,"from":currency_from,"q":"1.0"}
+
+    headers = {
+        "X-RapidAPI-Key": "260ce107f1msh4a1b88e31999632p116730jsnec29696c42e6",
+        "X-RapidAPI-Host": "currency-exchange.p.rapidapi.com"}
+    response = requests.get(url, headers=headers, params= querystring)
+
+    return response.json()
 
 
     

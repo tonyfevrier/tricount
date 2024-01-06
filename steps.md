@@ -1,6 +1,7 @@
 # Etapes élémentaires de construction
 
-Je tente la méthodo suivante : test unitaire puis fonction associée puis compléter le test fonctionnel.
+Je tente la méthodo suivante : test unitaire puis fonction associée puis compléter le test fonctionnel. 
+
 
 **Création d'une première page avec la liste des tricount sur laquelle on peut créer un tricount et cela incrémente la liste.**
     -`Ecrire mon test fonctionnel : l'utilisateur voit le titre, voit la liste des tricount disponibles.`
@@ -211,8 +212,28 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         -`Modifier dans toutes les pages de dépenses EUR par la currency choisie.`
         -`Ajouter dans devise.html la recherche de currency (JS).`
         -`écrire un test fonctionnel pour vérifier que ce JS fonctionne bien.`
-        - merger la branche puis la pousser vers le dépôt distant.
+        -`merger la branche puis la pousser vers le dépôt distant.`
+    -consommer l'API currency converter de rapid API pour afficher dans la liste des dépenses le total en livres.
+        - `créer une branche API currency.`
+        - `importer l'API dans la vue de spending`
+        - `y convertir le total amount en livre par exemple`
+        - `afficher le contenu de la réponse dans la vue pour l'afficher dans un test `
+        - `le transmettre à l'html.`
+        - `lancer les tests pour voir ce qui est affiché (normalement il existe déjà des tests qui lancent spending)`
+        - bug : comprendre pourquoi le coût en euro n'apparaît plus (css). 
+        - écrire test fonctionnel pour voir si la monnaie changée est bien affichée.
+        - merger la branche avec master
+        - rebaser la branche chat à master.
     -branche pour le chat entre les participants :
+        - `voir comment fonctionne ajax et quelles sont les autres sol pr l'affichage en temps réel.`
+        - partie du serveur à l'utilisateur : 
+            partie client en JS : si on envoie un message, envoi via protocole socket
+            partie client : si un message arrive, il est ajouté à la page.
+            partie serveur : django : voir comment recevoir les sockets, stocke les messages et les affiche sur les comptes des différents clients.
+            apparition du message dans la page html sans réactualiser si elle est ouverte
+            apparition d'une cloche si on n'est pas dans le chat.
+            promesse dans le cas où qqun écrit : affichage qu'un utilisateur écrit.
+            
     -modification des dépenses déjà entrées :
     -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`
     -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît. 
@@ -220,7 +241,8 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
 
 
 # Bug non résolu : 
-    
+
+
 
 # Bugs intéressants 
     - TIME SEND KEYS : Après send_Keys, il faut laisser du temps pour que la page se charge.

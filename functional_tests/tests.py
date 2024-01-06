@@ -392,7 +392,6 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Click,user_exper
             self.assertIn([participant.text,amount.text], [["Tony","-57.5 EUR"],["Henri","-7.5 EUR"],["Yann","22.5 EUR"],["Marine","42.5 EUR"]])
         
         #Les crédits dettes du propriétaire sont présentées d'abord celles des autres dans la section suivante
-
         usersolutions = self.browser.find_elements(By.NAME, "userinclude") 
         for usersolution in usersolutions:
             self.assertIn('Marine',[elt.text for elt in usersolution.find_elements(By.CLASS_NAME, 'who')])

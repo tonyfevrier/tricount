@@ -2,11 +2,11 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from count.models import Counts, Spending
-from count.func import *
+from count.utils import *
 from count import calculation
 from datetime import date
 from count.calculation import *
-import json
+import json, requests
 
 def welcome(request):  
     return render(request, "welcome.html")
@@ -68,10 +68,7 @@ def listecount(request, user):
     items = Counts.objects.all() 
     return render(request,'index.html',context ={'counts' : items, 'user' : user})
 
-def newcount(request,user): 
-    #if request.method == "POST":
-    #    currency = request.POST["acronym"]
-    #else :
+def newcount(request,user):  
     currency = "EUR" 
     return render(request, 'newcount.html',context={'user':user, 'currency': currency})
     
@@ -106,7 +103,8 @@ def choosecurrency(request,user):
     Function which leads to the choice of the payment currency
     """  
     file = open('static/json/currency.json','r')
-    currencies = json.load(file)  
+    currencies = json.load(file) 
+    file.close() 
     return render(request, 'currency.html', context = {'currencies' : currencies, 'user':user})
 
 def spending(request,user ,id_count):
@@ -120,7 +118,21 @@ def spending(request,user ,id_count):
     tricount = Tricount.from_json(count.data) 
     total_credit_owner = tricount.calculate_total_credit()[user] 
     total_cost = tricount.total_cost 
-    return render(request, "spending.html", context = {'user':user,'count':count,'names':participants, 'spending' : spending, 'credit_owner' : total_credit_owner, 'totalcost' : total_cost})
+
+    rate = useAPICurrency("GBP", "EUR")
+    total_cost_in_pound = rate * float(total_cost)
+    print(total_cost, rate, total_cost_in_pound)
+
+    context = {
+        'user':user,
+        'count':count,
+        'names':participants,
+        'spending' : spending,
+        'credit_owner' : total_credit_owner,
+        'totalcost' : total_cost,
+        'totalpound' : total_cost_in_pound,
+    }
+    return render(request, "spending.html", context = context)
 
 def spendingEquilibria(request,user ,id_count):
     """
@@ -179,4 +191,5 @@ def spending_details(request,user , id_count, id_spending):
     number_of_spending = Spending.objects.count()
     context = {'user':user,'idcount' : id_count, 'idspending' : id_spending,'previousidspending' : id_spending - 1 , 'followingidspending' : id_spending + 1,'spending': spending, 'number_of_spending' : number_of_spending}
     return render(request,"spending-details.html",context)
+
 
