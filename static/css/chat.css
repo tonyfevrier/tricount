@@ -1,0 +1,36 @@
+header{
+    justify-content:flex-start;
+    padding: 1em;
+}
+
+header a{
+    margin-right: 1em;
+}
+
+.header-title{
+    font-size: 1.5em;
+}
+
+main, form{
+    padding: 1em;
+    background-color: lightgray;
+}
+
+
+input[type="text"]{
+    border-radius: 10px;
+    height: 2em;
+    width: 90%;
+}
+
+button{
+    background-color: var(--color); 
+    cursor: pointer;
+    border-radius: 100%;
+    width:35px;
+    height: 35px;
+}
+
+button img{
+    align-items: center;
+}

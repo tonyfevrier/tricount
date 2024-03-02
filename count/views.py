@@ -192,4 +192,8 @@ def spending_details(request,user , id_count, id_spending):
     context = {'user':user,'idcount' : id_count, 'idspending' : id_spending,'previousidspending' : id_spending - 1 , 'followingidspending' : id_spending + 1,'spending': spending, 'number_of_spending' : number_of_spending}
     return render(request,"spending-details.html",context)
 
-
+def chat(request, user,id_count):
+    """
+    Function to go to the chat view
+    """
+    return render(request,'chat.html')

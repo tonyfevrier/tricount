@@ -1,0 +1,27 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/common.css'%}">
+    <link rel="stylesheet" href="{%static 'css/chat.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <a href="/count/{{user}}URL A COMPLETER" class = "backtospending" id = "backtospending"><img width = "20px" src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <nav>
+            <p class = "header-title">Titre</p>
+            <p class = "header-participants">Participants</p>
+        </nav>
+    </header>
+    <main>
+    </main>
+    <form action="">
+        <input type="text" placeholder="Ajoutez un message...">
+        <button type="submit"><img width = "20px" src="{%static 'images/send.png'%}" alt="send"></button>
+    </form>
+</body>
+</html>
