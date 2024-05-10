@@ -77,7 +77,7 @@ class NewcountTest(UnitaryTestMethods):
         Fonction qui à partir de la page de la liste des tricount clique sur "créer un nouveau tricount" et vérifie qu'on utilise le bon template
         """ 
         response = self.client.get('/count/Tony')
-        link = self.extract_and_click_on_link(response.content , 'id_newcount')
+        link = self.extract_and_click_on_link(response.content , 'countfromzero')
         response2 = self.client.get(link)
 
         self.assertTemplateUsed(response2, 'newcount.html') 

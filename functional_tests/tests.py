@@ -93,6 +93,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
 
         #Il voit la liste des tricount présents ou absents et clique sur le lien pour créer un nouveau tricount
         self.click_on_a_link(By.ID,'id_newcount')
+        self.click_on_a_link(By.ID, 'countfromzero')
         
         self.assertEqual(self.browser.current_url, url + '/count/Tony/newcount') 
     
@@ -151,6 +152,7 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
 
         #Il reclique pour recréer un second tricount. 
         self.click_on_a_link(By.ID,'id_newcount')
+        self.click_on_a_link(By.ID, 'countfromzero')
         
         self.assertEqual(self.browser.current_url, url + '/count/Tony/newcount') 
         
@@ -176,8 +178,9 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         self.assertIn('Tricount 2',[titre.text for titre in title]) 
         self.assertIn('Description 2',[desc.text for desc in description])
 
-        #Il reclique pour recréer un second tricount 
-        self.click_on_a_link(By.ID,'id_newcount')
+        #Il reclique pour recréer un tricount 
+        self.click_on_a_link(By.ID,'id_newcount')        
+        self.click_on_a_link(By.ID, 'countfromzero')
 
         # Il remplit les données d'un nouveau tricount mais oublie de mettre un titre
         # Il est renvoyé vers l'url de remplissagedu tricount avec un message d'erreur affiché en rouge 
@@ -208,6 +211,8 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         #Il veut créer un nouveau tricount mais change d'avis et après avoir rentré un participant appuie sur le bouton retour en arrière
         #Il atterrit à nouveau sur la liste des tricount. 
         self.click_on_a_link(By.ID,'id_newcount') 
+        self.click_on_a_link(By.ID, 'countfromzero')
+
         self.add_participants('Jeanine') 
         self.click_on_a_link(By.CLASS_NAME,'backtotricount')
 
@@ -215,6 +220,8 @@ class NewVisitorTest(StaticLiveServerTestCase,user_experience.Click):
         
         #Il clique pour créer un nouveau tricount et voit que les participants précédemment entrés ne sont pas sur la page
         self.click_on_a_link(By.ID,'id_newcount')
+        self.click_on_a_link(By.ID, 'countfromzero')
+        
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
 
         self.assertNotIn('Jeanine',[participant.text for participant in participants])

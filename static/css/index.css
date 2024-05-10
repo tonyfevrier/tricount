@@ -131,3 +131,27 @@ header{
     padding-top: 0.15em;
 
 }
+
+.choosecount{
+    position: absolute;
+    bottom : 10px;
+    right : 100px;
+    background-color: white;
+    height: fit-content;
+    width :fit-content;
+    margin-top: auto;
+    margin-left: auto;
+    border-radius: 10px;
+}
+
+.choosecount a{
+    border-radius: 10px;
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 1em;
+}
+
+.choosecount a:hover{
+    background-color: gray;
+}

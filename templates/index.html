@@ -90,7 +90,13 @@
         </a>
     </div>
     <footer>
-        <a data-button="JS" class ="id_newcount" id = "id_newcount" href="/count/{{user}}/newcount"> + </a>
+        <button data-button="JS" class ="id_newcount" id = "id_newcount"> + </button>
+
+        <div data-div = "hidden" class = "choosecount" hidden>
+            <a href="/count/{{user}}/newcount" id = "countfromzero"> Créer un nouveau tricount </a>
+            <a class = "" href=""> Clôner un tricount existant </a> 
+        </div>
+        <!--<a data-button="JS" class ="id_newcount" id = "id_newcount" href="/count/{{user}}/newcount"> + </a>-->
     </footer>
     <script src="{% static 'js/index2.js' %}"></script>
 

@@ -222,17 +222,35 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
         - `lancer les tests pour voir ce qui est affiché (normalement il existe déjà des tests qui lancent spending)`
         - bug : comprendre pourquoi le coût en euro n'apparaît plus (css). 
         - écrire test fonctionnel pour voir si la monnaie changée est bien affichée.
-        - merger la branche avec master
-        - rebaser la branche chat à master.
-    -branche pour le chat entre les participants :
+        - `merger la branche avec master`
+        - `rebaser la branche chat à master.`
+    -`branche pour le chat entre les participants :`
         - `voir comment fonctionne ajax et quelles sont les autres sol pr l'affichage en temps réel.`
-        - partie du serveur à l'utilisateur : 
-            partie client en JS : si on envoie un message, envoi via protocole socket
-            partie client : si un message arrive, il est ajouté à la page.
+        - `partie du serveur à l'utilisateur :` 
+            `créer la base de app.py`
+            `créer la base du JS pour l'ouverture et la fermeture de la websocket : elle s'ouvre quand on entre sur la page et elle se ferme si on la quitte.`
+            `tester dans count, l'ouverture d'une websocket quand la page chat est lancée.`
+            `partie client en JS : si on envoie un message, envoi via protocole socket`
+            `partie client : si un message arrive, il est ajouté à la page.`
+    - interaction multiutilisateur sur un même tricount:
+            `bug : pourquoi mettre eltinitially hidden avant footer.append fait que clonertricount s'affiche alors qu'après ce n'est pas le cas. (à mon avis ça vient de goback`
+            `ajouter une popup lorsqu'on crée un tricount pour laisser choisir entre créer de rien ou cloner un tricount existant`
+            `si on clique hors de la page la popup disparaît`
+            `test fonctionnel`
+            ajouter l'ajout d'un mdp de tricount lors de la création d'un tricount
+            modif test fonctionnel et serveur
+            clic sur clone, apparition d'une popup où l'user doit entrer son prenom et mot de passe
+            si prenom ou mdp incorrect, rediriger vers la liste des tricount du user
+            test fonctionnel
+            sinon clôner toutes les infos du tricount de la bdd de l'admin vers la bdd de l'user et rediriger vers la liste des dépenses.
+            test serveur pour vérifier que les données sont apparues dans la bdd du user
+            test fonctionnel 
+    - branche pour le chat (suite)
             partie serveur : django : voir comment recevoir les sockets, stocke les messages et les affiche sur les comptes des différents clients.
             apparition du message dans la page html sans réactualiser si elle est ouverte
             apparition d'une cloche si on n'est pas dans le chat.
             promesse dans le cas où qqun écrit : affichage qu'un utilisateur écrit.
+            voir comment lancer automatiquement app.py (lorsqu'un utilisateur entre dans le chat? ou lorsqu'un tricount est créé?) (peut-être qu'on le lançait juste pour voir les affichages et qu'on n'a pas besoin de le lancer.)
             
     -modification des dépenses déjà entrées :
     -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`

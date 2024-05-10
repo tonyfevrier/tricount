@@ -10,10 +10,40 @@ document.addEventListener("click", goback);
 
 let parameter = document.querySelector('.parameters');  
 let parameters_options = document.querySelector('.parameters-options'); 
-let elemtsInitiallyHidden = document.body.querySelectorAll('[data-div = hidden]');
+let newcount = document.body.querySelector('.id_newcount');
+let choosecountpopup = document.body.querySelector('.choosecount');
+let elemtsInitiallyHidden = document.body.querySelectorAll('[data-div = hidden]'); 
+//let footer = document.body.querySelector('footer');
+
  
 parameter.addEventListener("click", clickOnParameter);
 parameters_options.addEventListener("click",clickOnParameterOptions);
+newcount.addEventListener("click", choosenewcount);
+
+
+/*Création à l'avance d'une popup en cas de click pour créer un tricount*/
+/*let choosecountpopup = document.createElement('div');
+choosecountpopup.className = "choosecount";
+choosecountpopup.dataset.div = "hidden";
+choosecountpopup.hidden = "hidden";
+
+let countfromzero = document.createElement('a');
+countfromzero.innerHTML = "Créer un nouveau tricount";
+countfromzero.href = "/count/{{user}}/newcount"
+
+let countfromclone = document.createElement('a'); 
+countfromclone.innerHTML = "Clôner un tricount existant";
+
+
+choosecountpopup.append(countfromzero);
+choosecountpopup.append(countfromclone);*/
+
+//ICI let elemtsInitiallyHidden = document.body.querySelectorAll('[data-div = hidden]'); 
+
+//footer.append(choosecountpopup);
+
+//OU ICI
+
 
 /*Events handlers */
 function clickOnParameter(event) { 
@@ -72,4 +102,10 @@ function display_block_for_children(elem){
     for (let child of elem.children){
         child.style.display = "block";
     }
+}
+
+function choosenewcount(event){
+    /*Fonction qui fait apparaître un choix sur la façon de créer le tricount*/
+    toggle(choosecountpopup); 
+    event.stopPropagation()
 }
