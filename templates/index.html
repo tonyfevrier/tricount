@@ -94,8 +94,17 @@
 
         <div data-div = "hidden" class = "choosecount" hidden>
             <a href="/count/{{user}}/newcount" id = "countfromzero"> Créer un nouveau tricount </a>
-            <a class = "" href=""> Clôner un tricount existant </a> 
+            <button class = "clonecount" href=""> Clôner un tricount existant </button> 
         </div>
+
+        <div data-div = "hidden" class = 'form-pwdcount' hidden>
+            <form  class = "pwdcount" > 
+                <input type="password" placeholder="Mot de passe du tricount">
+                <input type="submit" placeholder="submit password">
+            </form>
+        </div> 
+
+
         <!--<a data-button="JS" class ="id_newcount" id = "id_newcount" href="/count/{{user}}/newcount"> + </a>-->
     </footer>
     <script src="{% static 'js/index2.js' %}"></script>

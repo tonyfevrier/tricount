@@ -45,7 +45,7 @@ button, a{
 }
 
 
-.newtricount_title, .newtricount_description{
+.newtricount_title, .newtricount_description, .newtricount_pwd{
     display: block;
     border-top: none;
     border-left: none;

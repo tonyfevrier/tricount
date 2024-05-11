@@ -13,11 +13,11 @@ class UnitaryTestMethods(TestCase):
         link = soup.select_one(f'a#{id}')['href'] #on clique sur le + : sorte de send_keys 
         return link
     
-    def create_a_tricount(self,title,description, currency,category,*participants):  
+    def create_a_tricount(self,title,password,description, currency,category,*participants):  
         """
         Function to create a tricount.
         """  
-        response = self.client.post("/count/Tony/newcount/addcount",data = {"newtricount_title":title, "newtricount_description":description, "newtricount_currency" : currency, "newtricount_category":category, "nameparticipant": participants})
+        response = self.client.post("/count/Tony/newcount/addcount",data = {"newtricount_title":title, "newtricount_pwd":password, "newtricount_description":description, "newtricount_currency" : currency, "newtricount_category":category, "nameparticipant": participants})
         
         return response
     

@@ -23,6 +23,12 @@
             {% if titre == False %}
                 <p class="error">Le titre doit comporter au moins un caractère.</p>
             {% endif %}
+
+            <input type="password" class = "newtricount_pwd" placeholder="Entrez un mot de passe" name = "newtricount_pwd">
+
+            {% if pwd == False %}
+                <p class = "error pwd-error">Il faut un mot de passe</p>
+            {% endif %}
             <input type ="text" class = "newtricount_description" placeholder="Description" name = "newtricount_description">
             
             <a href="/count/{{user}}/newcount/currency" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>

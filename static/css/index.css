@@ -144,7 +144,7 @@ header{
     border-radius: 10px;
 }
 
-.choosecount a{
+.choosecount a, .choosecount button{
     border-radius: 10px;
     display: block;
     text-decoration: none;
@@ -152,6 +152,32 @@ header{
     padding: 1em;
 }
 
-.choosecount a:hover{
+.choosecount button{
+    border: none;
+    background-color: white; 
+    font-weight: 550;
+}
+
+
+
+.choosecount a:hover, .choosecount button:hover{
     background-color: gray;
+}
+
+/*form{
+    display: flex;
+    flex-direction: column;
+}*/
+
+.form-pwdcount{
+    position: absolute;
+    bottom: 10px;
+    left: 400px;
+}
+ 
+
+input[type = "submit"]{
+    background-color: white;  
+    cursor: pointer;
+    border-radius: 5px;  
 }

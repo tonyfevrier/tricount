@@ -237,13 +237,18 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
             `ajouter une popup lorsqu'on crée un tricount pour laisser choisir entre créer de rien ou cloner un tricount existant`
             `si on clique hors de la page la popup disparaît`
             `test fonctionnel`
-            ajouter l'ajout d'un mdp de tricount lors de la création d'un tricount
-            modif test fonctionnel et serveur
-            clic sur clone, apparition d'une popup où l'user doit entrer son prenom et mot de passe
+            `ajouter l'ajout d'un mdp de tricount lors de la création d'un tricount`
+            `obliger à mettre un pwd pour la validation`
+            `modif test fonctionnel et serveur`
+            `clic sur clone, apparition d'une popup où l'user doit entrer son prenom et mot de passe`
+            `améliorer le css des boutons et form`
+            bug au premier clic sur cloner le form s'affiche mais si je recommence ce n'est plus le cas.
             si prenom ou mdp incorrect, rediriger vers la liste des tricount du user
             test fonctionnel
-            sinon clôner toutes les infos du tricount de la bdd de l'admin vers la bdd de l'user et rediriger vers la liste des dépenses.
-            test serveur pour vérifier que les données sont apparues dans la bdd du user
+            ajouter liste d'admin au tricount, y intégrer le créateur
+            si mdp correct, ajouter à la liste des admin du tricount
+            modifier views (listecount je pense) pour afficher les tricount dont la personne est admin (et pas tous les tricount)
+            test serveur pour vérifier que les données sont apparues dans la bdd du user, et que des tricount dont il n'est pas admin n'apparaissent pas.
             test fonctionnel 
     - branche pour le chat (suite)
             partie serveur : django : voir comment recevoir les sockets, stocke les messages et les affiche sur les comptes des différents clients.

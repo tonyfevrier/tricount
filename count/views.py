@@ -79,22 +79,26 @@ def addcount(request,user):
     """ 
 
     titre = request.POST["newtricount_title"]
+    password = request.POST["newtricount_pwd"]
     descption = request.POST["newtricount_description"]
     participts = request.POST.getlist('nameparticipant')
 
     if titre != "": 
-        if len(participts) <= 1:
-            #No participants have been added.
-            return render(request,'newcount.html', context={'ptcpt':False})
+        if password == "":
+                return render(request, 'newcount.html', context = {'pwd':False})
         else:
-            if descption != "": 
-                phrase = majuscule(descption)
+            if len(participts) <= 1:
+                #No participants have been added.
+                return render(request,'newcount.html', context={'ptcpt':False})
             else:
-                phrase = "Pas de description" 
-            #Creation of the object for calculations
-            tricount = Tricount(*participts)
-            count = Counts.objects.create(title = majuscule(titre), description = phrase, currency = request.POST["newtricount_currency"], category = request.POST["newtricount_category"], participants = participts, data = tricount.to_json())
-            return redirect(f'/count/{user}/tricount/'+ str(count.id))
+                if descption != "": 
+                    phrase = majuscule(descption)
+                else:
+                    phrase = "Pas de description" 
+                #Creation of the object for calculations
+                tricount = Tricount(*participts)
+                count = Counts.objects.create(title = majuscule(titre), password = password, description = phrase, currency = request.POST["newtricount_currency"], category = request.POST["newtricount_category"], participants = participts, data = tricount.to_json())
+                return redirect(f'/count/{user}/tricount/'+ str(count.id))
     else:  
         return render(request,'newcount.html', context={'titre':False})
 
@@ -120,8 +124,7 @@ def spending(request,user ,id_count):
     total_cost = tricount.total_cost 
 
     rate = useAPICurrency("GBP", "EUR")
-    total_cost_in_pound = rate * float(total_cost)
-    print(total_cost, rate, total_cost_in_pound)
+    total_cost_in_pound = rate * float(total_cost) 
 
     context = {
         'user':user,

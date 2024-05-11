@@ -11,42 +11,21 @@ document.addEventListener("click", goback);
 let parameter = document.querySelector('.parameters');  
 let parameters_options = document.querySelector('.parameters-options'); 
 let newcount = document.body.querySelector('.id_newcount');
+let clonecount = document.body.querySelector('.clonecount');
 let choosecountpopup = document.body.querySelector('.choosecount');
+let pwdcountpopup = document.body.querySelector('.form-pwdcount');
 let elemtsInitiallyHidden = document.body.querySelectorAll('[data-div = hidden]'); 
 //let footer = document.body.querySelector('footer');
 
  
 parameter.addEventListener("click", clickOnParameter);
 parameters_options.addEventListener("click",clickOnParameterOptions);
-newcount.addEventListener("click", choosenewcount);
-
-
-/*Création à l'avance d'une popup en cas de click pour créer un tricount*/
-/*let choosecountpopup = document.createElement('div');
-choosecountpopup.className = "choosecount";
-choosecountpopup.dataset.div = "hidden";
-choosecountpopup.hidden = "hidden";
-
-let countfromzero = document.createElement('a');
-countfromzero.innerHTML = "Créer un nouveau tricount";
-countfromzero.href = "/count/{{user}}/newcount"
-
-let countfromclone = document.createElement('a'); 
-countfromclone.innerHTML = "Clôner un tricount existant";
-
-
-choosecountpopup.append(countfromzero);
-choosecountpopup.append(countfromclone);*/
-
-//ICI let elemtsInitiallyHidden = document.body.querySelectorAll('[data-div = hidden]'); 
-
-//footer.append(choosecountpopup);
-
-//OU ICI
-
+newcount.addEventListener("click", clickOnNewcount);
+choosecountpopup.addEventListener("click", clickOnChooseCount);
 
 /*Events handlers */
 function clickOnParameter(event) { 
+    if (isOnePopUpApparent()) return;
     if (event.currentTarget == parameter){ 
         toggle(parameters_options);  
         display_block_for_children(parameters_options)
@@ -104,8 +83,21 @@ function display_block_for_children(elem){
     }
 }
 
-function choosenewcount(event){
+function clickOnNewcount(event){
     /*Fonction qui fait apparaître un choix sur la façon de créer le tricount*/
-    toggle(choosecountpopup); 
-    event.stopPropagation()
+    if (isOnePopUpApparent()) return;
+    if (pwdcountpopup.hidden === false) return;
+    choosecountpopup.hidden = false;
+    event.stopPropagation();
+}
+
+function clickOnChooseCount(event){
+    /*Fonction qui ouvre la popup demandant le mot de passe du tricount à clôner*/ 
+    // Si on clique sur autre chose que clonecount onretourne 
+    // sinon je cache idnewcount, et je rends visible le form, et j'empêche la propag au clic du document
+
+    if (event.target != clonecount) return;
+    choosecountpopup.hidden = true;
+    pwdcountpopup.hidden = false;  
+    event.stopPropagation();
 }
