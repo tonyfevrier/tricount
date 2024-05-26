@@ -68,6 +68,16 @@ def listecount(request, user):
     items = Counts.objects.all() 
     return render(request,'index.html',context ={'counts' : items, 'user' : user})
 
+def clonecount(request,user):
+    """
+    Récupération de l'information du form qui permet de clôner un tricount existant.
+    """
+
+    items = Counts.objects.get(password = request.POST['password'])
+    if len(items) == 0: #Aucun tricount n'a ce mot de passe.
+        return redirect(f'/count/{user}')
+    
+
 def newcount(request,user):  
     currency = "EUR" 
     return render(request, 'newcount.html',context={'user':user, 'currency': currency})

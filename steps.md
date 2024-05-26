@@ -242,8 +242,9 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
             `modif test fonctionnel et serveur`
             `clic sur clone, apparition d'une popup où l'user doit entrer son prenom et mot de passe`
             `améliorer le css des boutons et form`
-            bug au premier clic sur cloner le form s'affiche mais si je recommence ce n'est plus le cas.
-            si prenom ou mdp incorrect, rediriger vers la liste des tricount du user
+            `bug au premier clic sur cloner le form s'affiche mais si je recommence ce n'est plus le cas.`
+            si prenom ou mdp incorrect, rediriger vers la liste des tricount du user et envoyer un message du style "aucun tricount n'a ce mdp".
+            si on laisse le form vide, fonction JS qui laisse un msg d'erreur
             test fonctionnel
             ajouter liste d'admin au tricount, y intégrer le créateur
             si mdp correct, ajouter à la liste des admin du tricount

@@ -1,7 +1,8 @@
 import time 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
- 
+
+
 class Click():
     def __init__(self,browser,live_server_url) -> None:
         self.browser = browser
@@ -112,7 +113,6 @@ class Click():
         self.click_on_a_link(By.ID,'id_newcount') 
         self.click_on_a_link(By.ID,'countfromzero') 
 
-
         #Enter the participants 
         self.add_participants(*participants) 
 
@@ -189,7 +189,7 @@ class Check():
         participants = self.browser.find_elements(By.CLASS_NAME,"participant-name")
         amounts = self.browser.find_elements(By.CLASS_NAME,"participant-amount")
         Date = self.browser.find_element(By.CLASS_NAME,"date")
-
+ 
         self.assertEqual(title.text, titre)
         self.assertEqual(price.text, prix)
         self.assertEqual(payer.text, payeur)

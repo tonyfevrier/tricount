@@ -6,6 +6,7 @@ urlpatterns = [
     path('<str:user>',countviews.listecount,name = 'listecount'),
     path('<str:user>/logout',countviews.logout,name = 'logout'),
     path('<str:user>/logout/delog',countviews.delog,name = 'delog'),
+    path('<str:user>/newcount/count-pwd',countviews.clonecount, name = 'count-pwd'),
     path('<str:user>/newcount',countviews.newcount, name = 'newcount'),
     path('<str:user>/newcount/addcount', countviews.addcount, name = 'addcount'), 
     path('<str:user>/newcount/currency',countviews.choosecurrency,name = "choosecurrency"),
