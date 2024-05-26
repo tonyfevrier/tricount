@@ -119,6 +119,20 @@ class Click():
         #Enter  the other characteristics and click to validate
         self.add_tricount_characteristics(title, password, description, currency, category)
 
+    def clone_a_tricount(self,password):
+        """
+        Function used to clone an existing tricount.
+        """
+        self.click_on_a_link(By.ID,'id_newcount') 
+        self.click_on_a_link(By.CLASS_NAME,"clonecount") 
+        pwd = self.browser.find_element(By.CLASS_NAME,"password")
+        submit = self.browser.find_element(By.CLASS_NAME,"pwdsubmit")
+        pwd.send_keys(password)
+        submit.send_keys(Keys.ENTER)
+
+
+
+
     def click_on_an_existing_tricount(self,tricount_number):
         """
         Function which clicks on a tricount and check the title and the participants are the good ones.
@@ -169,9 +183,8 @@ class Click():
 
 
 class Check():
-    def __init__(self,browser,live_server_url) -> None:
-        self.browser = browser
-        self.live_server_url = live_server_url
+    def __init__(self,browser) -> None:
+        self.browser = browser 
 
     def check_if_popup_displayed(self,classname,bool):
         """

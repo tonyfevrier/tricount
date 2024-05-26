@@ -273,17 +273,27 @@ class MultiUsersTricount(StaticLiveServerTestCase):
 
     def test_clone_creation(self):
         #Deux utilisateurs s'enregistrent sur deux browser différents et se loggent
-        self.reg
-        #L'utilisateur 1 crée un tricount.
+        click = user_experience.Click(self.browser, self.live_server_url)
+        click2 = user_experience.Click(self.browser2, self.live_server_url)
+        click.register_and_login_someone("Tony", "tony.fevrier@gmail.com","hello")
+        click2.register_and_login_someone("Dulcinee", "dul.cinee@gmail.com","hello2")
 
-        #L'utilisateur 2 arrive sur sa liste de tricount et cherche à clôner le tricount qui a été créé par l'utilisateur 1.
+        #L'utilisateur 1 crée un tricount.
+        click.create_a_tricount("tricount1", "rightpassword","description","EUR", 'project',"Tony","Dulcinee")
+
+        #L'utilisateur 2 arrive sur sa liste de tricount et cherche à clôner le tricount qui a été créé par l'utilisateur 1. Il se trompe de mot de passe, il est renvoyé sur cette même page
+        click2.clone_a_tricount("falsepassword")
+
+        self.assertEqual(self.live_server_url + "/count/Dulcinee" , self.browser2.current_url)
 
         #Il oublie de mettre un mot de passe : un message apparaît.
-
-        #Il se trompe de mot de passe, il est renvoyé sur cette même page
+        click2.clone_a_tricount("")
+        error = self.browser2.find_element(By.CLASS_NAME, "error")
+        
+        self.assertEqual(error.text, "Entrez un mot de passe")
 
         #Il recommence et tape le bon mot de passe, il est envoyé vers les dépenses du tricount.
-        pass
+        
 
 class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
     

@@ -1,6 +1,6 @@
 # Etapes élémentaires de construction
 
-Je tente la méthodo suivante : test unitaire puis fonction associée puis compléter le test fonctionnel. 
+Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si la fonctionnalité touche à des choses internes : bdd) puis compléter le test fonctionnel. 
 
 
 **Création d'une première page avec la liste des tricount sur laquelle on peut créer un tricount et cela incrémente la liste.**
@@ -243,9 +243,10 @@ Je tente la méthodo suivante : test unitaire puis fonction associée puis compl
             `clic sur clone, apparition d'une popup où l'user doit entrer son prenom et mot de passe`
             `améliorer le css des boutons et form`
             `bug au premier clic sur cloner le form s'affiche mais si je recommence ce n'est plus le cas.`
-            si prenom ou mdp incorrect, rediriger vers la liste des tricount du user et envoyer un message du style "aucun tricount n'a ce mdp".
-            si on laisse le form vide, fonction JS qui laisse un msg d'erreur
-            test fonctionnel
+            `finir d'écrire clone tricount de userexperience puis le test fonctionnel.`
+            `si prenom ou mdp incorrect, rediriger vers la liste des tricount du user et envoyer un message du style "aucun tricount n'a ce mdp".`
+            `si on laisse le form vide, fonction JS qui laisse un msg d'erreur`
+            `test fonctionnel`
             ajouter liste d'admin au tricount, y intégrer le créateur
             si mdp correct, ajouter à la liste des admin du tricount
             modifier views (listecount je pense) pour afficher les tricount dont la personne est admin (et pas tous les tricount)

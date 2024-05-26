@@ -14,14 +14,25 @@ let newcount = document.body.querySelector('.id_newcount');
 let clonecount = document.body.querySelector('.clonecount');
 let choosecountpopup = document.body.querySelector('.choosecount');
 let pwdcountpopup = document.body.querySelector('.form-pwdcount');
+let form = pwdcountpopup.firstElementChild; 
+let pwdinput = form.firstElementChild; 
+let pwdsubmit = form.lastElementChild;
+let error = document.createElement("div");
+error.dataset.div = "hidden";
+error.className = "error";
+error.innerHTML = "Entrez un mot de passe";
+error.hidden = true;
+form.append(error);
 let elemtsInitiallyHidden = document.body.querySelectorAll('[data-div = hidden]'); 
-//let footer = document.body.querySelector('footer');
-
  
 parameter.addEventListener("click", clickOnParameter);
 parameters_options.addEventListener("click",clickOnParameterOptions);
 newcount.addEventListener("click", clickOnNewcount);
 choosecountpopup.addEventListener("click", clickOnChooseCount);
+pwdsubmit.addEventListener("click", clickOnSubmit);
+
+
+
 
 /*Events handlers */
 function clickOnParameter(event) { 
@@ -100,4 +111,12 @@ function clickOnChooseCount(event){
     choosecountpopup.hidden = true;
     pwdcountpopup.hidden = false;  
     event.stopPropagation();
+}
+
+function clickOnSubmit(event){
+    /*Fonction qui traite le cas où l'utilisateur oublie de mettre un mot de passe. Apparition d'un message d'erreur */
+    /*Si on clique et que le input est vide */
+    if (pwdinput.value !== "submit password" && pwdinput.value !== "") return;
+    event.preventDefault();
+    error.hidden = false;  
 }

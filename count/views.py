@@ -76,6 +76,8 @@ def clonecount(request,user):
     items = Counts.objects.get(password = request.POST['password'])
     if len(items) == 0: #Aucun tricount n'a ce mot de passe.
         return redirect(f'/count/{user}')
+    else: #
+        pass
     
 
 def newcount(request,user):  
