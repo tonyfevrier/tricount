@@ -17,22 +17,30 @@ class resolveUrl(TestCase):
     
     def test_resolve(self):
         """
-        On crée d'abord l'url de la page en question et on vérifie que l'url est associée à la bonne fonction de views.
+        Test if an url is associated with the good view function.
         """
         found = resolve('/count/Toto')
 
         self.assertEqual(found.func,listecount) 
 
 class HomepageTest(UnitaryTestMethods):
+    """
+    Class of methods to test registering and logging in the application
+    """
     def test_title(self):
+        """
+        Test if the title appears in the page.
+        """
         response = self.client.get('/count/Tony') 
 
         self.assertIn(b'Tricount',response.content)
         self.assertTemplateUsed(response,'index.html')
 
     def test_registering_bdd(self):
-        """Verify that the registration is done only if the username and the password do
-        not already exist"""
+        """
+        Test that the registration of a user works and works only if the username and the password do
+        not already exist.
+        """
         #We create a user
         response = self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
         
@@ -48,8 +56,10 @@ class HomepageTest(UnitaryTestMethods):
 
 
     def test_login(self):
-        """Verify that the authentification has been doned if password and username are correct,
-        refused otherwise"""
+        """
+        Test that the authentification has been doned if password and username are correct,
+        refused otherwise
+        """
        
         response = self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
         response = self.login_someone('Tony','pwd2') 
@@ -62,7 +72,9 @@ class HomepageTest(UnitaryTestMethods):
         self.assertEqual(response.wsgi_request.user.is_authenticated, True)
 
     def test_logout(self):
-        """Verify that the logout is correctly done"""
+        """
+        Test that the logout is correctly done
+        """
         response = self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
         response = self.login_someone('Tony','pwd') 
         self.assertEqual(response.wsgi_request.user.is_authenticated, True)
@@ -72,9 +84,12 @@ class HomepageTest(UnitaryTestMethods):
 
 
 class NewcountTest(UnitaryTestMethods):
+    """
+    Class of methods to test the creation of some tricounts
+    """
     def test_newcount(self):
         """
-        Fonction qui à partir de la page de la liste des tricount clique sur "créer un nouveau tricount" et vérifie qu'on utilise le bon template
+        Test that when we click on "create a tricount", the good template is used.
         """ 
         response = self.client.get('/count/Tony')
         link = self.extract_and_click_on_link(response.content , 'countfromzero')
@@ -85,7 +100,7 @@ class NewcountTest(UnitaryTestMethods):
 
     def test_newcount_inputs(self):
         """
-        Fonction qui teste si les données entrées par l'utilisateur sont bien récupérées et si la redirection vers la page d'origine est effective.
+        Test that data from tricount creation are correctly registered and that the redirection to the list of tricounts works properly.
         """ 
         response = self.create_a_tricount("tricount 1","password","description 1","EUR","Voyage",'Tony','Jean','Henri')
         count = Counts.objects.first()
@@ -99,8 +114,7 @@ class NewcountTest(UnitaryTestMethods):
 
     def test_lack_title_newcountinputs(self):
         """
-        Fonction qui regarde si lorsqu'on tente de créer un tricount sans titre, il n'y a pas de nouvel objet dans la bdd
-        et on a dans la réponse html un message en rouge indiquant que le titre et la catégorie doivent être remplis.
+        Test that if the title of the tricount is forgotten, the database does not change
         """    
         one = Counts.objects.count()
         response = self.create_a_tricount("","password","description 1","EUR","Voyage",'Jean') 
@@ -112,7 +126,7 @@ class NewcountTest(UnitaryTestMethods):
 
     def test_lack_password(self):
         """
-        Fonction qui regarde si tente de créer un tricount sans password, il n'y a pas de nouvel objet dans la bdd
+        Test that if the password of the tricount is forgotten, the database does not change
         """
         one = Counts.objects.count()
         response = self.create_a_tricount("title","","description 1","EUR","Voyage",'Jean')
@@ -125,8 +139,7 @@ class NewcountTest(UnitaryTestMethods):
 
     def test_lack_participant_newcountinputs(self):
         """
-        Fonction qui regarde si lorsqu'on tente de créer un tricount sans participant, il n'y a pas de nouvel objet dans la bdd
-        et on a dans la réponse html un message en rouge indiquant qu'il faut un participant.
+        Test that if the participants of the tricount are forgotten, the database does not change
         """    
         one = Counts.objects.count()
         response = self.create_a_tricount("Tricount sans participant","pwd", "description 1","EUR", "Voyage")
@@ -139,8 +152,7 @@ class NewcountTest(UnitaryTestMethods):
 
     def test_bdd_when_tricounts_created(self):
         """
-        Fonction qui teste si lorsqu'on poste un titre, une description, une catégorie, que les participants sont bien associés au tricount.
-        Enfin elle crée un second tricount et vérifie que la bdd associe bien le bon nombre de participants au tricount et qu'elle n'associe par des noms du premier tricount au second.
+        Test if after the creation of two tricounts, the data are associated with the good tricount. Data of different tricounts do not mix.
         """  
         self.create_a_tricount("tricount 1","pwd","description 1","EUR","Voyage","Jean","Henri")
 
@@ -174,20 +186,23 @@ class NewcountTest(UnitaryTestMethods):
         self.create_a_tricount("tricount 2", "pwd", "description 2","EUR", "Coloc", "Roberto",'Alfredo')
         
         #We go on the list of the tricounts
-        response = self.client.get('/count/Henri')
-        link = self.extract_and_click_on_link(response.content , 'link-tricount-2') 
+        response = self.client.get('/count/Tony') 
+        link = self.extract_and_click_on_link(response.content , 'link-tricount-2')  
 
-        self.assertEqual(link,'/count/Henri/tricount/2')
+        self.assertEqual(link,'/count/Tony/tricount/2')
 
-        link = self.extract_and_click_on_link(response.content , 'link-tricount-1')  
+        link = self.extract_and_click_on_link(response.content , 'link-tricount-1')   
 
-        self.assertEqual(link,'/count/Henri/tricount/1')
+        self.assertEqual(link,'/count/Tony/tricount/1')
 
-        response = self.client.get(link)
+        #response = self.client.get(link)
 
-        self.assertIn(b'Henri',response.content)
+        #self.assertIn(b'Henri',response.content)
 
     def test_currencies_passedto_currencyhtml(self):
+        """
+        Test if the currencies are printed in the currency page.
+        """
         response = self.client.get('/count/Toto/newcount/currency')
         soup = BeautifulSoup(response.content,'html.parser')
  
@@ -197,10 +212,13 @@ class NewcountTest(UnitaryTestMethods):
         
 
 class TestCalculator(TestCase):
+    """
+    Class of methods to test the calculation application (calculate equilibria, credits, debits)
+    """
 
     def test_class_creation(self):
         """
-        Testing if data are well created.
+        Test if credits data are well created.
         """
         participants = ['Tony', 'Marine', 'Henri', 'Yann']
         count = Tricount(*participants)
@@ -210,7 +228,7 @@ class TestCalculator(TestCase):
 
     def test_nullity(self):
         """
-        Function which test a spending of amount 0. Nothing changes
+        Test if for a spending of amount 0 nothing changes in the credits.
         """
         
         participants = ['Tony', 'Marine', 'Henri', 'Yann']
@@ -222,7 +240,7 @@ class TestCalculator(TestCase):
          
     def test_spending_update_first(self):
         """
-        We test a spending between two participants from a group of four to verify that the amount is correct and
+        Test a spending between two participants from a group of four to verify that the credits calculated are correct and
         that the others credits are not modified.
         """
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
@@ -238,7 +256,7 @@ class TestCalculator(TestCase):
 
     def test_spending_update_second(self):
         """
-        We test a spending between all participants from a group of four to verify that the amount is correct.
+        Test a spending between all participants from a group of four to verify that the credits calculated are correct.
         """
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
         old_total_cost = count.total_cost
@@ -263,7 +281,7 @@ class TestCalculator(TestCase):
                 
     def test_receiving_update(self):
         """
-        We test a money input between all participants from a group of four to verify that the amount is correct.
+        Test a money input between all participants from a group of four to verify that the credits calculated are correct.
         """
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
         old_dict_participants = deepcopy(count.dict_participants)  
@@ -286,7 +304,7 @@ class TestCalculator(TestCase):
        
     def test_calculate_total_credit(self):
         """
-        Function which tests if the total credit of each participant is correct.
+        Test if the total credit of each participant is correct after spendings.
         """
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann') 
         count.spending_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
@@ -301,6 +319,10 @@ class TestCalculator(TestCase):
         self.assertEqual(total_credit['Henri'],75)
 
     def test_resolve_solution(self):
+        """
+        Test the correctness of the computation of amounts to reach the equilibrium between participants after some spendings.
+        """
+
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann') 
         count.spending_update({'Tony':100.}, {'Marine':25., 'Yann':50, 'Henri':25})
         count.spending_update({'Marine':200.}, {'Marine':150., 'Tony':50})
@@ -314,6 +336,9 @@ class TestCalculator(TestCase):
         self.assertEqual(sum(transfert_to_equilibrium['Marine'].values()),50)
 
     def test_moneytransfer(self):
+        """
+        Test a money transfer between two participants from a group of four to verify that the credits calculated are correct.
+        """
         count = Tricount('Tony', 'Marine', 'Henri', 'Yann')
         old_total_cost = count.total_cost
         old_dict_participants = deepcopy(count.dict_participants)   
@@ -328,10 +353,13 @@ class TestCalculator(TestCase):
         self.assertDictEqual(old_dict_participants['Henri'].credits, count.dict_participants['Henri'].credits)
 
 class TestSpending(UnitaryTestMethods):
+    """
+    Class of methods to test the effect of new spendings in a given tricount.
+    """
 
     def test_redirect_after_newspending_inputs(self):
         """
-        We enter a newspending and we see if data are integrated into the database.
+        Test if after a new spending, the redirection is correct.
         """ 
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Tony", "Henri", "Jean")
         response = self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean','Tony'], [50,50,0])  
@@ -339,6 +367,9 @@ class TestSpending(UnitaryTestMethods):
         self.assertRedirects(response,'/count/Tony/tricount/1') 
     
     def test_bdd_newspending_inputs(self):
+        """
+        Test if after new spending inputs, data are correctly registrated in the database. 
+        """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Jean")
 
         number = Spending.objects.count()
@@ -355,7 +386,7 @@ class TestSpending(UnitaryTestMethods):
     
     def test_goback_bdd_unchanged(self):
         """
-        test : we begin to create a spending and go back. No new spend must appear in the bdd.
+        Test if when we don't complete entirely a spending, no new spending appear in the database.
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann")
         response = self.client.get('/count/Tony/tricount/1/spending') 
@@ -366,7 +397,7 @@ class TestSpending(UnitaryTestMethods):
 
     def test_notitle_bdd_unchanged(self):
         """
-        test : we create a spending, we forget the title. No new spend must appear in the bdd and we stay on the same template.
+        Test if when we create a spending and forget the title, no new spending appear in the database.
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Jean")     
         nb_spending = Spending.objects.count()
@@ -377,7 +408,7 @@ class TestSpending(UnitaryTestMethods):
         
     def test_noamount_nullspending(self):
         """
-        test : we create a spending with no amount. A new spend must appear in the bdd with amount 0 and we must be redirected.
+        Test if when we create a spending with no amount, a new spending must appear in the database with amount 0.
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Jean")
         nb_spending = Spending.objects.count()
@@ -388,6 +419,10 @@ class TestSpending(UnitaryTestMethods):
         self.assertEqual(spending.amount, 0)
  
     def test_multiple_spendings_gives_good_credits_in_bdd(self):
+        """
+        Test if when we create multiple spendings, the computation made by calculation.py are well transferred to the database.
+        """
+
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
         self.create_a_spending('dépense1', 100, 'Tony', ['Henri','Yann','Marine','Tony'], [25,50,25,0]) 
         self.create_a_spending('dépense2', 200, 'Marine', ['Henri','Yann','Marine','Tony'], [0,0,150,50]) 

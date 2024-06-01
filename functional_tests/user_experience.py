@@ -4,6 +4,9 @@ from selenium.webdriver.common.keys import Keys
 
 
 class Click():
+    """
+    Class of methods used in functional_tests to simulate the user experience.
+    """
     def __init__(self,browser,live_server_url) -> None:
         self.browser = browser
         self.live_server_url = live_server_url
@@ -11,10 +14,11 @@ class Click():
     def register_someone(self,username,email,password):
         """
         Function for registering a new user.
+        
         Inputs : 
-            -username (str)
-            -email (str)
-            -password (str)
+            - username (str)
+            - email (str)
+            - password (str)
         """
         user = self.browser.find_element(By.NAME, "username")
         mail = self.browser.find_element(By.NAME, "email")
@@ -35,6 +39,7 @@ class Click():
     def login_someone(self,username,password):
         """
         Function for logging someone who is already registered
+        
         Inputs : 
             -username (str) 
             -password (str)
@@ -53,6 +58,11 @@ class Click():
     def register_and_login_someone(self, username, email, password):
         """
         Function which register someone and log in him
+
+        Inputs : 
+            - username (str) 
+            - email (str)
+            - password (str)
         """
         url = self.live_server_url  
         self.browser.get(url + "/welcome/")
@@ -74,14 +84,21 @@ class Click():
         """
         Function which clicks on a link given by its id.
 
-        literal : the html attribute to find the element.
-        name : the name of the attribute.
+        Inputs : 
+           - literal : the html attribute to find the element.
+           - name : the name of the attribute.
         """
         link = self.browser.find_element(literal,name) 
         link.send_keys(Keys.ENTER)
         time.sleep(2) 
 
     def add_participants(self,*participants):
+        """
+        Function which adds participants when we try to create a new tricount.
+
+        Inputs : 
+            - participants (list[str])
+        """
         for participant in participants:
             participantbox = self.browser.find_element(By.NAME,"new_participant")
             buttonbox = self.browser.find_element(By.CLASS_NAME,"add_participant") 
@@ -90,8 +107,20 @@ class Click():
             time.sleep(2)
 
     def add_tricount_characteristics(self,title,password,description,currency,category):
+        """
+        Function which adds tricount characteristics when we try to create a new tricount.
+
+        Inputs : 
+            - title (str)
+            - password (str)
+            - description (str)
+            - currency (str)
+            - category (str)
+        """
+
         self.click_on_a_link(By.CLASS_NAME, "choose-currency")
         self.click_on_a_link(By.CLASS_NAME,currency)
+
         titlebox = self.browser.find_element(By.NAME,"newtricount_title")
         passwordbox = self.browser.find_element(By.NAME,"newtricount_pwd")
         descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")  
@@ -108,6 +137,17 @@ class Click():
         time.sleep(2)
 
     def create_a_tricount(self,title, password, description, currency, category,*participants):
+        """
+        Function which creates a new tricount.
+
+        Inputs : 
+            - title (str)
+            - password (str)
+            - description (str)
+            - currency (str)
+            - category (str)
+            - participants (list[str])
+        """
 
         #Clicks to add a tricount 
         self.click_on_a_link(By.ID,'id_newcount') 
@@ -122,22 +162,18 @@ class Click():
     def clone_a_tricount(self,password):
         """
         Function used to clone an existing tricount.
+
+        Input :
+            - password (str) 
         """
-        self.click_on_a_link(By.ID,'id_newcount') 
+        self.click_on_a_link(By.ID,'id_newcount')  
         self.click_on_a_link(By.CLASS_NAME,"clonecount") 
         pwd = self.browser.find_element(By.CLASS_NAME,"password")
         submit = self.browser.find_element(By.CLASS_NAME,"pwdsubmit")
         pwd.send_keys(password)
         submit.send_keys(Keys.ENTER)
 
-
-
-
     def click_on_an_existing_tricount(self,tricount_number):
-        """
-        Function which clicks on a tricount and check the title and the participants are the good ones.
-        participants : the participants we want to verify the presence.
-        """
         link = self.browser.find_element(By.ID,"link-tricount-" + str(tricount_number))
         link.send_keys(Keys.ENTER)
         time.sleep(2) 
@@ -147,9 +183,16 @@ class Click():
         link_spending.send_keys(Keys.ENTER)
         time.sleep(2)
 
-    def create_a_spending(self,title,amount,payer,receivers):#,respective_amounts):
+    def create_a_spending(self,title,amount,payer,receivers):
         """
         Function creating a new spending
+
+        Inputs : 
+            - title (str)
+            - amount (float)
+            - payer (str)
+            - receivers (list[str])
+        
         """
         titlebox = self.browser.find_element(By.NAME, 'title')
         amountbox = self.browser.find_element(By.NAME, 'amount')
@@ -162,32 +205,26 @@ class Click():
         spenderbox.send_keys(payer)
         receiverbox.send_keys(receivers)
 
-        """
-        #association of the respective amounts to receivers
-        for i in range(len(receivers)):
-            participantbox = self.browser.find_element(By.NAME,receivers[i])
-            participantbox.send_keys(respective_amounts[i])
-        """
-
         submitbox.send_keys(Keys.ENTER)
         time.sleep(2)
 
-    def click_on_an_existing_spending(self,spending_number):
-        """
-        Function which clicks on a tricount and check the title and the participants are the good ones.
-        participants : the participants we want to verify the presence.
-        """
+    def click_on_an_existing_spending(self,spending_number): 
         link = self.browser.find_element(By.ID,"spending-" + str(spending_number))
         link.send_keys(Keys.ENTER)
         time.sleep(2) 
 
 
 class Check():
+    """
+    Class containing methods to check that some JS actions work
+    """
     def __init__(self,browser) -> None:
         self.browser = browser 
 
     def check_if_popup_displayed(self,classname,bool):
         """
+        Function which checks if a given popup appeared.
+
         Inputs : 
             classname : name of the class of the html elt
             bool : True or False to see if the popup is displayed or not.
@@ -196,6 +233,17 @@ class Check():
         self.assertEqual(popup.is_displayed(),bool) 
 
     def check_informations_of_a_spending(self,titre,prix,payeur,ptcpts,amnts):
+        """
+        Function which checks that a spending has been correctly registered.
+
+        Inputs : 
+            - titre (str)
+            - prix (str)
+            - payeur (str)
+            - ptcpts (list[str])
+            - amnts (list[float])
+        """
+
         title = self.browser.find_element(By.CLASS_NAME,"title-spending")
         price = self.browser.find_element(By.CLASS_NAME,"price-spending")
         payer = self.browser.find_element(By.CLASS_NAME,"payer")

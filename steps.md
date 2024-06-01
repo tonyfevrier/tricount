@@ -247,11 +247,17 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             `si prenom ou mdp incorrect, rediriger vers la liste des tricount du user et envoyer un message du style "aucun tricount n'a ce mdp".`
             `si on laisse le form vide, fonction JS qui laisse un msg d'erreur`
             `test fonctionnel`
-            ajouter liste d'admin au tricount, y intégrer le créateur
-            si mdp correct, ajouter à la liste des admin du tricount
-            modifier views (listecount je pense) pour afficher les tricount dont la personne est admin (et pas tous les tricount)
+            `ajouter liste d'admin au tricount, y intégrer le créateur`
+            `débugger mes tests : bug de multiUsers à comprendre (le clic sur id newcount ne semble pas ouvrir clonecount)`
+            `dire de n'afficher le tricount que si le user est dans la liste des admins.`
+            `documenter mieux `
+            puis pousser à distance sur github
+            `si mdp correct, ajouter à la liste des admin du tricount`
+            `modifier views (listecount je pense) pour afficher les tricount dont la personne est admin (et pas tous les tricount)`
             test serveur pour vérifier que les données sont apparues dans la bdd du user, et que des tricount dont il n'est pas admin n'apparaissent pas.
             test fonctionnel 
+            débugger le test (impression qu'il y a un pb avec le JS de id newcount parfois : regarder sous quelle condition j'ai bloqué le bouton)
+            faire en sorte qu'il y ait mdp + un identifiant (comme le nom du créateur du tricount)
     - branche pour le chat (suite)
             partie serveur : django : voir comment recevoir les sockets, stocke les messages et les affiche sur les comptes des différents clients.
             apparition du message dans la page html sans réactualiser si elle est ouverte

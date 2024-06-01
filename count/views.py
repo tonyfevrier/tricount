@@ -65,35 +65,47 @@ def delog(request,user):
     return redirect('/welcome/')
 
 def listecount(request, user): 
-    items = Counts.objects.all() 
+    """
+    Function rendering the list of tricounts of a single user.
+    """
+    #items = Counts.objects.all() 
+    counts = Counts.objects.all() 
+    items = []
+    if len(counts) > 0:
+        for item in counts: 
+            if user in item.admins:
+                items.append(item)
     return render(request,'index.html',context ={'counts' : items, 'user' : user})
 
 def clonecount(request,user):
     """
-    Récupération de l'information du form qui permet de clôner un tricount existant.
-    """
-
-    items = Counts.objects.get(password = request.POST['password'])
-    if len(items) == 0: #Aucun tricount n'a ce mot de passe.
-        return redirect(f'/count/{user}')
-    else: #
-        pass
+    Function for cloning an existing tricount.
+    """  
+    item = Counts.objects.filter(password = request.POST['password'])
+    if item.exists():   
+        item.admins.append(user)
+    return redirect(f'/count/{user}') 
+    
     
 
-def newcount(request,user):  
+def newcount(request,user):
+    """
+    Function rendering the page of creation of a tricount
+    """  
     currency = "EUR" 
     return render(request, 'newcount.html',context={'user':user, 'currency': currency})
     
 
 def addcount(request,user):
     """
-    Fonction qui permet d'ajouter un nouveau tricount. S'il n'y a pas de titre, elle renvoie à la même page html.
+    Function adding a new tricount. A tricount necessitates a title, a password, a description, some participants and a list of admins
+    which increases when someone is cloning the tricount
     """ 
-
     titre = request.POST["newtricount_title"]
     password = request.POST["newtricount_pwd"]
     descption = request.POST["newtricount_description"]
     participts = request.POST.getlist('nameparticipant')
+    admins = [user]
 
     if titre != "": 
         if password == "":
@@ -109,7 +121,13 @@ def addcount(request,user):
                     phrase = "Pas de description" 
                 #Creation of the object for calculations
                 tricount = Tricount(*participts)
-                count = Counts.objects.create(title = majuscule(titre), password = password, description = phrase, currency = request.POST["newtricount_currency"], category = request.POST["newtricount_category"], participants = participts, data = tricount.to_json())
+                count = Counts.objects.create(title = majuscule(titre), 
+                                              password = password, 
+                                              description = phrase, 
+                                              currency = request.POST["newtricount_currency"], 
+                                              category = request.POST["newtricount_category"], 
+                                              participants = participts, data = tricount.to_json(),
+                                              admins = admins) 
                 return redirect(f'/count/{user}/tricount/'+ str(count.id))
     else:  
         return render(request,'newcount.html', context={'titre':False})
@@ -125,7 +143,7 @@ def choosecurrency(request,user):
 
 def spending(request,user ,id_count):
     """
-    Function which leads to the spending of a given tricount.
+    Function which leads to the page of all spendings of a given tricount.
     """
     count = Counts.objects.get(id=id_count)  
     participants = count.participants 
@@ -151,7 +169,7 @@ def spending(request,user ,id_count):
 
 def spendingEquilibria(request,user ,id_count):
     """
-    Function which leads to the equilibria of a given tricount.
+    Function which leads to the page of the equilibria of a given tricount.
     """
     count = Counts.objects.get(id=id_count)  
 
@@ -171,7 +189,7 @@ def newspending(request,user ,id_count):
 
 def addspending(request,user ,id_count):
     """
-    Function to recover the data of the form of newspending and redirect to the spending list. 
+    Function to create a new spending and redirecting to the list of tricounts. 
     """ 
 
     titre =  request.POST["title"]
@@ -200,11 +218,16 @@ def addspending(request,user ,id_count):
         
 def spending_details(request,user , id_count, id_spending):
     """
-    Function to see the details of a given spending
+    Function to render the page allowing to see the details of a given spending
     """
     spending = Spending.objects.get(id = id_spending)
     number_of_spending = Spending.objects.count()
-    context = {'user':user,'idcount' : id_count, 'idspending' : id_spending,'previousidspending' : id_spending - 1 , 'followingidspending' : id_spending + 1,'spending': spending, 'number_of_spending' : number_of_spending}
+    context = {'user':user,'idcount' : id_count, 
+               'idspending' : id_spending,
+               'previousidspending' : id_spending - 1, 
+               'followingidspending' : id_spending + 1,
+               'spending': spending, 
+               'number_of_spending' : number_of_spending}
     return render(request,"spending-details.html",context)
 
 def chat(request, user,id_count):

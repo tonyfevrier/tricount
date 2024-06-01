@@ -2,35 +2,59 @@ from django.test import TestCase
 from bs4 import BeautifulSoup 
 
 class UnitaryTestMethods(TestCase):
+    """
+    Class of methods used in server tests
+    """
     def extract_and_click_on_link(self,content,id):
         """
         Function to extract a link from a html content and click on it. The link is identified by its id.
 
-        content : the html content
-        id : str
+        Inputs : 
+            - content : the html content
+            - id (str) : id identifying the html link <a>.
+
+        Output : 
+            - link : result of clicking on the link
         """
-        soup = BeautifulSoup(content,'html.parser')
+        soup = BeautifulSoup(content,'html.parser')  
         link = soup.select_one(f'a#{id}')['href'] #on clique sur le + : sorte de send_keys 
         return link
     
     def create_a_tricount(self,title,password,description, currency,category,*participants):  
         """
         Function to create a tricount.
+
+        Inputs : 
+            - title (str)
+            - password (str)
+            - description (str)
+            - currency (str)
+            - category (str)
+            - participants (list[str])
+
+        Output : 
+            - response (object) : contains the characteristics of the response to the request post. 
         """  
-        response = self.client.post("/count/Tony/newcount/addcount",data = {"newtricount_title":title, "newtricount_pwd":password, "newtricount_description":description, "newtricount_currency" : currency, "newtricount_category":category, "nameparticipant": participants})
+        response = self.client.post("/count/Tony/newcount/addcount",
+                                    data = {"newtricount_title":title, 
+                                            "newtricount_pwd":password, 
+                                            "newtricount_description":description, 
+                                            "newtricount_currency" : currency, 
+                                            "newtricount_category":category, 
+                                            "nameparticipant": participants})
         
         return response
     
     def create_a_spending(self,title,amount,spender, receivers, respective_amounts):
         """
         Inputs :
-            title : str
-            amount : float
-            spender : str
-            receivers : list of str
+            - title (str) 
+            - amount (float) : amount of the spending
+            - spender (str) : who pays
+            - receivers (list[str]) : people the spender pay for
 
         Output : 
-            response : object
+            - response (object) : contains the characteristics of the response to the request post. 
         """ 
         data = {'title': title, 'amount': amount, 'spender': spender,  'receiver': receivers} 
         for i in range(len(receivers)):
