@@ -99,9 +99,9 @@
 
         <div data-div = "hidden" class = 'form-pwdcount' hidden>
             <form  class = "pwdcount" method = "POST" action = "/count/{{user}}/newcount/count-pwd"> 
-                {% csrf_token %}
                 <input type="password" class = "password" placeholder="Mot de passe du tricount" name = "password">
                 <input type="submit" class = "pwdsubmit" placeholder="submit password">
+                {% csrf_token %}
             </form>
         </div> 
 

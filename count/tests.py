@@ -209,6 +209,30 @@ class NewcountTest(UnitaryTestMethods):
         self.assertIn("EUR", str(soup))
         self.assertIn("Euro", str(soup))
 
+    def test_clonecount(self):
+        """
+        Test if when a tricount is cloned the list of admins change
+        """
+        #Creation of a tricount by Tony
+        self.create_a_tricount("tricount1",'pwd',"description","EUR","Voyage", "Henri", "Jean")
+        
+        admins = Counts.objects.first().admins
+        self.assertListEqual(admins, ['Tony'])
+
+        #Henri tries to clone the tricount
+        self.client.post("/count/Henri/newcount/count-pwd", data = {"password":"pwd"})
+        admins = Counts.objects.first().admins
+        self.assertListEqual(admins, ['Tony','Henri'])
+
+        #Jean tries to clone but gives a wrong password
+        self.client.post("/count/Jean/newcount/count-pwd", data = {"password":"error"})
+        admins = Counts.objects.first().admins
+        self.assertListEqual(admins, ['Tony','Henri'])
+
+        #He gives the good password
+        self.client.post("/count/Jean/newcount/count-pwd", data = {"password":"pwd"})
+        admins = Counts.objects.first().admins
+        self.assertListEqual(admins, ['Tony','Henri','Jean'])
         
 
 class TestCalculator(TestCase):

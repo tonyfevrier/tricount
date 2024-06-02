@@ -254,9 +254,10 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             puis pousser à distance sur github
             `si mdp correct, ajouter à la liste des admin du tricount`
             `modifier views (listecount je pense) pour afficher les tricount dont la personne est admin (et pas tous les tricount)`
-            test serveur pour vérifier que les données sont apparues dans la bdd du user, et que des tricount dont il n'est pas admin n'apparaissent pas.
-            test fonctionnel 
-            débugger le test (impression qu'il y a un pb avec le JS de id newcount parfois : regarder sous quelle condition j'ai bloqué le bouton)
+            `test serveur pour vérifier que les données sont apparues dans la bdd du user, et que des tricount dont il n'est pas admin n'apparaissent pas.`
+            `test fonctionnel`  
+            `JS à vérif : le error n'apparaît pas.`
+            `débugger le test (impression qu'il y a un pb avec le JS de id newcount parfois : regarder sous quelle condition j'ai bloqué le bouton)`
             faire en sorte qu'il y ait mdp + un identifiant (comme le nom du créateur du tricount)
     - branche pour le chat (suite)
             partie serveur : django : voir comment recevoir les sockets, stocke les messages et les affiche sur les comptes des différents clients.
@@ -307,7 +308,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
 
         # Soumettez le formulaire avec self.client.post
         response = self.client.post("/count/newcount/addcount", data=form_data)
-    -TAGS DJANGO EN JS : dans un fichier JS qui crée un html avec un tag django, il faut spécifier l'adresse d'un fichier static (ne pas utiliser les tags mais "/static/...). Il ne reconnaît pas les tags DJANGO côté client seulement côté serveur.
+    -TAGS DJANGO EN JS : dans un fichier JS qui crée un html contenant un tag django, il faut spécifier l'adresse d'un fichier static (ne pas utiliser les tags mais "/static/...). Il ne reconnaît pas les tags DJANGO côté client seulement côté serveur.
     -JSONfield : Attention pour stocker des chaînes JSON, mieux vaut utiliser models.Textfield que JsonField car celui-ci rend un objet JsonStr qui est différent d'un str et si on veut utiliser json.loads pour recréer un dico python, cela peut bugger du fait du type de l'objet. 
     -NOSUCHTABLE : pb de bdd, supprimer la base, vérifier que le dossier migrations et init existent bien et refaire les migrations.
     -JS PREVENTDEFAULT : quand je cliquais sur un input submit avec un event click qui m'affichait 1, il n'affichait pas 1 car le comportement par défaut était de soumettre le formulaire.

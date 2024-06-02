@@ -286,15 +286,18 @@ class MultiUsersTricount(StaticLiveServerTestCase):
         self.assertEqual(self.live_server_url + "/count/Dulcinee" , self.browser2.current_url)
 
         #Il oublie de mettre un mot de passe : un message apparaît.
+        
         click2.clone_a_tricount("")
         error = self.browser2.find_element(By.CLASS_NAME, "error")
         
         self.assertEqual(error.text, "Entrez un mot de passe")
 
         #Il recommence et tape le bon mot de passe, il est envoyé vers la liste de ses tricount et le tricount de l'utilisateur 1 est apparu.
+        click2.click_on_a_link(By.CLASS_NAME, "id_newcount")
         click2.clone_a_tricount("rightpassword")
-        tricount = self.browser.find_element(By.CLASS_NAME, 'tricount_title')
-        self.assertEqual(tricount.text, "tricount1")
+ 
+        tricount = self.browser.find_element(By.CLASS_NAME, 'tricount-title')
+        self.assertEqual(tricount.text, "Tricount1")
         
 
 class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):

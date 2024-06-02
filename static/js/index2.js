@@ -15,8 +15,8 @@ let clonecount = document.body.querySelector('.clonecount');
 let choosecountpopup = document.body.querySelector('.choosecount');
 let pwdcountpopup = document.body.querySelector('.form-pwdcount');
 let form = pwdcountpopup.firstElementChild; 
-let pwdinput = form.firstElementChild; 
-let pwdsubmit = form.lastElementChild;
+let pwdinput = form.firstElementChild;  
+
 let error = document.createElement("div");
 error.dataset.div = "hidden";
 error.className = "error";
@@ -29,7 +29,7 @@ parameter.addEventListener("click", clickOnParameter);
 parameters_options.addEventListener("click",clickOnParameterOptions);
 newcount.addEventListener("click", clickOnNewcount);
 choosecountpopup.addEventListener("click", clickOnChooseCount);
-pwdsubmit.addEventListener("click", clickOnSubmit);
+form.addEventListener("submit", clickOnSubmit);
 
 
 
@@ -115,8 +115,8 @@ function clickOnChooseCount(event){
 
 function clickOnSubmit(event){
     /*Fonction qui traite le cas où l'utilisateur oublie de mettre un mot de passe. Apparition d'un message d'erreur */
-    /*Si on clique et que le input est vide */
-    if (pwdinput.value !== "submit password" && pwdinput.value !== "") return;
-    event.preventDefault();
+    /*Si on clique et que le input est vide */  
+    if (pwdinput.value !== "Mot de passe du tricount" && pwdinput.value !== "") return;
+    event.preventDefault(); 
     error.hidden = false;  
 }

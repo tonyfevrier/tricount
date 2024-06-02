@@ -172,6 +172,7 @@ class Click():
         submit = self.browser.find_element(By.CLASS_NAME,"pwdsubmit")
         pwd.send_keys(password)
         submit.send_keys(Keys.ENTER)
+        time.sleep(2)
 
     def click_on_an_existing_tricount(self,tricount_number):
         link = self.browser.find_element(By.ID,"link-tricount-" + str(tricount_number))
