@@ -232,7 +232,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             `tester dans count, l'ouverture d'une websocket quand la page chat est lancée.`
             `partie client en JS : si on envoie un message, envoi via protocole socket`
             `partie client : si un message arrive, il est ajouté à la page.`
-    - interaction multiutilisateur sur un même tricount:
+    - `interaction multiutilisateur sur un même tricount:`
             `bug : pourquoi mettre eltinitially hidden avant footer.append fait que clonertricount s'affiche alors qu'après ce n'est pas le cas. (à mon avis ça vient de goback`
             `ajouter une popup lorsqu'on crée un tricount pour laisser choisir entre créer de rien ou cloner un tricount existant`
             `si on clique hors de la page la popup disparaît`
@@ -251,13 +251,16 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             `débugger mes tests : bug de multiUsers à comprendre (le clic sur id newcount ne semble pas ouvrir clonecount)`
             `dire de n'afficher le tricount que si le user est dans la liste des admins.`
             `documenter mieux `
-            puis pousser à distance sur github
+            `puis pousser à distance sur github`
             `si mdp correct, ajouter à la liste des admin du tricount`
             `modifier views (listecount je pense) pour afficher les tricount dont la personne est admin (et pas tous les tricount)`
-            test serveur pour vérifier que les données sont apparues dans la bdd du user, et que des tricount dont il n'est pas admin n'apparaissent pas.
-            test fonctionnel 
-            débugger le test (impression qu'il y a un pb avec le JS de id newcount parfois : regarder sous quelle condition j'ai bloqué le bouton)
-            faire en sorte qu'il y ait mdp + un identifiant (comme le nom du créateur du tricount)
+            `test serveur pour vérifier que les données sont apparues dans la bdd du user, et que des tricount dont il n'est pas admin n'apparaissent pas.`
+            `test fonctionnel`  
+            `JS à vérif : le error n'apparaît pas.`
+            `débugger le test (impression qu'il y a un pb avec le JS de id newcount parfois : regarder sous quelle condition j'ai bloqué le bouton)`
+            `test fonctionnel à compléter`
+            `faire en sorte qu'il y ait mdp + un identifiant (comme le nom du créateur du tricount)`
+            finir debug test fonctionnel
     - branche pour le chat (suite)
             partie serveur : django : voir comment recevoir les sockets, stocke les messages et les affiche sur les comptes des différents clients.
             apparition du message dans la page html sans réactualiser si elle est ouverte
@@ -307,7 +310,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
 
         # Soumettez le formulaire avec self.client.post
         response = self.client.post("/count/newcount/addcount", data=form_data)
-    -TAGS DJANGO EN JS : dans un fichier JS qui crée un html avec un tag django, il faut spécifier l'adresse d'un fichier static (ne pas utiliser les tags mais "/static/...). Il ne reconnaît pas les tags DJANGO côté client seulement côté serveur.
+    -TAGS DJANGO EN JS : dans un fichier JS qui crée un html contenant un tag django, il faut spécifier l'adresse d'un fichier static (ne pas utiliser les tags mais "/static/...). Il ne reconnaît pas les tags DJANGO côté client seulement côté serveur.
     -JSONfield : Attention pour stocker des chaînes JSON, mieux vaut utiliser models.Textfield que JsonField car celui-ci rend un objet JsonStr qui est différent d'un str et si on veut utiliser json.loads pour recréer un dico python, cela peut bugger du fait du type de l'objet. 
     -NOSUCHTABLE : pb de bdd, supprimer la base, vérifier que le dossier migrations et init existent bien et refaire les migrations.
     -JS PREVENTDEFAULT : quand je cliquais sur un input submit avec un event click qui m'affichait 1, il n'affichait pas 1 car le comportement par défaut était de soumettre le formulaire.

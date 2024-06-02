@@ -279,23 +279,42 @@ class MultiUsersTricount(StaticLiveServerTestCase):
         click2.register_and_login_someone("Dulcinee", "dul.cinee@gmail.com","hello2")
 
         #L'utilisateur 1 crée un tricount.
-        click.create_a_tricount("tricount1", "rightpassword","description","EUR", 'project',"Tony","Dulcinee")
+        click.create_a_tricount("Tricount1", "rightpassword","description","EUR", 'project',"Tony","Dulcinee")
+        click.click_on_a_link(By.CLASS_NAME,'backtolistecount')
 
         #L'utilisateur 2 arrive sur sa liste de tricount et cherche à clôner le tricount qui a été créé par l'utilisateur 1. Il se trompe de mot de passe, il est renvoyé sur cette même page
-        click2.clone_a_tricount("falsepassword") 
+        click2.clone_a_tricount("Tricount1", "falsepassword") 
         self.assertEqual(self.live_server_url + "/count/Dulcinee" , self.browser2.current_url)
 
         #Il oublie de mettre un mot de passe : un message apparaît.
-        click2.clone_a_tricount("")
+        
+        click2.clone_a_tricount("Tricount1","")
         error = self.browser2.find_element(By.CLASS_NAME, "error")
         
-        self.assertEqual(error.text, "Entrez un mot de passe")
+        self.assertEqual(error.text, "Remplissez le titre et le mot de passe")
 
         #Il recommence et tape le bon mot de passe, il est envoyé vers la liste de ses tricount et le tricount de l'utilisateur 1 est apparu.
-        click2.clone_a_tricount("rightpassword")
-        tricount = self.browser.find_element(By.CLASS_NAME, 'tricount_title')
-        self.assertEqual(tricount.text, "tricount1")
+        click2.click_on_a_link(By.CLASS_NAME, "id_newcount")
+        click2.clone_a_tricount("Tricount1", "rightpassword")
+  
+        tricount = self.browser.find_element(By.CLASS_NAME, 'tricount_title') 
+        self.assertEqual(tricount.text, "Tricount1")
         
+        #Le second utilisateur crée une dépense et celle-ci apparait bien sur les deux comptes d'utilisateur.
+        click2.click_on_an_existing_tricount(1)
+        click2.click_on_create_spending()
+        click2.create_a_spending('Dépense1',10,'Dulcinee',['Dulcinee','Tony'])
+
+        spending_title = self.browser2.find_elements(By.CLASS_NAME,"spending-title") 
+        self.assertIn('Dépense1',[name.text for name in spending_title]) 
+
+        click.click_on_an_existing_tricount(1)
+        spending_title = self.browser.find_elements(By.CLASS_NAME,"spending-title") 
+        self.assertIn('Dépense1',[name.text for name in spending_title]) 
+
+        
+
+
 
 class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
     

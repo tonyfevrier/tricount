@@ -45,6 +45,15 @@ class UnitaryTestMethods(TestCase):
         
         return response
     
+    def clone_a_tricount(self, people, title, password):
+        """
+        Inputs : 
+            - people (str) : who wants to clone the tricount.
+            - title (str)
+            - password (str)
+        """
+        self.client.post(f"/count/{people}/newcount/count-pwd", data = {"tricount-title":title, "password":password})
+
     def create_a_spending(self,title,amount,spender, receivers, respective_amounts):
         """
         Inputs :

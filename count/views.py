@@ -81,9 +81,11 @@ def clonecount(request,user):
     """
     Function for cloning an existing tricount.
     """  
-    item = Counts.objects.filter(password = request.POST['password'])
-    if item.exists():   
-        item.admins.append(user)
+    item = Counts.objects.filter(title = request.POST["tricount-title"], password = request.POST['password'])   
+    if len(item) > 0:    
+        item[0].admins.append(user)
+        item[0].save()
+    
     return redirect(f'/count/{user}') 
     
     
