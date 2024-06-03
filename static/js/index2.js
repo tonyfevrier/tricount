@@ -31,6 +31,7 @@ parameters_options.addEventListener("click",clickOnParameterOptions);
 newcount.addEventListener("click", clickOnNewcount);
 choosecountpopup.addEventListener("click", clickOnChooseCount);
 form.addEventListener("submit", clickOnSubmit);
+form.addEventListener("submit", clickOnSubmit);
 
 
 
