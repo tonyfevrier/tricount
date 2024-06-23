@@ -260,8 +260,29 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             `débugger le test (impression qu'il y a un pb avec le JS de id newcount parfois : regarder sous quelle condition j'ai bloqué le bouton)`
             `test fonctionnel à compléter`
             `faire en sorte qu'il y ait mdp + un identifiant (comme le nom du créateur du tricount)`
-            finir debug test fonctionnel
+            `finir debug test fonctionnel`
+    - modifier les données d'un tricount et des dépenses déjà crées
+            `page après clic sur le titre du count`
+            `mettre l'html avec même format que celui de la creation`
+            `ajouter les données au inputs qu'on peut modifier`
+            `css`
+            `renvoi vers la page du tricount après modif` 
+            `bouton pour soumettre le nouveau formulaire`
+            `créer l'url et la view qui récupère le form et modifie le tricount.`
+            `enregistrement dans la bdd des nouvelles data après modif`
+            `test unitaire pour vérifier les modifs changer ptcp titre, description`
+            test unitaire : calcul de dépense toujours correct (1 dépense, 1 ajout de participant, 1 dépense, toujours correct)`
+            Ajouter à count.data modifyregister de views, Robert en clé du dict_participants et en receveur des objets des autres participants, initialiser aussi le crédit de Robert pour tous les participants.
+            `debug du redirects`
+            test fonctionnel où on change les mêmes choses et on arrive sur les bonnes url. (et avant les donnée du count appariassent bien en placeholder).
+            ajouter option supprimer + popup JS confirmer
+            supprimer de la bdd le count supprimé
+            ajouter JS du : JE SUIS
+            test fonc
+    - pourquoi le clic sur un tricount déjà créé est si lent? Améliorer:
     - branche pour le chat (suite)
+            `copier l'html et voir si ça marche`
+            `copie de app et templates`
             partie serveur : django : voir comment recevoir les sockets, stocke les messages et les affiche sur les comptes des différents clients.
             apparition du message dans la page html sans réactualiser si elle est ouverte
             apparition d'une cloche si on n'est pas dans le chat.

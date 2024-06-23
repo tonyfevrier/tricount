@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <a href="/count/{{user}}URL A COMPLETER" class = "backtospending" id = "backtospending"><img width = "20px" src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="/count/{{user}}/tricount/{{id}}" class = "backtospending" id = "backtospending"><img width = "20px" src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <nav>
             <p class = "header-title">Titre</p>
             <p class = "header-participants">Participants</p>
@@ -20,8 +20,11 @@
     <main>
     </main>
     <form action="">
-        <input type="text" placeholder="Ajoutez un message...">
-        <button type="submit"><img width = "20px" src="{%static 'images/send.png'%}" alt="send"></button>
+        <input type="text" class = "send" placeholder = "Ajoutez un message...">
+        <button type="submit"  class = "submit"><img width = "20px" src = "{%static 'images/send.png'%}" alt="send"></button>
     </form>
 </body>
+<script src = "chat.js"></script>
 </html>
+
+   

@@ -1,0 +1,61 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouveau tricount</title>
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modifycount.css' %}">
+</head>
+<body>
+    <header> 
+        <a href="/count/{{user}}/tricount/{{count.id}}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <div class = "titre">Modifier le tricount</div>
+    </header> 
+    <main>
+        <form method="POST" class = "tricount" action="/count/{{user}}/tricount/{{count.id}}/modifycountregister">
+            {% csrf_token %}
+            <input type ="text" class = "tricount_title" placeholder="{{count.title}}" name = "tricount_title">  
+
+            {% if titre == False %}
+                <p class="error">Le titre doit comporter au moins un caractère.</p>
+            {% endif %}
+ 
+            <input type ="text" class = "tricount_description" placeholder="{{count.description}}" name = "tricount_description">
+            
+            <p class = "currency"> Devise : {{count.currency}} </p>
+
+            <p class = "category"> Catégorie : {{count.category}}</p>
+            
+            <div class = "participants"> 
+                <p> Participants au tricount </p>
+                <p> Je suis...</p>
+            </div>
+
+            {% for participant in count.participants%}
+            <div class = "printparticipant">
+                <input class = "nameparticipant" type="text" value = "{{participant}}" name = "nameparticipant">
+                <button class = "closeparticipant" name = "{{participant}}" ><img src="/static/images/close.png" alt="fermeture"></button>
+            </div> 
+            {% endfor%}
+
+            <button class = "submittricount" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
+
+
+        </form>
+        <input type ="text" name="new_participant" class ='new_participant' placeholder="Autre participant">
+        <button class = "add_participant">Ajouter</button>
+        <!--{% if ptcpt == False %}
+            <p class="participant-error">Il faut au moins un participant.</p>
+        {% endif %}-->
+        <!--<script src = "{%static 'js/modifycount.js'%}"></script>--> 
+        
+    </main>
+    <footer>
+        <button class = "delete-tricount"> Supprimer ce tricount</button>
+    </footer>
+</body>
+</html>

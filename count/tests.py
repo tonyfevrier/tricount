@@ -238,6 +238,21 @@ class NewcountTest(UnitaryTestMethods):
         admins = Counts.objects.first().admins
         self.assertListEqual(admins, ['Tony','Henri','Jean'])
         
+    def test_modify_tricount(self):
+        """
+        Test if the modification of a tricount changes effectively the tricount in the database
+        """
+        #We create a tricount and then try to modify the tricount
+        self.create_a_tricount("tricount1",'pwd',"description","EUR","Voyage", "Tony", "Henri", "Jean")
+        response = self.client.post("/count/Tony/tricount/1/modifycountregister", data = {'tricount_title' : "tricount2",
+                                                                               'tricount_description' : 'Autre', 
+                                                                               'nameparticipant' : ["Tony", "Henri", "Jean", "Robert"]})
+
+        count = Counts.objects.first()
+        self.assertEqual(count.title, "tricount2")
+        self.assertEqual(count.description, "Autre")
+        self.assertListEqual(count.participants, ["Tony", "Henri", "Jean", "Robert"])
+        self.assertRedirects(response,'/count/Tony/tricount/1')
 
 class TestCalculator(TestCase):
     """
@@ -306,7 +321,7 @@ class TestCalculator(TestCase):
                 if secondparticipant != firstparticipant:
                     self.assertEqual(old_dict_participants[firstparticipant].credits[secondparticipant], count.dict_participants[firstparticipant].credits[secondparticipant])
                     self.assertEqual(old_dict_participants[secondparticipant].credits[firstparticipant], count.dict_participants[secondparticipant].credits[firstparticipant])
-                
+
     def test_receiving_update(self):
         """
         Test a money input between all participants from a group of four to verify that the credits calculated are correct.
@@ -467,9 +482,44 @@ class TestSpending(UnitaryTestMethods):
         self.assertEqual(count.dict_participants["Yann"].expense, 180)
         
         self.assertDictEqual(count.dict_participants["Tony"].credits, {'Marine': 25.0, 'Henri': 0, 'Yann': 0})
-        self.assertEqual(count.dict_participants["Marine"].credits, {'Tony': -25.0, 'Henri': 25.0, 'Yann': 50.0})
-        self.assertEqual(count.dict_participants["Henri"].credits, {'Tony': 0, 'Marine': -25.0, 'Yann': -20})
-        self.assertEqual(count.dict_participants["Yann"].credits, {'Tony': 0, 'Marine': -50.0, 'Henri': 20})
+        self.assertDictEqual(count.dict_participants["Marine"].credits, {'Tony': -25.0, 'Henri': 25.0, 'Yann': 50.0})
+        self.assertDictEqual(count.dict_participants["Henri"].credits, {'Tony': 0, 'Marine': -25.0, 'Yann': -20})
+        self.assertDictEqual(count.dict_participants["Yann"].credits, {'Tony': 0, 'Marine': -50.0, 'Henri': 20})
        
+    def test_spending_after_adding_participant_to_tricount(self):
+        """
+        Test if calculations are correct when :
+        - we create a tricount
+        - we add a spending
+        - we add a participant to the tricount 
+        - we finally add a new spending involving the new participant
+        """
+        self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
+        self.create_a_spending('dépense', 180, 'Yann', ['Henri','Yann','Marine','Tony'], [30,50,50,50]) 
+        response = self.client.post("/count/Tony/tricount/1/modifycountregister", data = {'tricount_title' : "tricount1",
+                                                                               'tricount_description' : 'description', 
+                                                                               'nameparticipant' : ['Henri','Yann','Marine','Tony','Robert']})
+        self.create_a_spending('dépense', 100, 'Robert', ['Henri','Yann','Marine','Tony'], [100,0,0,0])
+        data = Counts.objects.first().data
+        count = Tricount.from_json(data)
+
+        self.assertEqual(count.dict_participants["Tony"].expense, 0)
+        self.assertEqual(count.dict_participants["Marine"].expense, 0)
+        self.assertEqual(count.dict_participants["Henri"].expense, 0)
+        self.assertEqual(count.dict_participants["Yann"].expense, 180)
+        self.assertEqual(count.dict_participants["Robert"].expense, 100)
+
+        
+        self.assertDictEqual(count.dict_participants["Tony"].credits, {'Marine': 0, 'Henri': 0, 'Yann': 50, 'Robert' : 0 })
+        self.assertDictEqual(count.dict_participants["Marine"].credits, {'Tony': 0, 'Henri': 0, 'Yann': 50.0, 'Robert' :0 })
+        self.assertDictEqual(count.dict_participants["Henri"].credits, {'Tony': 0, 'Marine': 0, 'Yann': 30, 'Robert' : 100 })
+        self.assertDictEqual(count.dict_participants["Yann"].credits, {'Tony': -50, 'Marine': -50.0, 'Henri': -30, 'Robert' : 0 })
+        self.assertDictEqual(count.dict_participants["Robert"].credits, {'Tony': 0, 'Marine': 0, 'Henri': -100, 'Yann' : 0})
+
+
+
+        
+        
+        
  
     

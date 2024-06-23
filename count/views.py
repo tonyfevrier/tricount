@@ -102,7 +102,7 @@ def addcount(request,user):
     """
     Function adding a new tricount. A tricount necessitates a title, a password, a description, some participants and a list of admins
     which increases when someone is cloning the tricount
-    """ 
+    """  
     titre = request.POST["newtricount_title"]
     password = request.POST["newtricount_pwd"]
     descption = request.POST["newtricount_description"]
@@ -128,11 +128,32 @@ def addcount(request,user):
                                               description = phrase, 
                                               currency = request.POST["newtricount_currency"], 
                                               category = request.POST["newtricount_category"], 
-                                              participants = participts, data = tricount.to_json(),
+                                              participants = participts, 
+                                              data = tricount.to_json(),
                                               admins = admins) 
                 return redirect(f'/count/{user}/tricount/'+ str(count.id))
     else:  
         return render(request,'newcount.html', context={'titre':False})
+    
+def modifycount(request, user, id_count):
+    """
+    Function which leads to modify the properties of the tricount.
+    """
+    count = Counts.objects.get(id = id_count)
+
+    return render(request, "modifycount.html", context={'count':count, 'user':user})
+
+def modifycountregister(request, user, id_count):
+    """
+    Function which modifies the tricount including the modifications of the user
+    """  
+    count = Counts.objects.get(id = id_count) 
+    count.title = request.POST['tricount_title']
+    count.description = request.POST['tricount_description']
+    count.participants = request.POST.getlist('nameparticipant')
+    count.save() 
+
+    return redirect(f'/count/{user}/tricount/{id_count}')
 
 def choosecurrency(request,user):
     """
@@ -236,4 +257,4 @@ def chat(request, user,id_count):
     """
     Function to go to the chat view
     """
-    return render(request,'chat.html')
+    return render(request,'chat.html',context={'user' : user, 'id':id_count})
