@@ -6,7 +6,7 @@ class Participant():
         Participant owner : the first element of the list.
         expense : what he has to pay
         credits : dictionnary containing debts or credits towards other participants : what they have to spend for each participant (key)
-        receivers : other participants of the tricount. 
+        receivers : list of other participants of the tricount. 
         """
         self.owner = owner
         self.receivers = receivers

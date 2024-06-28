@@ -45,6 +45,23 @@ class UnitaryTestMethods(TestCase):
         
         return response
     
+    def modify_a_tricount(self, title, description, *participants):
+        """
+        Function which modifies an existing tricount.
+
+        Inputs : 
+            - title (str) 
+            - description (str) 
+            - participants (list[str])
+        
+        Output : 
+            - response (object) : contains the characteristics of the response to the request post. 
+        """
+        response = self.client.post("/count/Tony/tricount/1/modifycountregister", data = {'tricount_title' : title,
+                                                                               'tricount_description' : description, 
+                                                                               'nameparticipant' : participants})
+        return response
+    
     def clone_a_tricount(self, people, title, password):
         """
         Inputs : 

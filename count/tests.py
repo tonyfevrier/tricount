@@ -244,9 +244,7 @@ class NewcountTest(UnitaryTestMethods):
         """
         #We create a tricount and then try to modify the tricount
         self.create_a_tricount("tricount1",'pwd',"description","EUR","Voyage", "Tony", "Henri", "Jean")
-        response = self.client.post("/count/Tony/tricount/1/modifycountregister", data = {'tricount_title' : "tricount2",
-                                                                               'tricount_description' : 'Autre', 
-                                                                               'nameparticipant' : ["Tony", "Henri", "Jean", "Robert"]})
+        response = self.modify_a_tricount("tricount2", "Autre", "Tony", "Henri", "Jean", "Robert") 
 
         count = Counts.objects.first()
         self.assertEqual(count.title, "tricount2")
@@ -496,9 +494,7 @@ class TestSpending(UnitaryTestMethods):
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
         self.create_a_spending('dépense', 180, 'Yann', ['Henri','Yann','Marine','Tony'], [30,50,50,50]) 
-        response = self.client.post("/count/Tony/tricount/1/modifycountregister", data = {'tricount_title' : "tricount1",
-                                                                               'tricount_description' : 'description', 
-                                                                               'nameparticipant' : ['Henri','Yann','Marine','Tony','Robert']})
+        self.modify_a_tricount("tricount1", "description", 'Henri','Yann','Marine','Tony','Robert')
         self.create_a_spending('dépense', 100, 'Robert', ['Henri','Yann','Marine','Tony'], [100,0,0,0])
         data = Counts.objects.first().data
         count = Tricount.from_json(data)
@@ -515,6 +511,34 @@ class TestSpending(UnitaryTestMethods):
         self.assertDictEqual(count.dict_participants["Henri"].credits, {'Tony': 0, 'Marine': 0, 'Yann': 30, 'Robert' : 100 })
         self.assertDictEqual(count.dict_participants["Yann"].credits, {'Tony': -50, 'Marine': -50.0, 'Henri': -30, 'Robert' : 0 })
         self.assertDictEqual(count.dict_participants["Robert"].credits, {'Tony': 0, 'Marine': 0, 'Henri': -100, 'Yann' : 0})
+
+    def test_spending_after_adding_and_removing_participant_to_tricount(self):
+        """
+        Test if calculations are correct when :
+        - we create a tricount
+        - we add a spending
+        - we add a participant to the tricount 
+        - we finally add a new spending involving the new participant
+        """
+        self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
+        self.create_a_spending('dépense', 180, 'Yann', ['Henri','Yann','Marine','Tony'], [30,50,50,50]) 
+        self.modify_a_tricount("tricount1", "description", 'Henri','Marine','Tony','Robert')
+        self.create_a_spending('dépense', 100, 'Robert', ['Henri','Marine','Tony'], [10,10,80])
+        data = Counts.objects.first().data
+        count = Tricount.from_json(data)
+
+        self.assertEqual(count.dict_participants["Tony"].expense, 0)
+        self.assertEqual(count.dict_participants["Marine"].expense, 0)
+        self.assertEqual(count.dict_participants["Henri"].expense, 0)
+        self.assertEqual(count.dict_participants["Yann"].expense, 180)
+        self.assertEqual(count.dict_participants["Robert"].expense, 100)
+
+        
+        self.assertDictEqual(count.dict_participants["Tony"].credits, {'Marine': 0, 'Henri': 0, 'Yann': 50, 'Robert' : 80 })
+        self.assertDictEqual(count.dict_participants["Marine"].credits, {'Tony': 0, 'Henri': 0, 'Yann': 50.0, 'Robert' :10 })
+        self.assertDictEqual(count.dict_participants["Henri"].credits, {'Tony': 0, 'Marine': 0, 'Yann': 30, 'Robert' : 10 })
+        self.assertDictEqual(count.dict_participants["Yann"].credits, {'Tony': -50, 'Marine': -50.0, 'Henri': -30, 'Robert' : 0 })
+        self.assertDictEqual(count.dict_participants["Robert"].credits, {'Tony': -80, 'Marine': -10, 'Henri': -10, 'Yann' : 0})
 
 
 

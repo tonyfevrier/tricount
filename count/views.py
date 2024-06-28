@@ -148,9 +148,25 @@ def modifycountregister(request, user, id_count):
     Function which modifies the tricount including the modifications of the user
     """  
     count = Counts.objects.get(id = id_count) 
-    count.title = request.POST['tricount_title']
-    count.description = request.POST['tricount_description']
-    count.participants = request.POST.getlist('nameparticipant')
+    newparticipants = request.POST.getlist('nameparticipant')
+
+    if count.title != request.POST['tricount_title']:
+        count.title = request.POST['tricount_title']
+
+    if count.description != request.POST['tricount_description']:
+        count.description = request.POST['tricount_description']
+    
+    #si les participants ont changé, ajout des nouveaux participants pour les calculs de crédits/dettes
+    if set(count.participants) != set(newparticipants):
+        tricount = Tricount.from_json(count.data) 
+        for participant in newparticipants:
+            if participant not in count.participants:
+                receivers = [receiver for receiver in count.participants if receiver != participant]
+                tricount.dict_participants[participant] = Participant(participant,receivers)
+                for receiver in receivers:
+                    tricount.dict_participants[receiver].credits[participant] = 0
+        count.participants = request.POST.getlist('nameparticipant')
+        count.data = tricount.to_json()
     count.save() 
 
     return redirect(f'/count/{user}/tricount/{id_count}')

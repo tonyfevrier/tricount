@@ -418,26 +418,70 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.click_on_a_link(By.CLASS_NAME,"backtospending")
  
         click.click_on_create_spending()
-        click.create_a_spending('Depense2', 10., 'Henri', ['Henri','Jean']) 
+        click.create_a_spending('Depense2', 12., 'Henri', ['Henri','Jean']) 
         click.click_on_create_spending()
-        click.create_a_spending('Depense3', 2., 'Henri', ['Henri','Jean'])
+        click.create_a_spending('Depense3', 3., 'Henri', ['Henri','Jean'])
 
         #Il clique à nouveau sur la première dépense puis sur suivant
         click.click_on_an_existing_spending(1)
         click.click_on_a_link(By.CLASS_NAME,"following")
 
         #Il voit alors les infos de la seconde dépense et le bouton précédent apparaître
-        self.check_informations_of_a_spending('DEPENSE2', '10.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['3.33', '3.33', '3.33'])
+        self.check_informations_of_a_spending('DEPENSE2', '12.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['4.0', '4.0', '4.0'])
         self.assertIsNotNone(self.browser.find_element(By.CLASS_NAME,'previous'))
 
         #Il clique sur suivant une fois et voit le bouton suivant disparaître
         click.click_on_a_link(By.CLASS_NAME,"following") 
-        self.check_informations_of_a_spending('DEPENSE3', '2.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['0.67', '0.67', '0.67'])
+        self.check_informations_of_a_spending('DEPENSE3', '3.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['1.0', '1.0', '1.0'])
         #self.assertIsNone(self.browser.find_element(By.CLASS_NAME,'following'))
 
-        #Il clique sur précédent trois fois.
+        #Il clique sur précédent trois fois et revient à la liste des dépenses
         click.click_on_a_link(By.CLASS_NAME,"previous")
         click.click_on_a_link(By.CLASS_NAME,"previous")
+        click.click_on_a_link(By.CLASS_NAME,"backtospending")
+
+        #Il clique sur le titre du tricount et voit les bonnes informations préremplies
+        click.click_on_a_link(By.CLASS_NAME,"tricount-characteristics")
+
+        title = self.browser.find_element(By.CLASS_NAME, "tricount_title")
+        description = self.browser.find_element(By.CLASS_NAME, "tricount_description")
+        participants = self.browser.find_elements(By.CLASS_NAME, "nameparticipant") 
+
+        self.assertEqual(title.get_attribute("placeholder"), "Tricount1")
+        self.assertEqual(description.get_attribute("placeholder"), "Je décris")
+        self.assertIn("Jean", [participant.get_attribute("value") for participant in participants])
+        self.assertIn("Henri", [participant.get_attribute("value") for participant in participants])
+        
+        #Il modifie le titre et la description puis valide. Il voit les nouvelles informations modifiées.
+        title.send_keys('Tricount2')
+        description.send_keys('autre') 
+        click.click_on_a_link(By.CLASS_NAME,'submittricount')
+
+        title = self.browser.find_element(By.CLASS_NAME, 'tricount-title')
+        self.assertEqual(title.text, "Tricount2") 
+
+        #Il reclique sur le titre du tricount et ajoute un nouveau participant tout en supprimant un autre
+        click.click_on_a_link(By.CLASS_NAME,"tricount-characteristics")
+        click.click_on_a_link(By.CSS_SELECTOR, "button[name = 'Jean']") 
+        click.add_participants('Robert')
+        click.click_on_a_link(By.CLASS_NAME,'submittricount')
+
+        participants = self.browser.find_elements(By.CLASS_NAME, "tricount-participants")
+        self.assertIn("Robert", [participant.text for participant in participants])
+        self.assertIn("Jean", [participant.text for participant in participants])
+
+        #Il crée une nouvelle dépense et observe que les participants mis à jour sont présents.
+        click.create_a_spending('Depense2', 100., 'Robert', ['Henri','Dulciny']) 
+        click.create_a_spending('Depense2', 50., 'Robert', ['Henri'])  
+
+        #Il clique sur les équilibres et observe que même le participant supprimé est toujours présent.
+        click.click_on_a_link(By.CLASS_NAME, "gotoequilibria")
+
+        credits = self.browser.find_elements(By.CLASS_NAME,"credits")
+        for credit in credits:
+            participant = credit.find_element(By.CLASS_NAME,"participant")
+            amount = credit.find_element(By.CLASS_NAME,"amount")
+            self.assertIn([participant.text,amount.text], [["Robert","150 EUR"],["Henri","-92.5 EUR"],["Dulciny","22.5 EUR"],["Jean","-7.5 EUR"]])
 
     def test_equilibria_with_multiple_spendings(self):
         
@@ -466,7 +510,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
             amount = credit.find_element(By.CLASS_NAME,"amount")
             self.assertIn([participant.text,amount.text], [["Tony","-57.5 EUR"],["Henri","-7.5 EUR"],["Yann","22.5 EUR"],["Marine","42.5 EUR"]])
         
-        #Les crédits dettes du propriétaire sont présentées d'abord celles des autres dans la section suivante
+        #Les crédits dettes du propriétaire sont présentées d'abord, celles des autres dans la section suivante
         usersolutions = self.browser.find_elements(By.NAME, "userinclude") 
         for usersolution in usersolutions:
             self.assertIn('Marine',[elt.text for elt in usersolution.find_elements(By.CLASS_NAME, 'who')])

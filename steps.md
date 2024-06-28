@@ -271,10 +271,13 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             `créer l'url et la view qui récupère le form et modifie le tricount.`
             `enregistrement dans la bdd des nouvelles data après modif`
             `test unitaire pour vérifier les modifs changer ptcp titre, description`
-            test unitaire : calcul de dépense toujours correct (1 dépense, 1 ajout de participant, 1 dépense, toujours correct)`
-            Ajouter à count.data modifyregister de views, Robert en clé du dict_participants et en receveur des objets des autres participants, initialiser aussi le crédit de Robert pour tous les participants.
+            `test unitaire : calcul de dépense toujours correct (1 dépense, 1 ajout de participant, 1 dépense, toujours correct)`
+            `tester le cas où on ajoute, le cas où on enlève et le cas où on ajoute et enlève`
+            Un cas à penser : celui où on enlèverait un participant puis le remettrait (il serait réinitialisé à 0).
+            `Ajouter à count.data modifyregister de views (si les participants ont été modifiés seulement), Robert en clé du dict_participants et en receveur des objets des autres participants, initialiser aussi le crédit de Robert pour tous les participants.`
             `debug du redirects`
-            test fonctionnel où on change les mêmes choses et on arrive sur les bonnes url. (et avant les donnée du count appariassent bien en placeholder).
+            test fonctionnel où on change les mêmes choses et on arrive sur les bonnes url. (et avant les donnée du count appariassent bien en placeholder). dans test fonc vérifier que si un participant est exclu du groupe il est toujours dans les comptes à la fin.
+            débug test fonc et puis-je faire des dépenses en décochant un ptcpt via selenium?
             ajouter option supprimer + popup JS confirmer
             supprimer de la bdd le count supprimé
             ajouter JS du : JE SUIS
