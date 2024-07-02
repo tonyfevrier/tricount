@@ -88,7 +88,7 @@ class Click():
            - literal : the html attribute to find the element.
            - name : the name of the attribute.
         """
-        link = self.browser.find_element(literal,name) 
+        link = self.browser.find_element(literal,name)  
         link.send_keys(Keys.ENTER)
         time.sleep(2) 
 
@@ -201,13 +201,16 @@ class Click():
         titlebox = self.browser.find_element(By.NAME, 'title')
         amountbox = self.browser.find_element(By.NAME, 'amount')
         spenderbox = self.browser.find_element(By.NAME, 'spender')
-        receiverbox = self.browser.find_element(By.NAME, 'receiver') 
+        receiverbox = self.browser.find_elements(By.NAME, 'receiver') 
         submitbox = self.browser.find_element(By.NAME,'submit') 
 
         titlebox.send_keys(title)
         amountbox.send_keys(amount)
-        spenderbox.send_keys(payer)
-        receiverbox.send_keys(receivers)
+        spenderbox.send_keys(payer) 
+
+        for receiver in receiverbox:
+            if receiver.get_attribute("value") not in receivers:
+                receiver.click()
 
         submitbox.send_keys(Keys.ENTER)
         time.sleep(2)

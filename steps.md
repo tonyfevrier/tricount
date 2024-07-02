@@ -276,8 +276,10 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             Un cas à penser : celui où on enlèverait un participant puis le remettrait (il serait réinitialisé à 0).
             `Ajouter à count.data modifyregister de views (si les participants ont été modifiés seulement), Robert en clé du dict_participants et en receveur des objets des autres participants, initialiser aussi le crédit de Robert pour tous les participants.`
             `debug du redirects`
-            test fonctionnel où on change les mêmes choses et on arrive sur les bonnes url. (et avant les donnée du count appariassent bien en placeholder). dans test fonc vérifier que si un participant est exclu du groupe il est toujours dans les comptes à la fin.
-            débug test fonc et puis-je faire des dépenses en décochant un ptcpt via selenium?
+            `Bug : le titre et la description si on ne la change pas et qu'on soumet le tricount, sont remplacés par rien!`
+            `test fonctionnel où on change les mêmes choses et on arrive sur les bonnes url. (et avant les donnée du count appariassent bien en placeholder). dans test fonc vérifier que si un participant est exclu du groupe il est toujours dans les comptes à la fin.`
+            débug test fonc
+            `receiverbox devrait être in find elements et pas element. Pourquoi les id ne donnent pas les noms? voir comment envoyer une liste de checked via selenium`          
             ajouter option supprimer + popup JS confirmer
             supprimer de la bdd le count supprimé
             ajouter JS du : JE SUIS

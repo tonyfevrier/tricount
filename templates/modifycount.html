@@ -35,12 +35,14 @@
                 <p> Je suis...</p>
             </div>
 
-            {% for participant in count.participants%}
-            <div class = "printparticipant">
-                <input class = "nameparticipant" type="text" value = "{{participant}}" name = "nameparticipant">
-                <button class = "closeparticipant" name = "{{participant}}" ><img src="/static/images/close.png" alt="fermeture"></button>
-            </div> 
-            {% endfor%}
+            <div class = "participants-container">
+                {% for participant in count.participants%}
+                <div class = "printparticipant">
+                    <input class = "nameparticipant" type="text" value = "{{participant}}" name = "nameparticipant">
+                    <button class = "closeparticipant" name = "{{participant}}" ><img src="/static/images/close.png" alt="fermeture"></button>
+                </div> 
+                {% endfor%}
+            </div>
 
             <button class = "submittricount" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
 
@@ -57,5 +59,6 @@
     <footer>
         <button class = "delete-tricount"> Supprimer ce tricount</button>
     </footer>
+    <script src="{% static 'js/modifycount.js' %}"></script>
 </body>
 </html>

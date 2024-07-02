@@ -405,8 +405,8 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri") 
 
         click.click_on_create_spending()
-        click.create_a_spending('Depense1', 100., 'Jean', ['Henri','Jean'])
-
+        click.create_a_spending('Depense1', 100., 'Jean', ['Henri','Jean','Dulciny'])
+ 
         click.click_on_an_existing_spending(1)
         time.sleep(3)
 
@@ -418,9 +418,9 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.click_on_a_link(By.CLASS_NAME,"backtospending")
  
         click.click_on_create_spending()
-        click.create_a_spending('Depense2', 12., 'Henri', ['Henri','Jean']) 
+        click.create_a_spending('Depense2', 12., 'Henri', ['Henri','Jean','Dulciny']) 
         click.click_on_create_spending()
-        click.create_a_spending('Depense3', 3., 'Henri', ['Henri','Jean'])
+        click.create_a_spending('Depense3', 3., 'Henri', ['Henri','Jean','Dulciny'])
 
         #Il clique à nouveau sur la première dépense puis sur suivant
         click.click_on_an_existing_spending(1)
@@ -468,10 +468,12 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
 
         participants = self.browser.find_elements(By.CLASS_NAME, "tricount-participants")
         self.assertIn("Robert", [participant.text for participant in participants])
-        self.assertIn("Jean", [participant.text for participant in participants])
+        self.assertNotIn("Jean", [participant.text for participant in participants])
 
         #Il crée une nouvelle dépense et observe que les participants mis à jour sont présents.
+        click.click_on_create_spending()
         click.create_a_spending('Depense2', 100., 'Robert', ['Henri','Dulciny']) 
+        click.click_on_create_spending()
         click.create_a_spending('Depense2', 50., 'Robert', ['Henri'])  
 
         #Il clique sur les équilibres et observe que même le participant supprimé est toujours présent.
