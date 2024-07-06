@@ -9,15 +9,19 @@ errormessage.hidden = true;
 let participants = document.body.querySelector('.participants-container');
 let addparticipant = document.body.querySelector('.add_participant');
 let inputparticipant = document.body.querySelector('.new_participant');
+const footer = document.body.querySelector("footer");
+const deletebutton = footer.firstElementChild;
+const deletealert = footer.lastElementChild;
 addparticipant.after(errormessage);
 
+window.addEventListener("click", alertBlockScreen);
 participants.addEventListener("click", userClosingParticipant);
-addparticipant.addEventListener("click",userAddingParticipant)
+addparticipant.addEventListener("click",userAddingParticipant);
+footer.addEventListener("click", userDeleteTricount); 
 
 function userClosingParticipant(event){
     /*Function which removes from the tricount the participant closed by the admin*/
-    event.preventDefault();  
-    console.log(event.target.childElement);
+    event.preventDefault();   
     if (event.target.tagName != "IMG" && event.target.tagName != "BUTTON") return;
     event.target.closest(".printparticipant").remove();
 }
@@ -35,4 +39,23 @@ function userAddingParticipant(event){
         inputparticipant.value = "";
         errormessage.hidden = true;
     }
+}
+
+function userDeleteTricount(event){
+    /*Function to manage the delation of the tricount*/
+   if (event.target === deletebutton){
+        deletealert.hidden = false;
+   } else if (event.target === deletealert.lastElementChild){
+        deletealert.hidden = true;
+   } 
+   return;
+}
+
+function alertBlockScreen(event){
+    /*Function which prevents from clicking on another button if the alert of delation of tricount has appeared */
+    const deleteconfirmation = document.body.querySelector(".delete-confirmation"); 
+    if (deleteconfirmation.hidden === false && event.target.className != "yesno" ){
+        event.preventDefault()
+    }
+    return;
 }

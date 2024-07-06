@@ -278,12 +278,25 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             `debug du redirects`
             `Bug : le titre et la description si on ne la change pas et qu'on soumet le tricount, sont remplacés par rien!`
             `test fonctionnel où on change les mêmes choses et on arrive sur les bonnes url. (et avant les donnée du count appariassent bien en placeholder). dans test fonc vérifier que si un participant est exclu du groupe il est toujours dans les comptes à la fin.`
-            débug test fonc
+            `débug test fonc de registerspending et NewVisitor`
             `receiverbox devrait être in find elements et pas element. Pourquoi les id ne donnent pas les noms? voir comment envoyer une liste de checked via selenium`          
-            ajouter option supprimer + popup JS confirmer
-            supprimer de la bdd le count supprimé
-            ajouter JS du : JE SUIS
-            test fonc
+            `ajouter option supprimer + popup JS confirmer`
+            `comprendre ce qu'il se passe avec useAPIcurrency : pb de l'api, éventuelt changer d'API.`
+            `supprimer de la bdd le count supprimé`
+            `test count pour vérifier que disparu de la bdd`
+            `si bug avec le tag django dans le js, je peux créer l'alert en hidden dans le html.`
+            `bug : pour lui dernier élement est une div, ne récupère pas le a! n'arrive pas à cliquer sur le lien a : ajouter un nom de classe et ensuite le trouver de la même manière que backtolistecount. Il faudra sûrement modifier le JS. (Il trouve les éléments mais n'arrive pas à cliquer dessus : peut-être qu'il ne voit pas un a).`
+            `bug : si pas EUR ca bug`
+            `bug : dans modifycount les validations de tricount et le retour ne marchent pas sûrement à cause du JS alertBlockScreen`
+            `CSS de l'alert` 
+            `test fonc` 
+            -modifier l'entrée de dépenses (currency dans le form de addspending) pour permettre à l'utilisateur de rentrer dans une autre monnaie une dépense.
+            -ajouter monnaie au html en select
+            -views : rediriger vers la page de sélection des trucs
+            -JS pour transférer la monnaie choisie via url à la page de addspending
+            -views de la dépense : convertir la monnaie en la monnaie du tricount.
+            -test fonc
+    - créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat)
     - pourquoi le clic sur un tricount déjà créé est si lent? Améliorer:
     - branche pour le chat (suite)
             `copier l'html et voir si ça marche`

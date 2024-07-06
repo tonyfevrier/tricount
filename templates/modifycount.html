@@ -31,8 +31,7 @@
             <p class = "category"> Catégorie : {{count.category}}</p>
             
             <div class = "participants"> 
-                <p> Participants au tricount </p>
-                <p> Je suis...</p>
+                <p> Participants au tricount </p> 
             </div>
 
             <div class = "participants-container">
@@ -58,6 +57,13 @@
     </main>
     <footer>
         <button class = "delete-tricount"> Supprimer ce tricount</button>
+        <div class = 'delete-confirmation' hidden>
+            Confirmez-vous vouloir supprimer le tricount 
+            <div class = 'alert'>
+                <a class = 'yesno' id = "yes" href = '/count/{{user}}/tricount/{{count.id}}/deletecount'>Oui</a>
+                <a class = 'yesno' id = "no" href = ''>Non</a>
+            </div>
+        </div>
     </footer>
     <script src="{% static 'js/modifycount.js' %}"></script>
 </body>

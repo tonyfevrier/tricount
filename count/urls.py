@@ -13,6 +13,7 @@ urlpatterns = [
     path('<str:user>/tricount/<int:id_count>', countviews.spending, name = "spending"), 
     path('<str:user>/tricount/<int:id_count>/modifycount', countviews.modifycount, name = "modifycount"),
     path('<str:user>/tricount/<int:id_count>/modifycountregister', countviews.modifycountregister, name = "modifycountregister"),
+    path('<str:user>/tricount/<int:id_count>/deletecount', countviews.deletecount, name = "deletecount"),
     path('<str:user>/tricount/<int:id_count>/chat', countviews.chat, name = "chat"), 
     path('<str:user>/tricount/<int:id_count>/equilibria', countviews.spendingEquilibria, name = "spending-equilibria"), 
     path('<str:user>/tricount/<int:id_count>/spending', countviews.newspending,name = "newspending"),

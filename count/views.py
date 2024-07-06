@@ -67,11 +67,11 @@ def delog(request,user):
 def listecount(request, user): 
     """
     Function rendering the list of tricounts of a single user.
-    """
-    #items = Counts.objects.all() 
+    """ 
     counts = Counts.objects.all() 
     items = []
     if len(counts) > 0:
+        #We select only the counts whose the user is an admin.
         for item in counts: 
             if user in item.admins:
                 items.append(item)
@@ -173,6 +173,14 @@ def modifycountregister(request, user, id_count):
 
     return redirect(f'/count/{user}/tricount/{id_count}')
 
+def deletecount(request,user, id_count):
+    """
+    Function which deletes a tricount.
+    """ 
+    count = Counts.objects.get(id = id_count)
+    count.delete()
+    return redirect(f"/count/{user}")
+
 def choosecurrency(request,user):
     """
     Function which leads to the choice of the payment currency
@@ -189,12 +197,11 @@ def spending(request,user ,id_count):
     count = Counts.objects.get(id=id_count)  
     participants = count.participants 
     spending = Spending.objects.filter(number = id_count)
-
     tricount = Tricount.from_json(count.data) 
     total_credit_owner = tricount.calculate_total_credit()[user] 
     total_cost = tricount.total_cost 
 
-    rate = useAPICurrency("GBP", "EUR")
+    rate = useAPICurrency("GBP", "EUR") 
     total_cost_in_pound = rate * float(total_cost) 
 
     context = {

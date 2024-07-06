@@ -176,3 +176,35 @@ button, a{
     color: red;
     font-size: 0.8em;
 }
+
+.delete-confirmation{
+    width: fit-content;
+    margin: auto;
+    background-color: white;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 10px;
+    border-style: solid;
+    padding: 0 0.5em;
+}
+
+.alert{
+    display: flex;
+    justify-content: space-around;
+}
+
+.alert a{
+    width: fit-content; 
+    border-color: var(--color);
+    border-width: 1px;
+    border-radius: 1px;
+    border-style: solid;
+    text-decoration: none;
+    color: var(--color);
+    margin: 1em;
+    padding: 0 0.5em;
+}
+
+.alert a:hover{
+    background-color: lightblue;
+}

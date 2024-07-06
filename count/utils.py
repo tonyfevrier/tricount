@@ -35,6 +35,8 @@ def useAPICurrency(currency_to, currency_from):
     Output : 
         - response.json() (str) : le taux de change. 
     """
+
+    """
     url = "https://currency-exchange.p.rapidapi.com/exchange"
     querystring = {"to":currency_to,"from":currency_from,"q":"1.0"}
 
@@ -42,8 +44,21 @@ def useAPICurrency(currency_to, currency_from):
         "X-RapidAPI-Key": "260ce107f1msh4a1b88e31999632p116730jsnec29696c42e6",
         "X-RapidAPI-Host": "currency-exchange.p.rapidapi.com"}
     response = requests.get(url, headers=headers, params= querystring)
+    print(response.status_code)
+    """
 
-    return response.json()
+    url = "https://exchange-rate-api1.p.rapidapi.com/latest"
+
+    querystring = {"base":currency_from}
+
+    headers = {
+	    "x-rapidapi-key": "260ce107f1msh4a1b88e31999632p116730jsnec29696c42e6",
+	    "x-rapidapi-host": "exchange-rate-api1.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
+    return response.json()['rates'][currency_to]
 
 
     

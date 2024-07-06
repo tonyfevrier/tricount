@@ -245,12 +245,22 @@ class NewcountTest(UnitaryTestMethods):
         #We create a tricount and then try to modify the tricount
         self.create_a_tricount("tricount1",'pwd',"description","EUR","Voyage", "Tony", "Henri", "Jean")
         response = self.modify_a_tricount("tricount2", "Autre", "Tony", "Henri", "Jean", "Robert") 
-
         count = Counts.objects.first()
+
         self.assertEqual(count.title, "tricount2")
         self.assertEqual(count.description, "Autre")
         self.assertListEqual(count.participants, ["Tony", "Henri", "Jean", "Robert"])
         self.assertRedirects(response,'/count/Tony/tricount/1')
+
+    def test_delete_tricount(self):
+        """
+        Test the delation of a tricount : it must disappear from the database
+        """
+        self.create_a_tricount("tricount1",'pwd',"description","EUR","Voyage", "Tony", "Henri", "Jean") 
+        self.client.get("/count/Tony/tricount/1/deletecount")
+        count = Counts.objects.all()
+        self.assertEqual(len(count), 0)
+
 
 class TestCalculator(TestCase):
     """

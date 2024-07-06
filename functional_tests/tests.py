@@ -19,7 +19,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def tearDown(self): 
         self.browser.quit()
 
-    def test_tricount_creation(self):
+    def test_tricount_creation_and_delation(self):
         #Le visiteur arrive sur la page, il se crée un compte et se logge et est redirigé vers la page de login
         url = self.live_server_url  
         click = user_experience.Click(self.browser, url)
@@ -199,7 +199,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Tony/newcount/addcount')
         self.assertIn("Il faut au moins un participant",participant_error.text) 
-     
+
         #Il oublie maintenant le mot de passe :
         click.add_tricount_characteristics('Tricount 3','', 'description3',"EUR", 'project')
         pwd_error = self.browser.find_element(By.CLASS_NAME, 'pwd-error')
@@ -224,7 +224,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         click.click_on_a_link(By.CLASS_NAME,'backtotricount')
 
         self.assertEqual(self.browser.current_url, url + '/count/Tony')
-        
+
         #Il clique pour créer un nouveau tricount et voit que les participants précédemment entrés ne sont pas sur la page
         click.click_on_a_link(By.ID,'id_newcount')
         click.click_on_a_link(By.ID, 'countfromzero')
@@ -259,6 +259,26 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertEqual(tricount_title.text, count.title)
         self.assertIn('Dulcinée', [name.text for name in tricount_participants]) 
         self.assertIn('Annie', [name.text for name in tricount_participants]) 
+
+        #Il va ensuite supprimer ce second tricount mais clique sur non lorsqu'on lui demande confirmation.
+        click.click_on_a_link(By.CLASS_NAME,"tricount-characteristics")
+        click.click_on_a_link(By.CLASS_NAME, "delete-tricount")
+
+        click.click_on_a_link(By.ID, "no")
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Tony/tricount/2/modifycount')
+
+        #Il recommence en cliquant sur oui et voit que sa liste n'en contient plus que deux tricounts.
+        click.click_on_a_link(By.CLASS_NAME, "delete-tricount")
+
+        click.click_on_a_link(By.ID, "yes")
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Tony')
+
+        counts = self.browser.find_elements(By.CLASS_NAME, "link-tricount")
+        
+        self.assertEqual(len(counts),2)
+        self.assertListEqual(["link-tricount-1", "link-tricount-3"], [count.get_attribute("id") for count in counts])
 
 class MultiUsersTricount(StaticLiveServerTestCase):
     def setUp(self):
@@ -337,6 +357,10 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri")
         click.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
 
+        #He creates a second tricount in an other currency : 
+        click.create_a_tricount('Tricount1bis',"pwdbis","Je décris", "USD", "project","Jean","Henri")
+        click.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
+
         #The user clicks on an existing tricount 
         click.click_on_an_existing_tricount(1)
 
@@ -391,6 +415,13 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.click_on_a_link(By.CLASS_NAME,"gotospending")
         self.assertEqual(self.browser.current_url,  self.live_server_url + "/count/Dulciny/tricount/1")
 
+        #He creates a second spending in USD for the second tricount.
+        click.click_on_a_link(By.CLASS_NAME,'backtolistecount')
+        click.click_on_an_existing_tricount(2)
+
+        click.click_on_create_spending()
+        click.create_a_spending('', 100., 'Jean', ['Henri','Jean'])
+
         #He forgets to put who is the payer, by default it is the first participant.
 
         #He forgets to put for who he pays, by default it's for all participants.
@@ -405,14 +436,14 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri") 
 
         click.click_on_create_spending()
-        click.create_a_spending('Depense1', 100., 'Jean', ['Henri','Jean','Dulciny'])
+        click.create_a_spending('Depense1', 120., 'Jean', ['Henri','Jean','Dulciny'])
  
         click.click_on_an_existing_spending(1)
         time.sleep(3)
 
         #Il arrive sur la page et il y voit toutes les données qu'il a enregistrées.
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Dulciny/tricount/1/spending/1")
-        self.check_informations_of_a_spending('DEPENSE1', '100.0', 'Payé par Jean', ['Dulciny','Henri','Jean'],['33.33', '33.33', '33.33'])
+        self.check_informations_of_a_spending('DEPENSE1', '120.0', 'Payé par Jean', ['Dulciny','Henri','Jean'],['40.0', '40.0', '40.0'])
 
         #Il revient en arrière et crée trois autres dépenses
         click.click_on_a_link(By.CLASS_NAME,"backtospending")
@@ -483,7 +514,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         for credit in credits:
             participant = credit.find_element(By.CLASS_NAME,"participant")
             amount = credit.find_element(By.CLASS_NAME,"amount")
-            self.assertIn([participant.text,amount.text], [["Robert","150 EUR"],["Henri","-92.5 EUR"],["Dulciny","22.5 EUR"],["Jean","-7.5 EUR"]])
+            self.assertIn([participant.text,amount.text], [["Robert","150.0 EUR"],["Henri","-130.0 EUR"],["Dulciny","-95.0 EUR"],["Jean","75.0 EUR"]])
 
     def test_equilibria_with_multiple_spendings(self):
         
