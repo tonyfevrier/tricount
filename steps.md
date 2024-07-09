@@ -261,7 +261,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             `test fonctionnel à compléter`
             `faire en sorte qu'il y ait mdp + un identifiant (comme le nom du créateur du tricount)`
             `finir debug test fonctionnel`
-    - modifier les données d'un tricount et des dépenses déjà crées
+    - `modifier les données d'un tricount et des dépenses déjà crées`
             `page après clic sur le titre du count`
             `mettre l'html avec même format que celui de la creation`
             `ajouter les données au inputs qu'on peut modifier`
@@ -299,6 +299,10 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `Debugger : trouver comment utiliser ma nouvelle api`
             - ` test unitaire : vérifier que la bonne monnaie est prise pr tricount mais aussi spending` 
             -` test fonc` 
+    - modifier une dépense:
+            - créer le html, les url et vues : identique à newspending avec un bouton supprimer et titre modifier
+            - `bouton modifier à relier avec la bonne url`
+            - passer les données de la dépense à la vue et voir ce qu'il faut changer dans l'html.
     - créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat)
     - pourquoi le clic sur un tricount déjà créé est si lent? Améliorer:
     - branche pour le chat (suite)

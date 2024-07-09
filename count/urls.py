@@ -18,5 +18,8 @@ urlpatterns = [
     path('<str:user>/tricount/<int:id_count>/equilibria', countviews.spendingEquilibria, name = "spending-equilibria"), 
     path('<str:user>/tricount/<int:id_count>/spending', countviews.newspending,name = "newspending"),
     path('<str:user>/tricount/<int:id_count>/addspending', countviews.addspending,name = "addspending"),
+    path('<str:user>/tricount/<int:id_count>/spending/<int:id_spending>/modifyspending', countviews.modifyspending,name = "modifyspending"),
+    path('<str:user>/tricount/<int:id_count>/spending/<int:id_spending>/modifyspendingregister', countviews.modifyspendingregister,name = "modifyspendingregister"),
+    path('<str:user>/tricount/<int:id_count>/spending/<int:id_spending>/deletespending', countviews.deletespending, name = "deletespending"),
     path('<str:user>/tricount/<int:id_count>/spending/<int:id_spending>', countviews.spending_details, name = "spending-details"),
 ]

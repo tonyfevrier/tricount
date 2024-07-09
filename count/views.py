@@ -285,6 +285,24 @@ def spending_details(request,user , id_count, id_spending):
                'number_of_spending' : number_of_spending}
     return render(request,"spending-details.html",context)
 
+def modifyspending(request, user,id_count, id_spending):
+    """
+    Function which redirects to the page allowing to modify a given spending.
+    """
+    return render(request, "modifyspending.html")
+
+def modifyspendingregister(request, user,id_count, id_spending):
+    """
+    Function which recovers data obtained from the modification of a spending.
+    """
+    pass
+
+def deletespending(request, user,id_count, id_spending):
+    """
+    Function which delete a spending
+    """
+    pass
+
 def chat(request, user,id_count):
     """
     Function to go to the chat view

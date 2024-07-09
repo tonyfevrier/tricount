@@ -12,7 +12,7 @@
 <body>
     <header>
         <a href="/count/{{user}}/tricount/{{idcount}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-        <p class = "header-title">Nouvelle dépense</p>
+        <p class = "header-title">Modifier la dépense</p>
     </header>
     <main>
         <form action="/count/{{user}}/tricount/{{idcount}}/addspending" method = "post">
@@ -56,6 +56,16 @@
             {% csrf_token %}
         </form>
     </main>
+    <footer>
+        <button class = "delete-spending"> Supprimer ce tricount</button>
+        <div class = 'delete-confirmation' hidden>
+            Confirmez-vous vouloir supprimer la dépense 
+            <div class = 'alert'>
+                <a class = 'yesno' id = "yes" href = 'REMPLIR'>Oui</a>
+                <a class = 'yesno' id = "no" href = ''>Non</a>
+            </div>
+        </div>
+    </footer>
     <script src = "{%static 'js/newspending.js'%}"></script>
 </body>
 </html>
