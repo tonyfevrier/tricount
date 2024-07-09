@@ -187,7 +187,7 @@ class Click():
         link_spending.send_keys(Keys.ENTER)
         time.sleep(2)
 
-    def create_a_spending(self,title,amount,payer,receivers):
+    def create_a_spending(self,title,amount,payer,receivers,currency):
         """
         Function creating a new spending
 
@@ -198,15 +198,18 @@ class Click():
             - receivers (list[str])
         
         """
+        self.click_on_a_link(By.CLASS_NAME, 'choose-currency')
+        self.click_on_a_link(By.CLASS_NAME, currency)
+        
         titlebox = self.browser.find_element(By.NAME, 'title')
         amountbox = self.browser.find_element(By.NAME, 'amount')
         spenderbox = self.browser.find_element(By.NAME, 'spender')
-        receiverbox = self.browser.find_elements(By.NAME, 'receiver') 
-        submitbox = self.browser.find_element(By.NAME,'submit') 
+        receiverbox = self.browser.find_elements(By.NAME, 'receiver')  
+        submitbox = self.browser.find_element(By.NAME,'submit')  
 
         titlebox.send_keys(title)
         amountbox.send_keys(amount)
-        spenderbox.send_keys(payer) 
+        spenderbox.send_keys(payer)  
 
         for receiver in receiverbox:
             if receiver.get_attribute("value") not in receivers:

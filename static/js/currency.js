@@ -3,10 +3,19 @@ let select = header.querySelector('p');
 let backtonewcount = document.querySelector('.backtonewcount');
 let loupe = document.querySelector('.currencyresearch');
 let research = document.querySelector('.research');
-let currencies = document.querySelectorAll('a[name = "link-newcount"]');
-
+let currencies = document.querySelectorAll('a[name = "link-newcount"]'); 
 header.addEventListener("click", userClicking);
 research.addEventListener("input",userSearching);
+
+//The href of the links depends on the referer url : we extract this information and add it to the links
+const url = window.location.search;
+const params = new URLSearchParams(url);
+
+for (let currency of currencies){
+    console.log(params.get("referer"));
+    currency.href = params.get("referer") +"?currency=" + currency.className;
+    console.log(currency.href);
+}
 
 function userClicking(event){
     if (!backtonewcount.contains(event.target) && event.target.tagName != 'BUTTON') return;

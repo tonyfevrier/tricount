@@ -10,8 +10,19 @@ let checkboxDiv = document.body.querySelector(".list-receivers");
 let receivers = document.body.querySelectorAll(".receiver");
 let toggleCheckbox = document.body.querySelector(".toggle-checkboxes");
 let toggleAvance = document.body.querySelector('.special-parameters'); 
+let currency = document.body.querySelector('.newtricount_currency');
 
+//We change the currency if the user has chosen an other currency.
+const url = window.location.search;
+const params = new URLSearchParams(url); 
+currency.value =  params.get("currency");
 
+for (let monnaie of document.body.querySelectorAll('.p-currency')){
+    console.log(monnaie);
+    monnaie.innerHTML = currency.value;
+}
+
+// Events
 title.addEventListener("input", userWriting);
 title.addEventListener("keydown", userTaping);
 amount.addEventListener("input", userAmount);

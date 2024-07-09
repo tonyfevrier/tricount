@@ -16,19 +16,19 @@
         <button href="" class = "currencyresearch" id = "loupe">loupe</button>
     </header>
     <main>
-        <a hidden href="/count/{{user}}/newcount?parametre1=EUR" class = "EUR" name = "link-newcount">
+        <a hidden class = "EUR" name = "link-newcount">
             <p class = "acronym"> EUR </p>
             <p class = "currencyentire"> {{currencies.EUR}}</p> 
         </a>
-        <a href="/count/{{user}}/newcount?parametre1=CHF" class = "CHF" name = "link-newcount">
+        <a class = "CHF" name = "link-newcount">
             <p class = "acronym"> CHF </p>
             <p class = "currencyentire"> {{currencies.CHF}}</p> 
         </a>
-        <a href="/count/{{user}}/newcount?parametre1=GBP" class = "GBP" name = "link-newcount">
+        <a class = "GBP" name = "link-newcount">
             <p class = "acronym"> GBP </p>
             <p class = "currencyentire"> {{currencies.GBP}}</p> 
         </a>
-        <a href="/count/{{user}}/newcount?parametre1=USD" class = "USD" name = "link-newcount">
+        <a class = "USD" name = "link-newcount">
             <p class = "acronym"> USD </p>
             <p class = "currencyentire"> {{currencies.USD}}</p> 
         </a>
@@ -36,7 +36,7 @@
     <div class = 'currencies-list'> Toutes les devises </div>
     <main> 
             {% for acronym, currency in currencies.items%} 
-            <a href="/count/{{user}}/newcount?parametre1={{acronym}}" class = "{{acronym}}" name = "link-newcount">
+            <a class = "{{acronym}}" name = "link-newcount">
                 <p class = "acronym"> {{acronym}} </p>
                 <p class = "currencyentire"> {{currency}}</p> 
             </a>

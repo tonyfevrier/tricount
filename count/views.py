@@ -184,7 +184,7 @@ def deletecount(request,user, id_count):
 def choosecurrency(request,user):
     """
     Function which leads to the choice of the payment currency
-    """  
+    """   
     file = open('static/json/currency.json','r')
     currencies = json.load(file) 
     file.close() 
@@ -201,7 +201,7 @@ def spending(request,user ,id_count):
     total_credit_owner = tricount.calculate_total_credit()[user] 
     total_cost = tricount.total_cost 
 
-    rate = useAPICurrency("GBP", "EUR") 
+    rate = 0.84 #useAPICurrency("GBP", "EUR") 
     total_cost_in_pound = rate * float(total_cost) 
 
     context = {
@@ -241,8 +241,15 @@ def addspending(request,user ,id_count):
     """ 
 
     titre =  request.POST["title"]
-    amount = request.POST["amount"] 
+    amount = request.POST["amount"]
+    currency = request.POST["newtricount_currency"]
 
+    #Convert the amount in the tricount currency if necessary
+    tricount_currency = Counts.objects.get(id = id_count).currency
+    if currency != tricount_currency: 
+        amount = float(useAPICurrency(tricount_currency,currency))*float(amount)
+
+    #Create the spending with form informations
     if titre != '':
         if amount == '':
             amount = 0.

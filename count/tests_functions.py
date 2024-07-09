@@ -71,7 +71,7 @@ class UnitaryTestMethods(TestCase):
         """
         self.client.post(f"/count/{people}/newcount/count-pwd", data = {"tricount-title":title, "password":password})
 
-    def create_a_spending(self,title,amount,spender, receivers, respective_amounts):
+    def create_a_spending(self,title,amount,spender, receivers, respective_amounts,currency):
         """
         Inputs :
             - title (str) 
@@ -82,7 +82,7 @@ class UnitaryTestMethods(TestCase):
         Output : 
             - response (object) : contains the characteristics of the response to the request post. 
         """ 
-        data = {'title': title, 'amount': amount, 'spender': spender,  'receiver': receivers} 
+        data = {'title': title, 'amount': amount, 'spender': spender,  'receiver': receivers, 'newtricount_currency':currency} 
         for i in range(len(receivers)):
             data[receivers[i]] = respective_amounts[i]
 

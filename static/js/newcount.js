@@ -17,12 +17,12 @@ document.addEventListener("keydown", userTaping);
 addparticipant.addEventListener("click", userAddingParticipant);
 
 //Récupération de la monnaie dans l'url si on vient de la liste des monnaies.
-const url = window.location.search;
+const url = window.location.search; 
 const params = new URLSearchParams(url);
 let currency = document.querySelector('.newtricount_currency');
 
-if (url.includes("parametre1")){
-    currency.value = params.get('parametre1');
+if (url.includes("currency")){
+    currency.value = params.get('currency');
 }
 
 //Stocker puis récupérer les données préécrites lors du chargement de page

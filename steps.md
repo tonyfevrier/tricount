@@ -290,12 +290,15 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             `bug : dans modifycount les validations de tricount et le retour ne marchent pas sûrement à cause du JS alertBlockScreen`
             `CSS de l'alert` 
             `test fonc` 
-            -modifier l'entrée de dépenses (currency dans le form de addspending) pour permettre à l'utilisateur de rentrer dans une autre monnaie une dépense.
-            -ajouter monnaie au html en select
-            -views : rediriger vers la page de sélection des trucs
-            -JS pour transférer la monnaie choisie via url à la page de addspending
-            -views de la dépense : convertir la monnaie en la monnaie du tricount.
-            -test fonc
+            -` modifier l'entrée de dépenses (currency dans le form de addspending) pour permettre à l'utilisateur de rentrer dans une autre monnaie une dépense.` 
+            -` ajouter monnaie au html en select` 
+            -`views : rediriger vers la page de sélection des trucs` 
+            -`JS pour transférer la monnaie choisie via url à la page de addspending` 
+            -`views de la dépense : convertir la monnaie en la monnaie du tricount.`
+            - `test unitaire où j'entre une dépense dans une autre monnaie`
+            - `Debugger : trouver comment utiliser ma nouvelle api`
+            - ` test unitaire : vérifier que la bonne monnaie est prise pr tricount mais aussi spending` 
+            -` test fonc` 
     - créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat)
     - pourquoi le clic sur un tricount déjà créé est si lent? Améliorer:
     - branche pour le chat (suite)

@@ -323,7 +323,7 @@ class MultiUsersTricount(StaticLiveServerTestCase):
         #Le second utilisateur crée une dépense et celle-ci apparait bien sur les deux comptes d'utilisateur.
         click2.click_on_an_existing_tricount(1)
         click2.click_on_create_spending()
-        click2.create_a_spending('Dépense1',10,'Dulcinee',['Dulcinee','Tony'])
+        click2.create_a_spending('Dépense1',10,'Dulcinee',['Dulcinee','Tony'],'EUR')
 
         spending_title = self.browser2.find_elements(By.CLASS_NAME,"spending-title") 
         self.assertIn('Dépense1',[name.text for name in spending_title]) 
@@ -378,7 +378,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         self.assertIn("Henri",[name.text for name in receiver_participants])
 
         #He enters the title, amount the payer and for who the payer paid
-        click.create_a_spending('Dépense1', 100., 'Jean', ['Henri','Jean'])
+        click.create_a_spending('Dépense1', 100., 'Jean', ['Henri','Jean'],'EUR')
 
         #He is then redirected to the spending list where the name, the amount, the payer appears
         self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Dulciny/tricount/1')
@@ -393,14 +393,14 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
 
         #He tries to create a second spending. He forgets to put a title, a message of error appears and he stays on the page.
         click.click_on_create_spending()
-        click.create_a_spending('', 100., 'Jean', ['Henri','Jean'])
+        click.create_a_spending('', 100., 'Jean', ['Henri','Jean'],'EUR')
 
         notitle = self.browser.find_element(By.CLASS_NAME,"notitle")
         self.assertEqual(notitle.text, "Titre non valable")
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Dulciny/tricount/1/addspending")
 
         #He forgets to put the amount, a spending is created with amount 0.
-        click.create_a_spending('Dépense2', '', 'Jean', ['Henri','Jean'])
+        click.create_a_spending('Dépense2', '', 'Jean', ['Henri','Jean'],'EUR')
 
         amounts = self.browser.find_elements(By.CLASS_NAME,"spending-amount")
         
@@ -420,7 +420,12 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.click_on_an_existing_tricount(2)
 
         click.click_on_create_spending()
-        click.create_a_spending('', 100., 'Jean', ['Henri','Jean'])
+        click.create_a_spending('Dépense en dollars', 100., 'Jean', ['Henri','Jean'],'USD')
+        spendings = self.browser.find_elements(By.CLASS_NAME,'spending')
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Dulciny/tricount/2')
+        self.assertEqual(len(spendings), 1)
+
 
         #He forgets to put who is the payer, by default it is the first participant.
 
@@ -436,7 +441,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri") 
 
         click.click_on_create_spending()
-        click.create_a_spending('Depense1', 120., 'Jean', ['Henri','Jean','Dulciny'])
+        click.create_a_spending('Depense1', 120., 'Jean', ['Henri','Jean','Dulciny'],'EUR')
  
         click.click_on_an_existing_spending(1)
         time.sleep(3)
@@ -449,9 +454,9 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.click_on_a_link(By.CLASS_NAME,"backtospending")
  
         click.click_on_create_spending()
-        click.create_a_spending('Depense2', 12., 'Henri', ['Henri','Jean','Dulciny']) 
+        click.create_a_spending('Depense2', 12., 'Henri', ['Henri','Jean','Dulciny'],'EUR') 
         click.click_on_create_spending()
-        click.create_a_spending('Depense3', 3., 'Henri', ['Henri','Jean','Dulciny'])
+        click.create_a_spending('Depense3', 3., 'Henri', ['Henri','Jean','Dulciny'],'EUR')
 
         #Il clique à nouveau sur la première dépense puis sur suivant
         click.click_on_an_existing_spending(1)
@@ -503,9 +508,9 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
 
         #Il crée une nouvelle dépense et observe que les participants mis à jour sont présents.
         click.click_on_create_spending()
-        click.create_a_spending('Depense2', 100., 'Robert', ['Henri','Dulciny']) 
+        click.create_a_spending('Depense2', 100., 'Robert', ['Henri','Dulciny'],'EUR') 
         click.click_on_create_spending()
-        click.create_a_spending('Depense2', 50., 'Robert', ['Henri'])  
+        click.create_a_spending('Depense2', 50., 'Robert', ['Henri'],'EUR')  
 
         #Il clique sur les équilibres et observe que même le participant supprimé est toujours présent.
         click.click_on_a_link(By.CLASS_NAME, "gotoequilibria")
@@ -526,13 +531,13 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Henri", "Yann", "Marine", "Tony") 
 
         click.click_on_create_spending() 
-        click.create_a_spending('dépense1', 100, 'Tony', ['Henri','Yann','Marine','Tony']) 
+        click.create_a_spending('dépense1', 100, 'Tony', ['Henri','Yann','Marine','Tony'],'EUR') 
         click.click_on_create_spending()
-        click.create_a_spending('dépense2', 200, 'Marine', ['Henri','Yann','Marine','Tony']) 
+        click.create_a_spending('dépense2', 200, 'Marine', ['Henri','Yann','Marine','Tony'],'EUR') 
         click.click_on_create_spending()
-        click.create_a_spending('dépense3', 150, 'Henri', ['Henri','Yann','Marine','Tony']) 
+        click.create_a_spending('dépense3', 150, 'Henri', ['Henri','Yann','Marine','Tony'],'EUR') 
         click.click_on_create_spending()
-        click.create_a_spending('dépense4', 180, 'Yann', ['Henri','Yann','Marine','Tony']) 
+        click.create_a_spending('dépense4', 180, 'Yann', ['Henri','Yann','Marine','Tony'],'EUR') 
         click.click_on_a_link(By.CLASS_NAME, "gotoequilibria")
         time.sleep(4)
 
