@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New spending</title>
+    <title>Modify spending</title>
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/newspending.css' %}">
 </head>
@@ -16,17 +16,18 @@
     </header>
     <main>
         <form action="/count/{{user}}/tricount/{{idcount}}/addspending" method = "post">
-            <input class = "title" type="text" placeholder="Titre" name = "title"> 
+            <input class = "title" type="text" placeholder="{{spending.title}}" name = "title"> 
 
             {%if titre == False%}
                 <p class = "notitle">Titre non valable</p>
             {%endif%}
             <p class = "counter">0/50</p>
             <div class = "div-amount">
-                <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount"> 
-                <a href="/count/{{user}}/newcount/currency?referer=/count/{{user}}/tricount/{{idcount}}/spending" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
+                <input class = "amount" type="text" placeholder="{{spending.amount}}" id="amount" name = "amount"> 
+                <a href="/count/{{user}}/newcount/currency?referer=/count/{{user}}/tricount/{{idcount}}/spending" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="EUR" value = "EUR" name = "newtricount_currency"></a>
             </div>
             <select class = "spender" name="spender" id="spender">
+                <option class = "spender-participant" value="{{spending.payer}}" selected>{{spending.payer}}</option> 
                 {% for participant in participants%}
                 <option class = "spender-participant" value="{{participant}}">{{participant}}</option> 
                 {%endfor%}
@@ -41,7 +42,11 @@
             <div class = "list-receivers">
                 {% for participant in participants%}
                 <div class = "div-receiver">
-                    <input class = "receiver" type="checkbox" name="receiver" id="{{participant}}" value = "{{participant}}" checked>
+                    {% if participant in spending.receivers%}
+                        <input class = "receiver" type="checkbox" name="receiver" id="{{participant}}" value = "{{participant}}" checked>
+                    {% else %}
+                        <input class = "receiver" type="checkbox" name="receiver" id="{{participant}}" value = "{{participant}}">
+                    {% endif %}
                     <label class = "receiver-participant" for="{{participant}}">{{participant}}</label> 
                     <div class = "amount-and-parts"> 
                         <input name = "{{participant}}" type = "text" class = "{{participant}}-amount" value = "0.00">
@@ -51,8 +56,6 @@
                 {% endfor %}
             </div>
             <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button>
-            
-            
             {% csrf_token %}
         </form>
     </main>

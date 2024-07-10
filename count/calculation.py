@@ -86,19 +86,19 @@ class Tricount():
 
         return self 
     
-    def receiving_update(self,payer,forwho):
+    def receiving_update(self,receiver,fromwho):
         """
         Function updating after an arrival of money the two dictionnaries. It's like a negative spending.
         
         receiver : dictionary {participant:str: amount:float}
-        forwho : dictionary of participants involved in the shared spending and the positive amount which was paid for them.
+        fromwho : dictionary of participants involved in the shared spending and the positive amount which was paid for them.
         """
- 
-        for spender in payer:
-            payer[spender] = - payer[spender]
+        payer,forwho = {},{}
+        for spender in receiver:
+            payer[spender] = - receiver[spender]
         
-        for receiver in forwho:
-            forwho[receiver] = - forwho[receiver] 
+        for receiver in fromwho:
+            forwho[receiver] = - fromwho[receiver] 
 
         return self.spending_update(payer,forwho)
     

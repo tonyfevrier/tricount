@@ -252,7 +252,7 @@ class NewcountTest(UnitaryTestMethods):
         """
         #We create a tricount and then try to modify the tricount
         self.create_a_tricount("tricount1",'pwd',"description","EUR","Voyage", "Tony", "Henri", "Jean")
-        response = self.modify_a_tricount("tricount2", "Autre", "Tony", "Henri", "Jean", "Robert") 
+        response = self.modify_a_tricount(1,"tricount2", "Autre", "Tony", "Henri", "Jean", "Robert") 
         count = Counts.objects.first()
 
         self.assertEqual(count.title, "tricount2")
@@ -411,6 +411,13 @@ class TestCalculator(TestCase):
         self.assertDictEqual(old_dict_participants['Yann'].credits, count.dict_participants['Yann'].credits)
         self.assertDictEqual(old_dict_participants['Henri'].credits, count.dict_participants['Henri'].credits)
 
+    def test_credits_after_modify_a_spending(self):
+        """
+        Function aiming to test if after the modification of a spending, the previous has been withdrawn from the calculations
+         of credits and the new spending added to the calculations.
+        """
+        pass
+
 class TestSpending(UnitaryTestMethods):
     """
     Class of methods to test the effect of new spendings in a given tricount.
@@ -421,7 +428,7 @@ class TestSpending(UnitaryTestMethods):
         Test if after a new spending, the redirection is correct.
         """ 
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Tony", "Henri", "Jean")
-        response = self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean','Tony'], [50,50,0],'EUR')  
+        response = self.create_a_spending('dépense1', 100,'EUR', 'Jean', ['Henri','Jean','Tony'], [50,50,0])  
 
         self.assertRedirects(response,'/count/Tony/tricount/1') 
     
@@ -432,7 +439,7 @@ class TestSpending(UnitaryTestMethods):
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Jean")
 
         number = Spending.objects.count()
-        self.create_a_spending('dépense1', 100, 'Jean', ['Henri','Jean'], [50,50],'EUR')  
+        self.create_a_spending('dépense1', 100,'EUR', 'Jean', ['Henri','Jean'], [50,50])  
         spending = Spending.objects.get(pk = 1)
         
         self.assertEqual(number+1, Spending.objects.count())
@@ -460,7 +467,7 @@ class TestSpending(UnitaryTestMethods):
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Jean")     
         nb_spending = Spending.objects.count()
-        response = self.create_a_spending('', 100, 'Jean', ['Henri','Jean'],[50,50],'EUR')   
+        response = self.create_a_spending('', 100,'EUR', 'Jean', ['Henri','Jean'],[50,50])   
         
         self.assertEqual(nb_spending,Spending.objects.count()) 
         self.assertTemplateUsed(response,'newspending.html')
@@ -471,7 +478,7 @@ class TestSpending(UnitaryTestMethods):
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Jean")
         nb_spending = Spending.objects.count()
-        self.create_a_spending('dépense1', '', 'Jean', ['Henri','Jean'],[0,0],'EUR')  
+        self.create_a_spending('dépense1', '','EUR', 'Jean', ['Henri','Jean'],[0,0])  
         spending = Spending.objects.get(pk = 1)
 
         self.assertEqual(nb_spending + 1,Spending.objects.count()) 
@@ -483,10 +490,10 @@ class TestSpending(UnitaryTestMethods):
         """
 
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
-        self.create_a_spending('dépense1', 100, 'Tony', ['Henri','Yann','Marine','Tony'], [25,50,25,0],'EUR') 
-        self.create_a_spending('dépense2', 200, 'Marine', ['Henri','Yann','Marine','Tony'], [0,0,150,50],'EUR') 
-        self.create_a_spending('dépense3', 150, 'Henri', ['Henri','Yann','Marine','Tony'], [50,50,25,25],'EUR') 
-        self.create_a_spending('dépense4', 180, 'Yann', ['Henri','Yann','Marine','Tony'], [30,50,50,50],'EUR') 
+        self.create_a_spending('dépense1', 100,'EUR', 'Tony', ['Henri','Yann','Marine','Tony'], [25,50,25,0]) 
+        self.create_a_spending('dépense2', 200,'EUR', 'Marine', ['Henri','Yann','Marine','Tony'], [0,0,150,50]) 
+        self.create_a_spending('dépense3', 150,'EUR', 'Henri', ['Henri','Yann','Marine','Tony'], [50,50,25,25]) 
+        self.create_a_spending('dépense4', 180,'EUR', 'Yann', ['Henri','Yann','Marine','Tony'], [30,50,50,50]) 
 
         #Deserialization of the bdd 
         data = Counts.objects.first().data
@@ -511,9 +518,9 @@ class TestSpending(UnitaryTestMethods):
         - we finally add a new spending involving the new participant
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
-        self.create_a_spending('dépense', 180, 'Yann', ['Henri','Yann','Marine','Tony'], [30,50,50,50],'EUR') 
-        self.modify_a_tricount("tricount1", "description", 'Henri','Yann','Marine','Tony','Robert')
-        self.create_a_spending('dépense', 100, 'Robert', ['Henri','Yann','Marine','Tony'], [100,0,0,0],'EUR')
+        self.create_a_spending('dépense', 180,'EUR', 'Yann', ['Henri','Yann','Marine','Tony'], [30,50,50,50]) 
+        self.modify_a_tricount(1,"tricount1", "description", 'Henri','Yann','Marine','Tony','Robert')
+        self.create_a_spending('dépense', 100,'EUR', 'Robert', ['Henri','Yann','Marine','Tony'], [100,0,0,0])
         data = Counts.objects.first().data
         count = Tricount.from_json(data)
 
@@ -539,9 +546,9 @@ class TestSpending(UnitaryTestMethods):
         - we finally add a new spending involving the new participant
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
-        self.create_a_spending('dépense', 180, 'Yann', ['Henri','Yann','Marine','Tony'], [30,50,50,50],'EUR') 
-        self.modify_a_tricount("tricount1", "description", 'Henri','Marine','Tony','Robert')
-        self.create_a_spending('dépense', 100, 'Robert', ['Henri','Marine','Tony'], [10,10,80],'EUR')
+        self.create_a_spending('dépense', 180,'EUR', 'Yann', ['Henri','Yann','Marine','Tony'], [30,50,50,50]) 
+        self.modify_a_tricount(1, "tricount1", "description", 'Henri','Marine','Tony','Robert')
+        self.create_a_spending('dépense', 100,'EUR', 'Robert', ['Henri','Marine','Tony'], [10,10,80])
         data = Counts.objects.first().data
         count = Tricount.from_json(data)
 
@@ -563,11 +570,39 @@ class TestSpending(UnitaryTestMethods):
         Function which creates a spending in pounds and verifies that the amount in euros in correct. This function makes a call to freecurrencyapi.
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
-        self.create_a_spending('dépense', 100, 'Yann', ['Marine','Tony'], [50,50],'GBP') 
+        self.create_a_spending('dépense', 100,'GBP', 'Yann', ['Marine','Tony'], [50,50]) 
         spending = Spending.objects.first()
 
-        self.assertEqual(round(spending.amount,2), 118.3)
-        
+        self.assertEqual(round(spending.amount,2), 118.24)
+
+    def test_modify_a_spending(self):
+        """
+        Function which modifies a spending and checks if data in spending bdd have been modified.
+        """
+        #We create a tricount, a spending and modify the spending.
+        self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
+        self.create_a_spending('dépense', 180,'EUR', 'Henri', ['Henri','Yann','Marine','Tony'], [30,50,50,50]) 
+        response = self.modify_a_spending(1,1,"depense2", 180, 'EUR',"Tony", ["Henri", "Yann"], [90,90]) 
+        spending = Spending.objects.first()
+
+        self.assertEqual(spending.title, "depense2")
+        self.assertEqual(spending.amount, 180) 
+        self.assertEqual(spending.payer, 'Tony') 
+        self.assertDictEqual(spending.receivers, {"Henri":90, "Yann":90})
+        self.assertRedirects(response,'/count/Tony/tricount/1/spending/1')
+
+        #We create a second spending and only modify the currency
+        self.create_a_spending('dépense', 100,'EUR', 'Henri', ['Henri','Yann'], [50,50]) 
+        response = self.modify_a_spending(1,2,"dépense", 100, 'USD',"Henri",['Henri','Yann'], [50,50]) 
+        spending2 = Spending.objects.get(id = 2)
+
+        self.assertEqual(round(spending2.amount,2), 92.47)  
+        self.assertListEqual(list(spending2.receivers.keys()), ['Henri', 'Yann'])
+        self.assertEqual(round(spending2.receivers['Henri'],1), 46.2)
+        self.assertEqual(round(spending2.receivers['Yann'],1), 46.2)
+
+
+
         
         
         

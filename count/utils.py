@@ -1,5 +1,5 @@
 from count.models import Counts
-from count.calculation import Tricount
+from count.calculation import Participant, Tricount
 import requests
 
 def majuscule(chaine):
@@ -23,6 +23,44 @@ def update_tricount_after_new_spending(id_count, spender, dico_receivers):
     tricount.spending_update(spender, dico_receivers)
     count.data = tricount.to_json()
     count.save()
+
+def update_tricount_after_new_receiving(id_count, receiver, dico_payers):
+    """
+    Fonction qui permet de modifier les crédits de chacun dans le tricount après une dépense puis d'enregistrer dans la bdd
+
+    Inputs : 
+        id_count (int) : number of tricount
+        spender (dict) : {payer (str): amount(float)}
+        dico_receivers (dict) : keys are participants and values are the amount they have to reimburse to the payer.  
+    """
+
+    count = Counts.objects.get(id = id_count)
+    tricount = Tricount.from_json(count.data)
+    tricount.receiving_update(receiver, dico_payers)
+    count.data = tricount.to_json()
+    count.save()
+
+def add_new_participants_to_a_tricount(count,participants):  
+    """
+    Function which checks if there are new participants in participants and creates an object Participant and add it for future credits calculations.
+
+    Inputs : 
+        - count (object): an instanciation of the class Counts (models).
+        - participants (list) : a list of participants.
+
+    Output : 
+        - count : updated.
+    """
+    tricount = Tricount.from_json(count.data) 
+    for participant in participants:
+        if participant not in count.participants:
+            receivers = [receiver for receiver in count.participants if receiver != participant]
+            tricount.dict_participants[participant] = Participant(participant,receivers)
+            for receiver in receivers:
+                tricount.dict_participants[receiver].credits[participant] = 0
+    count.participants = participants
+    count.data = tricount.to_json()
+    return count
 
 def useAPICurrency(currency_to, currency_from):
     """
@@ -60,6 +98,10 @@ def useAPICurrency(currency_to, currency_from):
     response = requests.get(url, headers=headers, params= querystring)
  
     return response.json()["data"][currency_to]
+
+def convertSpendingCurrency(currency_to, currency_from, amount):
+    pass
+
     
 
 

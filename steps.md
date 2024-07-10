@@ -300,9 +300,22 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - ` test unitaire : vérifier que la bonne monnaie est prise pr tricount mais aussi spending` 
             -` test fonc` 
     - modifier une dépense:
-            - créer le html, les url et vues : identique à newspending avec un bouton supprimer et titre modifier
+            - `créer le html, les url et vues : identique à newspending avec un bouton supprimer et titre modifier`
             - `bouton modifier à relier avec la bonne url`
-            - passer les données de la dépense à la vue et voir ce qu'il faut changer dans l'html.
+            - `passer les données de la dépense à la vue et voir ce qu'il faut changer dans l'html.`
+            - `calculer aussi le prix dans modify count register s'il change la currency.`
+            - `test unitaire pour voir si la dépense est bien modifiée`
+            - `test_unitaire : modifier modify a spending pour entrer des montants respectifs.`
+            - `addspending et modifyspending (attention si on change de monnaie, les montants récupérés doivent aussi être modifiés) dico_receivers[receiver] = float(request.POST[receiver])`
+            - Debug des tests actuels unitaires 
+            - test unitaire : vérifier que la dépense déjà entrée dans les calculs a bien été retirée des calculs puis que la nouvelle dépense a bien été ajoutée.
+            - `rajouter les montants respectifs dans modify spending de test count (views à modifier aussi pour updater les calculs liés au tricount).`
+            - test fonctionnel : modification d'une dépense vérification
+            - factor : améliorer utils.py en créant une classe de méthodes appliquées à un tricount (structuration).
+            - factoriser les modifyspending pour que ce soit plus clair.
+            - JS pour la suppression de dépense + test unitaire associé
+            - test fonctionnel : suppression de cette dépense vérification
+    - coupler avec une API de date pour entrer la date de la dépense.
     - créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat)
     - pourquoi le clic sur un tricount déjà créé est si lent? Améliorer:
     - branche pour le chat (suite)
