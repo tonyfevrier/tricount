@@ -11,27 +11,26 @@
 </head>
 <body>
     <header>
-        <a href="/count/{{user}}/tricount/{{idcount}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="/count/{{user}}/tricount/{{count.id}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <p class = "header-title">Modifier la dépense</p>
     </header>
     <main>
-        <form action="/count/{{user}}/tricount/{{idcount}}/addspending" method = "post">
-            <input class = "title" type="text" placeholder="{{spending.title}}" name = "title"> 
-
+        <form action="/count/{{user}}/tricount/{{count.id}}/spending/{{spending.id}}/modifyspendingregister" method = "post">
+            <input class = "title" type="text" placeholder="{{spending.title}}" value = {{spending.title}} name = "title"> 
             {%if titre == False%}
                 <p class = "notitle">Titre non valable</p>
             {%endif%}
             <p class = "counter">0/50</p>
-            <div class = "div-amount">
-                <input class = "amount" type="text" placeholder="{{spending.amount}}" id="amount" name = "amount"> 
-                <a href="/count/{{user}}/newcount/currency?referer=/count/{{user}}/tricount/{{idcount}}/spending" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="EUR" value = "EUR" name = "newtricount_currency"></a>
+            <div class = "div-amount">  
+                <input class = "amount" type="text" value="{{spending.amount}}" id="amount" name = "amount"> 
+                <a href="/count/{{user}}/newcount/currency?referer=/count/{{user}}/tricount/{{count.id}}/spending/{{spending.id}}/modifyspending" class = "choose-currency"><input type= "text" class = "newtricount_currency" value = "{{count.currency}}" name = "newtricount_currency"></a>
             </div>
             <select class = "spender" name="spender" id="spender">
                 <option class = "spender-participant" value="{{spending.payer}}" selected>{{spending.payer}}</option> 
                 {% for participant in participants%}
                 <option class = "spender-participant" value="{{participant}}">{{participant}}</option> 
                 {%endfor%}
-            </select>  
+            </select>   
             <div class = "forwho">
                 <div class ="div-forwho">
                     <input class = "toggle-checkboxes" type="checkbox" checked>
@@ -40,19 +39,27 @@
                 <button class = "special-parameters">Avancé</button>
             </div> 
             <div class = "list-receivers">
-                {% for participant in participants%}
+                {% for participant, amount in spending.receivers.items%}
                 <div class = "div-receiver">
-                    {% if participant in spending.receivers%}
-                        <input class = "receiver" type="checkbox" name="receiver" id="{{participant}}" value = "{{participant}}" checked>
-                    {% else %}
-                        <input class = "receiver" type="checkbox" name="receiver" id="{{participant}}" value = "{{participant}}">
-                    {% endif %}
+                    <input class = "receiver" type="checkbox" name="receiver" id="{{participant}}" value = "{{participant}}" checked>                     
                     <label class = "receiver-participant" for="{{participant}}">{{participant}}</label> 
                     <div class = "amount-and-parts"> 
-                        <input name = "{{participant}}" type = "text" class = "{{participant}}-amount" value = "0.00">
+                        <input name = "{{participant}}" type = "text" class = "{{participant}}-amount" value = "{{amount}}">
                         <p class = "p-currency">{{currency}}</p>
                     </div>
                 </div> 
+                {% endfor %}
+                {% for participant in participants%}    
+                    {% if participant not in spending.receivers.keys%}
+                        <div class = "div-receiver">
+                                <input class = "receiver" type="checkbox" name="receiver" id="{{participant}}" value = "{{participant}}">                     
+                            <label class = "receiver-participant" for="{{participant}}">{{participant}}</label> 
+                            <div class = "amount-and-parts"> 
+                                <input name = "{{participant}}" type = "text" class = "{{participant}}-amount" value = "0.00">
+                                <p class = "p-currency">{{currency}}</p>
+                            </div>
+                        </div> 
+                    {% endif %}
                 {% endfor %}
             </div>
             <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button>

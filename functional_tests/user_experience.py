@@ -182,6 +182,32 @@ class Click():
         link.send_keys(Keys.ENTER)
         time.sleep(2) 
 
+    def modify_a_tricount(self,modified_elements = {}, participants_to_add = [], participants_to_delete = []):
+        """
+        Function aiming at modifying a tricount.
+
+        Inputs : 
+            - modified_elements (dict) : dictionnary whose keys are class names of input text elements (except receivers) we want to modify and whose values are the value to enter
+                Example : {'title':'Nouveau titre, "description":'blabla'}
+            - participants_to_add (list)
+            - participants_to_delete (list)
+        """ 
+
+        #Modification of the input text elements
+        for classname in modified_elements.keys():
+            element = self.browser.find_element(By.CLASS_NAME, classname)
+            element.send_keys(modified_elements[classname])
+        
+        #Modification of participants: 
+        for participant in participants_to_add:
+            self.add_participants(participant)
+
+        for participant in participants_to_delete:
+            self.click_on_a_link(By.CSS_SELECTOR, f"button[name = {participant}]") 
+
+        self.click_on_a_link(By.CLASS_NAME,'submittricount')
+
+
     def click_on_create_spending(self):
         link_spending = self.browser.find_element(By.CLASS_NAME,'new-spending')
         link_spending.send_keys(Keys.ENTER)
@@ -217,6 +243,37 @@ class Click():
 
         submitbox.send_keys(Keys.ENTER)
         time.sleep(2)
+
+    def modify_a_spending(self,modified_elements,*receivers):
+        """
+        Function modifying a spending
+
+        Inputs : 
+            - modified_elements (dict) : dictionnary whose keys are class names of input text elements (except receivers) we want to modify and whose values are the value to enter
+                Example : {'title':'Nouveau titre,'amount':10, "spender":'Joe', "choose-currency":"EUR"}
+            - receivers (list) : list of participants we want to receive the spending.
+        """ 
+
+        for classname in modified_elements.keys():
+            element = self.browser.find_element(By.CLASS_NAME, classname)
+            if element.tag_name == 'input':
+                self.clear_registration_inputs(element)
+            element.send_keys(modified_elements[classname])
+        
+        receiverbox = self.browser.find_elements(By.NAME, 'receiver') 
+
+        #We check all participants if they are not all checked and we then unckeck all participants who are not in receivers
+        if any([not receiver.is_selected() for receiver in receiverbox]):
+            toggle_box = self.browser.find_element(By.CLASS_NAME,"toggle-checkboxes") 
+            toggle_box.click()
+        for receiver in receiverbox:
+            if receiver.get_attribute("value") not in receivers:
+                receiver.click()
+
+        submitbox = self.browser.find_element(By.NAME,'submit')  
+        submitbox.send_keys(Keys.ENTER)
+        time.sleep(2)        
+
 
     def click_on_an_existing_spending(self,spending_number): 
         link = self.browser.find_element(By.ID,"spending-" + str(spending_number))
@@ -261,7 +318,7 @@ class Check():
         amounts = self.browser.find_elements(By.CLASS_NAME,"participant-amount")
         Date = self.browser.find_element(By.CLASS_NAME,"date")
  
-        self.assertEqual(title.text, titre)
+        self.assertEqual(title.text.lower(), titre)
         self.assertEqual(price.text, prix)
         self.assertEqual(payer.text, payeur)
 

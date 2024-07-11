@@ -307,14 +307,30 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `test unitaire pour voir si la dépense est bien modifiée`
             - `test_unitaire : modifier modify a spending pour entrer des montants respectifs.`
             - `addspending et modifyspending (attention si on change de monnaie, les montants récupérés doivent aussi être modifiés) dico_receivers[receiver] = float(request.POST[receiver])`
-            - Debug des tests actuels unitaires 
-            - test unitaire : vérifier que la dépense déjà entrée dans les calculs a bien été retirée des calculs puis que la nouvelle dépense a bien été ajoutée.
+            - `Debug des tests actuels unitaires` 
+            - `test unitaire : vérifier que la dépense déjà entrée dans les calculs a bien été retirée des calculs puis que la nouvelle dépense a bien été ajoutée.`
             - `rajouter les montants respectifs dans modify spending de test count (views à modifier aussi pour updater les calculs liés au tricount).`
-            - test fonctionnel : modification d'une dépense vérification
+            - `test fonctionnel : modification d'une dépense vérification `
+            - `Bug : quand je clique sur la monnaie de modifyspending, je suis renvoyé vers nouvelle dépense au lieu de modify dépense.`
+            - s`BUG : quand je modifie l'amount de modify spending, il faudra supprimer ce qui est déjà écrit dans la case sinon il rentre 100.0100.`
+            - `Bug : quand je crée un tricount en usd, les dépenses me sont proposées en euro, faudrait que ce soit en dollar. Sûrement relié au bug du test fonc où quand je modifie une dépense, il considère que je rentre des dollars. Une explication? Modifyspending.html est mis par défaut en EUR : passer à la vue la monnaie du tricount. Reproduire en test unitaire la config de mon test fonc : 2 tricount 1 en euro, 1 en dollar pour voir si le pb est originaire du calcul (RECUPERER LE MONTANT PAYE POUR CHAQUE (pas les crédits mais l'amount divisé en 4) mais la répartition de la somme de la dépense et voir si c'est correct après chaque dépense et modif de de dépesne)`
+            - `Bug si je clique sur le backtolistecount de la page currency ça m'envoie toujours vers "Nouveau tricount".`
+            - `Bug : sur la page modifyspending il faut mettre les valeurs de la dépense pour chaque partiicpant en placeholder.  spending.receivers.participant ne marche pas en tag django, solution ultime : passer la valeur via JS ou les mettre dans le contexte. Essayer avaec items pour voir si ça marche`
+            - `modifier modifycount de views en mettant des value au lieu des placeholder dans le bon template pour enlever les if = "".`
+            - `Attetntion je dois avoir le même bug pour addcount et addspending : si je ne clique pas sur currency, il ne doit sûrement y avoir aucune valeur de monnaie renvoyée (il faudra dire que si vide, renvoyer valeur par défaut dans views). Ca semble fonctionner voir si j'ai une différence de programmation.`
+            - `faire le JS des checkbox de modifyspending puis éventuellement la fonction modifyspending de userexperience (partie où on clique sur la toggle box pour mettre tout le monde à checked : il faudra distinguer le cas où tous sont déjà cochées).`
+            - `Verif : test spendingcreation`.
+            - `test fonc : pour que les montants soient corrects, il va falloir non slt faire le JS de la toggle box de modifyspending et aussi modifier la fonction modifyspending de userexperience.`
+            - `attention si je valide direct une modif de dépense sans rien changer ça bugge. Si rien n'a changé, il faudrait geler le bouton validation OU alors il faut enregistrer les valeurs qui sont dans placeholder.`
+            - css de "changer la monnaie"
+    - factorisation
             - factor : améliorer utils.py en créant une classe de méthodes appliquées à un tricount (structuration).
             - factoriser les modifyspending pour que ce soit plus clair.
+            - `faut-il factoriser pour modifier une dépense et un tricount et créer des fonctions userexperience pour ça. (oui fonction qui a pour arg, une dictionnaire avec les noms des classes des éléments à modifier et la valeur qu'on veut lui associer).`
             - JS pour la suppression de dépense + test unitaire associé
             - test fonctionnel : suppression de cette dépense vérification
+            - reprendre une page en scss après l'avoir installé en path.
+            - factoriser : voir si je ne peux pas créer une fonction pour les findelements avec un nombre indéterminé d'élts à chercher.
     - coupler avec une API de date pour entrer la date de la dépense.
     - créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat)
     - pourquoi le clic sur un tricount déjà créé est si lent? Améliorer:
@@ -375,6 +391,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     -JS PREVENTDEFAULT : quand je cliquais sur un input submit avec un event click qui m'affichait 1, il n'affichait pas 1 car le comportement par défaut était de soumettre le formulaire.
     -JS PREVENTDEFAULT 2 : quand on empêche l'event par défaut de submit, les inputs ne sont pas remis à 0 : cela implique que le texte précédemment tapé est toujours là.
     -HIDDEN FLEX INLINE : attention certains types de display empêchent le paramètre hidden de fonctionner. Le display = none est un bon remplaçant.
+    - A VERSUS INPUT : Les <a> ne sont pas prévus pour encapsuler des input : quand je mets un input dans un <a>, si je mets une value par défaut, lorsque je soumets le formulaire, cette valeur n'est pas envoyée à la soumission.
 
 # Mes difficultés principales
 

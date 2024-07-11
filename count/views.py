@@ -283,16 +283,24 @@ def spending_details(request,user , id_count, id_spending):
 def modifyspending(request, user,id_count, id_spending):
     """
     Function which redirects to the page allowing to modify a given spending.
-    """
+    """ 
     count = Counts.objects.get(id = id_count)
     spending = Spending.objects.get(id = id_spending, number = id_count)  
-    context = {'spending': spending, 'participants': count.participants}
+    context = {'user':user,'count': count, 'spending': spending, 'participants': count.participants}
     return render(request, "modifyspending.html", context = context)
 
 def modifyspendingregister(request, user,id_count, id_spending):
     """
     Function which recovers data obtained from the modification of a spending.
-    """ 
+    """  
+    #si une des données est modifiée, il faut pouvoir enregistrer
+    #si rien n'a changé le bouton de soumission doit être bloqué
+    #on ne doit utiliser les fonctions update que si soit l'amount est changé soit le nombre de participants est changé pour la performance
+    
+    #si juste le titre est changé pas de update
+    #si any des autres est changé il faut updater la dépense
+    # 
+    
 
     count = Counts.objects.get(id = id_count)
     spending = Spending.objects.get(id = id_spending, number = id_count) 
@@ -300,40 +308,42 @@ def modifyspendingregister(request, user,id_count, id_spending):
     #We first delete the previous spending in the calculation by making the inverse spending : the spender is now a receiver.
     receiver = spending.payer
     payers = spending.receivers
-    update_tricount_after_new_spending(id_count, {receiver : float(spending.amount)}, payers)
+    update_tricount_after_new_receiving(id_count, {receiver : float(spending.amount)}, payers)
 
     #Then we change data of the spending
-    newtitle = request.POST['title']
+    newtitle = request.POST['title'] 
     newamount = request.POST['amount']
     newcurrency = request.POST['newtricount_currency']
     newspender = request.POST['spender']
     newparticipants = request.POST.getlist('receiver')
+ 
 
-    if newtitle != "" and spending.title != newtitle:
+    if spending.title != newtitle:
         spending.title = newtitle
+                
 
-    if newamount != "" and spending.amount != newamount:
-        tricount_currency = count.currency
-        dico_receivers = {}
-        if newcurrency == tricount_currency: 
-            spending.amount = newamount
-            for receiver in newparticipants:  
-                dico_receivers[receiver] = float(request.POST[receiver])
-        #Convert the amount in the tricount currency and the receivers if necessary
-        else:
-            rate = float(useAPICurrency(count.currency,newcurrency))
-            spending.amount = rate*float(newamount) 
-            for receiver in newparticipants: 
-                dico_receivers[receiver] = float(request.POST[receiver])*rate
-
-
-    if newspender != "" and spending.payer != newspender:
+    if spending.payer != newspender:
         spending.payer = newspender
     
+    tricount_currency = count.currency
+    dico_receivers = {}
+    for receiver in newparticipants: 
+        if newcurrency == tricount_currency:  
+            dico_receivers[receiver] = float(request.POST[receiver])
+        else: #Convert the amounts of receivers in the tricount currency
+            rate = float(useAPICurrency(count.currency,newcurrency))
+            dico_receivers[receiver] = float(request.POST[receiver])*rate
     spending.receivers = dico_receivers
-        
+
+    if spending.amount != newamount:
+        if newcurrency == tricount_currency:  
+            spending.amount = newamount
+        #Convert the amount in the tricount currency
+        elif newcurrency != "": 
+            spending.amount = rate*float(newamount) 
+    
     update_tricount_after_new_spending(id_count, {newspender : float(newamount)}, dico_receivers)
-    spending.save() 
+    spending.save()  
 
     return redirect(f'/count/{user}/tricount/{id_count}/spending/{id_spending}')
 

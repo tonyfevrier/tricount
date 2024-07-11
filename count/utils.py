@@ -100,7 +100,20 @@ def useAPICurrency(currency_to, currency_from):
     return response.json()["data"][currency_to]
 
 def convertSpendingCurrency(currency_to, currency_from, amount):
-    pass
+    """
+    Function converting an amount in an other currency
+
+    Inputs:
+        - currency_to (str): the currency in which to convert.
+        - currency_from (str) : the initial currency
+        - amount (float)
+
+    Output :
+        -amount converted.
+    """
+    rate = float(useAPICurrency(currency_to, currency_from))
+    amount = rate*float(amount)
+    return amount
 
     
 

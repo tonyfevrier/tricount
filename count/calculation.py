@@ -73,8 +73,7 @@ class Tricount():
         forwho : dictionary of participants involved in the shared spending and the positive amount which was paid for them.
         """
 
-        #The payer expense and credits change.
-
+        #The payer expense and credits change. 
         for spender in payer.keys():
             self.total_cost += payer[spender] 
             self.dict_participants[spender].expense += payer[spender] 
@@ -82,8 +81,7 @@ class Tricount():
             for receiver in forwho.keys():
                 if receiver != spender: 
                     self.dict_participants[spender].credits[receiver] -= forwho[receiver]
-                    self.dict_participants[receiver].credits[spender] += forwho[receiver]
-
+                    self.dict_participants[receiver].credits[spender] += forwho[receiver] 
         return self 
     
     def receiving_update(self,receiver,fromwho):
@@ -93,13 +91,14 @@ class Tricount():
         receiver : dictionary {participant:str: amount:float}
         fromwho : dictionary of participants involved in the shared spending and the positive amount which was paid for them.
         """
+        
         payer,forwho = {},{}
         for spender in receiver:
             payer[spender] = - receiver[spender]
         
         for receiver in fromwho:
             forwho[receiver] = - fromwho[receiver] 
-
+    
         return self.spending_update(payer,forwho)
     
     def money_transfer(self,payer, forwho):

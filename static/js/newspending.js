@@ -1,9 +1,4 @@
-/*
-clic sur dépense : élément avec choix. 
-clic sur eur : élement avec Eur et plus
-*/
-
-const title = document.body.querySelector("[placeholder = 'Titre']");
+const title = document.body.querySelector(".title");
 const amount = document.body.querySelector(".amount"); 
 let counter = document.body.querySelector(".counter");
 let checkboxDiv = document.body.querySelector(".list-receivers");  
@@ -15,10 +10,12 @@ let currency = document.body.querySelector('.newtricount_currency');
 //We change the currency if the user has chosen an other currency.
 const url = window.location.search;
 const params = new URLSearchParams(url); 
-currency.value =  params.get("currency");
 
-for (let monnaie of document.body.querySelectorAll('.p-currency')){
-    console.log(monnaie);
+if (url.includes("currency")){
+    currency.value = params.get('currency');
+}
+
+for (let monnaie of document.body.querySelectorAll('.p-currency')){ 
     monnaie.innerHTML = currency.value;
 }
 

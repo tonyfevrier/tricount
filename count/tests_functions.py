@@ -71,7 +71,7 @@ class UnitaryTestMethods(TestCase):
         """
         self.client.post(f"/count/{people}/newcount/count-pwd", data = {"tricount-title":title, "password":password})
 
-    def create_a_spending(self,title,amount,currency,spender, receivers, respective_amounts):
+    def create_a_spending(self,idcount,title,amount,currency,spender, receivers, respective_amounts):
         """
         Inputs :
             - title (str) 
@@ -87,7 +87,7 @@ class UnitaryTestMethods(TestCase):
         for i in range(len(receivers)):
             data[receivers[i]] = respective_amounts[i]
 
-        response = self.client.post('/count/Tony/tricount/1/addspending', data)
+        response = self.client.post(f'/count/Tony/tricount/{idcount}/addspending', data)
         return response
     
     def modify_a_spending(self, idcount, idspending, title, amount, currency, spender, receivers, respective_amounts):

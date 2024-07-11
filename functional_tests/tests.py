@@ -354,11 +354,11 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.register_and_login_someone("Dulciny","dulciny@dulciny.fr", "dulciny")
 
         #A tricount is created et come back to the listecount page 
-        click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri")
+        click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri","Dulciny")
         click.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
 
         #He creates a second tricount in an other currency : 
-        click.create_a_tricount('Tricount1bis',"pwdbis","Je décris", "USD", "project","Jean","Henri")
+        click.create_a_tricount('Tricount1bis',"pwdbis","Je décris", "USD", "project","Jean","Henri","Dulciny")
         click.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
 
         #The user clicks on an existing tricount 
@@ -396,6 +396,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.create_a_spending('', 100., 'Jean', ['Henri','Jean'],'EUR')
 
         notitle = self.browser.find_element(By.CLASS_NAME,"notitle")
+
         self.assertEqual(notitle.text, "Titre non valable")
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Dulciny/tricount/1/addspending")
 
@@ -426,10 +427,34 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Dulciny/tricount/2')
         self.assertEqual(len(spendings), 1)
 
+        #He modifies the spending of the first tricount and is redirected to the page of the spending he modifies, the informations of the spending are written
+        click.click_on_a_link(By.CLASS_NAME, "backtolistecount")
+        click.click_on_an_existing_tricount(1)
+        click.click_on_an_existing_spending(1)
+        click.click_on_a_link(By.CLASS_NAME, "modify-spending")
 
-        #He forgets to put who is the payer, by default it is the first participant.
+        title = self.browser.find_element(By.CLASS_NAME, "title")
+        amount = self.browser.find_element(By.CLASS_NAME, "amount")
 
-        #He forgets to put for who he pays, by default it's for all participants.
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Dulciny/tricount/1/spending/1/modifyspending')
+        self.assertEqual(title.get_attribute("value"), "Dépense1")
+        self.assertEqual(amount.get_attribute("value"), '100.0')
+
+        click.modify_a_spending({'amount':100},"Dulciny", "Henri")
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Dulciny/tricount/1/spending/1')
+
+        #He also notes that the amounts have been correctly modified
+        self.check_informations_of_a_spending('dépense1','100.0', 'Payé par Jean', ['Dulciny','Henri'],['50.0', '50.0'])
+
+        #He makes an other modification : he modifies the spender         
+        click.click_on_a_link(By.CLASS_NAME, "modify-spending")
+        click.modify_a_spending({'title': 'spending','spender': "Henri"},"Dulciny", "Henri")
+
+        self.check_informations_of_a_spending('spending','100.0', 'Payé par Henri', ['Dulciny','Henri'],['50.0', '50.0'])
+
+        #He then click to modify a spending but do not change anything and validate : he is redirected correctly to the spending details.
+ 
 
     def test_the_page_of_some_spendings(self):
         
@@ -448,7 +473,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
 
         #Il arrive sur la page et il y voit toutes les données qu'il a enregistrées.
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Dulciny/tricount/1/spending/1")
-        self.check_informations_of_a_spending('DEPENSE1', '120.0', 'Payé par Jean', ['Dulciny','Henri','Jean'],['40.0', '40.0', '40.0'])
+        self.check_informations_of_a_spending('depense1', '120.0', 'Payé par Jean', ['Dulciny','Henri','Jean'],['40.0', '40.0', '40.0'])
 
         #Il revient en arrière et crée trois autres dépenses
         click.click_on_a_link(By.CLASS_NAME,"backtospending")
@@ -463,12 +488,12 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.click_on_a_link(By.CLASS_NAME,"following")
 
         #Il voit alors les infos de la seconde dépense et le bouton précédent apparaître
-        self.check_informations_of_a_spending('DEPENSE2', '12.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['4.0', '4.0', '4.0'])
+        self.check_informations_of_a_spending('depense2', '12.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['4.0', '4.0', '4.0'])
         self.assertIsNotNone(self.browser.find_element(By.CLASS_NAME,'previous'))
 
         #Il clique sur suivant une fois et voit le bouton suivant disparaître
         click.click_on_a_link(By.CLASS_NAME,"following") 
-        self.check_informations_of_a_spending('DEPENSE3', '3.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['1.0', '1.0', '1.0'])
+        self.check_informations_of_a_spending('depense3', '3.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['1.0', '1.0', '1.0'])
         #self.assertIsNone(self.browser.find_element(By.CLASS_NAME,'following'))
 
         #Il clique sur précédent trois fois et revient à la liste des dépenses
@@ -489,18 +514,11 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         self.assertIn("Henri", [participant.get_attribute("value") for participant in participants])
         
         #Il modifie le titre et la description puis valide. Il voit les nouvelles informations modifiées.
-        title.send_keys('Tricount2')
-        description.send_keys('autre') 
-        click.click_on_a_link(By.CLASS_NAME,'submittricount')
-
-        title = self.browser.find_element(By.CLASS_NAME, 'tricount-title')
-        self.assertEqual(title.text, "Tricount2") 
+        click.modify_a_tricount({'tricount_title':'Tricount2','tricount_description':'autre'}) 
 
         #Il reclique sur le titre du tricount et ajoute un nouveau participant tout en supprimant un autre
         click.click_on_a_link(By.CLASS_NAME,"tricount-characteristics")
-        click.click_on_a_link(By.CSS_SELECTOR, "button[name = 'Jean']") 
-        click.add_participants('Robert')
-        click.click_on_a_link(By.CLASS_NAME,'submittricount')
+        click.modify_a_tricount(participants_to_add = ["Robert"], participants_to_delete = ["Jean"]) 
 
         participants = self.browser.find_elements(By.CLASS_NAME, "tricount-participants")
         self.assertIn("Robert", [participant.text for participant in participants])

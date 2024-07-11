@@ -11,10 +11,9 @@ research.addEventListener("input",userSearching);
 const url = window.location.search;
 const params = new URLSearchParams(url);
 
-for (let currency of currencies){
-    console.log(params.get("referer"));
-    currency.href = params.get("referer") +"?currency=" + currency.className;
-    console.log(currency.href);
+backtonewcount.href = params.get('referer');
+for (let currency of currencies){ 
+    currency.href = params.get("referer") +"?currency=" + currency.className; 
 }
 
 function userClicking(event){
