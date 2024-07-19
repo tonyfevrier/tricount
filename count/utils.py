@@ -115,6 +115,27 @@ def convertSpendingCurrency(currency_to, currency_from, amount):
     amount = rate*float(amount)
     return amount
 
+def createReceiversDictionaryOfASpending(newcurrency, tricount_currency, request, *participants):
+    """
+    Function which creates the dictionnary containing the amount of each participant to a spending.
+
+    Inputs : 
+        - newcurrency (str) : the currency entered for the spending.
+        - tricount_currency (str) : the currency registered when the tricount was created.
+        - request (obj) 
+        - participants (list[str]) : list containing the receivers of the spending.
+    Output : 
+        - dico_receivers (dictionary) : keys are participants to the spending, values are their amount.  
+
+    """
+    dico_receivers = {}
+    for receiver in participants: 
+        if newcurrency == tricount_currency:  
+            dico_receivers[receiver] = float(request.POST[receiver])
+        else: #Convert the amounts of receivers in the tricount currency
+            dico_receivers[receiver] = convertSpendingCurrency(tricount_currency,newcurrency,request.POST[receiver])
+    return dico_receivers
+
     
 
 

@@ -112,7 +112,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         click.click_on_a_link(By.CSS_SELECTOR,".closeparticipant[name = 'Henri']")
         time.sleep(2)
 
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Tony/newcount?parametre1=AFN")
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/count/Tony/newcount?currency=AFN")
         
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
         number_participants = self.browser.find_element(By.CLASS_NAME,"nb_participants") 
@@ -454,7 +454,11 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         self.check_informations_of_a_spending('spending','100.0', 'Payé par Henri', ['Dulciny','Henri'],['50.0', '50.0'])
 
         #He then click to modify a spending but do not change anything and validate : he is redirected correctly to the spending details.
- 
+        click.click_on_a_link(By.CLASS_NAME, "modify-spending")
+        click.click_on_a_link(By.CLASS_NAME, "submit-spending")
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Dulciny/tricount/1/spending/1')
+
 
     def test_the_page_of_some_spendings(self):
         
@@ -508,8 +512,8 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         description = self.browser.find_element(By.CLASS_NAME, "tricount_description")
         participants = self.browser.find_elements(By.CLASS_NAME, "nameparticipant") 
 
-        self.assertEqual(title.get_attribute("placeholder"), "Tricount1")
-        self.assertEqual(description.get_attribute("placeholder"), "Je décris")
+        self.assertEqual(title.get_attribute("value"), "Tricount1")
+        self.assertEqual(description.get_attribute("value"), "Je décris")
         self.assertIn("Jean", [participant.get_attribute("value") for participant in participants])
         self.assertIn("Henri", [participant.get_attribute("value") for participant in participants])
         

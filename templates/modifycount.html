@@ -18,13 +18,13 @@
     <main>
         <form method="POST" class = "tricount" action="/count/{{user}}/tricount/{{count.id}}/modifycountregister">
             {% csrf_token %}
-            <input type ="text" class = "tricount_title" placeholder="{{count.title}}" name = "tricount_title">  
+            <input type ="text" class = "tricount_title" value = "{{count.title}}" name = "tricount_title">  
 
             {% if titre == False %}
                 <p class="error">Le titre doit comporter au moins un caractère.</p>
             {% endif %}
  
-            <input type ="text" class = "tricount_description" placeholder="{{count.description}}" name = "tricount_description">
+            <input type ="text" class = "tricount_description" value = "{{count.description}}" name = "tricount_description">
             
             <p class = "currency"> Devise : {{count.currency}} </p>
 
