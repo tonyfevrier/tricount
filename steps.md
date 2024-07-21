@@ -333,6 +333,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - factoriser : voir si je ne peux pas créer une fonction pour les findelements avec un nombre indéterminé d'élts à chercher.
     - coupler avec une API de date pour entrer la date de la dépense.
     - créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat)
+    - factorisation des JS : créer un fichier de handler qu'on importe (des handlers sont réécrits plusieurs fois) quitte à leur ajouter des arguments. On pourrait faire un code par classe avec les handlers click, les handlers input etc.
     - pourquoi le clic sur un tricount déjà créé est si lent? Améliorer:
     - branche pour le chat (suite)
             `copier l'html et voir si ça marche`

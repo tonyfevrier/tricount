@@ -42,7 +42,7 @@ function userAddingParticipant(event){
 }
 
 function userDeleteTricount(event){
-    /*Function to manage the delation of the tricount*/
+    /*Function to manage the delation of the tricount*/ 
    if (event.target === deletebutton){
         deletealert.hidden = false;
    } else if (event.target === deletealert.lastElementChild){
@@ -53,8 +53,7 @@ function userDeleteTricount(event){
 
 function alertBlockScreen(event){
     /*Function which prevents from clicking on another button if the alert of delation of tricount has appeared */
-    const deleteconfirmation = document.body.querySelector(".delete-confirmation"); 
-    if (deleteconfirmation.hidden === false && event.target.className != "yesno" ){
+    if (deletealert.hidden === false && event.target.className != "yesno" ){
         event.preventDefault()
     }
     return;

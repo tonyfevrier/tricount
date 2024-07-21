@@ -6,6 +6,9 @@ let receivers = document.body.querySelectorAll(".receiver");
 let toggleCheckbox = document.body.querySelector(".toggle-checkboxes");
 let toggleAvance = document.body.querySelector('.special-parameters'); 
 let currency = document.body.querySelector('.newtricount_currency');
+const footer = document.body.querySelector("footer");
+const deletebutton = footer.firstElementChild;
+const deletealert = footer.lastElementChild; 
 
 //We change the currency if the user has chosen an other currency.
 const url = window.location.search;
@@ -26,6 +29,9 @@ amount.addEventListener("input", userAmount);
 checkboxDiv.addEventListener("click",userChecking);
 toggleCheckbox.addEventListener("click",userToggle);
 toggleAvance.addEventListener("click", userAvance);
+deletebutton.addEventListener("click", userDeleteSpending);
+window.addEventListener("click", alertBlockScreen);
+
 
 
 let click = new Event("click", {bubbles: true,});
@@ -85,9 +91,23 @@ function userAvance(event){
     event.preventDefault();
 }
 
- 
+function userDeleteSpending(event){
+    /*Fonction making an alert appearing if the user is clicking on delete the spending */
+    if (event.target === deletebutton){
+        deletealert.hidden = false;
+    } else if (event.target === deletealert.lastElementChild){
+            deletealert.hidden = true;
+    } 
+    return;
+} 
 
-
+function alertBlockScreen(event){
+    /*Function which prevents from clicking on another button if the alert of delation of tricount has appeared */
+    if (deletealert.hidden === false && event.target.className != "yesno" ){
+        event.preventDefault()
+    }
+    return;
+}
 
 
 /*Useful functions for handlers*/
