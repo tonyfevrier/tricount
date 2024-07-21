@@ -261,7 +261,7 @@ class NewcountTest(UnitaryTestMethods):
 
     def test_delete_tricount(self):
         """
-        Test the delation of a tricount : it must disappear from the database
+        Test the deletion of a tricount : it must disappear from the database
         """
         self.create_a_tricount("tricount1",'pwd',"description","EUR","Voyage", "Tony", "Henri", "Jean") 
         self.client.get("/count/Tony/tricount/1/deletecount")
@@ -649,7 +649,7 @@ class TestSpending(UnitaryTestMethods):
 
         self.delete_a_spending(1,2)
         spending = Spending.objects.first()
-        
+
         self.assertEqual(spending.title, "dépense")
         self.assertEqual(spending.payer, "Yann")
         self.assertEqual(len(Spending.objects.all()),1)

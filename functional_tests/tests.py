@@ -459,6 +459,20 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
 
         self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Dulciny/tricount/1/spending/1')
 
+        #He now decides to supress the last spending and is correctly redirected to the spendings which contains the good number of spendings
+        click.click_on_a_link(By.CLASS_NAME, "modify-spending")
+        click.click_on_a_link(By.CLASS_NAME, "delete-spending")
+        click.click_on_a_link(By.ID, "no")
+
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Dulciny/tricount/1/spending/1/modifyspending')
+
+        click.click_on_a_link(By.CLASS_NAME, "delete-spending")
+        click.click_on_a_link(By.ID, "yes")
+        
+        spendings = self.browser.find_elements(By.CLASS_NAME,'spending')
+        
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/count/Dulciny/tricount/1')
+        self.assertEqual(len(spendings), 1)
 
     def test_the_page_of_some_spendings(self):
         

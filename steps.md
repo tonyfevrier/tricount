@@ -322,14 +322,15 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `Verif : test spendingcreation`.
             - `test fonc : pour que les montants soient corrects, il va falloir non slt faire le JS de la toggle box de modifyspending et aussi modifier la fonction modifyspending de userexperience.`
             - `attention si je valide direct une modif de dépense sans rien changer ça bugge. Si rien n'a changé, il faudrait geler le bouton validation OU alors il faut enregistrer les valeurs qui sont dans placeholder.` 
-    - factorisation
+    - `factorisation`
             - `factor : améliorer utils.py en créant une classe de méthodes appliquées à un tricount (structuration).`
             - `factoriser les modifyspending pour que ce soit plus clair. Utiliser createDictionaryReceivers et voir si je peux la mettre aussi dans addspending. Finir docstring de cette fonction.`
             - `Debug addspending.`
             - `faut-il factoriser pour modifier une dépense et un tricount et créer des fonctions userexperience pour ça. (oui fonction qui a pour arg, une dictionnaire avec les noms des classes des éléments à modifier et la valeur qu'on veut lui associer).`
             - `JS pour la suppression de dépense` 
-            - vue pour la suppression de la dépense + test unitaire associé
-            - test fonctionnel : suppression de cette dépense vérification
+            - `vue pour la suppression de la dépense + test unitaire associé`
+            - `test fonctionnel : suppression de cette dépense vérification`
+    - factorisation
             - reprendre une page en scss après l'avoir installé en path.
             - factoriser : voir si je ne peux pas créer une fonction pour les findelements avec un nombre indéterminé d'élts à chercher.
     - coupler avec une API de date pour entrer la date de la dépense.
