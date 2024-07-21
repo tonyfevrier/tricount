@@ -327,7 +327,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `factoriser les modifyspending pour que ce soit plus clair. Utiliser createDictionaryReceivers et voir si je peux la mettre aussi dans addspending. Finir docstring de cette fonction.`
             - `Debug addspending.`
             - `faut-il factoriser pour modifier une dépense et un tricount et créer des fonctions userexperience pour ça. (oui fonction qui a pour arg, une dictionnaire avec les noms des classes des éléments à modifier et la valeur qu'on veut lui associer).`
-            - JS pour la suppression de dépense + test unitaire associé
+            - `JS pour la suppression de dépense` 
+            - vue pour la suppression de la dépense + test unitaire associé
             - test fonctionnel : suppression de cette dépense vérification
             - reprendre une page en scss après l'avoir installé en path.
             - factoriser : voir si je ne peux pas créer une fonction pour les findelements avec un nombre indéterminé d'élts à chercher.

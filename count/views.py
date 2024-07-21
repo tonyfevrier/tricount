@@ -322,7 +322,10 @@ def deletespending(request, user,id_count, id_spending):
     """
     Function which delete a spending
     """
-    pass
+    #on supprimer la dépense, on redirige vers la page des 
+    spending = Spending.objects.get(number = id_count, id = id_spending)
+    spending.delete()
+    return redirect(f'/count/{user}/tricount/{id_count}')
 
 def chat(request, user,id_count):
     """
