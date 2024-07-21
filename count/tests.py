@@ -637,7 +637,23 @@ class TestSpending(UnitaryTestMethods):
         self.assertEqual(tricount.dict_participants["Yann"].credits['Henri'], 0.0)
         self.assertEqual(tricount.dict_participants["Marine"].credits['Henri'], 0.0) 
 
+    def test_delete_a_spending(self):
+        """
+        Function which deletes a created spending and verifies if the spending has been correctly deleted
+        """
+        self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
+        self.create_a_spending(1,'dépense', 180,'EUR', 'Yann', ['Henri','Yann','Marine','Tony'], [30,50,50,50]) 
+        self.create_a_spending(1,'dépense2', 10,'EUR', 'Henri', ['Henri','Yann','Marine','Tony'], [30,50,50,50]) 
         
+        self.assertEqual(len(Spending.objects.all()),2)
+
+        self.delete_a_spending(1,2)
+        spending = Spending.objects.first()
+        
+        self.assertEqual(spending.title, "dépense")
+        self.assertEqual(spending.payer, "Yann")
+        self.assertEqual(len(Spending.objects.all()),1)
+
         
         
  

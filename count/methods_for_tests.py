@@ -111,6 +111,13 @@ class UnitaryTestMethods(TestCase):
 
         response = self.client.post(f"/count/Tony/tricount/{idcount}/spending/{idspending}/modifyspendingregister", data)
         return response
+    
+    def delete_a_spending(self, idcount, idspending):
+        """
+        Function which deletes a given spending
+        """ 
+        response = self.client.post(f"/count/Tony/tricount/{idcount}/spending/{idspending}/deletespending")
+        return response 
 
     def register_someone(self, username, password, email):
         response = self.client.post('/welcome/register', data = {'username':username, 'password':password, 'email' : email})        
