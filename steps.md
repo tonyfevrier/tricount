@@ -323,7 +323,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `test fonc : pour que les montants soient corrects, il va falloir non slt faire le JS de la toggle box de modifyspending et aussi modifier la fonction modifyspending de userexperience.`
             - `attention si je valide direct une modif de dépense sans rien changer ça bugge. Si rien n'a changé, il faudrait geler le bouton validation OU alors il faut enregistrer les valeurs qui sont dans placeholder.` 
     - factorisation
-            - factor : améliorer utils.py en créant une classe de méthodes appliquées à un tricount (structuration).
+            - `factor : améliorer utils.py en créant une classe de méthodes appliquées à un tricount (structuration).`
             - `factoriser les modifyspending pour que ce soit plus clair. Utiliser createDictionaryReceivers et voir si je peux la mettre aussi dans addspending. Finir docstring de cette fonction.`
             - `Debug addspending.`
             - `faut-il factoriser pour modifier une dépense et un tricount et créer des fonctions userexperience pour ça. (oui fonction qui a pour arg, une dictionnaire avec les noms des classes des éléments à modifier et la valeur qu'on veut lui associer).`

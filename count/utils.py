@@ -2,139 +2,158 @@ from count.models import Counts
 from count.calculation import Participant, Tricount
 import requests
 
-def majuscule(chaine):
-    """
-    Function which puts the first letter in majuscule
-    """
-    return chaine[0].upper() + chaine[1:]
 
-def update_tricount_after_new_spending(id_count, spender, dico_receivers):
-    """
-    Fonction qui permet de modifier les crédits de chacun dans le tricount après une dépense puis d'enregistrer dans la bdd
+class String():
 
-    Inputs : 
-        id_count (int) : number of tricount
-        spender (dict) : {payer (str): amount(float)}
-        dico_receivers (dict) : keys are participants and values are the amount they have to reimburse to the payer.  
-    """
+    @staticmethod
+    def majuscule(chaine):
+        """
+        Function which puts the first letter in majuscule
+        """
+        return chaine[0].upper() + chaine[1:]
 
-    count = Counts.objects.get(id = id_count)
-    tricount = Tricount.from_json(count.data)
-    tricount.spending_update(spender, dico_receivers)
-    count.data = tricount.to_json()
-    count.save()
 
-def update_tricount_after_new_receiving(id_count, receiver, dico_payers):
-    """
-    Fonction qui permet de modifier les crédits de chacun dans le tricount après une dépense puis d'enregistrer dans la bdd
+class CurrencyConversion():
 
-    Inputs : 
-        id_count (int) : number of tricount
-        spender (dict) : {payer (str): amount(float)}
-        dico_receivers (dict) : keys are participants and values are the amount they have to reimburse to the payer.  
-    """
+    @staticmethod
+    def useAPICurrency(currency_to, currency_from):
+        """
+        Fonction qui donne le taux de change d'une monnaie à une autre.
 
-    count = Counts.objects.get(id = id_count)
-    tricount = Tricount.from_json(count.data)
-    tricount.receiving_update(receiver, dico_payers)
-    count.data = tricount.to_json()
-    count.save()
+        Inputs : 
+            -currency_to (str): monnaie dont veut le taux pour 1 unité de la monnaie convertie. 
+            -currency_from (str): monnaie qu'on veut convertir.
+        
+        Output : 
+            - response.json() (str) : le taux de change. 
+        """
+        """
+        url = "https://exchange-rate-api1.p.rapidapi.com/latest"
 
-def add_new_participants_to_a_tricount(count,participants):  
-    """
-    Function which checks if there are new participants in participants and creates an object Participant and add it for future credits calculations.
+        querystring = {"base":currency_from}
 
-    Inputs : 
-        - count (object): an instanciation of the class Counts (models).
-        - participants (list) : a list of participants.
+        headers = {
+            "x-rapidapi-key": "260ce107f1msh4a1b88e31999632p116730jsnec29696c42e6",
+            "x-rapidapi-host": "exchange-rate-api1.p.rapidapi.com"
+        }
 
-    Output : 
-        - count : updated.
-    """
-    tricount = Tricount.from_json(count.data) 
-    for participant in participants:
-        if participant not in count.participants:
-            receivers = [receiver for receiver in count.participants if receiver != participant]
-            tricount.dict_participants[participant] = Participant(participant,receivers)
-            for receiver in receivers:
-                tricount.dict_participants[receiver].credits[participant] = 0
-    count.participants = participants
-    count.data = tricount.to_json()
-    return count
+        response = requests.get(url, headers=headers, params=querystring) 
+        
+        return response.json()['rates'][currency_to]
+        """
 
-def useAPICurrency(currency_to, currency_from):
-    """
-    Fonction qui donne le taux de change d'une monnaie à une autre.
+        url = "https://api.freecurrencyapi.com/v1/latest"
+        
+        headers = {
+            "apikey" : "fca_live_WBlOtjh3ldI46OSl1jGUzQQFXzz7XvkO1G8dreQl",
+        }
+        querystring = {"base_currency":currency_from, "currencies":[currency_to]}
 
-    Inputs : 
-        -currency_to (str): monnaie dont veut le taux pour 1 unité de la monnaie convertie. 
-        -currency_from (str): monnaie qu'on veut convertir.
+        response = requests.get(url, headers=headers, params= querystring)
     
-    Output : 
-        - response.json() (str) : le taux de change. 
-    """
-    """
-    url = "https://exchange-rate-api1.p.rapidapi.com/latest"
+        return response.json()["data"][currency_to]
 
-    querystring = {"base":currency_from}
+    @classmethod
+    def convertSpendingCurrency(cls,currency_to, currency_from, amount):
+        """
+        Function converting an amount in an other currency
 
-    headers = {
-	    "x-rapidapi-key": "260ce107f1msh4a1b88e31999632p116730jsnec29696c42e6",
-	    "x-rapidapi-host": "exchange-rate-api1.p.rapidapi.com"
-    }
+        Inputs:
+            - currency_to (str): the currency in which to convert.
+            - currency_from (str) : the initial currency
+            - amount (float)
 
-    response = requests.get(url, headers=headers, params=querystring) 
+        Output :
+            -amount converted.
+        """
+        rate = float(cls.useAPICurrency(currency_to, currency_from))
+        amount = rate*float(amount)
+        return amount
     
-    return response.json()['rates'][currency_to]
-    """
 
-    url = "https://api.freecurrencyapi.com/v1/latest"
-    
-    headers = {
-        "apikey" : "fca_live_WBlOtjh3ldI46OSl1jGUzQQFXzz7XvkO1G8dreQl",
-    }
-    querystring = {"base_currency":currency_from, "currencies":[currency_to]}
+class ModifyTricount(CurrencyConversion):
 
-    response = requests.get(url, headers=headers, params= querystring)
- 
-    return response.json()["data"][currency_to]
+    @staticmethod    
+    def update_tricount_after_new_spending(id_count, spender, dico_receivers):
+        """
+        Fonction qui permet de modifier les crédits de chacun dans le tricount après une dépense puis d'enregistrer dans la bdd
 
-def convertSpendingCurrency(currency_to, currency_from, amount):
-    """
-    Function converting an amount in an other currency
+        Inputs : 
+            id_count (int) : number of tricount
+            spender (dict) : {payer (str): amount(float)}
+            dico_receivers (dict) : keys are participants and values are the amount they have to reimburse to the payer.  
+        """
 
-    Inputs:
-        - currency_to (str): the currency in which to convert.
-        - currency_from (str) : the initial currency
-        - amount (float)
+        count = Counts.objects.get(id = id_count)
+        tricount = Tricount.from_json(count.data)
+        tricount.spending_update(spender, dico_receivers)
+        count.data = tricount.to_json()
+        count.save()
 
-    Output :
-        -amount converted.
-    """
-    rate = float(useAPICurrency(currency_to, currency_from))
-    amount = rate*float(amount)
-    return amount
+    @staticmethod
+    def update_tricount_after_new_receiving(id_count, receiver, dico_payers):
+        """
+        Fonction qui permet de modifier les crédits de chacun dans le tricount après une dépense puis d'enregistrer dans la bdd
 
-def createReceiversDictionaryOfASpending(newcurrency, tricount_currency, request, *participants):
-    """
-    Function which creates the dictionnary containing the amount of each participant to a spending.
+        Inputs : 
+            id_count (int) : number of tricount
+            spender (dict) : {payer (str): amount(float)}
+            dico_receivers (dict) : keys are participants and values are the amount they have to reimburse to the payer.  
+        """
 
-    Inputs : 
-        - newcurrency (str) : the currency entered for the spending.
-        - tricount_currency (str) : the currency registered when the tricount was created.
-        - request (obj) 
-        - participants (list[str]) : list containing the receivers of the spending.
-    Output : 
-        - dico_receivers (dictionary) : keys are participants to the spending, values are their amount.  
+        count = Counts.objects.get(id = id_count)
+        tricount = Tricount.from_json(count.data)
+        tricount.receiving_update(receiver, dico_payers)
+        count.data = tricount.to_json()
+        count.save()
 
-    """
-    dico_receivers = {}
-    for receiver in participants: 
-        if newcurrency == tricount_currency:  
-            dico_receivers[receiver] = float(request.POST[receiver])
-        else: #Convert the amounts of receivers in the tricount currency
-            dico_receivers[receiver] = convertSpendingCurrency(tricount_currency,newcurrency,request.POST[receiver])
-    return dico_receivers
+    @staticmethod
+    def add_new_participants_to_a_tricount(count,participants):  
+        """
+        Function which checks if there are new participants in participants and creates an object Participant and add it for future credits calculations.
+
+        Inputs : 
+            - count (object): an instanciation of the class Counts (models).
+            - participants (list) : a list of participants.
+
+        Output : 
+            - count : updated.
+        """
+        tricount = Tricount.from_json(count.data) 
+        for participant in participants:
+            if participant not in count.participants:
+                receivers = [receiver for receiver in count.participants if receiver != participant]
+                tricount.dict_participants[participant] = Participant(participant,receivers)
+                for receiver in receivers:
+                    tricount.dict_participants[receiver].credits[participant] = 0
+        count.participants = participants
+        count.data = tricount.to_json()
+        return count
+
+    @classmethod    
+    def createReceiversDictionaryOfASpending(cls,newcurrency, tricount_currency, request, *participants):
+        """
+        Function which creates the dictionnary containing the amount of each participant to a spending.
+
+        Inputs : 
+            - newcurrency (str) : the currency entered for the spending.
+            - tricount_currency (str) : the currency registered when the tricount was created.
+            - request (obj) 
+            - participants (list[str]) : list containing the receivers of the spending.
+        Output : 
+            - dico_receivers (dictionary) : keys are participants to the spending, values are their amount.  
+
+        """
+        dico_receivers = {}
+        for receiver in participants: 
+            if newcurrency == tricount_currency:  
+                dico_receivers[receiver] = float(request.POST[receiver])
+            else: #Convert the amounts of receivers in the tricount currency
+                dico_receivers[receiver] = cls.convertSpendingCurrency(tricount_currency,newcurrency,request.POST[receiver])
+        return dico_receivers
+
+
+
 
     
 

@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from count.models import Counts, Spending
-from count.utils import *
+from count.utils import CurrencyConversion as CC, ModifyTricount as MT, String  
 from count import calculation
 from datetime import date
 from count.calculation import *
@@ -118,12 +118,12 @@ def addcount(request,user):
                 return render(request,'newcount.html', context={'ptcpt':False})
             else:
                 if descption != "": 
-                    phrase = majuscule(descption)
+                    phrase = String.majuscule(descption)
                 else:
                     phrase = "Pas de description" 
                 #Creation of the object for calculations
                 tricount = Tricount(*participts)
-                count = Counts.objects.create(title = majuscule(titre), 
+                count = Counts.objects.create(title = String.majuscule(titre), 
                                               password = password, 
                                               description = phrase, 
                                               currency = request.POST["newtricount_currency"], 
@@ -157,7 +157,7 @@ def modifycountregister(request, user, id_count):
     
     #si les participants ont changé, ajout des nouveaux participants pour les calculs de crédits/dettes
     if set(count.participants) != set(newparticipants):
-        count = add_new_participants_to_a_tricount(count,newparticipants)
+        count = MT.add_new_participants_to_a_tricount(count,newparticipants)
     count.save() 
 
     return redirect(f'/count/{user}/tricount/{id_count}')
@@ -246,11 +246,11 @@ def addspending(request,user ,id_count):
         #On récupère aussi les montants des personnes cochées pour les mettre dans un dictionnaire passé à la bdd.
 
         if currency != tricount_currency:   
-            amount = convertSpendingCurrency(tricount_currency,currency,amount)
+            amount = CC.convertSpendingCurrency(tricount_currency,currency,amount)
     
-        dico_receivers = createReceiversDictionaryOfASpending(currency, tricount_currency, request, *receivers)
+        dico_receivers = MT.createReceiversDictionaryOfASpending(currency, tricount_currency, request, *receivers)
         Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, number = id_count, date = date.today())
-        update_tricount_after_new_spending(id_count, {spender : float(amount)}, dico_receivers)
+        MT.update_tricount_after_new_spending(id_count, {spender : float(amount)}, dico_receivers)
         
         return redirect(f'/count/{user}/tricount/{id_count}')
     else: #Lack of title needs an error message.
@@ -292,7 +292,7 @@ def modifyspendingregister(request, user,id_count, id_spending):
     #We first delete the previous spending in the calculation by making the inverse spending : the spender is now a receiver.
     receiver = spending.payer
     payers = spending.receivers
-    update_tricount_after_new_receiving(id_count, {receiver : float(spending.amount)}, payers)
+    MT.update_tricount_after_new_receiving(id_count, {receiver : float(spending.amount)}, payers)
 
     #Then we change data of the spending in the database.
     newtitle = request.POST['title'] 
@@ -305,15 +305,15 @@ def modifyspendingregister(request, user,id_count, id_spending):
     spending.payer = newspender
     
     tricount_currency = count.currency 
-    spending.receivers = createReceiversDictionaryOfASpending(newcurrency, tricount_currency, request, *newparticipants)
+    spending.receivers = MT.createReceiversDictionaryOfASpending(newcurrency, tricount_currency, request, *newparticipants)
  
     if newcurrency == tricount_currency:  
         spending.amount = newamount 
     else: 
-        spending.amount = convertSpendingCurrency(count.currency,newcurrency,newamount)
+        spending.amount = CC.convertSpendingCurrency(count.currency,newcurrency,newamount)
     
     #We update the calculations with the new spending.
-    update_tricount_after_new_spending(id_count, {newspender : float(newamount)}, spending.receivers)
+    MT.update_tricount_after_new_spending(id_count, {newspender : float(newamount)}, spending.receivers)
     spending.save()  
 
     return redirect(f'/count/{user}/tricount/{id_count}/spending/{id_spending}')

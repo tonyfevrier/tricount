@@ -5,14 +5,12 @@ from count.views import listecount
 from count.models import Counts, Spending
 from count.calculation import Tricount 
 from copy import deepcopy
-from count.tests_functions import UnitaryTestMethods
+from count.methods_for_tests import UnitaryTestMethods
 from datetime import date
 import json
 from bs4 import BeautifulSoup 
-from count.utils import convertSpendingCurrency
+from count.utils import CurrencyConversion as CC 
 
-
-# Create your tests here.
 
 class resolveUrl(TestCase):
     
@@ -568,7 +566,7 @@ class TestSpending(UnitaryTestMethods):
         self.create_a_spending(1,'dépense', 100,'GBP', 'Yann', ['Marine','Tony'], [50,50]) 
         spending = Spending.objects.first()
 
-        amount = convertSpendingCurrency('EUR','GBP',100)
+        amount = CC.convertSpendingCurrency('EUR','GBP',100)
         self.assertEqual(spending.amount, amount)
 
     def test_modify_a_spending(self):
@@ -592,7 +590,7 @@ class TestSpending(UnitaryTestMethods):
         response = self.modify_a_spending(1,2,"dépense", 100, 'USD',"Henri",['Henri','Yann'], [50,50]) 
         spending2 = Spending.objects.get(id = 2)
 
-        amount = convertSpendingCurrency('EUR','USD',100)
+        amount = CC.convertSpendingCurrency('EUR','USD',100)
         self.assertEqual(spending2.amount, amount)  
         self.assertListEqual(list(spending2.receivers.keys()), ['Henri', 'Yann'])
         self.assertEqual(spending2.receivers['Henri'], amount/2)
