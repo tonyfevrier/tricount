@@ -1,0 +1,169 @@
+$blue : rgb(71, 71, 199);
+$gray : gray;
+
+header {
+    .backtospending{
+        padding-left: 1em;
+    }
+    .header-title{
+        color: white;
+        padding: 0 2em ;
+        font-size: 1.2em;
+        font-weight: 500;
+    }
+}
+
+.title{
+    display: block;
+    padding-top: 2em;
+    margin: 0 1em ;
+    width: 94%;
+
+    &:focus{
+        outline:none;
+        border-color: $blue;
+        
+        &::placeholder{
+            color: $blue;
+            transform: translate(0,-20px);
+            font-size: 10px;
+            transition: 0.2s;
+        }
+    }
+}
+
+.counter{
+    color: gray;
+    text-align:end;
+    font-size: 0.8em;
+    width : 95%;
+}
+
+.notitle{
+    color:red;
+    margin: 0 1em ;
+    font-size: 0.8em;
+}
+
+.div-amount{
+    display: block;
+    margin: 0 1em;
+    width: 100%;
+
+    .amount{
+        padding-top: 2em;
+        width:85%;
+
+        &:focus{
+            outline:none;
+            border-color: $blue;
+            
+            &::placeholder{
+                color: $blue;
+                transform: translate(0,-20px);
+                font-size: 10px;
+                transition: 0.2s;
+            }
+        }
+    }
+
+    &::after{
+        content: "Payé par";
+        color: $gray;
+        display: block;
+        font-size: 10px; 
+        transform: translateY(2.5em);
+    }
+}
+
+%bords-des-inputs{
+    border-top:none;
+    border-left: none;
+    border-right: none;
+    border-bottom-color: $gray;
+}
+
+input{
+    @extend %bords-des-inputs;
+}
+
+.spender{
+    @extend %bords-des-inputs;
+    padding: 0.5em 0;
+    margin: 1.5em 1em 1em 1em;
+    width:94%;
+
+    &:focus{
+        border-color: $blue;
+        outline:none; 
+    }
+}
+
+.forwho{
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightgray;
+    padding: 1em;
+    text-transform: uppercase;
+    color: $gray;
+    font-size: 0.8em;
+    width:100%;
+
+    .div-forwho{
+        display: inline-block;
+
+        .toggle-checkboxes{
+            margin-right:1em;
+        }
+    }
+
+    .special-parameters{ 
+        background-color: transparent;
+        border:none;
+        color: $blue;
+    }
+}
+
+.div-receiver{
+    @extend %bords-des-inputs;
+    display: flex;
+    padding: 1em 0;
+    margin: 0 1em ;
+    align-items: center;  
+
+    label{
+        padding-left: 0.5em;
+    }
+
+    .amount-and-parts{
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        text-transform: uppercase;
+        color: $gray;
+
+        input{
+            width: 80px;
+        }
+    }
+
+    input{   
+        color:$gray;
+        outline: none;
+        border-color: $gray;
+    }
+}
+ 
+
+.submit-spending{ 
+    border: none;
+    background: transparent;
+
+    img{
+        position: absolute;
+        right : 1em;
+        top : 1em;
+    }
+}
+   

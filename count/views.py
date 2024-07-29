@@ -69,7 +69,8 @@ def listecount(request, user):
     Function rendering the list of tricounts of a single user.
     """ 
     counts = Counts.objects.all() 
-    items = []
+    items = [] 
+    #if not counts.exists():
     if len(counts) > 0:
         #We select only the counts whose the user is an admin.
         for item in counts: 

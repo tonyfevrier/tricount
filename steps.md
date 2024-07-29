@@ -332,7 +332,14 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `test fonctionnel : suppression de cette dépense vérification`
     - factorisation
             - reprendre une page en scss après l'avoir installé en path.
-            - factoriser : voir si je ne peux pas créer une fonction pour les findelements avec un nombre indéterminé d'élts à chercher.
+            - `factoriser : voir si je ne peux pas créer une fonction pour les findelements avec un nombre indéterminé d'élts à chercher.`
+            - `fonc click on successive links (arrivé à MultiUsers), et aussi utiliser find multiple dans user experience.` 
+            - `factoriser createspend et clickoncreate`
+            - `effacer bdd pour la tester et notamment le JS de spending`
+            - `remettre le dossier count/migrations qui a disparu et notamment le fichier init`
+            - `bug à comprendre : pourquoi le amountbox qui fonctionnait avant ne fonctionne plus`
+            - `bug repéré : quand on modifie le tricount, il faut effacer ce qu'il y a dans titre et description si on les modifie.`
+            - `voir comment avoir ls dans cmd`
     - coupler avec une API de date pour entrer la date de la dépense.
     - créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat)
     - factorisation des JS : créer un fichier de handler qu'on importe (des handlers sont réécrits plusieurs fois) quitte à leur ajouter des arguments. On pourrait faire un code par classe avec les handlers click, les handlers input etc.
@@ -357,6 +364,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
 
 
 # Bugs intéressants 
+    - Environnement et selenium : ne pas oublier d'installer un driver du navigateur utilisé pour les tests (geckodriver pour Firefox) et d'ajouter son chemin dans le path. Il faut aussi passer en option le chemin vers Firefox dans les tests.
     - TIME SEND KEYS : Après send_Keys, il faut laisser du temps pour que la page se charge.
     - URL : Faire bien attention à respecter le fait qu'il y ait ou non / dans les adresses (faire pareil que dans le path : si j'ai mis count/ dans le path il faut le mettre après dans les redirections) sinon on aura une réponse inappropriée ( 404 ou autre).
     - URL SELECTONE : la méthode selectone de BeautifoulSoup donne l'url sans / à la fin. Attention à ne pas oublier de le rajouter si nécessaire.
@@ -395,6 +403,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     -JS PREVENTDEFAULT 2 : quand on empêche l'event par défaut de submit, les inputs ne sont pas remis à 0 : cela implique que le texte précédemment tapé est toujours là.
     -HIDDEN FLEX INLINE : attention certains types de display empêchent le paramètre hidden de fonctionner. Le display = none est un bon remplaçant.
     - A VERSUS INPUT : Les <a> ne sont pas prévus pour encapsuler des input : quand je mets un input dans un <a>, si je mets une value par défaut, lorsque je soumets le formulaire, cette valeur n'est pas envoyée à la soumission.
+    - JS LOCAL VARIABLES IN IF : les éléments définis dans un if n'existent que dans ce if. En particulier, s'il y a des handlers qui les utilisent, il faut les mettre dans le if.
+    - SASS EXTEND : Attention il semble que si on utilise extend dans un élement, sass copie les attributs des enfants aussi. Cela peut mener à des absurdités : sélecteur avec des parents n'ayant pas l'enfant qui leur est associé. Pour parer à ça, on peut créer un élément fictif qui n'est pas dans le html et qui n'aura pas d'enfant et utiliser @extend de cet élément.
 
 # Mes difficultés principales
 

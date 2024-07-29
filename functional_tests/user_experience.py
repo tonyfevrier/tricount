@@ -20,9 +20,7 @@ class Click():
             - email (str)
             - password (str)
         """
-        user = self.browser.find_element(By.NAME, "username")
-        mail = self.browser.find_element(By.NAME, "email")
-        pwd = self.browser.find_element(By.NAME, "password")
+        user,mail,pwd = self.find_multiple_elements(By.NAME,"username","email","password")
         submit = self.browser.find_element(By.CLASS_NAME, "submit")
 
         user.send_keys(username)
@@ -45,9 +43,8 @@ class Click():
             -password (str)
         """
         self.click_on_a_link(By.CLASS_NAME, "login")
-
-        user = self.browser.find_element(By.NAME, "username") 
-        pwd = self.browser.find_element(By.NAME, "password")
+ 
+        user,pwd = self.find_multiple_elements(By.NAME,"username","password")
         submit = self.browser.find_element(By.CLASS_NAME, "submit")
 
         user.send_keys(username) 
@@ -92,6 +89,33 @@ class Click():
         link.send_keys(Keys.ENTER)
         time.sleep(2) 
 
+    def click_on_successive_links(self, literal, *names):
+        """
+        Function which clicks on several links
+
+        Inputs : 
+            - literal (object): the html attribute to find the element.
+            - names (list[str]) : the names of the attribute.
+        """
+        for name in names:
+            self.click_on_a_link(literal, name)
+    
+    def find_multiple_elements(self, literal, *names):
+        """
+        Function which return multiple elements given by their names
+
+        Inputs : 
+            - literal (object): the attribute to get the element (example : By.NAME) 
+            - names (list[str]): a sequences of names associated with the literal            
+        
+        Outputs : 
+            - elemnts (tuple[object]) : the tuple containing the elements.
+        """
+        elements = []
+        for name in names:
+            elements.append(self.browser.find_element(literal, name))
+        return tuple(elements)
+
     def add_participants(self,*participants):
         """
         Function which adds participants when we try to create a new tricount.
@@ -117,15 +141,14 @@ class Click():
             - currency (str)
             - category (str)
         """
-
-        self.click_on_a_link(By.CLASS_NAME, "choose-currency")
-        self.click_on_a_link(By.CLASS_NAME,currency)
-
-        titlebox = self.browser.find_element(By.NAME,"newtricount_title")
-        passwordbox = self.browser.find_element(By.NAME,"newtricount_pwd")
-        descriptionbox = self.browser.find_element(By.NAME,"newtricount_description")  
+ 
+        self.click_on_successive_links(By.CLASS_NAME,"choose-currency",currency)
+        titlebox,passwordbox,descriptionbox,submitbox = self.find_multiple_elements(By.NAME,
+                                                                                    "newtricount_title",
+                                                                                    "newtricount_pwd",
+                                                                                    "newtricount_description",
+                                                                                    "submit")
         categorybox = self.browser.find_element(By.ID,f"{category}") 
-        submitbox = self.browser.find_element(By.NAME,"submit")
         
         titlebox.send_keys(title)
         descriptionbox.send_keys(description) 
@@ -149,9 +172,8 @@ class Click():
             - participants (list[str])
         """
 
-        #Clicks to add a tricount 
-        self.click_on_a_link(By.ID,'id_newcount') 
-        self.click_on_a_link(By.ID,'countfromzero') 
+        #Clicks to add a tricount  
+        self.click_on_successive_links(By.ID,'id_newcount','countfromzero')
 
         #Enter the participants 
         self.add_participants(*participants) 
@@ -168,10 +190,8 @@ class Click():
             - password (str) 
         """
         self.click_on_a_link(By.ID,'id_newcount')  
-        self.click_on_a_link(By.CLASS_NAME,"clonecount") 
-        tricount_title = self.browser.find_element(By.CLASS_NAME,"tricount-title")
-        pwd = self.browser.find_element(By.CLASS_NAME,"password")
-        submit = self.browser.find_element(By.CLASS_NAME,"pwdsubmit")
+        self.click_on_a_link(By.CLASS_NAME,"clonecount")  
+        tricount_title,pwd,submit = self.find_multiple_elements(By.CLASS_NAME,"tricount-title","password","pwdsubmit")
         tricount_title.send_keys(title)
         pwd.send_keys(password)
         submit.send_keys(Keys.ENTER)
@@ -196,6 +216,7 @@ class Click():
         #Modification of the input text elements
         for classname in modified_elements.keys():
             element = self.browser.find_element(By.CLASS_NAME, classname)
+            self.clear_registration_inputs(element)
             element.send_keys(modified_elements[classname])
         
         #Modification of participants: 
@@ -213,6 +234,7 @@ class Click():
         link_spending.send_keys(Keys.ENTER)
         time.sleep(2)
 
+
     def create_a_spending(self,title,amount,payer,receivers,currency):
         """
         Function creating a new spending
@@ -223,16 +245,14 @@ class Click():
             - payer (str)
             - receivers (list[str])
         
-        """
-        self.click_on_a_link(By.CLASS_NAME, 'choose-currency')
-        self.click_on_a_link(By.CLASS_NAME, currency)
-        
-        titlebox = self.browser.find_element(By.NAME, 'title')
-        amountbox = self.browser.find_element(By.NAME, 'amount')
-        spenderbox = self.browser.find_element(By.NAME, 'spender')
-        receiverbox = self.browser.find_elements(By.NAME, 'receiver')  
-        submitbox = self.browser.find_element(By.NAME,'submit')  
-
+        """ 
+        self.click_on_successive_links(By.CLASS_NAME,'choose-currency',currency) 
+        titlebox,amountbox,spenderbox,submitbox = self.find_multiple_elements(By.NAME,
+                                                                                          'title',
+                                                                                          'amount',
+                                                                                          'spender',
+                                                                                         'submit')  
+        receiverbox = self.browser.find_elements(By.NAME,'receiver')
         titlebox.send_keys(title)
         amountbox.send_keys(amount)
         spenderbox.send_keys(payer)  
@@ -243,6 +263,10 @@ class Click():
 
         submitbox.send_keys(Keys.ENTER)
         time.sleep(2)
+
+    def click_and_create_a_spending(self,title,amount,payer,receivers,currency):
+        self.click_on_a_link(By.CLASS_NAME,'new-spending')
+        self.create_a_spending(title,amount,payer,receivers,currency)
 
     def modify_a_spending(self,modified_elements,*receivers):
         """
@@ -315,8 +339,7 @@ class Check():
         price = self.browser.find_element(By.CLASS_NAME,"price-spending")
         payer = self.browser.find_element(By.CLASS_NAME,"payer")
         participants = self.browser.find_elements(By.CLASS_NAME,"participant-name")
-        amounts = self.browser.find_elements(By.CLASS_NAME,"participant-amount")
-        Date = self.browser.find_element(By.CLASS_NAME,"date")
+        amounts = self.browser.find_elements(By.CLASS_NAME,"participant-amount") 
  
         self.assertEqual(title.text.lower(), titre)
         self.assertEqual(price.text, prix)
