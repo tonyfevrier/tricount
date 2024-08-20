@@ -24,6 +24,29 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def tearDown(self): 
         self.browser.quit()
 
+    """ def test_input(self): 
+        url = self.live_server_url  
+        click = user_experience.Click(self.browser, url)
+        self.browser.get(url + "/welcome/")
+
+        click.register_someone("Tony","tony.fevrier62@gmail.com", "password")
+        self.assertEqual(self.browser.current_url, url + "/login/")
+
+        #Il se connecte et atterrit sur la liste des tricounts
+        click.login_someone("Tony", "password")
+        self.assertEqual(self.browser.current_url, url + "/count/Tony")
+
+        #Le visiteur arrive sur la page il voit le titre.
+        self.assertIn('Tricount',self.browser.title)
+
+        #Il voit la liste des tricount présents ou absents et clique sur le lien pour créer un nouveau tricount  
+        click.click_on_successive_links(By.ID,'id_newcount','countfromzero')     
+        self.assertEqual(self.browser.current_url, url + '/count/Tony/newcount') 
+
+        #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
+        click.add_tricount_characteristics('Tricount 1', 'pwd1', 'Description 1',"EUR", 'trip') """
+
+
     def test_tricount_creation_and_delation(self):
         #Le visiteur arrive sur la page, il se crée un compte et se logge et est redirigé vers la page de login
         url = self.live_server_url  

@@ -2,11 +2,10 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from count.models import Counts, Spending
-from count.utils import CurrencyConversion as CC, ModifyTricount as MT, String  
-from count import calculation
+from count.utils import CurrencyConversion as CC, ModifyTricount as MT, String   
 from datetime import date
 from count.calculation import *
-import json, requests
+import json
 
 def welcome(request):  
     return render(request, "welcome.html")

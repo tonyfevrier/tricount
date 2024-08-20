@@ -88,11 +88,10 @@ button, a{
     
 }
 
-input[type="radio"].newtricount_category{
-    /*display: none;*/
+ input[type="radio"].newtricount_category{ 
     opacity: 0;
-    width: 0;
-}
+    width: 0.01;
+} 
 
 input[type="radio"].newtricount_category + label{
     margin:0.2em 0.2em;
@@ -108,10 +107,10 @@ input[type="radio"].newtricount_category:first-child + label{
     margin-left: 0;
 }
 
-input[type="radio"].newtricount_category:checked + label {
+ input[type="radio"].newtricount_category:checked + label {
     background-color: var(--color);
     color: white;
-}
+} 
 
 
 

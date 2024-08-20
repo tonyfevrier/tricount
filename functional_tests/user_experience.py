@@ -148,11 +148,12 @@ class Click():
                                                                                     "newtricount_pwd",
                                                                                     "newtricount_description",
                                                                                     "submit")
-        categorybox = self.browser.find_element(By.ID,f"{category}") 
-        
+        categorybox = self.browser.find_element(By.ID,f"{category}")  
+
         titlebox.send_keys(title)
         descriptionbox.send_keys(description) 
-        passwordbox.send_keys(password) 
+        passwordbox.send_keys(password)  
+  
         categorybox.click()
 
         #He chooses to go on the currency page: 

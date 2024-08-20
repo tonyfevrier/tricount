@@ -331,7 +331,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `vue pour la suppression de la dépense + test unitaire associé`
             - `test fonctionnel : suppression de cette dépense vérification`
     - factorisation
-            - reprendre une page en scss après l'avoir installé en path.
+            - `reprendre une page en scss après l'avoir installé en path.`
             - `factoriser : voir si je ne peux pas créer une fonction pour les findelements avec un nombre indéterminé d'élts à chercher.`
             - `fonc click on successive links (arrivé à MultiUsers), et aussi utiliser find multiple dans user experience.` 
             - `factoriser createspend et clickoncreate`
@@ -340,9 +340,32 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `bug à comprendre : pourquoi le amountbox qui fonctionnait avant ne fonctionne plus`
             - `bug repéré : quand on modifie le tricount, il faut effacer ce qu'il y a dans titre et description si on les modifie.`
             - `voir comment avoir ls dans cmd`
-    - coupler avec une API de date pour entrer la date de la dépense.
-    - créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat)
+    - `créer un fichier de requirements.txt pour installer l'environnement tricount et installer avec ce fichier. Suppremier countenv et le recréer.`
+    - coupler avec une API de date pour entrer la date de la dépense : utiliser timezone plutôt
+    - créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat). Faire en sorte qu'il compile automatiquement tous les scss avant le lancement.
+        - `bug voir pourquoi rien ne se passe`
+        - `bug : pb avec process il ne semble pas trouver le fichier scss lorsque j'exécute ma commande`
+        - comprendre pourquoi tous les tests ne sont pas lancés
+        - comprendre comment régler le bug stderr.decode
+        - `tests fonctionnels à débugger : voir chatgpt, stackoverflow, afficher page source pour voir si je le vois, essayer de le mettre plus haut dans la vue pour voir si on arrive à le cliquer. Créer un autre élément du même type pour voir ce qu'on arrive à cliquer. Voir docu selenium, comment cliquer un input radio, les autres tests bloquent où?`
+            `bug lié à la classe newtricountcategory (soit pb css, soit js)`
+        - il faudra peut-être utiliser await pour bien attendre que les tests précédents se finissent avant qu'un autre ne se lance.
+        - voir ce que propose django pour lancer tous les tests car il doit y avoir qqch.
+    - faire disparaître le module JSONField et utiliser celui de django
+    - réécrire les url pour qu'on ait une page d'accueil directement à l'url du liveserver.
+    - améliorer du login
+        quand on s'enregistre, on tombe sur son compte et pas sur login
+        css moche et peu visible
+        si échec d'authenfication, on devrait avoir des messages d'erreurs
+    - reprendre mes fichiers html, écrire un layout avec des blocs comme dans mes projets edX (si c'est possible)
+    - modifier mes tests unitaires en créant un setup permettant d'enregistrer et logger systématiquement qqun (tests unitaires et peut-être aussi fonctionnels)
     - factorisation des JS : créer un fichier de handler qu'on importe (des handlers sont réécrits plusieurs fois) quitte à leur ajouter des arguments. On pourrait faire un code par classe avec les handlers click, les handlers input etc.
+        tags url pour remplacer les grosses url
+        améliorer le js avec query selector pour plus de lisibilité
+        Nettoyer les boutons qui ne servent à rien
+        ajouter l'event domcontentloaded
+        améliorer le css des éléments boutons style loupe, le + du newtricount, les différences de polices quand clic sur +, le padding des messages d'erreurs, le CSS de confirmer supprimer le tricount...
+    - l'affichage en pound a trop de chiffres après la virgule
     - pourquoi le clic sur un tricount déjà créé est si lent? Améliorer:
     - branche pour le chat (suite)
             `copier l'html et voir si ça marche`
@@ -352,6 +375,16 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             apparition d'une cloche si on n'est pas dans le chat.
             promesse dans le cas où qqun écrit : affichage qu'un utilisateur écrit.
             voir comment lancer automatiquement app.py (lorsqu'un utilisateur entre dans le chat? ou lorsqu'un tricount est créé?) (peut-être qu'on le lançait juste pour voir les affichages et qu'on n'a pas besoin de le lancer.)
+    - faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
+    - pour le projet edX:
+        regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.
+        faire les factorisations ci-dessus pour améliorer mon appli
+        enlever les user des url et utiliser le request.user.s
+        apprivoiser les django channels pour intégrer le chat
+        terminer le fichier de lancement de mes tests ou le remplacer par un fichier yaml et montrer que j'ai apprivoisé la cicd dans mon projet (juste la CI pour les copyright).
+        appliquer les préceptes de sécurité évoqués dans leur dernière vidéo
+        réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)
+        améliorer pour la pep8 : noms de fonctions en minuscule et _
             
     -modification des dépenses déjà entrées :
     -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`

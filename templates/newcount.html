@@ -15,9 +15,19 @@
         <a href="/count/{{user}}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <div class = "titre">Nouveau tricount</div>
     </header> 
-    <main>
+    <main> 
+        <!--<form action="">
+            <div class = "test" >
+                <input class = "iden1" type="radio" id="iden1" name="iden1" value="trip">
+                <label for="iden1">Voyage</label>
+                <input class = "iden1" type="radio" id="iden2" name="iden1" value="coloc">
+                <label for="iden2">Coloc</label> 
+            </div>
+        </form>-->
+
         <form method="POST" class = "newtricount" action="/count/{{user}}/newcount/addcount">
             {% csrf_token %}
+
             <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title">  
 
             {% if titre == False %}
