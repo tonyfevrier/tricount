@@ -1,35 +1,22 @@
 from django.db import models
-#from jsonfield import JSONField
-from datetime import date
-
+from django.utils import timezone
 
 # Create your models here.
 
-""" class Participants(models.Model):
-    name = models.TextField(default='') 
-    number = models.IntegerField(default=0) """
-
-""" class Counts(models.Model):
-    title = models.TextField(default='')
-    description = models.TextField(default='')
-    category = models.TextField(default='')
-    participants = models.ManyToManyField(Participants) """
-
 class Counts(models.Model):
-    #data is the object containing credits useful for calculations of equilibria.
     title = models.TextField(default='')
     password = models.TextField(default='')
     description = models.TextField(default='')
     currency = models.TextField(default = '')
     category = models.TextField(default='')
-    participants = models.JSONField(default=[]) #JSONField(default=dict)
-    data = models.TextField(default='') 
-    admins = models.JSONField(default=[]) #JSONField(default = dict)
+    participants = models.JSONField(default=[]) 
+    data = models.TextField(default='') # contains credits for calculations of equilibria.
+    admins = models.JSONField(default=[]) 
 
 class Spending(models.Model):
     title = models.TextField(default='')
     amount = models.FloatField(default=0.)
     payer = models.TextField(default='')
-    receivers = models.JSONField(default=[]) #JSONField(default = dict)
+    receivers = models.JSONField(default=[]) 
     number = models.IntegerField(default = 0)
-    date = models.DateField(default = date(2023,1,1)) 
+    date = models.DateField(default = timezone.now) 

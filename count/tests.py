@@ -44,14 +44,14 @@ class HomepageTest(UnitaryTestMethods):
         response = self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
         
         self.assertEqual(User.objects.all().count(),1)
-        self.assertRedirects(response, '/login/')
+        self.assertRedirects(response, '/count/Tony')
 
         #We tries to create a user with the same username and email.
         response = self.register_someone('Tony','pwd', 'tony.fevrier@gmail.com')
         response = self.register_someone('Dulcinée', 'pwd','tony.fevrier62@gmail.com')
 
         self.assertEqual(User.objects.all().count(),1)
-        self.assertRedirects(response, '/welcome/')
+        self.assertRedirects(response, '/')
 
 
     def test_login(self):

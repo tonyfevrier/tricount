@@ -1,18 +1,17 @@
-from django.shortcuts import render,redirect 
+from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.urls import reverse
 from django.contrib.auth.models import User, auth
 from count.models import Counts, Spending
-from count.utils import CurrencyConversion as CC, ModifyTricount as MT, String   
-from datetime import date
+from count.utils import CurrencyConversion as CC, ModifyTricount as MT, String    
 from count.calculation import *
 import json
 
 def welcome(request):  
     return render(request, "welcome.html")
 
-def login(request): 
-    return render(request, "login.html")
-    
+def loginpage(request): 
+    return render(request, "login.html")    
 
 def register(request):
     """
@@ -25,29 +24,31 @@ def register(request):
  
     if User.objects.filter(username = username).exists():
         messages.info(request, 'This username already exists')
-        return redirect('/welcome/')
+        return redirect(reverse('welcome'))
     elif User.objects.filter(email = email).exists(): 
         messages.info(request, 'This email already exists')
-        return redirect('/welcome/')
+        return redirect(reverse('welcome'))
     else:
         user = User.objects.create_user(username = username, password = password, email = email)
         user.save()
-        return redirect('/login/')
+        return redirect(f'/count/{username}')
 
-def log(request):
+def login(request):
     """
     Function logging the user and redirecting to the list of counts page of the corresponding user. 
     """ 
 
     username = request.POST["username"]
     password = request.POST["password"]
-
+    
     user = auth.authenticate(username = username, password = password) 
+
     if user is not None:
         auth.login(request,user)
-        return redirect(f'/count/{username}') #l'adresse devra être spécifique à l'utilisateur.
+        return redirect(f'/count/{username}')  
     else:
-        return redirect('/login/')
+        messages.info(request, 'Invalid credentials')
+        return redirect(reverse('welcome'))
 
 def logout(request,user):
     """
@@ -61,7 +62,7 @@ def delog(request,user):
     Function which is delogging the user
     """
     auth.logout(request)
-    return redirect('/welcome/')
+    return redirect(reverse(loginpage))
 
 def listecount(request, user): 
     """
@@ -249,7 +250,7 @@ def addspending(request,user ,id_count):
             amount = CC.convertSpendingCurrency(tricount_currency,currency,amount)
     
         dico_receivers = MT.createReceiversDictionaryOfASpending(currency, tricount_currency, request, *receivers)
-        Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, number = id_count, date = date.today())
+        Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, number = id_count)
         MT.update_tricount_after_new_spending(id_count, {spender : float(amount)}, dico_receivers)
         
         return redirect(f'/count/{user}/tricount/{id_count}')

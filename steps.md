@@ -341,18 +341,22 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `bug repéré : quand on modifie le tricount, il faut effacer ce qu'il y a dans titre et description si on les modifie.`
             - `voir comment avoir ls dans cmd`
     - `créer un fichier de requirements.txt pour installer l'environnement tricount et installer avec ce fichier. Suppremier countenv et le recréer.`
-    - coupler avec une API de date pour entrer la date de la dépense : utiliser timezone plutôt
-    - créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat). Faire en sorte qu'il compile automatiquement tous les scss avant le lancement.
+    - `coupler avec une API de date pour entrer la date de la dépense : utiliser timezone plutôt`
+    - `créer un fichier de lancement de tous les tests fonctionnels avec subprocess (voir run.py pour le chat). Faire en sorte qu'il compile automatiquement tous les scss avant le lancement.`
         - `bug voir pourquoi rien ne se passe`
         - `bug : pb avec process il ne semble pas trouver le fichier scss lorsque j'exécute ma commande`
-        - comprendre pourquoi tous les tests ne sont pas lancés
-        - comprendre comment régler le bug stderr.decode
+        - `comprendre pourquoi tous les tests ne sont pas lancés`
+        - `comprendre comment régler le bug stderr.decode`
         - `tests fonctionnels à débugger : voir chatgpt, stackoverflow, afficher page source pour voir si je le vois, essayer de le mettre plus haut dans la vue pour voir si on arrive à le cliquer. Créer un autre élément du même type pour voir ce qu'on arrive à cliquer. Voir docu selenium, comment cliquer un input radio, les autres tests bloquent où?`
             `bug lié à la classe newtricountcategory (soit pb css, soit js)`
-        - il faudra peut-être utiliser await pour bien attendre que les tests précédents se finissent avant qu'un autre ne se lance.
-        - voir ce que propose django pour lancer tous les tests car il doit y avoir qqch.
-    - faire disparaître le module JSONField et utiliser celui de django
-    - réécrire les url pour qu'on ait une page d'accueil directement à l'url du liveserver.
+        - `il faudra peut-être utiliser await pour bien attendre que les tests précédents se finissent avant qu'un autre ne se lance.`
+        - `voir ce que propose django pour lancer tous les tests car il doit y avoir qqch.`
+    - `faire disparaître le module JSONField et utiliser celui de django`
+    - réécrire les url pour qu'on ait une page d'accueil directement à l'url du liveserver. 
+        modifier le css des boutons a de la page welcome et login
+        `changer les adresses welcome/qqch en qqch`
+        `rediriger register et login vers la page des comptes si ça a marché`
+        `modifier les tests pr qu'ils passent` 
     - améliorer du login
         quand on s'enregistre, on tombe sur son compte et pas sur login
         css moche et peu visible
@@ -385,6 +389,9 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         appliquer les préceptes de sécurité évoqués dans leur dernière vidéo
         réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)
         améliorer pour la pep8 : noms de fonctions en minuscule et _
+        réfléchir à utiliser le django cache framework : quelles parties pourraient s'améliorer en termes de performance? Lesquelles je ne voudrais pas recharger?
+        sécurité : mettre ma clé d'API non pas dans le code source mais dans une variable d'environnement ou la sécuriser.
+        sécurité : introduire le hachage des pwd dans mon application
             
     -modification des dépenses déjà entrées :
     -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`

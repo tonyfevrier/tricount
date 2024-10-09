@@ -24,39 +24,17 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def tearDown(self): 
         self.browser.quit()
 
-    """ def test_input(self): 
+    def test_tricount_creation_and_delation(self):
+        # Le visiteur arrive sur la page, il se crée un compte et se logge et est redirigé vers la page de son compte
         url = self.live_server_url  
         click = user_experience.Click(self.browser, url)
-        self.browser.get(url + "/welcome/")
+        self.browser.get(url)
 
         click.register_someone("Tony","tony.fevrier62@gmail.com", "password")
-        self.assertEqual(self.browser.current_url, url + "/login/")
-
-        #Il se connecte et atterrit sur la liste des tricounts
-        click.login_someone("Tony", "password")
         self.assertEqual(self.browser.current_url, url + "/count/Tony")
 
-        #Le visiteur arrive sur la page il voit le titre.
-        self.assertIn('Tricount',self.browser.title)
-
-        #Il voit la liste des tricount présents ou absents et clique sur le lien pour créer un nouveau tricount  
-        click.click_on_successive_links(By.ID,'id_newcount','countfromzero')     
-        self.assertEqual(self.browser.current_url, url + '/count/Tony/newcount') 
-
-        #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
-        click.add_tricount_characteristics('Tricount 1', 'pwd1', 'Description 1',"EUR", 'trip') """
-
-
-    def test_tricount_creation_and_delation(self):
-        #Le visiteur arrive sur la page, il se crée un compte et se logge et est redirigé vers la page de login
-        url = self.live_server_url  
-        click = user_experience.Click(self.browser, url)
-        self.browser.get(url + "/welcome/")
-
-        click.register_someone("Tony","tony.fevrier62@gmail.com", "password")
-        self.assertEqual(self.browser.current_url, url + "/login/")
-
-        #Il se connecte et atterrit sur la liste des tricounts
+        # Il se déconnecte puis se connecte et atterrit sur la liste des tricounts
+        click.logout_someone_from_listecount_page()
         click.login_someone("Tony", "password")
         self.assertEqual(self.browser.current_url, url + "/count/Tony")
 
@@ -68,16 +46,17 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertEqual(mail.text, "tony.fevrier62@gmail.com")
 
         click.click_on_a_link(By.CLASS_NAME, "logout")
-        self.assertEqual(self.browser.current_url, url + "/welcome/")
+        self.assertEqual(self.browser.current_url, url + "/loginpage/")
 
         #Il tente d'enregistrer un nouveau compte avec le même username puis avec le même mail mais est refusé
+        click.click_on_a_link(By.CLASS_NAME, "welcome")
         click.register_someone("Tony", "tony@gmail.com","pwd")
-        self.assertEqual(self.browser.current_url, url + "/welcome/")
+        self.assertEqual(self.browser.current_url, url + "/")
 
         click.register_someone("Dulcinée", "tony.fevrier62@gmail.com","pwd")
-        self.assertEqual(self.browser.current_url, url + "/welcome/") 
+        self.assertEqual(self.browser.current_url, url + "/") 
+
         #Il tente d'envoyer le formulaire sans username puis sans email et password, le formulaire n'est pas envoyé et des éléments apparaissent
-        
         click.register_someone("", "tony.fevrier6@gmail.com","pwd")
         userlacking = self.browser.find_element(By.CLASS_NAME,"userlacking")
         self.assertEqual(userlacking.text, "A username is needed") 
@@ -95,14 +74,20 @@ class NewVisitorTest(StaticLiveServerTestCase):
         userlacking = self.browser.find_element(By.CLASS_NAME,"userlacking")
 
         self.assertEqual(userlacking.text, "A username is needed") 
-        self.assertEqual(self.browser.current_url, url + "/login/")
+        self.assertEqual(self.browser.current_url, url + "/loginpage/")
         
         click.clear_registration_inputs(self.browser.find_element(By.NAME, "username"),self.browser.find_element(By.NAME, "password"))
         click.login_someone("Tony", "")
         pwdlacking = self.browser.find_element(By.CLASS_NAME,"pwdlacking")
         self.assertEqual(pwdlacking.text, "A password is needed") 
 
+        # Il tente de s'identifier avec de faux identifiants
+        click.login_someone("Jean","password")
+        message = self.browser.find_element(By.CLASS_NAME, "messages")
+        self.assertEqual(message.text, 'Invalid credentials')
+
         #Il met enfin ses bons identifiants.
+        click.clear_registration_inputs(self.browser.find_element(By.NAME, "username"),self.browser.find_element(By.NAME, "password"))
         click.login_someone("Tony", "password") 
 
         #Le visiteur arrive sur la page il voit le titre.

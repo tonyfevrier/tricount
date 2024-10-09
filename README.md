@@ -21,3 +21,4 @@
 - html en block
 - request user pas dans les url
 - sécurité?
+- amélioration de la qualité du code, du js notamment (comparer au commit 09ac9ded132ddc7bc4d1e6480025236b5c7cb261)

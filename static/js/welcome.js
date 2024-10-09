@@ -2,12 +2,13 @@ let username = document.querySelector('.username');
 let email = document.querySelector('.email');
 let password = document.querySelector('.password');
 let submit = document.querySelector('.submit');
-
+ 
 submit.addEventListener("click", blank);
 
 let userlacking = document.createElement('p');
 let emaillacking = document.createElement('p');
 let pwdlacking = document.createElement('p');
+
 userlacking.textContent = "A username is needed";
 emaillacking.textContent = "An email is needed";
 pwdlacking.textContent = "A password is needed";
@@ -33,7 +34,8 @@ function blank(event){
         userlacking.hidden = true;
     }
 
-    if (email.value.length == 0){
+    
+    if (email.style.display != 'none' && email.value.length == 0){
         event.preventDefault(); 
         emaillacking.hidden = false;
     } else {
@@ -47,5 +49,5 @@ function blank(event){
         pwdlacking.hidden = true;
     }
 }
- 
+  
  

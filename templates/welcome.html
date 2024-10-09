@@ -11,10 +11,10 @@
 </head>
 <body>
     <header>
-        <a class = "welcome" href="/welcome/"><button>Créer un compte</button></a>
-        <a class = "login" href="/login/"><button>Se connecter</button></a>
+        <a class = "welcome" href="{% url 'welcome'%}">Créer un compte</a>
+        <a class = "login" href="{% url 'loginpage'%}">Se connecter</a>
     </header>
-    <form action="/welcome/register" method = "post">
+    <form action="/register/" method = "post">
         {% csrf_token %}
         <input class = "username" type="text" placeholder="Username" name = "username">
         <input class = "email" type="email" placeholder="email" name = "email">
