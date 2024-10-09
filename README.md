@@ -19,6 +19,7 @@
 # Improvement thanks to the formation
 
 - html en block
-- request user pas dans les url
+- request user pas dans les url, 
+- tags django url et reverse pour éviter url en bruts 
 - sécurité?
 - amélioration de la qualité du code, du js notamment (comparer au commit 09ac9ded132ddc7bc4d1e6480025236b5c7cb261)

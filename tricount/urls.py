@@ -20,10 +20,6 @@ from count import urls as list_urls
 from count import views as countviews
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('count/', include(list_urls)),
-    path('', countviews.welcome, name = 'welcome'),
-    path('register/', countviews.register, name = 'register'),
-    path('loginpage/', countviews.loginpage, name = 'loginpage'),
-    path('login/', countviews.login, name = 'login'),
+    path('admin/', admin.site.urls), 
+    path('', include(list_urls)),  
 ]

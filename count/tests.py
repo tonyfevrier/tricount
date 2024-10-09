@@ -18,7 +18,7 @@ class resolveUrl(TestCase):
         """
         Test if an url is associated with the good view function.
         """
-        found = resolve('/count/')
+        found = resolve('/count')
 
         self.assertEqual(found.func,listecount) 
 
@@ -31,7 +31,7 @@ class HomepageTest(UnitaryTestMethods):
         """
         Test if the title appears in the page.
         """
-        response = self.client.get('/count/') 
+        response = self.client.get('/count') 
 
         self.assertIn(b'Tricount',response.content)
         self.assertTemplateUsed(response,'index.html')
@@ -45,13 +45,14 @@ class HomepageTest(UnitaryTestMethods):
         response = self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
         
         self.assertEqual(User.objects.all().count(),1)
-        self.assertRedirects(response, '/count/')
+        self.assertRedirects(response, '/count')
 
         #We tries to create a user with the same username and email.
         response = self.register_someone('Tony','pwd', 'tony.fevrier@gmail.com')
         response = self.register_someone('Dulcinée', 'pwd','tony.fevrier62@gmail.com')
 
         self.assertEqual(User.objects.all().count(),1)
+        print(response)
         self.assertRedirects(response, '/')
 
 
@@ -95,7 +96,7 @@ class NewcountTest(UnitaryTestMethods):
         """
         Test that when we click on "create a tricount", the good template is used.
         """ 
-        response = self.client.get('/count/')
+        response = self.client.get('/count')
         link = self.extract_and_click_on_link(response.content , 'countfromzero')
         response2 = self.client.get(link)
 
@@ -122,7 +123,7 @@ class NewcountTest(UnitaryTestMethods):
         self.assertEqual("Description 1", count.description)
         self.assertEqual("Voyage", count.category)
         self.assertEqual("EUR", count.currency)
-        self.assertRedirects(response, '/count/tricount/1')  
+        self.assertRedirects(response, '/tricount/1')  
 
     def test_lack_title_newcountinputs(self):
         """
@@ -198,20 +199,20 @@ class NewcountTest(UnitaryTestMethods):
         self.create_a_tricount("tricount 2", "pwd", "description 2","EUR", "Coloc", "Roberto",'Alfredo')
         
         #We go on the list of the tricounts
-        response = self.client.get('/count/') 
+        response = self.client.get('/count') 
         link = self.extract_and_click_on_link(response.content , 'link-tricount-2')  
 
-        self.assertEqual(link,'/count/tricount/2')
+        self.assertEqual(link,'/tricount/2')
 
         link = self.extract_and_click_on_link(response.content , 'link-tricount-1')   
 
-        self.assertEqual(link,'/count/tricount/1') 
+        self.assertEqual(link,'/tricount/1') 
 
     def test_currencies_passedto_currencyhtml(self):
         """
         Test if the currencies are printed in the currency page.
         """
-        response = self.client.get('/count/newcount/currency')
+        response = self.client.get('/choosecurrency')
         soup = BeautifulSoup(response.content,'html.parser')
  
         self.assertIn("EUR", str(soup))
@@ -260,14 +261,14 @@ class NewcountTest(UnitaryTestMethods):
         self.assertEqual(count.title, "tricount2")
         self.assertEqual(count.description, "Autre")
         self.assertListEqual(count.participants, ["Tony", "Henri", "Jean", "Robert"])
-        self.assertRedirects(response,'/count/tricount/1')
+        self.assertRedirects(response,'/tricount/1')
 
     def test_delete_tricount(self):
         """
         Test the deletion of a tricount : it must disappear from the database
         """
         self.create_a_tricount("tricount1",'pwd',"description","EUR","Voyage", "Tony", "Henri", "Jean") 
-        self.client.get("/count/tricount/1/deletecount")
+        self.client.get("/deletecount/1")
         count = Counts.objects.all()
         self.assertEqual(len(count), 0)
 
@@ -429,7 +430,7 @@ class TestSpending(UnitaryTestMethods):
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Tony", "Henri", "Jean")
         response = self.create_a_spending(1,'dépense1', 100,'EUR', 'Tony', ['Henri','Jean','Tony'], [50,50,0])  
 
-        self.assertRedirects(response,'/count/tricount/1') 
+        self.assertRedirects(response,'/tricount/1') 
     
     def test_bdd_newspending_inputs(self):
         """
@@ -454,7 +455,7 @@ class TestSpending(UnitaryTestMethods):
         Test if when we don't complete entirely a spending, no new spending appear in the database.
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann")
-        response = self.client.get('/count/tricount/1/spending') 
+        response = self.client.get('/newspending/1') 
         nb_spending = Spending.objects.count()
         self.extract_and_click_on_link(response.content , 'backtospending')  
 
@@ -592,7 +593,7 @@ class TestSpending(UnitaryTestMethods):
         self.assertEqual(spending.amount, 180) 
         self.assertEqual(spending.payer, 'Tony') 
         self.assertDictEqual(spending.receivers, {"Henri":90, "Yann":90})
-        self.assertRedirects(response,'/count/tricount/1/spending/1')
+        self.assertRedirects(response,'/spending-details/1/1')
 
         #We create a second spending and only modify the currency
         self.login_someone('Henri', '1234')

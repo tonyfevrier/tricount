@@ -10,7 +10,7 @@ import json
 def welcome(request):  
     return render(request, "welcome.html")
 
-def loginpage(request): 
+def log(request): 
     return render(request, "login.html")    
 
 def register(request):
@@ -63,7 +63,7 @@ def delog(request):
     Function which is delogging the user
     """
     auth.logout(request)
-    return redirect(reverse('loginpage'))
+    return redirect(reverse('login'))
 
 def listecount(request): 
     """

@@ -24,7 +24,7 @@
             <p class = "counter">0/50</p>
             <div class = "div-amount">
                 <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount"> 
-                <a href="/count/newcount/currency?referer=/count/tricount/{{idcount}}/spending" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
+                <a href="/choosecurrency?referer=/newspending/{{idcount}}" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
             </div>
             <select class = "spender" name="spender" id="spender">
                 {% for participant in participants%}
