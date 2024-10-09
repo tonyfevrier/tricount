@@ -31,7 +31,8 @@ def register(request):
     else:
         user = User.objects.create_user(username = username, password = password, email = email)
         user.save()
-        return redirect(f'/count/{username}')
+        auth.login(request,user)
+        return redirect('/count/')
 
 def login(request):
     """
@@ -45,26 +46,26 @@ def login(request):
 
     if user is not None:
         auth.login(request,user)
-        return redirect(f'/count/{username}')  
+        return redirect('/count/')  
     else:
         messages.info(request, 'Invalid credentials')
         return redirect(reverse('welcome'))
 
-def logout(request,user):
+def logout(request):
     """
     Function to go to the logout page containing the parameters.
-    """
-    userObject = User.objects.get(username = user)
+    """ 
+    userObject = User.objects.get(username = request.user.username)
     return render(request, "logout.html",context = {'userobject':userObject})
 
-def delog(request,user):
+def delog(request):
     """
     Function which is delogging the user
     """
     auth.logout(request)
     return redirect(reverse(loginpage))
 
-def listecount(request, user): 
+def listecount(request): 
     """
     Function rendering the list of tricounts of a single user.
     """ 
@@ -74,32 +75,32 @@ def listecount(request, user):
     if len(counts) > 0:
         #We select only the counts whose the user is an admin.
         for item in counts: 
-            if user in item.admins:
+            if request.user.username in item.admins:
                 items.append(item)
-    return render(request,'index.html',context ={'counts' : items, 'user' : user})
+    return render(request,'index.html',context ={'counts' : items})
 
-def clonecount(request,user):
+def clonecount(request):
     """
     Function for cloning an existing tricount.
     """  
     item = Counts.objects.filter(title = request.POST["tricount-title"], password = request.POST['password'])   
     if len(item) > 0:    
-        item[0].admins.append(user)
+        item[0].admins.append(request.user.username)
         item[0].save()
     
-    return redirect(f'/count/{user}') 
+    return redirect('/count/') 
     
     
 
-def newcount(request,user):
+def newcount(request):
     """
     Function rendering the page of creation of a tricount
     """  
     currency = "EUR" 
-    return render(request, 'newcount.html',context={'user':user, 'currency': currency})
+    return render(request, 'newcount.html',context={'user':request.user.username, 'currency': currency})
     
 
-def addcount(request,user):
+def addcount(request):
     """
     Function adding a new tricount. A tricount necessitates a title, a password, a description, some participants and a list of admins
     which increases when someone is cloning the tricount
@@ -108,7 +109,7 @@ def addcount(request,user):
     password = request.POST["newtricount_pwd"]
     descption = request.POST["newtricount_description"]
     participts = request.POST.getlist('nameparticipant')
-    admins = [user]
+    admins = [request.user.username]
 
     if titre != "": 
         if password == "":
@@ -132,19 +133,19 @@ def addcount(request,user):
                                               participants = participts, 
                                               data = tricount.to_json(),
                                               admins = admins) 
-                return redirect(f'/count/{user}/tricount/'+ str(count.id))
+                return redirect('/count/tricount/'+ str(count.id))
     else:  
         return render(request,'newcount.html', context={'titre':False})
     
-def modifycount(request, user, id_count):
+def modifycount(request, id_count):
     """
     Function which leads to modify the properties of the tricount.
     """
     count = Counts.objects.get(id = id_count)
 
-    return render(request, "modifycount.html", context={'count':count, 'user':user})
+    return render(request, "modifycount.html", context={'count':count})
 
-def modifycountregister(request, user, id_count):
+def modifycountregister(request, id_count):
     """
     Function which modifies the tricount including the modifications of the user
     """  
@@ -161,26 +162,26 @@ def modifycountregister(request, user, id_count):
         count = MT.add_new_participants_to_a_tricount(count,newparticipants)
     count.save() 
 
-    return redirect(f'/count/{user}/tricount/{id_count}')
+    return redirect(f'/count/tricount/{id_count}')
 
-def deletecount(request,user, id_count):
+def deletecount(request, id_count):
     """
     Function which deletes a tricount.
     """ 
     count = Counts.objects.get(id = id_count)
     count.delete()
-    return redirect(f"/count/{user}")
+    return redirect("/count/")
 
-def choosecurrency(request,user):
+def choosecurrency(request):
     """
     Function which leads to the choice of the payment currency
     """   
     file = open('static/json/currency.json','r')
     currencies = json.load(file) 
     file.close() 
-    return render(request, 'currency.html', context = {'currencies' : currencies, 'user':user})
+    return render(request, 'currency.html', context = {'currencies' : currencies, 'user':request.user.username})
 
-def spending(request,user ,id_count):
+def spending(request, id_count):
     """
     Function which leads to the page of all spendings of a given tricount.
     """
@@ -188,14 +189,13 @@ def spending(request,user ,id_count):
     participants = count.participants 
     spending = Spending.objects.filter(number = id_count)
     tricount = Tricount.from_json(count.data) 
-    total_credit_owner = tricount.calculate_total_credit()[user] 
+    total_credit_owner = tricount.calculate_total_credit()[request.user.username] 
     total_cost = tricount.total_cost 
 
     rate = 0.84 #useAPICurrency("GBP", "EUR") 
     total_cost_in_pound = rate * float(total_cost) 
 
     context = {
-        'user':user,
         'count':count,
         'names':participants,
         'spending' : spending,
@@ -205,7 +205,7 @@ def spending(request,user ,id_count):
     }
     return render(request, "spending.html", context = context)
 
-def spendingEquilibria(request,user ,id_count):
+def spendingEquilibria(request, id_count):
     """
     Function which leads to the page of the equilibria of a given tricount.
     """
@@ -214,18 +214,18 @@ def spendingEquilibria(request,user ,id_count):
     #Deserialisation and calculation of ways to go the equilibrium
     tricount = Tricount.from_json(count.data)
     total_credit,transfert_to_equilibrium = tricount.calculate_total_credit_and_resolve_solution() 
-    return render(request, "spendingEquilibria.html", context = {'user':user,'count':count,'total_credit' : total_credit,'transfert_to_equilibrium' : transfert_to_equilibrium})
+    return render(request, "spendingEquilibria.html", context = {'user':request.user.username,'count':count,'total_credit' : total_credit,'transfert_to_equilibrium' : transfert_to_equilibrium})
 
-def newspending(request,user ,id_count):
+def newspending(request, id_count):
     """
     Function which render the template when we want to add a new spending
     """
     count = Counts.objects.get(id = id_count)
     participants = count.participants
     currency = count.currency
-    return render(request, 'newspending.html',context={'user':user,'idcount': id_count, 'participants':participants, 'currency': currency})
+    return render(request, 'newspending.html',context={'idcount': id_count, 'participants':participants, 'currency': currency})
 
-def addspending(request,user ,id_count):
+def addspending(request, id_count):
     """
     Function to create a new spending and redirecting to the list of tricounts. 
     """ 
@@ -253,19 +253,19 @@ def addspending(request,user ,id_count):
         Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, number = id_count)
         MT.update_tricount_after_new_spending(id_count, {spender : float(amount)}, dico_receivers)
         
-        return redirect(f'/count/{user}/tricount/{id_count}')
+        return redirect(f'/count/tricount/{id_count}')
     else: #Lack of title needs an error message.
         count = Counts.objects.get(id = id_count)
         participants = count.participants
         return render(request, 'newspending.html',context={'idcount': id_count, 'participants':participants,'titre':False})
         
-def spending_details(request,user , id_count, id_spending):
+def spending_details(request, id_count, id_spending):
     """
     Function to render the page allowing to see the details of a given spending
     """
     spending = Spending.objects.get(id = id_spending, number = id_count) 
     number_of_spending = Spending.objects.count()
-    context = {'user':user,'idcount' : id_count, 
+    context = {'idcount' : id_count, 
                'idspending' : id_spending,
                'previousidspending' : id_spending - 1, 
                'followingidspending' : id_spending + 1,
@@ -273,20 +273,19 @@ def spending_details(request,user , id_count, id_spending):
                'number_of_spending' : number_of_spending}
     return render(request,"spending-details.html",context)
 
-def modifyspending(request, user,id_count, id_spending):
+def modifyspending(request, id_count, id_spending):
     """
     Function which redirects to the page allowing to modify a given spending.
-    """ 
+    """  
     count = Counts.objects.get(id = id_count)
     spending = Spending.objects.get(id = id_spending, number = id_count)  
-    context = {'user':user,'count': count, 'spending': spending, 'participants': count.participants}
+    context = {'count': count, 'spending': spending, 'participants': count.participants}
     return render(request, "modifyspending.html", context = context)
 
-def modifyspendingregister(request, user,id_count, id_spending):
+def modifyspendingregister(request, id_count, id_spending):
     """
     Function which recovers data obtained from the modification of a spending.
     """      
-
     count = Counts.objects.get(id = id_count)
     spending = Spending.objects.get(id = id_spending, number = id_count) 
 
@@ -317,19 +316,19 @@ def modifyspendingregister(request, user,id_count, id_spending):
     MT.update_tricount_after_new_spending(id_count, {newspender : float(newamount)}, spending.receivers)
     spending.save()  
 
-    return redirect(f'/count/{user}/tricount/{id_count}/spending/{id_spending}')
+    return redirect(f'/count/tricount/{id_count}/spending/{id_spending}')
 
-def deletespending(request, user,id_count, id_spending):
+def deletespending(request, id_count, id_spending):
     """
     Function which delete a spending
     """
     #on supprimer la dépense, on redirige vers la page des 
     spending = Spending.objects.get(number = id_count, id = id_spending)
     spending.delete()
-    return redirect(f'/count/{user}/tricount/{id_count}')
+    return redirect(f'/count/tricount/{id_count}')
 
-def chat(request, user,id_count):
+def chat(request, id_count):
     """
     Function to go to the chat view
     """
-    return render(request,'chat.html',context={'user' : user, 'id':id_count})
+    return render(request,'chat.html',context={'id':id_count})

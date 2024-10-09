@@ -11,11 +11,11 @@
 </head>
 <body>
     <header>
-        <a href="/count/{{user}}/tricount/{{idcount}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="/count/tricount/{{idcount}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <p class = "header-title">Nouvelle dépense</p>
     </header>
     <main>
-        <form action="/count/{{user}}/tricount/{{idcount}}/addspending" method = "post">
+        <form action="/count/tricount/{{idcount}}/addspending" method = "post">
             <input class = "title" type="text" placeholder="Titre" name = "title"> 
 
             {%if titre == False%}
@@ -24,7 +24,7 @@
             <p class = "counter">0/50</p>
             <div class = "div-amount">
                 <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount"> 
-                <a href="/count/{{user}}/newcount/currency?referer=/count/{{user}}/tricount/{{idcount}}/spending" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
+                <a href="/count/newcount/currency?referer=/count/tricount/{{idcount}}/spending" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
             </div>
             <select class = "spender" name="spender" id="spender">
                 {% for participant in participants%}

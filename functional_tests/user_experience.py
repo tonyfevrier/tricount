@@ -62,9 +62,8 @@ class Click():
             - password (str)
         """
         url = self.live_server_url  
-        self.browser.get(url + "/welcome/")
-        self.register_someone(username, email, password)  
-        self.login_someone(username, password)
+        self.browser.get(url)
+        self.register_someone(username, email, password)   
 
     def logout_someone_from_listecount_page(self):
         """

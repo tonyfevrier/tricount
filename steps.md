@@ -353,10 +353,14 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - `voir ce que propose django pour lancer tous les tests car il doit y avoir qqch.`
     - `faire disparaître le module JSONField et utiliser celui de django`
     - réécrire les url pour qu'on ait une page d'accueil directement à l'url du liveserver. 
+        `enlever les user des url et utiliser le request.user.` 
         modifier le css des boutons a de la page welcome et login
         `changer les adresses welcome/qqch en qqch`
         `rediriger register et login vers la page des comptes si ça a marché`
         `modifier les tests pr qu'ils passent` 
+        tags url pour remplacer les grosses url en html
+        reverse pour éviter d'écrire les url dans views
+        éviter de passer au maximum user dans les contexts si inutiles (si ce n'était utile que pour les url)
     - améliorer du login
         quand on s'enregistre, on tombe sur son compte et pas sur login
         css moche et peu visible
@@ -364,7 +368,6 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     - reprendre mes fichiers html, écrire un layout avec des blocs comme dans mes projets edX (si c'est possible)
     - modifier mes tests unitaires en créant un setup permettant d'enregistrer et logger systématiquement qqun (tests unitaires et peut-être aussi fonctionnels)
     - factorisation des JS : créer un fichier de handler qu'on importe (des handlers sont réécrits plusieurs fois) quitte à leur ajouter des arguments. On pourrait faire un code par classe avec les handlers click, les handlers input etc.
-        tags url pour remplacer les grosses url
         améliorer le js avec query selector pour plus de lisibilité
         Nettoyer les boutons qui ne servent à rien
         ajouter l'event domcontentloaded
@@ -381,9 +384,9 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             voir comment lancer automatiquement app.py (lorsqu'un utilisateur entre dans le chat? ou lorsqu'un tricount est créé?) (peut-être qu'on le lançait juste pour voir les affichages et qu'on n'a pas besoin de le lancer.)
     - faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
     - pour le projet edX:
+        voir toutes les branches accessibles uniquement via login (@auth_login)
         regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.
         faire les factorisations ci-dessus pour améliorer mon appli
-        enlever les user des url et utiliser le request.user.s
         apprivoiser les django channels pour intégrer le chat
         terminer le fichier de lancement de mes tests ou le remplacer par un fichier yaml et montrer que j'ai apprivoisé la cicd dans mon projet (juste la CI pour les copyright).
         appliquer les préceptes de sécurité évoqués dans leur dernière vidéo

@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav class = "navbar">
-            <a href="/count/{{userobject.username}}" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" width="20px" alt="Retour en arrière"></a>
+            <a href="/count/" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" width="20px" alt="Retour en arrière"></a>
             <p>Mes paramètres</p>
         </nav>
         <div class = "owner-title">
@@ -40,7 +40,7 @@
             <input type="range" name="range" min="0" max="1"/>
         </div>
     </main>
-    <form action="/count/{{user}}/logout/delog">
+    <form action="/count/logout/delog">
         <input type="submit" class="logout" placeholder="Déconnexion"> 
     </form> 
 </body>

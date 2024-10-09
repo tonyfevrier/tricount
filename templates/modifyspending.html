@@ -11,11 +11,11 @@
 </head>
 <body>
     <header>
-        <a href="/count/{{user}}/tricount/{{count.id}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="/count/tricount/{{count.id}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <p class = "header-title">Modifier la dépense</p>
     </header>
     <main>
-        <form action="/count/{{user}}/tricount/{{count.id}}/spending/{{spending.id}}/modifyspendingregister" method = "post">
+        <form action="/count/tricount/{{count.id}}/spending/{{spending.id}}/modifyspendingregister" method = "post">
             <input class = "title" type="text" placeholder="{{spending.title}}" value = {{spending.title}} name = "title"> 
             {%if titre == False%}
                 <p class = "notitle">Titre non valable</p>
@@ -23,7 +23,7 @@
             <p class = "counter">0/50</p>
             <div class = "div-amount">  
                 <input class = "amount" type="text" value="{{spending.amount}}" id="amount" name = "amount"> 
-                <a href="/count/{{user}}/newcount/currency?referer=/count/{{user}}/tricount/{{count.id}}/spending/{{spending.id}}/modifyspending" class = "choose-currency"><input type= "text" class = "newtricount_currency" value = "{{count.currency}}" name = "newtricount_currency"></a>
+                <a href="/count/newcount/currency?referer=/count/tricount/{{count.id}}/spending/{{spending.id}}/modifyspending" class = "choose-currency"><input type= "text" class = "newtricount_currency" value = "{{count.currency}}" name = "newtricount_currency"></a>
             </div>
             <select class = "spender" name="spender" id="spender">
                 <option class = "spender-participant" value="{{spending.payer}}" selected>{{spending.payer}}</option> 
@@ -71,7 +71,7 @@
         <div class = 'delete-confirmation' hidden>
             Confirmez-vous vouloir supprimer la dépense 
             <div class = 'alert'>
-                <a class = 'yesno' id = "yes" href = '/count/{{user}}/tricount/{{count.id}}/spending/{{spending.id}}/deletespending'>Oui</a>
+                <a class = 'yesno' id = "yes" href = '/count/tricount/{{count.id}}/spending/{{spending.id}}/deletespending'>Oui</a>
                 <a class = 'yesno' id = "no" href = ''>Non</a>
             </div>
         </div>

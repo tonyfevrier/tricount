@@ -18,7 +18,7 @@ class resolveUrl(TestCase):
         """
         Test if an url is associated with the good view function.
         """
-        found = resolve('/count/Toto')
+        found = resolve('/count/')
 
         self.assertEqual(found.func,listecount) 
 
@@ -26,11 +26,12 @@ class HomepageTest(UnitaryTestMethods):
     """
     Class of methods to test registering and logging in the application
     """
+
     def test_title(self):
         """
         Test if the title appears in the page.
         """
-        response = self.client.get('/count/Tony') 
+        response = self.client.get('/count/') 
 
         self.assertIn(b'Tricount',response.content)
         self.assertTemplateUsed(response,'index.html')
@@ -44,7 +45,7 @@ class HomepageTest(UnitaryTestMethods):
         response = self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
         
         self.assertEqual(User.objects.all().count(),1)
-        self.assertRedirects(response, '/count/Tony')
+        self.assertRedirects(response, '/count/')
 
         #We tries to create a user with the same username and email.
         response = self.register_someone('Tony','pwd', 'tony.fevrier@gmail.com')
@@ -59,15 +60,15 @@ class HomepageTest(UnitaryTestMethods):
         Test that the authentification has been doned if password and username are correct,
         refused otherwise
         """
-       
-        response = self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
+        self.register_someone('Tony', '1234', 'tony@gmail.com')
+        self.logout_someone()
         response = self.login_someone('Tony','pwd2') 
         self.assertEqual(response.wsgi_request.user.is_authenticated, False)
         
-        response = self.login_someone('Tonton','pwd') 
+        response = self.login_someone('Tonton','1234') 
         self.assertEqual(response.wsgi_request.user.is_authenticated, False)
 
-        response = self.login_someone('Tony','pwd') 
+        response = self.login_someone('Tony','1234') 
         self.assertEqual(response.wsgi_request.user.is_authenticated, True)
 
     def test_logout(self):
@@ -86,11 +87,15 @@ class NewcountTest(UnitaryTestMethods):
     """
     Class of methods to test the creation of some tricounts
     """
+
+    def setUp(self):
+        self.register_someone('Tony', '1234', 'tony@gmail.com')
+
     def test_newcount(self):
         """
         Test that when we click on "create a tricount", the good template is used.
         """ 
-        response = self.client.get('/count/Tony')
+        response = self.client.get('/count/')
         link = self.extract_and_click_on_link(response.content , 'countfromzero')
         response2 = self.client.get(link)
 
@@ -100,7 +105,7 @@ class NewcountTest(UnitaryTestMethods):
         """
         Function which creates a tricount in USD and verifies that the database has registered this currency.
         """
-        response = self.create_a_tricount("tricount 1","password","description 1","USD","Voyage",'Tony','Jean','Henri')
+        self.create_a_tricount("tricount 1","password","description 1","USD","Voyage",'Tony','Jean','Henri')
         count = Counts.objects.first()
 
         self.assertEqual(count.currency, 'USD')
@@ -117,7 +122,7 @@ class NewcountTest(UnitaryTestMethods):
         self.assertEqual("Description 1", count.description)
         self.assertEqual("Voyage", count.category)
         self.assertEqual("EUR", count.currency)
-        self.assertRedirects(response, '/count/Tony/tricount/1')  
+        self.assertRedirects(response, '/count/tricount/1')  
 
     def test_lack_title_newcountinputs(self):
         """
@@ -193,24 +198,20 @@ class NewcountTest(UnitaryTestMethods):
         self.create_a_tricount("tricount 2", "pwd", "description 2","EUR", "Coloc", "Roberto",'Alfredo')
         
         #We go on the list of the tricounts
-        response = self.client.get('/count/Tony') 
+        response = self.client.get('/count/') 
         link = self.extract_and_click_on_link(response.content , 'link-tricount-2')  
 
-        self.assertEqual(link,'/count/Tony/tricount/2')
+        self.assertEqual(link,'/count/tricount/2')
 
         link = self.extract_and_click_on_link(response.content , 'link-tricount-1')   
 
-        self.assertEqual(link,'/count/Tony/tricount/1')
-
-        #response = self.client.get(link)
-
-        #self.assertIn(b'Henri',response.content)
+        self.assertEqual(link,'/count/tricount/1') 
 
     def test_currencies_passedto_currencyhtml(self):
         """
         Test if the currencies are printed in the currency page.
         """
-        response = self.client.get('/count/Toto/newcount/currency')
+        response = self.client.get('/count/newcount/currency')
         soup = BeautifulSoup(response.content,'html.parser')
  
         self.assertIn("EUR", str(soup))
@@ -227,21 +228,23 @@ class NewcountTest(UnitaryTestMethods):
         self.assertListEqual(admins, ['Tony'])
 
         #Henri tries to clone the tricount
-        self.clone_a_tricount('Henri',"Tricount1","pwd") 
+        self.register_someone('Henri', '1234', 'henri@gmail.com')
+        self.clone_a_tricount("Tricount1","pwd") 
         admins = Counts.objects.first().admins
         self.assertListEqual(admins, ['Tony','Henri'])
 
         #Jean tries to clone but gives a wrong password and then gives a wrong title
-        self.clone_a_tricount('Jean',"wrong","pwd") 
+        self.register_someone('Jean', '1234', 'Jean@gmail.com')
+        self.clone_a_tricount("wrong","pwd") 
         admins = Counts.objects.first().admins
         self.assertListEqual(admins, ['Tony','Henri'])
 
-        self.clone_a_tricount('Jean',"Tricount1","error")  
+        self.clone_a_tricount("Tricount1","error")  
         admins = Counts.objects.first().admins
         self.assertListEqual(admins, ['Tony','Henri'])
 
         #He gives the good password
-        self.clone_a_tricount('Jean',"Tricount1","pwd") 
+        self.clone_a_tricount("Tricount1","pwd") 
         admins = Counts.objects.first().admins
         self.assertListEqual(admins, ['Tony','Henri','Jean'])
         
@@ -257,14 +260,14 @@ class NewcountTest(UnitaryTestMethods):
         self.assertEqual(count.title, "tricount2")
         self.assertEqual(count.description, "Autre")
         self.assertListEqual(count.participants, ["Tony", "Henri", "Jean", "Robert"])
-        self.assertRedirects(response,'/count/Tony/tricount/1')
+        self.assertRedirects(response,'/count/tricount/1')
 
     def test_delete_tricount(self):
         """
         Test the deletion of a tricount : it must disappear from the database
         """
         self.create_a_tricount("tricount1",'pwd',"description","EUR","Voyage", "Tony", "Henri", "Jean") 
-        self.client.get("/count/Tony/tricount/1/deletecount")
+        self.client.get("/count/tricount/1/deletecount")
         count = Counts.objects.all()
         self.assertEqual(len(count), 0)
 
@@ -416,14 +419,17 @@ class TestSpending(UnitaryTestMethods):
     Class of methods to test the effect of new spendings in a given tricount.
     """
 
+    def setUp(self):
+        self.register_someone('Tony', '1234', 'tony@gmail.com')
+
     def test_redirect_after_newspending_inputs(self):
         """
         Test if after a new spending, the redirection is correct.
         """ 
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Tony", "Henri", "Jean")
-        response = self.create_a_spending(1,'dépense1', 100,'EUR', 'Jean', ['Henri','Jean','Tony'], [50,50,0])  
+        response = self.create_a_spending(1,'dépense1', 100,'EUR', 'Tony', ['Henri','Jean','Tony'], [50,50,0])  
 
-        self.assertRedirects(response,'/count/Tony/tricount/1') 
+        self.assertRedirects(response,'/count/tricount/1') 
     
     def test_bdd_newspending_inputs(self):
         """
@@ -448,7 +454,7 @@ class TestSpending(UnitaryTestMethods):
         Test if when we don't complete entirely a spending, no new spending appear in the database.
         """
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann")
-        response = self.client.get('/count/Tony/tricount/1/spending') 
+        response = self.client.get('/count/tricount/1/spending') 
         nb_spending = Spending.objects.count()
         self.extract_and_click_on_link(response.content , 'backtospending')  
 
@@ -575,7 +581,10 @@ class TestSpending(UnitaryTestMethods):
         """
         #We create a tricount, a spending and modify the spending.
         self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Yann", "Marine", "Tony")
+        self.register_someone('Henri', '1234', 'henri@gmail.com')
         self.create_a_spending(1,'dépense', 180,'EUR', 'Henri', ['Henri','Yann','Marine','Tony'], [30,50,50,50]) 
+        self.logout_someone()
+        response = self.login_someone('Tony', '1234') 
         response = self.modify_a_spending(1,1,"depense2", 180, 'EUR',"Tony", ["Henri", "Yann"], [90,90]) 
         spending = Spending.objects.first()
 
@@ -583,9 +592,10 @@ class TestSpending(UnitaryTestMethods):
         self.assertEqual(spending.amount, 180) 
         self.assertEqual(spending.payer, 'Tony') 
         self.assertDictEqual(spending.receivers, {"Henri":90, "Yann":90})
-        self.assertRedirects(response,'/count/Tony/tricount/1/spending/1')
+        self.assertRedirects(response,'/count/tricount/1/spending/1')
 
         #We create a second spending and only modify the currency
+        self.login_someone('Henri', '1234')
         self.create_a_spending(1,'dépense', 100,'EUR', 'Henri', ['Henri','Yann'], [50,50]) 
         response = self.modify_a_spending(1,2,"dépense", 100, 'USD',"Henri",['Henri','Yann'], [50,50]) 
         spending2 = Spending.objects.get(id = 2)

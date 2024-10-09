@@ -12,11 +12,11 @@
 </head>
 <body>
     <header> 
-        <a href="/count/{{user}}/tricount/{{count.id}}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="/count/tricount/{{count.id}}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <div class = "titre">Modifier le tricount</div>
     </header> 
     <main>
-        <form method="POST" class = "tricount" action="/count/{{user}}/tricount/{{count.id}}/modifycountregister">
+        <form method="POST" class = "tricount" action="/count/tricount/{{count.id}}/modifycountregister">
             {% csrf_token %}
             <input type ="text" class = "tricount_title" value = "{{count.title}}" name = "tricount_title">  
 
@@ -60,7 +60,7 @@
         <div class = 'delete-confirmation' hidden>
             Confirmez-vous vouloir supprimer le tricount 
             <div class = 'alert'>
-                <a class = 'yesno' id = "yes" href = '/count/{{user}}/tricount/{{count.id}}/deletecount'>Oui</a>
+                <a class = 'yesno' id = "yes" href = '/count/tricount/{{count.id}}/deletecount'>Oui</a>
                 <a class = 'yesno' id = "no" href = ''>Non</a>
             </div>
         </div>

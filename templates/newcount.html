@@ -12,7 +12,7 @@
 </head>
 <body>
     <header> 
-        <a href="/count/{{user}}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="/count/" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <div class = "titre">Nouveau tricount</div>
     </header> 
     <main> 
@@ -25,7 +25,7 @@
             </div>
         </form>-->
 
-        <form method="POST" class = "newtricount" action="/count/{{user}}/newcount/addcount">
+        <form method="POST" class = "newtricount" action="/count/newcount/addcount">
             {% csrf_token %}
 
             <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title">  
@@ -41,7 +41,7 @@
             {% endif %}
             <input type ="text" class = "newtricount_description" placeholder="Description" name = "newtricount_description">
             
-            <a href="/count/{{user}}/newcount/currency?referer=/count/{{user}}/newcount" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
+            <a href="/count/newcount/currency?referer=/count/newcount" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
             
 
             <p class="title_category"> Catégorie </p> 

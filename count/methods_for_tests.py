@@ -35,7 +35,7 @@ class UnitaryTestMethods(TestCase):
         Output : 
             - response (object) : contains the characteristics of the response to the request post. 
         """  
-        response = self.client.post("/count/Tony/newcount/addcount",
+        response = self.client.post("/count/newcount/addcount",
                                     data = {"newtricount_title":title, 
                                             "newtricount_pwd":password, 
                                             "newtricount_description":description, 
@@ -57,19 +57,19 @@ class UnitaryTestMethods(TestCase):
         Output : 
             - response (object) : contains the characteristics of the response to the request post. 
         """
-        response = self.client.post(f"/count/Tony/tricount/{idcount}/modifycountregister", data = {'tricount_title' : title,
+        response = self.client.post(f"/count/tricount/{idcount}/modifycountregister", data = {'tricount_title' : title,
                                                                                'tricount_description' : description, 
                                                                                'nameparticipant' : participants})
         return response
     
-    def clone_a_tricount(self, people, title, password):
+    def clone_a_tricount(self, title, password):
         """
         Inputs : 
             - people (str) : who wants to clone the tricount.
             - title (str)
             - password (str)
         """
-        self.client.post(f"/count/{people}/newcount/count-pwd", data = {"tricount-title":title, "password":password})
+        self.client.post("/count/newcount/count-pwd", data = {"tricount-title":title, "password":password})
 
     def create_a_spending(self,idcount,title,amount,currency,spender, receivers, respective_amounts):
         """
@@ -87,7 +87,7 @@ class UnitaryTestMethods(TestCase):
         for i in range(len(receivers)):
             data[receivers[i]] = respective_amounts[i]
 
-        response = self.client.post(f'/count/Tony/tricount/{idcount}/addspending', data)
+        response = self.client.post(f'/count/tricount/{idcount}/addspending', data)
         return response
     
     def modify_a_spending(self, idcount, idspending, title, amount, currency, spender, receivers, respective_amounts):
@@ -109,14 +109,14 @@ class UnitaryTestMethods(TestCase):
         for i in range(len(receivers)):
             data[receivers[i]] = respective_amounts[i]
 
-        response = self.client.post(f"/count/Tony/tricount/{idcount}/spending/{idspending}/modifyspendingregister", data)
+        response = self.client.post(f"/count/tricount/{idcount}/spending/{idspending}/modifyspendingregister", data)
         return response
     
     def delete_a_spending(self, idcount, idspending):
         """
         Function which deletes a given spending
         """ 
-        response = self.client.post(f"/count/Tony/tricount/{idcount}/spending/{idspending}/deletespending")
+        response = self.client.post(f"/count/tricount/{idcount}/spending/{idspending}/deletespending")
         return response 
 
     def register_someone(self, username, password, email):
@@ -128,5 +128,5 @@ class UnitaryTestMethods(TestCase):
         return response
     
     def logout_someone(self):
-        response = self.client.post('/count/Tony/logout/delog')
+        response = self.client.post('/count/logout/delog')
         return response

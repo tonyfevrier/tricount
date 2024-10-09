@@ -12,8 +12,8 @@
 <body>
     <header>
         <nav>
-            <a href="/count/{{user}}/tricount/{{idcount}}" class = "backtospending" id = "backtospending"><img src="{%static 'images/back.png' %}" width = "20px" alt="Retour en arrière"></a>
-            <a href="/count/{{user}}/tricount/{{idcount}}/spending/{{idspending}}/modifyspending" class = "modify-spending">Modifier</a>
+            <a href="/count/tricount/{{idcount}}" class = "backtospending" id = "backtospending"><img src="{%static 'images/back.png' %}" width = "20px" alt="Retour en arrière"></a>
+            <a href="/count/tricount/{{idcount}}/spending/{{idspending}}/modifyspending" class = "modify-spending">Modifier</a>
         </nav>
         <h1 class = "title-spending">
             {{spending.title}}
@@ -37,10 +37,10 @@
     </main>
     <footer>
         {% if idspending != 1 %}
-            <a class = "previous" href = "/count/{{user}}/tricount/{{idcount}}/spending/{{previousidspending}}">Précédent</a>
+            <a class = "previous" href = "/count/tricount/{{idcount}}/spending/{{previousidspending}}">Précédent</a>
         {% endif %}
         {% if idspending != number_of_spending %}
-            <a class = "following" href = "/count/{{user}}/tricount/{{idcount}}/spending/{{followingidspending}}">Suivant</a>
+            <a class = "following" href = "/count/tricount/{{idcount}}/spending/{{followingidspending}}">Suivant</a>
         {% endif %}
         
     </footer>
