@@ -28,13 +28,13 @@
         <form method="POST" class = "newtricount" action="{% url 'addcount' %}">
             {% csrf_token %}
 
-            <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title">  
+            <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title" autocomplete="off">  
 
             {% if titre == False %}
                 <p class="error">Le titre doit comporter au moins un caractère.</p>
             {% endif %}
 
-            <input type="password" class = "newtricount_pwd" placeholder="Entrez un mot de passe" name = "newtricount_pwd">
+            <input type="password" class = "newtricount_pwd" placeholder="Entrez un mot de passe" name = "newtricount_pwd" autocomplete="new-password">
 
             {% if pwd == False %}
                 <p class = "error pwd-error">Il faut un mot de passe</p>

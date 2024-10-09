@@ -352,9 +352,9 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - `il faudra peut-être utiliser await pour bien attendre que les tests précédents se finissent avant qu'un autre ne se lance.`
         - `voir ce que propose django pour lancer tous les tests car il doit y avoir qqch.`
     - `faire disparaître le module JSONField et utiliser celui de django`
-    - réécrire les url pour qu'on ait une page d'accueil directement à l'url du liveserver. 
+    - `réécrire les url pour qu'on ait une page d'accueil directement à l'url du liveserver.` 
         `enlever les user des url et utiliser le request.user.` 
-        modifier le css des boutons a de la page welcome et login
+        modifier le css des boutons a de la page welcome et login et des forms
         `changer les adresses welcome/qqch en qqch`
         `rediriger register et login vers la page des comptes si ça a marché`
         `modifier les tests pr qu'ils passent` 
@@ -362,13 +362,17 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         `reverse pour éviter d'écrire les url dans views`
         `raccourcir les noms de certaines url pour éviter les url à rallonge, exemple count/logout`
         `éviter de passer au maximum user dans les contexts si inutiles (si ce n'était utile que pour les url)`
-        currency.html : href à compléter
-    - améliorer du login
-        quand on s'enregistre, on tombe sur son compte et pas sur login
+        `currency.html : href à compléter : je crois que c'est le JS qui la complète, pas sûr`
+    - améliorer le login
+        `quand on s'enregistre, on tombe sur son compte et pas sur login`
         css moche et peu visible
-        si échec d'authenfication, on devrait avoir des messages d'erreurs
+        `si échec d'authenfication, on devrait avoir des messages d'erreurs`
+    - bug : le compteur lorsqu'on ajoute des participants (/50) est-il correct? et quand on enlève celui qui possèdê, une croix reste à droite.
+    - `comment enlever l'autocomplétion lors de la création de tricount`
     - reprendre mes fichiers html, écrire un layout avec des blocs comme dans mes projets edX (si c'est possible)
+    - mettre des titres aux pages html
     - modifier mes tests unitaires en créant un setup permettant d'enregistrer et logger systématiquement qqun (tests unitaires et peut-être aussi fonctionnels)
+    - comprendre pourquoi si je suis loggé mais que je relance la page de log on me redemande mes identifiants: changer cela en redirection automatique à mon compte si je suis loggé
     - factorisation des JS : créer un fichier de handler qu'on importe (des handlers sont réécrits plusieurs fois) quitte à leur ajouter des arguments. On pourrait faire un code par classe avec les handlers click, les handlers input etc.
         améliorer le js avec query selector pour plus de lisibilité
         Nettoyer les boutons qui ne servent à rien
@@ -397,6 +401,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         réfléchir à utiliser le django cache framework : quelles parties pourraient s'améliorer en termes de performance? Lesquelles je ne voudrais pas recharger?
         sécurité : mettre ma clé d'API non pas dans le code source mais dans une variable d'environnement ou la sécuriser.
         sécurité : introduire le hachage des pwd dans mon application
+        vérifier toutes les spécifications.
+        
             
     -modification des dépenses déjà entrées :
     -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`

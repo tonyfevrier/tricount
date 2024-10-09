@@ -46,15 +46,15 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertEqual(mail.text, "tony.fevrier62@gmail.com")
 
         click.click_on_a_link(By.CLASS_NAME, "logout")
-        self.assertEqual(self.browser.current_url, url + "/loginpage")
+        self.assertEqual(self.browser.current_url, url + "/log")
 
         #Il tente d'enregistrer un nouveau compte avec le même username puis avec le même mail mais est refusé
         click.click_on_a_link(By.CLASS_NAME, "welcome")
         click.register_someone("Tony", "tony@gmail.com","pwd")
-        self.assertEqual(self.browser.current_url, url)
+        self.assertEqual(self.browser.current_url, url + "/")
 
         click.register_someone("Dulcinée", "tony.fevrier62@gmail.com","pwd")
-        self.assertEqual(self.browser.current_url, url) 
+        self.assertEqual(self.browser.current_url, url + "/") 
 
         #Il tente d'envoyer le formulaire sans username puis sans email et password, le formulaire n'est pas envoyé et des éléments apparaissent
         click.register_someone("", "tony.fevrier6@gmail.com","pwd")
@@ -74,7 +74,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         userlacking = self.browser.find_element(By.CLASS_NAME,"userlacking")
 
         self.assertEqual(userlacking.text, "A username is needed") 
-        self.assertEqual(self.browser.current_url, url + "/login")
+        self.assertEqual(self.browser.current_url, url + "/log")
         
         click.clear_registration_inputs(self.browser.find_element(By.NAME, "username"),self.browser.find_element(By.NAME, "password"))
         click.login_someone("Tony", "")
@@ -376,7 +376,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.click_on_a_link(By.CLASS_NAME, "modify-spending")
         title = self.browser.find_element(By.CLASS_NAME, "title")
         amount = self.browser.find_element(By.CLASS_NAME, "amount")
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/modifyspending/1')
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/modifyspending/1/1')
         self.assertEqual(title.get_attribute("value"), "Dépense1")
         self.assertEqual(amount.get_attribute("value"), '100.0')
 

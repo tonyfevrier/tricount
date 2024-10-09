@@ -52,7 +52,6 @@ class HomepageTest(UnitaryTestMethods):
         response = self.register_someone('Dulcinée', 'pwd','tony.fevrier62@gmail.com')
 
         self.assertEqual(User.objects.all().count(),1)
-        print(response)
         self.assertRedirects(response, '/')
 
 

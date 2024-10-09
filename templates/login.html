@@ -11,7 +11,7 @@
 <body>
     <header>
         <a class = "welcome" href="{% url 'welcome'%}">Créer un compte</a>
-        <a class = "login" href="{% url 'login'%}">Se connecter</a>
+        <a class = "login" href="{% url 'log'%}">Se connecter</a>
     </header>
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}

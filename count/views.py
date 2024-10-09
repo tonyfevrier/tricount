@@ -49,7 +49,7 @@ def login(request):
         return redirect(reverse('listecount'))  
     else:
         messages.info(request, 'Invalid credentials')
-        return redirect(reverse('welcome'))
+        return redirect(reverse('log'))
 
 def logout(request):
     """
@@ -62,8 +62,9 @@ def delog(request):
     """
     Function which is delogging the user
     """
+    
     auth.logout(request)
-    return redirect(reverse('login'))
+    return redirect(reverse('log'))
 
 def listecount(request): 
     """
