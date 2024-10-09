@@ -32,7 +32,7 @@ def register(request):
         user = User.objects.create_user(username = username, password = password, email = email)
         user.save()
         auth.login(request,user)
-        return redirect('/count/')
+        return redirect(reverse('listecount'))
 
 def login(request):
     """
@@ -46,7 +46,7 @@ def login(request):
 
     if user is not None:
         auth.login(request,user)
-        return redirect('/count/')  
+        return redirect(reverse('listecount'))  
     else:
         messages.info(request, 'Invalid credentials')
         return redirect(reverse('welcome'))
@@ -63,7 +63,7 @@ def delog(request):
     Function which is delogging the user
     """
     auth.logout(request)
-    return redirect(reverse(loginpage))
+    return redirect(reverse('loginpage'))
 
 def listecount(request): 
     """
@@ -88,7 +88,7 @@ def clonecount(request):
         item[0].admins.append(request.user.username)
         item[0].save()
     
-    return redirect('/count/') 
+    return redirect(reverse('listecount')) 
     
     
 
@@ -133,7 +133,7 @@ def addcount(request):
                                               participants = participts, 
                                               data = tricount.to_json(),
                                               admins = admins) 
-                return redirect('/count/tricount/'+ str(count.id))
+                return redirect(reverse('spending', args=[count.id]))
     else:  
         return render(request,'newcount.html', context={'titre':False})
     
@@ -162,7 +162,7 @@ def modifycountregister(request, id_count):
         count = MT.add_new_participants_to_a_tricount(count,newparticipants)
     count.save() 
 
-    return redirect(f'/count/tricount/{id_count}')
+    return redirect(reverse('spending', args=[id_count]))
 
 def deletecount(request, id_count):
     """
@@ -170,7 +170,7 @@ def deletecount(request, id_count):
     """ 
     count = Counts.objects.get(id = id_count)
     count.delete()
-    return redirect("/count/")
+    return redirect(reverse("listecount"))
 
 def choosecurrency(request):
     """
@@ -253,7 +253,7 @@ def addspending(request, id_count):
         Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, number = id_count)
         MT.update_tricount_after_new_spending(id_count, {spender : float(amount)}, dico_receivers)
         
-        return redirect(f'/count/tricount/{id_count}')
+        return redirect(reverse('spending', args=[id_count]))
     else: #Lack of title needs an error message.
         count = Counts.objects.get(id = id_count)
         participants = count.participants
@@ -316,7 +316,7 @@ def modifyspendingregister(request, id_count, id_spending):
     MT.update_tricount_after_new_spending(id_count, {newspender : float(newamount)}, spending.receivers)
     spending.save()  
 
-    return redirect(f'/count/tricount/{id_count}/spending/{id_spending}')
+    return redirect(reverse('spending-details', args=[id_count, id_spending]))
 
 def deletespending(request, id_count, id_spending):
     """
@@ -325,7 +325,7 @@ def deletespending(request, id_count, id_spending):
     #on supprimer la dépense, on redirige vers la page des 
     spending = Spending.objects.get(number = id_count, id = id_spending)
     spending.delete()
-    return redirect(f'/count/tricount/{id_count}')
+    return redirect(reverse('spending', args=[id_count]))
 
 def chat(request, id_count):
     """

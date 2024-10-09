@@ -11,11 +11,11 @@
 </head>
 <body>
     <header>
-        <a href="/count/tricount/{{count.id}}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="{% url 'spending' count.id %}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <p class = "header-title">Modifier la dépense</p>
     </header>
     <main>
-        <form action="/count/tricount/{{count.id}}/spending/{{spending.id}}/modifyspendingregister" method = "post">
+        <form action="{% url 'modifyspendingregister' count.id spending.id %}" method = "post">
             <input class = "title" type="text" placeholder="{{spending.title}}" value = {{spending.title}} name = "title"> 
             {%if titre == False%}
                 <p class = "notitle">Titre non valable</p>
@@ -71,7 +71,7 @@
         <div class = 'delete-confirmation' hidden>
             Confirmez-vous vouloir supprimer la dépense 
             <div class = 'alert'>
-                <a class = 'yesno' id = "yes" href = '/count/tricount/{{count.id}}/spending/{{spending.id}}/deletespending'>Oui</a>
+                <a class = 'yesno' id = "yes" href = "{% url 'deletespending' count.id spending.id %}">Oui</a>
                 <a class = 'yesno' id = "no" href = ''>Non</a>
             </div>
         </div>

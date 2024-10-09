@@ -11,7 +11,7 @@
 <body>
     <header>
         <nav class = "header-nav"> 
-            <a href="/count/" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+            <a href="{% url 'listecount' %}" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
             <div class = "tricount-characteristics" >
                 <p class = "tricount-title">{{count.title}}</p>
                 {% for name in total_credit.keys %}
@@ -21,8 +21,8 @@
             <button class = "share">Partager</button>
         </nav>
         <div class = header-spending>
-            <a class = "gotospending" href = "/count/tricount/{{count.id}}">Dépenses</a>
-            <a class = "gotoequilibria" href = "/count/tricount/{{count.id}}/equilibria">Equilibres</a>
+            <a class = "gotospending" href = "{% url 'spending' count.id %}">Dépenses</a>
+            <a class = "gotoequilibria" href = "{% url 'equilibria' count.id %}">Equilibres</a>
         </div>
     </header>
     <main> 

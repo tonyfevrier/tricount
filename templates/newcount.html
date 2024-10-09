@@ -12,7 +12,7 @@
 </head>
 <body>
     <header> 
-        <a href="/count/" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="{% url 'listecount' %}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <div class = "titre">Nouveau tricount</div>
     </header> 
     <main> 
@@ -25,7 +25,7 @@
             </div>
         </form>-->
 
-        <form method="POST" class = "newtricount" action="/count/newcount/addcount">
+        <form method="POST" class = "newtricount" action="{% url 'addcount' %}">
             {% csrf_token %}
 
             <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title">  

@@ -11,26 +11,26 @@
 <body>
     <header>
         <nav class = "header-nav"> 
-            <a href="/count/" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-            <a class = "tricount-characteristics" href = "/count/tricount/{{count.id}}/modifycount" >
+            <a href="{% url 'listecount' %}" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+            <a class = "tricount-characteristics" href = "{% url 'modifycount' count.id %}" >
                 <p class = "tricount-title">{{count.title}}</p>
                 {% for name in names%}
                 <p class = "tricount-participants">{{name}}</p>
                 {% endfor%}
             </a>
             <a href=""><img width = 20px src="{%static 'images/loupe.png'%}" alt="loupe de recherche"></a>
-            <a href="/count/tricount/{{count.id}}/chat"><img width = 20px src="{%static 'images/cloche.png'%}" alt="chat"></a>
+            <a href="{% url 'chat' count.id %}"><img width = 20px src="{%static 'images/cloche.png'%}" alt="chat"></a>
             <a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>
             <a href="" class="options"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </a>
         </nav>
         <div class = header-spending>
-            <a class = "gotospending" href = "/count/tricount/{{count.id}}">Dépenses</a>
-            <a class = "gotoequilibria" href = "/count/tricount/{{count.id}}/equilibria">Equilibres</a>
+            <a class = "gotospending" href = "{% url 'spending' count.id %}">Dépenses</a>
+            <a class = "gotoequilibria" href = "{% url 'equilibria' count.id %}">Equilibres</a>
         </div>
     </header>
     <main>
         {%for spend in spending%}
-        <a class = "spending" id="spending-{{spend.id}}" href = '/count/tricount/{{count.id}}/spending/{{spend.id}}'>
+        <a class = "spending" id="spending-{{spend.id}}" href = "{% url 'spending-details' count.id spend.id %}">
             <div class = "spending-reason">
                 <p class = "spending-title">{{spend.title}}</p>
                 <p class = "spending-payer">{{spend.payer}}</p>
@@ -45,7 +45,7 @@
     
     
     <footer>
-        <a class = "new-spending" href="/count/tricount/{{count.id}}/spending">+</a>
+        <a class = "new-spending" href="{% url 'newspending' count.id %}">+</a>
         <div class = footer>
             <div class = "total-cost">
                 <p>Mon coût total</p>

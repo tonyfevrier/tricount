@@ -358,9 +358,11 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         `changer les adresses welcome/qqch en qqch`
         `rediriger register et login vers la page des comptes si ça a marché`
         `modifier les tests pr qu'ils passent` 
-        tags url pour remplacer les grosses url en html
+        `tags url pour remplacer les grosses url en html`
         reverse pour éviter d'écrire les url dans views
+        raccourcir les noms de certaines url pour éviter les url à rallonge, exemple count/logout
         éviter de passer au maximum user dans les contexts si inutiles (si ce n'était utile que pour les url)
+        currency.html : href à compléter
     - améliorer du login
         quand on s'enregistre, on tombe sur son compte et pas sur login
         css moche et peu visible

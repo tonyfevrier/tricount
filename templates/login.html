@@ -13,7 +13,7 @@
         <a class = "welcome" href="{% url 'welcome'%}">Créer un compte</a>
         <a class = "login" href="{% url 'loginpage'%}">Se connecter</a>
     </header>
-    <form action="/login/" method="post">
+    <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <input class = "username" type="text" placeholder="Username" name = "username"> 
         <input class = "password" type="password" placeholder="Password" name="password">
