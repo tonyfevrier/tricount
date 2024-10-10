@@ -69,18 +69,34 @@ header{
     top : 5px;
     background-color: white;
     z-index: 1;
+    border-radius: 5px;
+    border: solid 1px black;
 }
 
 .parameters-options > *, .help-options > *, .conditions-options > *, .share-options > *{
-    padding: 20px;
+    padding: 10px 20px;
     text-decoration: none;
     background-color: transparent;
-    border: none;
+    border: solid 1px lightgray; 
     font-size: 1em;
     font-weight: 400;
     color: black;
     width: 100%;
-    text-align: left;
+    text-align: left; 
+}
+
+.parameters-options>*:first-child, .help-options>*:first-child, .conditions-options>*:first-child, .share-options>*:first-child{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.parameters-options>*:last-child, .help-options>*:last-child, .conditions-options>*:last-child, .share-options>*:last-child{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.parameters-options > *:hover, .help-options > *:hover, .conditions-options > *:hover, .share-options > *:hover{
+    background-color: lightgray;
 }
 
 .link-tricount{
@@ -128,8 +144,6 @@ header{
     border-radius: 100%;
     text-decoration: none;
     text-align: center;
-    padding-top: 0.15em;
-
 }
 
 .choosecount{
@@ -142,6 +156,7 @@ header{
     margin-top: auto;
     margin-left: auto;
     border-radius: 10px;
+    border: solid 1px black;
 }
 
 .choosecount a, .choosecount button{
@@ -159,25 +174,47 @@ header{
 }
 
 
-
 .choosecount a:hover, .choosecount button:hover{
-    background-color: gray;
+    background-color: lightgray;
 }
-
-/*form{
-    display: flex;
-    flex-direction: column;
-}*/
+ 
 
 .form-pwdcount{
     position: absolute;
-    bottom: 10px;
-    left: 400px;
+    bottom : 10px;
+    right : 100px;
+    background-color: white; 
+    margin-top: auto;
+    margin-left: auto;
+    border-radius: 5px;
+    /*border: solid 1px black;*/
 }
- 
+
+.form-pwdcount form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-pwdcount form > *{
+    width: 300px;
+    height: 40px;
+    padding: 0 1em;
+}
+
+.form-pwdcount form input:focus{
+    transition: .5s;
+    font-size: 0.7em;
+    color:blue;
+}
 
 input[type = "submit"]{
     background-color: white;  
     cursor: pointer;
     border-radius: 5px;  
+    font-weight: 600;
 }
+
+input[type = "submit"]:hover{
+    color: blue;
+}
+

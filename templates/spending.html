@@ -21,7 +21,7 @@
         <a href="" class="options"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </a>
     </nav>
     <div class = header-spending>
-        <a class = "gotospending" href = "{% url 'spending' count.id %}">Dépenses</a>
+        <a class = "gotospending" data-light="underline" href = "{% url 'spending' count.id %}">Dépenses</a>
         <a class = "gotoequilibria" href = "{% url 'equilibria' count.id %}">Equilibres</a>
     </div>
 {% endblock %}

@@ -15,14 +15,14 @@
 {% block main %}
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
-        <input class = "username" type="text" placeholder="Username" name = "username"> 
-        <input class = "password" type="password" placeholder="Password" name="password">
+        <input class = "username" type="text" placeholder="Username" name = "username" autocomplete="off"> 
+        <input class = "password" type="password" placeholder="Password" name="password" autocomplete="new-password">
         <input class = "submit" type="submit">
     </form>
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                <li{% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
             {% endfor %}
         </ul>
     {% endif %} 

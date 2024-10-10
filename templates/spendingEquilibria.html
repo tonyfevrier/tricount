@@ -19,7 +19,7 @@
     </nav>
     <div class = header-spending>
         <a class = "gotospending" href = "{% url 'spending' count.id %}">Dépenses</a>
-        <a class = "gotoequilibria" href = "{% url 'equilibria' count.id %}">Equilibres</a>
+        <a class = "gotoequilibria" data-light="underline" href = "{% url 'equilibria' count.id %}">Equilibres</a>
     </div>
 {% endblock %}
 

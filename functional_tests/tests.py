@@ -517,12 +517,14 @@ class JSTest(StaticLiveServerTestCase,user_experience.Check):
     def setUp(self):
         self.browser = webdriver.Firefox(options=options)
         self.browser.implicitly_wait(3)
+        click = user_experience.Click(self.browser, self.live_server_url)
+        click.register_and_login_someone('tony', 't@gmail.com', '1234')
+        self.click = click
     
     def tearDown(self):
         self.browser.quit()
 
     def test_JS_of_listecount_page(self):
-        click = user_experience.Click(self.browser, self.live_server_url)
 
         #The user arrives on listecount page, no popup is opened :
         self.browser.get(self.live_server_url+ '/count')
@@ -532,20 +534,20 @@ class JSTest(StaticLiveServerTestCase,user_experience.Check):
             self.assertEqual(elt.is_displayed(),False) 
 
         #He creates a tricount and come back.
-        click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri")
-        click.click_on_a_link(By.CLASS_NAME,'backtolistecount')  
+        self.click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri")
+        self.click.click_on_a_link(By.CLASS_NAME,'backtolistecount')  
 
         # he clicks on parameters, a popup appears
-        click.click_on_a_link(By.CLASS_NAME,"parameters")
+        self.click.click_on_a_link(By.CLASS_NAME,"parameters")
         self.check_if_popup_displayed("parameters-options",True) 
         
         #He clicks on a JS button of the popup, an other popup replaces the previous one.
-        click.click_on_a_link(By.CLASS_NAME, "conditions") 
+        self.click.click_on_a_link(By.CLASS_NAME, "conditions") 
         self.check_if_popup_displayed("parameters-options",False)
         self.check_if_popup_displayed("conditions-options",True)
 
         #He clicks on the link of the tricount and no popup is visible and he stays on the same page.
-        click.click_on_a_link(By.CLASS_NAME,"link-tricount")
+        self.click.click_on_a_link(By.CLASS_NAME,"link-tricount")
 
         popup_children = self.browser.find_elements(By.CSS_SELECTOR, "[data-div = hidden] > *")
 
@@ -553,16 +555,15 @@ class JSTest(StaticLiveServerTestCase,user_experience.Check):
             self.assertEqual(elt.is_displayed(),False)
         self.assertEqual(self.browser.current_url, self.live_server_url + "/count")
 
-    def test_JS_of_newcount_page(self):
-        click = user_experience.Click(self.browser, self.live_server_url)
+    def test_JS_of_newcount_page(self): 
 
         #The client goes to the creation of a new count
         self.browser.get(self.live_server_url+ '/count')
-        click.click_on_a_link(By.CLASS_NAME,'id_newcount')
-        click.click_on_a_link(By.ID,'countfromzero')
+        self.click.click_on_a_link(By.CLASS_NAME,'id_newcount')
+        self.click.click_on_a_link(By.ID,'countfromzero')
 
         #He enters a title and a description, a counter appears and the number of letters corresponds to the length of the word.   
-        titlebox,descriptionbox = click.find_multiple_elements(By.NAME,"newtricount_title","newtricount_description")
+        titlebox,descriptionbox = self.click.find_multiple_elements(By.NAME,"newtricount_title","newtricount_description")
         titlebox.click()
         counter = self.browser.find_element(By.CLASS_NAME, "compteur")
         self.assertEqual(counter.text, '0/50')
@@ -582,20 +583,19 @@ class JSTest(StaticLiveServerTestCase,user_experience.Check):
         descriptionbox.send_keys('description')
         self.assertEqual(counter.text, '11/500') 
 
-    def test_JS_currency_research_bar(self):
-        click = user_experience.Click(self.browser, self.live_server_url)
+    def test_JS_currency_research_bar(self): 
 
         #The client creates a new count and begins to create a tricount.
         self.browser.get(self.live_server_url+ '/count')
-        click.click_on_a_link(By.CLASS_NAME,'id_newcount')
-        click.click_on_a_link(By.ID,'countfromzero')
+        self.click.click_on_a_link(By.CLASS_NAME,'id_newcount')
+        self.click.click_on_a_link(By.ID,'countfromzero')
 
-        click.click_on_a_link(By.CLASS_NAME, "choose-currency")
+        self.click.click_on_a_link(By.CLASS_NAME, "choose-currency")
         loupe = self.browser.find_element(By.CLASS_NAME, "currencyresearch") 
         self.assertEqual(loupe.is_displayed(),True) 
 
         #He clicks on the loop and the research bar appears.
-        click.click_on_a_link(By.CLASS_NAME, "currencyresearch")
+        self.click.click_on_a_link(By.CLASS_NAME, "currencyresearch")
         research = self.browser.find_element(By.CLASS_NAME, "research") 
         self.assertEqual(research.is_displayed(),True) 
         self.assertEqual(loupe.is_displayed(),False) 
@@ -611,11 +611,11 @@ class JSTest(StaticLiveServerTestCase,user_experience.Check):
         self.assertEqual(displayed_currencies,3)
 
         #He then chooses to delete the research bar by pressing the backtonewcount arrow and it stays on the same page
-        click.click_on_a_link(By.CLASS_NAME, "backtonewcount")
+        self.click.click_on_a_link(By.CLASS_NAME, "backtonewcount")
         self.assertEqual(self.browser.current_url, self.live_server_url+ '/choosecurrency?referer=/newcount')
 
         #He clicks an other time to go back to newcount page.
-        click.click_on_a_link(By.CLASS_NAME, "backtonewcount")
+        self.click.click_on_a_link(By.CLASS_NAME, "backtonewcount")
         self.assertEqual(self.browser.current_url, self.live_server_url+ '/newcount')
 
 

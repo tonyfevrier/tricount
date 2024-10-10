@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin : 0;
     font-size: 14px;
+    font-family: serif, 'Times New Roman', Times, Georgia; 
 }
 
 :root{
@@ -22,10 +23,10 @@ body{
     background-color: lightgray;
 }
 
-main{
-    background-color: white;   
-}
-
 button {
     cursor: pointer;
+}
+
+.container{
+    background-color: white;
 }

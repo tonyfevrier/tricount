@@ -7,7 +7,9 @@ from count.utils import CurrencyConversion as CC, ModifyTricount as MT, String
 from count.calculation import *
 import json
 
-def welcome(request):  
+def welcome(request): 
+    if request.user.is_authenticated:
+        return redirect(reverse('listecount')) 
     return render(request, "welcome.html")
 
 def log(request): 
@@ -151,20 +153,19 @@ def modifycount(request, id_count):
 def modifycountregister(request, id_count):
     """
     Function which modifies the tricount including the modifications of the user
-    """  
+    """   
     count = Counts.objects.get(id = id_count) 
-    newtitle = request.POST['tricount_title']
-    newdescription = request.POST['tricount_description']
-    newparticipants = request.POST.getlist('nameparticipant')
-
+    newtitle = request.POST['tricount_title'] 
+    newdescription = request.POST['tricount_description'] 
+    newparticipants = request.POST.getlist('nameparticipant') 
     count.title = newtitle
-    count.description = newdescription
+    count.description = newdescription 
     
     #si les participants ont changé, ajout des nouveaux participants pour les calculs de crédits/dettes
     if set(count.participants) != set(newparticipants):
         count = MT.add_new_participants_to_a_tricount(count,newparticipants)
     count.save() 
-
+ 
     return redirect(reverse('spending', args=[id_count]))
 
 def deletecount(request, id_count):

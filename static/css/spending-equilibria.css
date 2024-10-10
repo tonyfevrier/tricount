@@ -17,7 +17,7 @@ header{
     height: 7em;
 }
 
-main{
+.container{
     background-color: white;   
 }
 
@@ -83,17 +83,9 @@ header{
     text-align: center;
 }
 
-.header-spending a:focus{
-    opacity: 1;
-}
-
-.header-spending a:focus::after{
-    content: "";
-    display: block;
-    height:2px;
-    width: 100%;
-    background-color: orange;
-    transform: translate(0,1.25em);
+.header-spending a[data-light="underline"]{
+    opacity: 1; 
+    font-weight: 600;
 }
 
 .credits{

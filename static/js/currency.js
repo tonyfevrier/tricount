@@ -17,10 +17,10 @@ for (let currency of currencies){
 }
 
 function userClicking(event){
-    if (!backtonewcount.contains(event.target) && event.target.tagName != 'BUTTON') return;
+    if (!backtonewcount.contains(event.target) && !loupe.contains(event.target)) return;
 
-    //Clic sur la loupe fait apparaître la barre de recherche.
-    if (event.target.id === "loupe"){
+    //Clic sur la loupe fait apparaître la barre de recherche. 
+    if (loupe.contains(event.target)){
         toggleHeader();
     } 
  

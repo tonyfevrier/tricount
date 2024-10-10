@@ -46,6 +46,7 @@ class HomepageTest(UnitaryTestMethods):
         
         self.assertEqual(User.objects.all().count(),1)
         self.assertRedirects(response, '/count')
+        self.logout_someone()
 
         #We tries to create a user with the same username and email.
         response = self.register_someone('Tony','pwd', 'tony.fevrier@gmail.com')

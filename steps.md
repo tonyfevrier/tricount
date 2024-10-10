@@ -354,7 +354,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     - `faire disparaître le module JSONField et utiliser celui de django`
     - `réécrire les url pour qu'on ait une page d'accueil directement à l'url du liveserver.` 
         `enlever les user des url et utiliser le request.user.` 
-        modifier le css des boutons a de la page welcome et login et des forms
+        ` modifier le css des boutons a de la page welcome et login et des forms` 
         `changer les adresses welcome/qqch en qqch`
         `rediriger register et login vers la page des comptes si ça a marché`
         `modifier les tests pr qu'ils passent` 
@@ -363,25 +363,37 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         `raccourcir les noms de certaines url pour éviter les url à rallonge, exemple count/logout`
         `éviter de passer au maximum user dans les contexts si inutiles (si ce n'était utile que pour les url)`
         `currency.html : href à compléter : je crois que c'est le JS qui la complète, pas sûr`
-    - améliorer le login
+    - `améliorer le login`
         `quand on s'enregistre, on tombe sur son compte et pas sur login`
-        css moche et peu visible
+        `css moche et peu visible`
+        `améliorer le css des éléments boutons style loupe, le + du newtricount, les différences de polices quand clic sur +, le padding des messages d'erreurs, le CSS de confirmer supprimer le tricount..., pointeur de logout`
         `si échec d'authenfication, on devrait avoir des messages d'erreurs`
-    - bug : le compteur lorsqu'on ajoute des participants (/50) est-il correct? et quand on enlève celui qui possèdê, une croix reste à droite.
+    - `bug : le compteur lorsqu'on ajoute des participants (/50) est-il correct? et quand on enlève celui qui possèdê, une croix reste à droite.`
+        `autre bugs : relancer les tests et débugger`
+            - `functional_tests.tests.JSTest.test_JS_of_listecount_page : pourquoi pas de participant principal lors de la création du tricount`
+            - `testthepageofsomespendings`
+            - `testcurrency bar`
     - `comment enlever l'autocomplétion lors de la création de tricount`
-    - reprendre mes fichiers html, écrire un layout avec des blocs comme dans mes projets edX (si c'est possible)
-    - dans les block body enlever les gros conteneurs quitte à modifier le css
-    - faire un css pour le container et modifier en conséquences les petits bugs de css 
+    - `reprendre mes fichiers html, écrire un layout avec des blocs comme dans mes projets edX (si c'est possible)`
+    - `ans les block body enlever les gros conteneurs quitte à modifier le css`
+    - `faire un css pour le container et modifier en conséquences les petits bugs de css`
     - `mettre des titres aux pages html`
     - modifier mes tests unitaires en créant un setup permettant d'enregistrer et logger systématiquement qqun (tests unitaires et peut-être aussi fonctionnels)
-    - comprendre pourquoi si je suis loggé mais que je relance la page de log on me redemande mes identifiants: changer cela en redirection automatique à mon compte si je suis loggé
+    - c`omprendre pourquoi si je suis loggé mais que je relance la page de log on me redemande mes identifiants: changer cela en redirection automatique à mon compte si je suis loggé`
+    - `CSS des messages d'erreurs : mettre les messages à droite de la boite les concernant et pas en dessous et en + petits caractères.`
     - factorisation des JS : créer un fichier de handler qu'on importe (des handlers sont réécrits plusieurs fois) quitte à leur ajouter des arguments. On pourrait faire un code par classe avec les handlers click, les handlers input etc.
         améliorer le js avec query selector pour plus de lisibilité
         Nettoyer les boutons qui ne servent à rien
         ajouter l'event domcontentloaded
-        améliorer le css des éléments boutons style loupe, le + du newtricount, les différences de polices quand clic sur +, le padding des messages d'erreurs, le CSS de confirmer supprimer le tricount...
+    - pour le clonage de tricount, autoriser qu'on mette une minuscule en première lettre du titre du tricount
     - l'affichage en pound a trop de chiffres après la virgule
-    - pourquoi le clic sur un tricount déjà créé est si lent? Améliorer:
+    - pourquoi le clic sur un tricount déjà créé est si lent? 
+    - bugs
+        - clic newcount quand je supprime le participant principal ça me supprime ce que j'ai entré et me met un message d'erreur pour le titre ou pwd (ce que je n'ai pas rempli).
+        - pb avec le JS de newspending : Avancé et aussi le calcul des montants qui ne semble plus fonctionner, relancer les tests fonctionnels (pb que ce soit lié au fait que j'ai touché au html via des blocks et au CSS)
+        - bug : j'ai rentré une unique dépense mais dans spending-details j'ai un bouton précédent!
+        - depuis l'introduction de la loupe dans currency.html, la barre de recherche n'apparait plus (JS pb)
+    Améliorer:
     - branche pour le chat (suite)
             `copier l'html et voir si ça marche`
             `copie de app et templates`
@@ -404,6 +416,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         sécurité : mettre ma clé d'API non pas dans le code source mais dans une variable d'environnement ou la sécuriser.
         sécurité : introduire le hachage des pwd dans mon application
         vérifier toutes les spécifications.
+        vérifier le côté responsive du site : pas parfait exemple newspending
+        Optionnel : recherche dans les dépenses avec la loupe
         
             
     -modification des dépenses déjà entrées :

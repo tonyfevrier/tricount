@@ -164,6 +164,7 @@ label[for="other"]::before{
 .error,.participant-error{
     color: red;
     font-size: 10px;
+    padding: 0 1.5em;
 }
  
 
@@ -208,9 +209,10 @@ label[for="other"]::before{
     border-right: none;
     background-color: transparent;
     margin-top: 0.2em;
+    margin-bottom: 0.5em;
     width: 85%;
     height: 30px;
-    padding : 0 1em;
+    padding : 1em;
 }
 
 .new_participant:focus{

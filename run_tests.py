@@ -48,7 +48,7 @@ def compile_scss():
     for filename in filenames:
         # Compile with sass all scss files 
         if re.findall(r'.+\.scss$', filename):  
-            commands.append(['C:\Programs\dart-sass\sass.BAT',f"{folder}/{filename}",f"{folder}" + re.sub(".scss",".css",f"/{filename}")])
+            commands.append(['C:\Programs\dart-sass\sass.BAT',f"{folder}/{filename}", re.sub("scss", "css", f"{folder}") + re.sub(".scss",".css",f"/{filename}")])
     return commands
     
 

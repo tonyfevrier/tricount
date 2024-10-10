@@ -8,7 +8,7 @@ let toggleAvance = document.body.querySelector('.special-parameters');
 let currency = document.body.querySelector('.newtricount_currency');
 const footer = document.body.querySelector("footer"); 
 
-if (footer){
+if (footer.innerText){
     const deletebutton = footer.firstElementChild;
     const deletealert = footer.lastElementChild; 
     console.log(deletealert)
