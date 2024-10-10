@@ -1,61 +1,59 @@
+{% extends 'layout.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New spending</title>
+{% block head %}
+    <title>New spending</title> 
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/newspending.css' %}">
-</head>
-<body>
-    <header>
-        <a href="{% url 'spending' idcount %}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-        <p class = "header-title">Nouvelle dépense</p>
-    </header>
-    <main>
-        <form action="{% url 'addspending' idcount %}" method = "post">
-            <input class = "title" type="text" placeholder="Titre" name = "title"> 
+{% endblock %}
 
-            {%if titre == False%}
-                <p class = "notitle">Titre non valable</p>
-            {%endif%}
-            <p class = "counter">0/50</p>
-            <div class = "div-amount">
-                <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount"> 
-                <a href="/choosecurrency?referer=/newspending/{{idcount}}" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
+{% block header %}
+    <a href="{% url 'spending' idcount %}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+    <p class = "header-title">Nouvelle dépense</p>
+{% endblock %}
+
+{% block main %}
+    <form action="{% url 'addspending' idcount %}" method = "post">
+        <input class = "title" type="text" placeholder="Titre" name = "title"> 
+
+        {%if titre == False%}
+            <p class = "notitle">Titre non valable</p>
+        {%endif%}
+        <p class = "counter">0/50</p>
+        <div class = "div-amount">
+            <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount"> 
+            <a href="/choosecurrency?referer=/newspending/{{idcount}}" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
+        </div>
+        <select class = "spender" name="spender" id="spender">
+            {% for participant in participants%}
+            <option class = "spender-participant" value="{{participant}}">{{participant}}</option> 
+            {%endfor%}
+        </select>  
+        <div class = "forwho">
+            <div class ="div-forwho">
+                <input class = "toggle-checkboxes" type="checkbox" checked>
+                Pour qui
             </div>
-            <select class = "spender" name="spender" id="spender">
-                {% for participant in participants%}
-                <option class = "spender-participant" value="{{participant}}">{{participant}}</option> 
-                {%endfor%}
-            </select>  
-            <div class = "forwho">
-                <div class ="div-forwho">
-                    <input class = "toggle-checkboxes" type="checkbox" checked>
-                    Pour qui
+            <button class = "special-parameters">Avancé</button>
+        </div> 
+        <div class = "list-receivers">
+            {% for participant in participants%}
+            <div class = "div-receiver">
+                <input class = "receiver" type="checkbox" name="receiver" id="{{participant}}" value = "{{participant}}" checked>
+                <label class = "receiver-participant" for="{{participant}}">{{participant}}</label> 
+                <div class = "amount-and-parts"> 
+                    <input name = "{{participant}}" type = "text" class = "{{participant}}-amount" value = "0.00">
+                    <p class = "p-currency">{{currency}}</p>
                 </div>
-                <button class = "special-parameters">Avancé</button>
             </div> 
-            <div class = "list-receivers">
-                {% for participant in participants%}
-                <div class = "div-receiver">
-                    <input class = "receiver" type="checkbox" name="receiver" id="{{participant}}" value = "{{participant}}" checked>
-                    <label class = "receiver-participant" for="{{participant}}">{{participant}}</label> 
-                    <div class = "amount-and-parts"> 
-                        <input name = "{{participant}}" type = "text" class = "{{participant}}-amount" value = "0.00">
-                        <p class = "p-currency">{{currency}}</p>
-                    </div>
-                </div> 
-                {% endfor %}
-            </div>
-            <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button>
-            
-            
-            {% csrf_token %}
-        </form>
-    </main>
+            {% endfor %}
+        </div>
+        <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button>
+        
+        {% csrf_token %}
+    </form>
+{% endblock %}
+
+{% block js %}
     <script src = "{%static 'js/newspending.js'%}"></script>
-</body>
-</html>
+{% endblock %}

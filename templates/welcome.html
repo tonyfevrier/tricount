@@ -1,19 +1,18 @@
+{% extends 'layout.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+{% block head %}
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-</head>
-<body>
-    <header>
-        <a class = "welcome" href="{% url 'welcome' %}">Créer un compte</a>
-        <a class = "login" href="{% url 'log' %}">Se connecter</a>
-    </header>
+    <title>Welcome to tricount app</title>
+{% endblock %}
+
+{% block header %}
+    <a class = "welcome" href="{% url 'welcome' %}">Créer un compte</a>
+    <a class = "login" href="{% url 'log' %}">Se connecter</a>
+{% endblock %}
+
+{% block main %}
     <form action="{% url 'register' %}" method = "post">
         {% csrf_token %}
         <input class = "username" type="text" placeholder="Username" name = "username">
@@ -28,6 +27,9 @@
             {% endfor %}
         </ul>
     {% endif %}
+{% endblock %} 
+
+{% block js %}
     <script src = "{% static 'js/welcome.js' %}"></script>
-</body>
-</html>
+{% endblock %}
+ 

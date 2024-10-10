@@ -1,30 +1,32 @@
-{%load static%}
+{% extends 'layout.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{%static 'css/common.css'%}">
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{%static 'css/chat.css'%}">
-    <title>Document</title>
-</head>
-<body>
-    <header>
-        <a href="/count/tricount/{{id}}" class = "backtospending" id = "backtospending"><img width = "20px" src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-        <nav>
-            <p class = "header-title">Titre</p>
-            <p class = "header-participants">Participants</p>
-        </nav>
-    </header>
-    <main>
-    </main>
+    <title>Chat</title>
+{% endblock %}
+
+{% block header %}
+    <a href="/tricount/{{id}}" class = "backtospending" id = "backtospending"><img width = "20px" src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+    <nav>
+        <p class = "header-title">Titre</p>
+        <p class = "header-participants">Participants</p>
+    </nav>
+{% endblock %} 
+
+{% block footer %}
     <form action="">
         <input type="text" class = "send" placeholder = "Ajoutez un message...">
         <button type="submit"  class = "submit"><img width = "20px" src = "{%static 'images/send.png'%}" alt="send"></button>
     </form>
-</body>
-<script src = "chat.js"></script>
-</html>
+{% endblock %}
+
+{% block js %}
+    <script src = "chat.js"></script>
+{% endblock %}
+
+ 
+ 
 
    

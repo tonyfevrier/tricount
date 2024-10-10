@@ -1,49 +1,48 @@
-{%load static%}
+{% extends 'layout.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{%static 'css/common.css'%}">
+{% block head %}
+    <title>Spending details</title> 
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{%static 'css/spending-details.css'%}">
-</head>
-<body>
-    <header>
-        <nav>
-            <a href="{% url 'spending' idcount %}" class = "backtospending" id = "backtospending"><img src="{%static 'images/back.png' %}" width = "20px" alt="Retour en arrière"></a>
-            <a href="{% url 'modifyspending' idcount idspending %}" class = "modify-spending">Modifier</a>
-        </nav>
-        <h1 class = "title-spending">
-            {{spending.title}}
-        </h1>
-        <h2 class = "price-spending">
-            {{spending.amount}}
-        </h2>
-        <nav class = "payer-date">
-            <p class = "payer"> Payé par {{spending.payer}}</p>
-            <p class = "date"> {{spending.date}} </p>
-        </nav>
-    </header>
-    <main>
-        <div class = "forwho"> Pour {{spending.receivers.len}} participants, dont </div>
-        {% for participant,amount in spending.receivers.items %}
-        <div class = "participant">
-            <p class = "participant-name"> {{participant}}</p>
-            <p class = "participant-amount"> {{amount}} </p>
-        </div> 
-        {% endfor%}
-    </main>
-    <footer>
-        {% if idspending != 1 %}
-            <a class = "previous" href = "{% url 'spending-details' idcount previousidspending %}">Précédent</a>
-        {% endif %}
-        {% if idspending != number_of_spending %}
-            <a class = "following" href = "{% url 'spending-details' idcount followingidspending %}">Suivant</a>
-        {% endif %}
-        
-    </footer>
-    <!--<script src = "{%static 'js/spending-details.js' %}"></script>-->
-</body>
-</html>
+{% endblock %}
+
+{% block header %}
+    <nav>
+        <a href="{% url 'spending' idcount %}" class = "backtospending" id = "backtospending"><img src="{%static 'images/back.png' %}" width = "20px" alt="Retour en arrière"></a>
+        <a href="{% url 'modifyspending' idcount idspending %}" class = "modify-spending">Modifier</a>
+    </nav>
+    <h1 class = "title-spending">
+        {{spending.title}}
+    </h1>
+    <h2 class = "price-spending">
+        {{spending.amount}}
+    </h2>
+    <nav class = "payer-date">
+        <p class = "payer"> Payé par {{spending.payer}}</p>
+        <p class = "date"> {{spending.date}} </p>
+    </nav>
+{% endblock %}
+
+{% block main %}
+    <div class = "forwho"> Pour {{spending.receivers.len}} participants, dont </div>
+    {% for participant,amount in spending.receivers.items %}
+    <div class = "participant">
+        <p class = "participant-name"> {{participant}}</p>
+        <p class = "participant-amount"> {{amount}} </p>
+    </div> 
+    {% endfor%}
+{% endblock %}
+
+{% block footer %}
+    {% if idspending != 1 %}
+        <a class = "previous" href = "{% url 'spending-details' idcount previousidspending %}">Précédent</a>
+    {% endif %}
+    {% if idspending != number_of_spending %}
+        <a class = "following" href = "{% url 'spending-details' idcount followingidspending %}">Suivant</a>
+    {% endif %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+ 

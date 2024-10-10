@@ -1,20 +1,18 @@
+{% extends 'layout.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block head %}
     <title>Modify spending</title>
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/newspending.css' %}">
-</head>
-<body>
-    <header>
-        <a href="{% url 'spending' count.id %}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-        <p class = "header-title">Modifier la dépense</p>
-    </header>
-    <main>
+{% endblock %}
+
+{% block header %}
+    <a href="{% url 'spending' count.id %}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+    <p class = "header-title">Modifier la dépense</p>
+{% endblock %}
+
+{% block main %}
         <form action="{% url 'modifyspendingregister' count.id spending.id %}" method = "post">
             <input class = "title" type="text" placeholder="{{spending.title}}" value = {{spending.title}} name = "title"> 
             {%if titre == False%}
@@ -65,17 +63,19 @@
             <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button>
             {% csrf_token %}
         </form>
-    </main>
-    <footer>
-        <button class = "delete-spending"> Supprimer cette dépense</button>
-        <div class = 'delete-confirmation' hidden>
-            Confirmez-vous vouloir supprimer la dépense 
-            <div class = 'alert'>
-                <a class = 'yesno' id = "yes" href = "{% url 'deletespending' count.id spending.id %}">Oui</a>
-                <a class = 'yesno' id = "no" href = ''>Non</a>
-            </div>
+{% endblock %}
+
+{% block footer %}
+    <button class = "delete-spending"> Supprimer cette dépense</button>
+    <div class = 'delete-confirmation' hidden>
+        Confirmez-vous vouloir supprimer la dépense 
+        <div class = 'alert'>
+            <a class = 'yesno' id = "yes" href = "{% url 'deletespending' count.id spending.id %}">Oui</a>
+            <a class = 'yesno' id = "no" href = ''>Non</a>
         </div>
-    </footer>
+    </div>
+{% endblock %}
+
+{% block js %}
     <script src = "{%static 'js/newspending.js'%}"></script>
-</body>
-</html>
+{% endblock %}

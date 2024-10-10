@@ -370,7 +370,9 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     - bug : le compteur lorsqu'on ajoute des participants (/50) est-il correct? et quand on enlève celui qui possèdê, une croix reste à droite.
     - `comment enlever l'autocomplétion lors de la création de tricount`
     - reprendre mes fichiers html, écrire un layout avec des blocs comme dans mes projets edX (si c'est possible)
-    - mettre des titres aux pages html
+    - dans les block body enlever les gros conteneurs quitte à modifier le css
+    - faire un css pour le container et modifier en conséquences les petits bugs de css 
+    - `mettre des titres aux pages html`
     - modifier mes tests unitaires en créant un setup permettant d'enregistrer et logger systématiquement qqun (tests unitaires et peut-être aussi fonctionnels)
     - comprendre pourquoi si je suis loggé mais que je relance la page de log on me redemande mes identifiants: changer cela en redirection automatique à mon compte si je suis loggé
     - factorisation des JS : créer un fichier de handler qu'on importe (des handlers sont réécrits plusieurs fois) quitte à leur ajouter des arguments. On pourrait faire un code par classe avec les handlers click, les handlers input etc.
@@ -390,7 +392,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             voir comment lancer automatiquement app.py (lorsqu'un utilisateur entre dans le chat? ou lorsqu'un tricount est créé?) (peut-être qu'on le lançait juste pour voir les affichages et qu'on n'a pas besoin de le lancer.)
     - faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
     - pour le projet edX:
-        voir toutes les branches accessibles uniquement via login (@auth_login)
+        voir pour mettre des branches accessibles uniquement via login (@auth_login)
         regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.
         faire les factorisations ci-dessus pour améliorer mon appli
         apprivoiser les django channels pour intégrer le chat

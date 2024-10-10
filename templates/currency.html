@@ -1,20 +1,20 @@
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choice of the currency</title>
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Currency</title> 
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/currency.css' %}">
-</head>
-<body>
-    <header>
-        <a class = "backtonewcount" id = "backtonewcount"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-        <input type="text" hidden name="research" class ="research">
-        <p id = "select">Sélectionner une devise</p>
-        <button href="" class = "currencyresearch" id = "loupe">loupe</button>
-    </header>
+{% endblock %}
+
+{% block header %}
+    <a class = "backtonewcount" id = "backtonewcount"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+    <input type="text" hidden name="research" class ="research">
+    <p id = "select">Sélectionner une devise</p>
+    <button href="" class = "currencyresearch" id = "loupe">loupe</button>
+{% endblock %}
+
+{% block main %}
     <main>
         <a hidden class = "EUR" name = "link-newcount">
             <p class = "acronym"> EUR </p>
@@ -44,6 +44,8 @@
             {% csrf_token %}
         </form>
     </main>
+{% endblock %} 
+
+{% block js %}
     <script src = "{% static 'js/currency.js'%}"></script>
-</body>
-</html>
+{% endblock %}

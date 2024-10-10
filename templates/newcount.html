@@ -1,21 +1,18 @@
-{%load static%}
+{% extends 'layout.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nouveau tricount</title>
+{% block head %}
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/newcount.css' %}">
-</head>
-<body>
-    <header> 
-        <a href="{% url 'listecount' %}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-        <div class = "titre">Nouveau tricount</div>
-    </header> 
-    <main> 
+    <title>Nouveau tricount</title>
+{% endblock %}
+
+{% block header %}
+    <a href="{% url 'listecount' %}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+    <div class = "titre">Nouveau tricount</div>
+{% endblock %}
+
+{% block main %} 
         <!--<form action="">
             <div class = "test" >
                 <input class = "iden1" type="radio" id="iden1" name="iden1" value="trip">
@@ -75,7 +72,8 @@
             <p class="participant-error">Il faut au moins un participant.</p>
         {% endif %}
         <script src = "{%static 'js/newcount.js'%}"></script> 
-        
-    </main>
-</body>
-</html>
+{% endblock %}
+
+{% block js %}
+    <script src = "{%static 'js/newcount.js'%}"></script> 
+{% endblock %}

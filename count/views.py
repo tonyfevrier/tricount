@@ -11,6 +11,8 @@ def welcome(request):
     return render(request, "welcome.html")
 
 def log(request): 
+    if request.user.is_authenticated:
+        return redirect(reverse('listecount'))
     return render(request, "login.html")    
 
 def register(request):

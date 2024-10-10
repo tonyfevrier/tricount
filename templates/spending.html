@@ -1,62 +1,57 @@
-{%load static%}
+{% extends 'layout.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block head %}
     <title>Spending</title> 
     <link rel="stylesheet" href="{% static 'css/spending.css'%}">
-</head>
-<body>
-    <header>
-        <nav class = "header-nav"> 
-            <a href="{% url 'listecount' %}" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-            <a class = "tricount-characteristics" href = "{% url 'modifycount' count.id %}" >
-                <p class = "tricount-title">{{count.title}}</p>
-                {% for name in names%}
-                <p class = "tricount-participants">{{name}}</p>
-                {% endfor%}
-            </a>
-            <a href=""><img width = 20px src="{%static 'images/loupe.png'%}" alt="loupe de recherche"></a>
-            <a href="{% url 'chat' count.id %}"><img width = 20px src="{%static 'images/cloche.png'%}" alt="chat"></a>
-            <a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>
-            <a href="" class="options"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </a>
-        </nav>
-        <div class = header-spending>
-            <a class = "gotospending" href = "{% url 'spending' count.id %}">Dépenses</a>
-            <a class = "gotoequilibria" href = "{% url 'equilibria' count.id %}">Equilibres</a>
-        </div>
-    </header>
-    <main>
-        {%for spend in spending%}
-        <a class = "spending" id="spending-{{spend.id}}" href = "{% url 'spending-details' count.id spend.id %}">
-            <div class = "spending-reason">
-                <p class = "spending-title">{{spend.title}}</p>
-                <p class = "spending-payer">{{spend.payer}}</p>
-            </div>
-            <div class = "spending-amount-div">
-                <p class = "spending-amount">{{spend.amount}}</p>
-                <p class = "spending-date">Hier</p>
-            </div>
+{% endblock %}
+
+{% block header %}
+    <nav class = "header-nav"> 
+        <a href="{% url 'listecount' %}" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a class = "tricount-characteristics" href = "{% url 'modifycount' count.id %}" >
+            <p class = "tricount-title">{{count.title}}</p>
+            {% for name in names%}
+            <p class = "tricount-participants">{{name}}</p>
+            {% endfor%}
         </a>
-        {%endfor%}
-    </main>
-    
-    
-    <footer>
-        <a class = "new-spending" href="{% url 'newspending' count.id %}">+</a>
-        <div class = footer>
-            <div class = "total-cost">
-                <p>Mon coût total</p>
-                <p>{{credit_owner}} {{count.currency}}</p>
-            </div>
-            <div class = "total-spending">
-                <p>Total dépenses</p>
-                <p>{{totalcost}} {{count.currency}}</p>
-                <p>{{totalpound}} GBP</p>
-            </div>
+        <a href=""><img width = 20px src="{%static 'images/loupe.png'%}" alt="loupe de recherche"></a>
+        <a href="{% url 'chat' count.id %}"><img width = 20px src="{%static 'images/cloche.png'%}" alt="chat"></a>
+        <a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>
+        <a href="" class="options"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </a>
+    </nav>
+    <div class = header-spending>
+        <a class = "gotospending" href = "{% url 'spending' count.id %}">Dépenses</a>
+        <a class = "gotoequilibria" href = "{% url 'equilibria' count.id %}">Equilibres</a>
+    </div>
+{% endblock %}
+
+{% block main %}
+    {%for spend in spending%}
+    <a class = "spending" id="spending-{{spend.id}}" href = "{% url 'spending-details' count.id spend.id %}">
+        <div class = "spending-reason">
+            <p class = "spending-title">{{spend.title}}</p>
+            <p class = "spending-payer">{{spend.payer}}</p>
         </div>
-    </footer>
-</body>
-</html>
+        <div class = "spending-amount-div">
+            <p class = "spending-amount">{{spend.amount}}</p>
+            <p class = "spending-date">Hier</p>
+        </div>
+    </a>
+    {%endfor%}
+{% endblock %}
+
+{% block footer %}
+    <a class = "new-spending" href="{% url 'newspending' count.id %}">+</a>
+    <div class = footer>
+        <div class = "total-cost">
+            <p>Mon coût total</p>
+            <p>{{credit_owner}} {{count.currency}}</p>
+        </div>
+        <div class = "total-spending">
+            <p>Total dépenses</p>
+            <p>{{totalcost}} {{count.currency}}</p>
+            <p>{{totalpound}} GBP</p>
+        </div>
+    </div>
+{% endblock %}

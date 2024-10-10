@@ -1,21 +1,18 @@
-{%load static%}
+{% extends 'layout.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nouveau tricount</title>
+{% block head %}
+    <title>Modify tricount</title> 
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/modifycount.css' %}">
-</head>
-<body>
-    <header> 
-        <a href="{% url 'spending' count.id %}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-        <div class = "titre">Modifier le tricount</div>
-    </header> 
-    <main>
+{% endblock %}
+
+{% block header %}
+    <a href="{% url 'spending' count.id %}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+    <div class = "titre">Modifier le tricount</div>
+{% endblock %}
+
+{% block main %}
         <form method="POST" class = "tricount" action="{% url 'modifycountregister' count.id %}">
             {% csrf_token %}
             <input type ="text" class = "tricount_title" value = "{{count.title}}" name = "tricount_title">  
@@ -23,7 +20,7 @@
             {% if titre == False %}
                 <p class="error">Le titre doit comporter au moins un caractère.</p>
             {% endif %}
- 
+
             <input type ="text" class = "tricount_description" value = "{{count.description}}" name = "tricount_description">
             
             <p class = "currency"> Devise : {{count.currency}} </p>
@@ -49,22 +46,20 @@
         </form>
         <input type ="text" name="new_participant" class ='new_participant' placeholder="Autre participant">
         <button class = "add_participant">Ajouter</button>
-        <!--{% if ptcpt == False %}
-            <p class="participant-error">Il faut au moins un participant.</p>
-        {% endif %}-->
-        <!--<script src = "{%static 'js/modifycount.js'%}"></script>--> 
-        
-    </main>
-    <footer>
-        <button class = "delete-tricount"> Supprimer ce tricount</button>
-        <div class = 'delete-confirmation' hidden>
-            Confirmez-vous vouloir supprimer le tricount 
-            <div class = 'alert'>
-                <a class = 'yesno' id = "yes" href = "{% url 'deletecount' count.id %}">Oui</a>
-                <a class = 'yesno' id = "no" href = ''>Non</a>
-            </div>
+{% endblock %}
+
+{% block footer %}
+    <button class = "delete-tricount"> Supprimer ce tricount</button>
+    <div class = 'delete-confirmation' hidden>
+        Confirmez-vous vouloir supprimer le tricount 
+        <div class = 'alert'>
+            <a class = 'yesno' id = "yes" href = "{% url 'deletecount' count.id %}">Oui</a>
+            <a class = 'yesno' id = "no" href = ''>Non</a>
         </div>
-    </footer>
+    </div>
+{% endblock %}
+
+{% block js %}
     <script src="{% static 'js/modifycount.js' %}"></script>
-</body>
-</html>
+{% endblock %}
+

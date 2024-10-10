@@ -1,18 +1,18 @@
+{% extends 'layout.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel = "stylesheet" href = "{%static 'css/common.css'%}">
-    <link rel = "stylesheet" href = "{%static 'css/login.css'%}">
-</head>
-<body>
-    <header>
-        <a class = "welcome" href="{% url 'welcome'%}">Créer un compte</a>
-        <a class = "login" href="{% url 'log'%}">Se connecter</a>
-    </header>
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Log in</title>
+{% endblock %}
+
+{% block header %}
+    <a class = "welcome" href="{% url 'welcome' %}">Créer un compte</a>
+    <a class = "login" href="{% url 'log' %}">Se connecter</a>
+{% endblock %}
+
+{% block main %}
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <input class = "username" type="text" placeholder="Username" name = "username"> 
@@ -25,7 +25,12 @@
                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
             {% endfor %}
         </ul>
-    {% endif %}
+    {% endif %} 
+{% endblock %}
+
+{% block js %}
     <script src = "{% static 'js/login.js' %}"></script>
-</body>
-</html>
+{% endblock %}
+
+
+ 

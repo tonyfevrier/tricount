@@ -1,24 +1,21 @@
+{% extends 'layout.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tricount</title>
+{% block head %}
+    <title>Tricount list</title>
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
-</head>
-<body>
-    <header>
-        <div class="titre"> tricount</div>
-        <nav class = "header_data">
-            <a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>
-            <button data-button="JS" class="parameters"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </button>
-        </nav>
-    </header>
+{% endblock %}
 
+{% block header %}
+    <div class="titre"> tricount</div>
+    <nav class = "header_data">
+        <a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>
+        <button data-button="JS" class="parameters"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </button>
+    </nav>
+{% endblock %}
+
+{% block main %}
     <div data-div = "hidden" class = "parameters-options" hidden>
         <a href=""> Premium </a>
         <a class = "myparameters" href="{% url 'logout' %}"> Mes paramètres </a>
@@ -87,26 +84,29 @@
             <p>Faire ses comptes entre amis</p>
         </a>
     </div>
-    <footer>
-        <button data-button="JS" class ="id_newcount" id = "id_newcount"> + </button>
+{% endblock %}
 
-        <div data-div = "hidden" class = "choosecount" hidden>
-            <a href="{% url 'newcount' %}" id = "countfromzero"> Créer un nouveau tricount </a>
-            <button class = "clonecount" href=""> Clôner un tricount existant </button> 
-        </div>
+{% block footer %}
+    <button data-button="JS" class ="id_newcount" id = "id_newcount"> + </button>
 
-        <div data-div = "hidden" class = 'form-pwdcount' hidden>
-            <form  class = "pwdcount" method = "POST" action = "{% url 'clonecount' %}"> 
-                <input type="text" class = "tricount-title" placeholder="Titre du tricount : commencez par une majuscule" name = "tricount-title">
-                <input type="password" class = "password" placeholder="Mot de passe du tricount" name = "password">
-                <input type="submit" class = "pwdsubmit" placeholder="submit password">
-                {% csrf_token %}
-                {% csrf_token %}
-            </form>
-        </div> 
+    <div data-div = "hidden" class = "choosecount" hidden>
+        <a href="{% url 'newcount' %}" id = "countfromzero"> Créer un nouveau tricount </a>
+        <button class = "clonecount" href=""> Clôner un tricount existant </button> 
+    </div>
 
-    </footer>
+    <div data-div = "hidden" class = 'form-pwdcount' hidden>
+        <form  class = "pwdcount" method = "POST" action = "{% url 'clonecount' %}"> 
+            <input type="text" class = "tricount-title" placeholder="Titre du tricount : commencez par une majuscule" name = "tricount-title">
+            <input type="password" class = "password" placeholder="Mot de passe du tricount" name = "password">
+            <input type="submit" class = "pwdsubmit" placeholder="submit password">
+            {% csrf_token %}
+            {% csrf_token %}
+        </form>
+    </div> 
+{% endblock %}
+
+{% block js %}
     <script src="{% static 'js/index2.js' %}"></script>
+{% endblock %}
 
-</body>
-</html>
+    

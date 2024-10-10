@@ -1,25 +1,25 @@
-{%load static%}
+{% extends 'layout.html' %}
+{% load static %}
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+{% block head %}
+    <title>Log out</title>
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/logout.css' %}">
-</head>
-<body>
-    <header>
-        <nav class = "navbar">
-            <a href="{% url 'listecount' %}" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" width="20px" alt="Retour en arrière"></a>
-            <p>Mes paramètres</p>
-        </nav>
-        <div class = "owner-title">
-            <p class = "firstletter"> {{userobject.username.0}} </p>
-            <p class = "hello"> Bonjour {{userobject.username}}</p>
-            <p class = "mail"> {{userobject.email}}</p>
-        </div>
-    </header>
+{% endblock %}
+
+{% block header %}
+    <nav class = "navbar">
+        <a href="{% url 'listecount' %}" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" width="20px" alt="Retour en arrière"></a>
+        <p>Mes paramètres</p>
+    </nav>
+    <div class = "owner-title">
+        <p class = "firstletter"> {{userobject.username.0}} </p>
+        <p class = "hello"> Bonjour {{userobject.username}}</p>
+        <p class = "mail"> {{userobject.email}}</p>
+    </div>
+{% endblock %}
+
+{% block main %}
     <main>
         <div class="main-sections">Mes paramètres</div>
         <form action = "" class = "myparameters">
@@ -43,5 +43,4 @@
     <form action="{% url 'delog' %}">
         <input type="submit" class="logout" placeholder="Déconnexion"> 
     </form> 
-</body>
-</html>
+{% endblock %}
