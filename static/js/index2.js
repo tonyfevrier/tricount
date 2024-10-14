@@ -1,71 +1,56 @@
-/*
-Essayer de ne mettre qu'un événement sur le doc et d'assigner des méthodes différentes suivant là où on clique.
-    click sur l'engrenage : apparition d'un élément 
-    click sur bas : apparition d'un élément
-    click sur qqch qui n'est ni un lien ni un cadre ouvert : réinitialisation de la page initiale.
-    clic sur un lien de l'élément généré par l'engrenage : un autre élément remplace le précédent.
-*/
+window.addEventListener('DOMContentLoaded', () => {
+    // Get all possible popups initially hidden
+    let elemtsInitiallyHidden = document.body.querySelectorAll('[data-div = hidden]'); 
 
-document.addEventListener("click", goback);
+    // Behaviour when clicking on the page
+    document.addEventListener("click", (event) => click_on_page(event, elemtsInitiallyHidden));
 
-let parameter = document.querySelector('.parameters');  
-let parameters_options = document.querySelector('.parameters-options'); 
-let newcount = document.body.querySelector('.id_newcount');
-let clonecount = document.body.querySelector('.clonecount');
-let choosecountpopup = document.body.querySelector('.choosecount');
-let pwdcountpopup = document.body.querySelector('.form-pwdcount');
-let form = pwdcountpopup.firstElementChild; 
-let titleinput = form.firstElementChild;  
-let pwdinput = document.body.querySelector('.password');
+    // Specific behaviour clicks
+    document.querySelector('.parameters').addEventListener("click", (event) => click_on_parameter(event, elemtsInitiallyHidden));
+    document.querySelector('.parameters-options').addEventListener("click", click_on_parameter_options);
+    document.querySelector('.id_newcount').addEventListener("click", (event) => click_on_newcount(event, elemtsInitiallyHidden));
+    document.querySelector('.choosecount').addEventListener("click", click_on_choose_count);
 
-let error = document.createElement("div");
-error.dataset.div = "hidden";
-error.className = "error";
-error.innerHTML = "Remplissez le titre et le mot de passe";
-error.hidden = true;
-form.append(error);
-let elemtsInitiallyHidden = document.body.querySelectorAll('[data-div = hidden]'); 
- 
-parameter.addEventListener("click", clickOnParameter);
-parameters_options.addEventListener("click",clickOnParameterOptions);
-newcount.addEventListener("click", clickOnNewcount);
-choosecountpopup.addEventListener("click", clickOnChooseCount);
-form.addEventListener("submit", clickOnSubmit);
-form.addEventListener("submit", clickOnSubmit);
-
-
-
+    // Event when submitting clonecount form
+    document.querySelector('.form-pwdcount form').addEventListener("submit", click_on_submit); 
+})
 
 /*Events handlers */
-function clickOnParameter(event) { 
-    if (isOnePopUpApparent()) return;
-    if (event.currentTarget == parameter){ 
-        toggle(parameters_options);  
-        display_block_for_children(parameters_options)
-        event.stopPropagation(); //éviter que le listener goback soit lancé
+function click_on_parameter(event, elemtsInitiallyHidden) { 
+    // Do nothing if a popup is opened
+    if (isOnePopUpApparent(elemtsInitiallyHidden)) return;
+
+    // Display a popup if click on parameter
+    if (event.currentTarget == document.querySelector('.parameters')){ 
+        toggle(document.querySelector('.parameters-options'));  
+        style_display_block_for_children(document.querySelector('.parameters-options'));
+        
+        // Prevent goback from being launched
+        event.stopPropagation();
     }
 }
 
-function clickOnParameterOptions(event){
-    if (!event.target.dataset.button) return;
-    /*on récupère la classe de l'élément JS
-    on fait apparaître l'élément dont le nom est le nom de la classe -options.
-    on cache parameter options*/
-    const classname = event.target.className;
-    toggle(parameters_options);  
-    const child = document.body.querySelector(`.${classname}-options`)
-    toggle(child);
-    display_block_for_children(child);
+function click_on_parameter_options(event){
+    // Do nothing if click on other then a button
+    if (!event.target.dataset.button) return; 
+
+    // Display the child element the user clicks on 
+    toggle(document.querySelector('.parameters-options'));  
+    toggle(document.querySelector(`.${event.target.className}-options`));
+    style_display_block_for_children(document.querySelector(`.${event.target.className}-options`));
+
+    // Prevent goback from being launched
     event.stopPropagation();
 }
 
-function goback(event){ 
-    // si aucune popup n'est apparente, on garde le comportement initial de la page.
-    if (!isOnePopUpApparent()) return;
-    //si on ne clique pas sur une div ayant l'attribut data-div, on retourne à la page pop up ouverte.
+function click_on_page(event, elemtsInitiallyHidden){ 
+    // Do nothing if a popup is opened
+    if (!isOnePopUpApparent(elemtsInitiallyHidden)) return;
+
+    // Hide all opened popups if the user does not click on it
     if (!event.target.closest('div')?.dataset.div){ 
-        event.preventDefault(); //désactiver les liens.
-        hide();
+        event.preventDefault(); 
+        hide_all_popup_elements(elemtsInitiallyHidden);
     }
 }
 
@@ -75,7 +60,8 @@ function toggle(elem){
     elem.hidden = !elem.hidden;
 }
 
-function isOnePopUpApparent(){
+function isOnePopUpApparent(elemtsInitiallyHidden){
+    /* Returns true of a popup is opened */
     let bool = false;
     for (elem of elemtsInitiallyHidden){ 
         if (elem.hidden === false){ 
@@ -85,42 +71,46 @@ function isOnePopUpApparent(){
     return bool;
 }
 
-function hide(){
-    //on récupère tous les éléments ayant un data-div = hidden et on les cache.
+function hide_all_popup_elements(elemtsInitiallyHidden){
     for (elem of elemtsInitiallyHidden) elem.hidden = true;
 }
 
-function display_block_for_children(elem){
+function style_display_block_for_children(elem){
     for (let child of elem.children){
         child.style.display = "block";
     }
 }
 
-function clickOnNewcount(event){
-    /*Fonction qui fait apparaître un choix sur la façon de créer le tricount*/
-    if (isOnePopUpApparent()) return;
-    if (pwdcountpopup.hidden === false) return;
-    choosecountpopup.hidden = false;
+function click_on_newcount(event, elemtsInitiallyHidden){
+    // Do nothing if a popup or the last form are opened
+    if (isOnePopUpApparent(elemtsInitiallyHidden)) return;
+    if (!document.querySelector('.form-pwdcount').hidden) return;
+
+    // Display a popup to choose the way to create a tricount
+    document.querySelector('.choosecount').hidden = false;
     event.stopPropagation();
 }
 
-function clickOnChooseCount(event){
-    /*Fonction qui ouvre la popup demandant le mot de passe du tricount à clôner*/ 
-    // Si on clique sur autre chose que clonecount onretourne 
-    // sinon je cache idnewcount, et je rends visible le form, et j'empêche la propag au clic du document
-
-    if (event.target != clonecount) return;
-    choosecountpopup.hidden = true;
-    pwdcountpopup.hidden = false;  
+function click_on_choose_count(event){
+    /* Open the form to clone an existing tricount*/  
+    if (event.target != document.body.querySelector('.clonecount')) return;
+    document.querySelector('.choosecount').hidden = true;
+    document.querySelector('.form-pwdcount').hidden = false;  
     event.stopPropagation();
 }
 
-function clickOnSubmit(event){
-    /*Fonction qui traite le cas où l'utilisateur oublie de mettre un mot de passe. Apparition d'un message d'erreur */
-    /*Si on clique et que le input est vide */  
-    if (pwdinput.value !== "Mot de passe du tricount" && pwdinput.value !== "" && titleinput.value !== "Titre du tricount" && titleinput.value !== "") return;    
+function click_on_submit(event){
+    /* Display an error message if the user does not fill an input in the clone count form */
+    if (document.querySelector('.password').value !== "Mot de passe du tricount" 
+        && document.querySelector('.password').value !== "" 
+        && document.querySelector('.tricount-title').value !== "Titre du tricount" 
+        && document.querySelector('.tricount-title').value !== "") return;    
+    
+    // Create an error message
     event.preventDefault(); 
-    error.hidden = false;  
-    titleinput.value = ''; 
-    pwdinput.value = ''; 
+    document.querySelector('.error').hidden = false; 
+    
+    // Clear inputs
+    document.querySelector('.tricount-title').value = ''; 
+    document.querySelector('.password').value = ''; 
 }

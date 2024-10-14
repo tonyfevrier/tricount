@@ -385,6 +385,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         améliorer le js avec query selector pour plus de lisibilité
         Nettoyer les boutons qui ne servent à rien
         ajouter l'event domcontentloaded
+        bien documenter
     - pour le clonage de tricount, autoriser qu'on mette une minuscule en première lettre du titre du tricount
     - l'affichage en pound a trop de chiffres après la virgule
     - pourquoi le clic sur un tricount déjà créé est si lent? 
@@ -393,6 +394,9 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - pb avec le JS de newspending : Avancé et aussi le calcul des montants qui ne semble plus fonctionner, relancer les tests fonctionnels (pb que ce soit lié au fait que j'ai touché au html via des blocks et au CSS)
         - bug : j'ai rentré une unique dépense mais dans spending-details j'ai un bouton précédent!
         - depuis l'introduction de la loupe dans currency.html, la barre de recherche n'apparait plus (JS pb)
+    - centrer le Bonjour Tony de la page logout
+    - si le titre et le pwd pr cloner ne correspondent à rien, ajouter un message l'indiquant.
+    - mettre aussi le msg d'erreur Remplissez mdp en rouge.
     Améliorer:
     - branche pour le chat (suite)
             `copier l'html et voir si ça marche`
