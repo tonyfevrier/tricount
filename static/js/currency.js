@@ -1,50 +1,54 @@
-let header = document.querySelector('header');
-let select = header.querySelector('p');
-let backtonewcount = document.querySelector('.backtonewcount');
-let loupe = document.querySelector('.currencyresearch');
-let research = document.querySelector('.research');
-let currencies = document.querySelectorAll('a[name = "link-newcount"]'); 
-header.addEventListener("click", userClicking);
-research.addEventListener("input",userSearching);
+window.addEventListener('DOMContentLoaded', () => {
 
-//The href of the links depends on the referer url : we extract this information and add it to the links
-const url = window.location.search;
-const params = new URLSearchParams(url);
+    //The href of the links depends on the referer url : we extract this information and add it to the links 
+    const params = new URLSearchParams(window.location.search);
 
-backtonewcount.href = params.get('referer');
-for (let currency of currencies){ 
-    currency.href = params.get("referer") +"?currency=" + currency.className; 
-}
+    document.querySelector('.backtonewcount').href = params.get('referer');
+    const currencies = document.querySelectorAll('a[name = "link-newcount"]')
+    for (let currency of currencies){ 
+        currency.href = params.get("referer") +"?currency=" + currency.className; 
+    }
 
-function userClicking(event){
-    if (!backtonewcount.contains(event.target) && !loupe.contains(event.target)) return;
+    // Event when clicking on the header
+    document.querySelector('header').addEventListener("click", user_clicking);
 
-    //Clic sur la loupe fait apparaître la barre de recherche. 
-    if (loupe.contains(event.target)){
-        toggleHeader();
+    // Event for research bar
+    document.querySelector('.research').addEventListener("input", (event) => user_searching(event, currencies));
+})
+
+function user_clicking(event){
+    // Do nothing if the click is not on these buttons
+    if (!document.querySelector('.backtonewcount').contains(event.target) 
+        && !document.querySelector('.currencyresearch').contains(event.target)) return;
+
+    // Clic on research displays a search bar
+    if (document.querySelector('.currencyresearch').contains(event.target)){
+        toggle_header();
     } 
  
-    //Clic sur le retour quand la barre de recherche est là.  
-    if (loupe.hidden === true && backtonewcount.contains(event.target)){
+    // Clic on back when the search bar is opened only hide the search bar 
+    if (document.querySelector('.currencyresearch').hidden === true 
+        && document.querySelector('.backtonewcount').contains(event.target)){
         event.preventDefault();
-        toggleHeader();
+        toggle_header();
     } 
 }
 
-function userSearching(event){
+function user_searching(event, currencies){
+    /* Displays or hide currencies whether they contain what the user writes or not */ 
     for (let currency of currencies){  
-        hideOrPrintCurrency(currency,event.target.value); 
+        hide_or_print_currency(currency, event.target.value); 
     }
 }
 
-function toggleHeader(){
+function toggle_header(){
     /*Function which toggle the header when we wants to do a research or no*/
-    research.hidden = !research.hidden;
-    select.hidden = !select.hidden;
-    loupe.hidden = !loupe.hidden;
+    document.querySelector('.research').hidden = !document.querySelector('.research').hidden;
+    document.querySelector('header').querySelector('p').hidden = !document.querySelector('header').querySelector('p').hidden;
+    document.querySelector('.currencyresearch').hidden = !document.querySelector('.currencyresearch').hidden;
 }
 
-function hideOrPrintCurrency(currency, string){
+function hide_or_print_currency(currency, string){
     /*Function which hides or prints the currency if it contains the string or not.  
     
     Inputs : 
@@ -52,10 +56,11 @@ function hideOrPrintCurrency(currency, string){
         - string (str)    
     */
 
-    let acronym = currency.querySelector(".acronym").textContent;
-    let entire = currency.querySelector(".currencyentire").textContent; 
+    const acronym = currency.querySelector(".acronym").textContent;
+    const entire = currency.querySelector(".currencyentire").textContent; 
 
-    if (acronym.includes(string) || entire.includes(string) || acronym.includes(majuscule(string)) || entire.includes(majuscule(string))){ 
+    if (acronym.includes(string) || entire.includes(string) ||
+        acronym.includes(majuscule(string)) || entire.includes(majuscule(string))){ 
         currency.style.display = 'flex';
     } else {
         currency.style.display = 'none';
@@ -66,5 +71,3 @@ function majuscule(chaine){
     /*Function which puts the first letter in majuscule*/
     return chaine[0].toUpperCase() + chaine.slice(1)
 } 
-
-
