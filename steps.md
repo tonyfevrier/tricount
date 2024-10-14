@@ -418,6 +418,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         vérifier toutes les spécifications.
         vérifier le côté responsive du site : pas parfait exemple newspending
         Optionnel : recherche dans les dépenses avec la loupe
+        ajouter l'obligation d'enregistrer un email valide
         
             
     -modification des dépenses déjà entrées :

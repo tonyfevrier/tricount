@@ -1,53 +1,36 @@
-let username = document.querySelector('.username');
-let email = document.querySelector('.email');
-let password = document.querySelector('.password');
-let submit = document.querySelector('.submit');
- 
-submit.addEventListener("click", blank);
+window.addEventListener('DOMContentLoaded', () =>{ 
+    document.querySelector('.submit').addEventListener("click", (event) => tell_lack_input(event));
+})
 
-let userlacking = document.createElement('p');
-let emaillacking = document.createElement('p');
-let pwdlacking = document.createElement('p');
+function tell_lack_input(event){
+    /* Prevents the form to be sent if the user has not entered username or email or password. */
 
-userlacking.textContent = "A username is needed";
-emaillacking.textContent = "An email is needed";
-pwdlacking.textContent = "A password is needed";
-userlacking.className = "userlacking lack";
-emaillacking.className = "emaillacking lack";
-pwdlacking.className = "pwdlacking lack";
-userlacking.hidden = true;
-emaillacking.hidden = true;
-pwdlacking.hidden = true;
-username.after(userlacking);
-email.after(emaillacking);
-password.after(pwdlacking);
-
- 
-function blank(event){
-    /*function which prevents the form to be sent if the user has not entered username or email or password.
-    It also add an element telling the lack of username/email/password*/
+    // Remove existing messages
+    const printed_errors = document.querySelectorAll('.lack'); 
+        for (error of printed_errors){error.remove();}
     
-    if (username.value.length == 0){
+    // Create error messages if one input is empty
+    if (document.querySelector('.username').value.length == 0){
         event.preventDefault(); 
-        userlacking.hidden = false;
-    } else {
-        userlacking.hidden = true;
-    }
-
+        create_error_element("A username is needed", document.querySelector('.username')) 
+    } 
     
-    if (email.style.display != 'none' && email.value.length == 0){
+    if (document.querySelector('.email') && document.querySelector('.email').style.display != 'none' && document.querySelector('.email').value.length == 0){
         event.preventDefault(); 
-        emaillacking.hidden = false;
-    } else {
-        emaillacking.hidden = true;
-    }
+        create_error_element("An email is needed", document.querySelector('.email')) 
+    } 
 
-    if (password.value.length == 0){
+    if (document.querySelector('.password').value.length == 0){
         event.preventDefault(); 
-        pwdlacking.hidden = false;
-    } else {
-        pwdlacking.hidden = true;
-    }
+        create_error_element("A password is needed", document.querySelector('.password')) 
+    } 
 }
-  
+
+
+function create_error_element(text, parent){  
+    const userlacking = document.createElement('p');
+    userlacking.textContent = text;
+    userlacking.className = "lack"; 
+    parent.after(userlacking);  
+}
  

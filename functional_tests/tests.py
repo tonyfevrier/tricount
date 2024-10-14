@@ -58,27 +58,28 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         #Il tente d'envoyer le formulaire sans username puis sans email et password, le formulaire n'est pas envoyé et des éléments apparaissent
         click.register_someone("", "tony.fevrier6@gmail.com","pwd")
-        userlacking = self.browser.find_element(By.CLASS_NAME,"userlacking")
+        userlacking = self.browser.find_element(By.CLASS_NAME,"lack")
         self.assertEqual(userlacking.text, "A username is needed") 
 
         click.clear_registration_inputs(self.browser.find_element(By.NAME, "username"),
                                         self.browser.find_element(By.NAME, "email"),
                                         self.browser.find_element(By.NAME, "password"))
         click.register_someone("Dulcinée", "", "") 
-        emaillacking,pwdlacking = click.find_multiple_elements(By.CLASS_NAME,"emaillacking","pwdlacking")
-        self.assertEqual(emaillacking.text, "An email is needed")
-        self.assertEqual(pwdlacking.text, "A password is needed")  
+        elements = self.browser.find_elements(By.CLASS_NAME, "lack")
+        #emaillacking,pwdlacking = click.find_multiple_elements(By.CLASS_NAME,"emaillacking","pwdlacking")
+        self.assertIn("An email is needed", [element.text for element in elements])
+        self.assertIn("A password is needed", [element.text for element in elements])  
 
         #Il va sur la page pour se reconnecter, il tente de se connecter sans username puis sans mot de passe
         click.login_someone("","password")
-        userlacking = self.browser.find_element(By.CLASS_NAME,"userlacking")
+        userlacking = self.browser.find_element(By.CLASS_NAME,"lack")
 
         self.assertEqual(userlacking.text, "A username is needed") 
         self.assertEqual(self.browser.current_url, url + "/log")
         
         click.clear_registration_inputs(self.browser.find_element(By.NAME, "username"),self.browser.find_element(By.NAME, "password"))
         click.login_someone("Tony", "")
-        pwdlacking = self.browser.find_element(By.CLASS_NAME,"pwdlacking")
+        pwdlacking = self.browser.find_element(By.CLASS_NAME,"lack")
         self.assertEqual(pwdlacking.text, "A password is needed") 
 
         # Il tente de s'identifier avec de faux identifiants
