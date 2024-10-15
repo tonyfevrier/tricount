@@ -389,11 +389,28 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     - pour le clonage de tricount, autoriser qu'on mette une minuscule en première lettre du titre du tricount
     - l'affichage en pound a trop de chiffres après la virgule
     - pourquoi le clic sur un tricount déjà créé est si lent? 
+    - modifier newspending.js, addspending pour que la gestion des champs non remplis soient faits en JS et pas dans la vue.
     - bugs
-        - clic newcount quand je supprime le participant principal ça me supprime ce que j'ai entré et me met un message d'erreur pour le titre ou pwd (ce que je n'ai pas rempli).
+        - `clic newcount quand je supprime le participant principal ça me supprime ce que j'ai entré et me met un message d'erreur pour le titre ou pwd (ce que je n'ai pas rempli).`
         - pb avec le JS de newspending : Avancé et aussi le calcul des montants qui ne semble plus fonctionner, relancer les tests fonctionnels (pb que ce soit lié au fait que j'ai touché au html via des blocks et au CSS)
         - bug : j'ai rentré une unique dépense mais dans spending-details j'ai un bouton précédent!
-        - depuis l'introduction de la loupe dans currency.html, la barre de recherche n'apparait plus (JS pb)
+        - `depuis l'introduction de la loupe dans currency.html, la barre de recherche n'apparait plus (JS pb)`
+        - `newcount : je peux enlever tous les participants (en commençant par enlever l'admin puis en enlevant les autres) et quand je clique sur valider il me remet l'admin.`
+        - `On devrait en JS empêcher toutes les suppressions déjà (garantir toujours au - 1 ptcpt mais ajouter un message "Il faut au - un participant" qu'il faudra enlever de views). `
+        - `quand clic sur valider alors que non rempli des messages apparaissent mais les participants sont réinitialisés : faire en sorte qu'ils soient conservés.`
+            - `ajouter un event sur submittricount`
+            - `supprimer de views.addcount pctpt`
+            - `faire apparaître les messages d'erreurs via JS.`
+            - `ajout d'une erreur si on tente de supprimer le dernier participant`
+            - `supprimer les tests unitaires où tout nest pas rempli`
+            - modifier les tests fonctionnels
+            - `nettoyer newcount.js`
+        - `je ne peux pas supprimer deux participants de suite : au deuxième il bascule sur l'url addcount comme s'il essayait de valider le tricount.`
+        - `Sol : il faut enlever l'obligation de garder l'admin.`
+        - `newcount : si je mets un ptcpt, je supprime l'admin et je change de monnaie, l'admin que j'ai supprimé revient alors que je voudrais le garder supprimé.`
+        - `on peut mettre deux fois le même ptcpt`
+        - `pb on ne peut faire de tricount sans l'admin`
+        - `si je supprime l'admin et que je reviens de currency, l'admin est remis : JS pour ne remettre que les elts de list_participants et pas l'admin s'il a été supprimé avant`
     - centrer le Bonjour Tony de la page logout
     - si le titre et le pwd pr cloner ne correspondent à rien, ajouter un message l'indiquant.
     - mettre aussi le msg d'erreur Remplissez mdp en rouge.
@@ -423,6 +440,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         vérifier le côté responsive du site : pas parfait exemple newspending
         Optionnel : recherche dans les dépenses avec la loupe
         ajouter l'obligation d'enregistrer un email valide
+        créer variable de temps pour time.sleep dans tests fonctionnels : essayer de diminuer le temps
         
             
     -modification des dépenses déjà entrées :

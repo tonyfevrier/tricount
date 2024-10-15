@@ -140,28 +140,38 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn('Tricount 1',[titre.text for titre in title]) 
         self.assertIn('Description 1',[desc.text for desc in description])
 
-        #Il reclique pour recréer un second tricount.  
+        # Il tente de créer un tricount en se supprimant des participants
+        click.click_on_successive_links(By.ID,'id_newcount','countfromzero')
+        click.add_participants('Jean','Heeeeeenri')
+        click.click_on_a_link(By.CSS_SELECTOR, "button[name='Tony']")
+        participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
+        self.assertNotIn('Tony', [participant.text for participant in participants])
+        click.add_tricount_characteristics('Tricount 2', 'pwd2', 'Description 2',"EUR", 'project')
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/tricount/2' )
+
+        #Il reclique pour recréer un troisième tricount.  
+        click.click_on_a_link(By.CLASS_NAME,'backtolistecount')
         click.click_on_successive_links(By.ID,'id_newcount','countfromzero')
         self.assertEqual(self.browser.current_url, url + '/newcount') 
         
-        #Il remplit les différents participants d'un second tricount : les participants apparaissent sur la page du tricount mais pas ceux du tricount précédemment créé.
+        #Il remplit les différents participants d'un troisième tricount : les participants apparaissent sur la page du tricount mais pas ceux du tricount précédemment créé.
         click.add_participants('Tony','Dulcinée','Annie')
         participants = self.browser.find_elements(By.CLASS_NAME,"nameparticipant")
         self.assertNotIn('Jean', [participant.text for participant in participants])
         self.assertNotIn('Heeeeeenri', [participant.text for participant in participants])
 
         #Il remplit les données d'un nouveau tricount et les envoie et voit ses données apparaître sur la page recensant la liste des tricount.
-        click.add_tricount_characteristics('Tricount 2', 'pwd2', 'Description 2',"EUR", 'project')
+        click.add_tricount_characteristics('Tricount 3', 'pwd3', 'Description 3',"EUR", 'project')
 
         #He arrives on the good url 
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/tricount/2' )
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/tricount/3' )
 
         #Il est alors renvoyé vers la page recensant la liste des tricount : son tricount est apparu.
         click.click_on_a_link(By.CLASS_NAME,'backtolistecount')
         title = self.browser.find_elements(By.CLASS_NAME,'tricount_title')
         description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
-        self.assertIn('Tricount 2',[titre.text for titre in title]) 
-        self.assertIn('Description 2',[desc.text for desc in description])
+        self.assertIn('Tricount 3',[titre.text for titre in title]) 
+        self.assertIn('Description 3',[desc.text for desc in description])
 
         #Il reclique pour recréer un tricount  
         click.click_on_successive_links(By.ID,'id_newcount','countfromzero')
@@ -169,7 +179,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         # Il remplit les données d'un nouveau tricount mais oublie de mettre un titre
         # Il est renvoyé vers l'url de remplissagedu tricount avec un message d'erreur affiché en rouge 
         click.add_tricount_characteristics('', 'pwd3', 'description 3',"EUR", 'project')
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/addcount')
+        #self.assertEqual(self.browser.current_url, self.live_server_url + '/addcount')
 
         msg = self.browser.find_element(By.CLASS_NAME,'error')
         self.assertIn('Le titre doit comporter au moins un caractère.',msg.text)
@@ -177,17 +187,21 @@ class NewVisitorTest(StaticLiveServerTestCase):
         #Du coup, il rajoute un titre mais oublie de mettre des participants:    
         click.add_tricount_characteristics('Tricount 3','pwd3', '',"EUR", 'project')
         participant_error = self.browser.find_element(By.CLASS_NAME,'participant-error')
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/addcount')
+        #self.assertEqual(self.browser.current_url, self.live_server_url + '/addcount')
         self.assertIn("Il faut au moins un participant",participant_error.text) 
 
         #Il oublie maintenant le mot de passe :
+        click.clear_registration_inputs(self.browser.find_element(By.NAME, "newtricount_title"),
+                                        self.browser.find_element(By.NAME, "newtricount_pwd"))
         click.add_tricount_characteristics('Tricount 3','', 'description3',"EUR", 'project')
-        pwd_error = self.browser.find_element(By.CLASS_NAME, 'pwd-error')
+        pwd_error = self.browser.find_element(By.ID, 'pwd-error')
         self.assertEqual(pwd_error.text, 'Il faut un mot de passe')
 
         #Il met des participants puis crée son tricount. 
         click.add_participants('Totolitoto','Biloute','Anne')
-        click.add_tricount_characteristics('Tricount 3','pwd3', '',"EUR", 'project')
+        click.clear_registration_inputs(self.browser.find_element(By.NAME, "newtricount_title"),
+                                        self.browser.find_element(By.NAME, "newtricount_description"))
+        click.add_tricount_characteristics('Tricount 4','pwd4', '',"EUR", 'project')
         click.click_on_a_link(By.CLASS_NAME,'backtolistecount')
         description = self.browser.find_elements(By.CLASS_NAME,'tricount_description')
         self.assertIn('Pas de description',[desc.text for desc in description])
@@ -217,12 +231,12 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn('Jean', [name.text for name in tricount_participants])  
         
         click.click_on_a_link(By.CLASS_NAME,'backtolistecount') 
-        click.click_on_an_existing_tricount(2)
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/tricount/2")
+        click.click_on_an_existing_tricount(3)
+        self.assertEqual(self.browser.current_url, self.live_server_url + "/tricount/3")
 
         tricount_title = self.browser.find_element(By.CLASS_NAME,"tricount-title")
         tricount_participants = self.browser.find_elements(By.CLASS_NAME,"tricount-participants")
-        count = Counts.objects.get(id=2)       
+        count = Counts.objects.get(id=3)       
         self.assertEqual(tricount_title.text, count.title)
         self.assertIn('Dulcinée', [name.text for name in tricount_participants]) 
         self.assertIn('Annie', [name.text for name in tricount_participants]) 
@@ -230,7 +244,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         #Il va ensuite supprimer ce second tricount mais clique sur non lorsqu'on lui demande confirmation. 
         click.click_on_successive_links(By.CLASS_NAME,"tricount-characteristics","delete-tricount")
         click.click_on_a_link(By.ID, "no")
-        self.assertEqual(self.browser.current_url, self.live_server_url + '/modifycount/2')
+        self.assertEqual(self.browser.current_url, self.live_server_url + '/modifycount/3')
 
         #Il recommence en cliquant sur oui et voit que sa liste n'en contient plus que deux tricounts.
         click.click_on_a_link(By.CLASS_NAME, "delete-tricount")
@@ -238,8 +252,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertEqual(self.browser.current_url, self.live_server_url + '/count')
 
         counts = self.browser.find_elements(By.CLASS_NAME, "link-tricount")
-        self.assertEqual(len(counts),2)
-        self.assertListEqual(["link-tricount-1", "link-tricount-3"], [count.get_attribute("id") for count in counts])
+        self.assertEqual(len(counts),3)
+        self.assertListEqual(["link-tricount-1", "link-tricount-2", "link-tricount-4"], [count.get_attribute("id") for count in counts])
 
 class MultiUsersTricount(StaticLiveServerTestCase):
     def setUp(self):

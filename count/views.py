@@ -113,34 +113,24 @@ def addcount(request):
     titre = request.POST["newtricount_title"]
     password = request.POST["newtricount_pwd"]
     descption = request.POST["newtricount_description"]
-    participts = request.POST.getlist('nameparticipant')
+    participts = request.POST.getlist('formparticipant')
     admins = [request.user.username]
 
-    if titre != "": 
-        if password == "":
-                return render(request, 'newcount.html', context = {'pwd':False})
-        else:
-            if len(participts) <= 1:
-                #No participants have been added.
-                return render(request,'newcount.html', context={'ptcpt':False})
-            else:
-                if descption != "": 
-                    phrase = String.majuscule(descption)
-                else:
-                    phrase = "Pas de description" 
-                #Creation of the object for calculations
-                tricount = Tricount(*participts)
-                count = Counts.objects.create(title = String.majuscule(titre), 
-                                              password = password, 
-                                              description = phrase, 
-                                              currency = request.POST["newtricount_currency"], 
-                                              category = request.POST["newtricount_category"], 
-                                              participants = participts, 
-                                              data = tricount.to_json(),
-                                              admins = admins) 
-                return redirect(reverse('spending', args=[count.id]))
-    else:  
-        return render(request,'newcount.html', context={'titre':False})
+    if descption != "": 
+        phrase = String.majuscule(descption)
+    else:
+        phrase = "Pas de description" 
+    #Creation of the object for calculations
+    tricount = Tricount(*participts)
+    count = Counts.objects.create(title = String.majuscule(titre), 
+                                  password = password, 
+                                  description = phrase, 
+                                  currency = request.POST["newtricount_currency"], 
+                                  category = request.POST["newtricount_category"], 
+                                  participants = participts, 
+                                  data = tricount.to_json(),
+                                  admins = admins) 
+    return redirect(reverse('spending', args=[count.id])) 
     
 def modifycount(request, id_count):
     """

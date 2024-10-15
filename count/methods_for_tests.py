@@ -41,7 +41,7 @@ class UnitaryTestMethods(TestCase):
                                             "newtricount_description":description, 
                                             "newtricount_currency" : currency, 
                                             "newtricount_category":category, 
-                                            "nameparticipant": participants})
+                                            "formparticipant": participants})
         
         return response
     

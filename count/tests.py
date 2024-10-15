@@ -102,6 +102,19 @@ class NewcountTest(UnitaryTestMethods):
 
         self.assertTemplateUsed(response2, 'newcount.html') 
 
+    def test_newcount_without_admin(self):
+        """
+        Create a tricount with participants who do not include the creator
+        """
+        self.create_a_tricount("tricount 1","password","description 1","USD","Voyage",'Jean','Henri')
+        count = Counts.objects.first()
+        self.assertEqual("Tricount 1",count.title)
+        self.assertEqual("password", count.password)
+        self.assertEqual("Description 1", count.description)
+        self.assertEqual("Voyage", count.category)
+        self.assertEqual("USD", count.currency)
+        self.assertListEqual(count.participants, ['Jean','Henri'])
+
     def test_newcount_in_other_currency(self):
         """
         Function which creates a tricount in USD and verifies that the database has registered this currency.
@@ -124,43 +137,6 @@ class NewcountTest(UnitaryTestMethods):
         self.assertEqual("Voyage", count.category)
         self.assertEqual("EUR", count.currency)
         self.assertRedirects(response, '/tricount/1')  
-
-    def test_lack_title_newcountinputs(self):
-        """
-        Test that if the title of the tricount is forgotten, the database does not change
-        """    
-        one = Counts.objects.count()
-        response = self.create_a_tricount("","password","description 1","EUR","Voyage",'Jean') 
-        two = Counts.objects.count() 
-
-        self.assertEqual(one,two)
-        self.assertTemplateUsed(response,"newcount.html")
-        self.assertContains(response,"Le titre doit comporter au moins un caractère.")
-
-    def test_lack_password(self):
-        """
-        Test that if the password of the tricount is forgotten, the database does not change
-        """
-        one = Counts.objects.count()
-        response = self.create_a_tricount("title","","description 1","EUR","Voyage",'Jean')
-        two = Counts.objects.count()
-        self.assertEqual(one,two)
-        self.assertTemplateUsed(response,"newcount.html")
-        self.assertContains(response, "Il faut un mot de passe")
-
-
-
-    def test_lack_participant_newcountinputs(self):
-        """
-        Test that if the participants of the tricount are forgotten, the database does not change
-        """    
-        one = Counts.objects.count()
-        response = self.create_a_tricount("Tricount sans participant","pwd", "description 1","EUR", "Voyage")
-        two = Counts.objects.count() 
-
-        self.assertEqual(one,two)
-        self.assertTemplateUsed(response,"newcount.html")
-        self.assertContains(response,"Il faut au moins un participant")
 
 
     def test_bdd_when_tricounts_created(self):

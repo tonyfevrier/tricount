@@ -12,30 +12,19 @@
     <div class = "titre">Nouveau tricount</div>
 {% endblock %}
 
-{% block main %} 
-        <!--<form action="">
-            <div class = "test" >
-                <input class = "iden1" type="radio" id="iden1" name="iden1" value="trip">
-                <label for="iden1">Voyage</label>
-                <input class = "iden1" type="radio" id="iden2" name="iden1" value="coloc">
-                <label for="iden2">Coloc</label> 
-            </div>
-        </form>-->
+{% block main %}  
 
         <form method="POST" class = "newtricount" action="{% url 'addcount' %}">
             {% csrf_token %}
 
             <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title" autocomplete="off">  
-
-            {% if titre == False %}
-                <p class="error">Le titre doit comporter au moins un caractère.</p>
-            {% endif %}
+ 
+            <p class="error" id="title-error" hidden >Le titre doit comporter au moins un caractère.</p>
 
             <input type="password" class = "newtricount_pwd" placeholder="Entrez un mot de passe" name = "newtricount_pwd" autocomplete="new-password">
 
-            {% if pwd == False %}
-                <p class = "error pwd-error">Il faut un mot de passe</p>
-            {% endif %}
+            <p class = "error" id="pwd-error" hidden>Il faut un mot de passe</p>
+
             <input type ="text" class = "newtricount_description" placeholder="Description" name = "newtricount_description">
             
             <a href="/choosecurrency?referer=/newcount" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
@@ -57,21 +46,27 @@
                 <label for="other">Autre</label>
             </div>
 
+            <p class="error" id="category-error" hidden >Il faut choisir une catégorie.</p>
+
+
             <button class = "submittricount" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
-            
-            <div class = "nb_participants"> Participants (1/50)</div>
+
+            <input type="text" class="formparticipant" value = "{{user}}" name = "formparticipant" hidden>
+
+        </form>
+
+        <div class = "nb_participants"> Participants (1/50)</div>
+
+        <div class = "participants-container">
             <div class = "printparticipant">
                 <input class = "nameparticipant" type="text" value = "{{user}}" name = "nameparticipant">
                 <button class = "closeparticipant" name = "{{user}}" ><img src="/static/images/close.png" alt="fermeture"></button>
             </div> 
+        </div>
 
-        </form>
         <input type ="text" name="new_participant" class ='new_participant' placeholder="Autre participant">
-        <button class = "add_participant">Ajouter</button>
-        {% if ptcpt == False %}
-            <p class="error participant-error">Il faut au moins un participant.</p>
-        {% endif %}
-        <script src = "{%static 'js/newcount.js'%}"></script> 
+        <button class = "add_participant">Ajouter</button> 
+        <p class="error participant-error" id="participant-error" hidden>Il faut au moins un participant.</p> 
 {% endblock %}
 
 {% block js %}
