@@ -9,19 +9,17 @@
 
 {% block header %}
     <a href="{% url 'spending' count.id %}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-    <div class = "titre">Modifier le tricount</div>
+    <div class = "titre" id = {{count.id}}>Modifier le tricount</div>
 {% endblock %}
 
 {% block main %}
         <form method="POST" class = "tricount" action="{% url 'modifycountregister' count.id %}">
             {% csrf_token %}
             <input type ="text" class = "tricount_title" value = "{{count.title}}" placeholder="Titre" name= "tricount_title">  
-
-            {% if titre == False %}
-                <p class="error">Le titre doit comporter au moins un caractère.</p>
-            {% endif %}
+            <p class="error" id="title-error" hidden >Le titre doit comporter au moins un caractère.</p>
 
             <input type ="text" class = "tricount_description" value = "{{count.description}}" placeholder="Description" name = "tricount_description">
+            <p class = "error" id="description-error" hidden>La description doit comporter au moins un caractère.</p>
             
             <p class = "currency"> <strong>Devise :</strong> {{count.currency}} </p>
 
@@ -39,6 +37,8 @@
                 </div> 
                 {% endfor%}
             </div>
+            <p class="error participant-error" id="participant-error" hidden>Il faut au moins deux participants.</p> 
+
 
             <button class = "submittricount" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
 
@@ -50,13 +50,6 @@
 
 {% block footer %}
     <button class = "delete-tricount"> Supprimer ce tricount</button>
-    <div class = 'delete-confirmation' hidden>
-        Confirmez-vous vouloir supprimer le tricount 
-        <div class = 'alert'>
-            <a class = 'yesno' id = "yes" href = "{% url 'deletecount' count.id %}">Oui</a>
-            <a class = 'yesno' id = "no" href = ''>Non</a>
-        </div>
-    </div>
 {% endblock %}
 
 {% block js %}

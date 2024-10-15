@@ -382,7 +382,11 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     - c`omprendre pourquoi si je suis loggé mais que je relance la page de log on me redemande mes identifiants: changer cela en redirection automatique à mon compte si je suis loggé`
     - `CSS des messages d'erreurs : mettre les messages à droite de la boite les concernant et pas en dessous et en + petits caractères.`
     - factorisation des JS : créer un fichier de handler qu'on importe (des handlers sont réécrits plusieurs fois) quitte à leur ajouter des arguments. On pourrait faire un code par classe avec les handlers click, les handlers input etc.
-        améliorer le js avec query selector pour plus de lisibilité
+        améliorer le js avec query selector pour plus de lisibilité (reste newspding modifycount.js)
+        `modifycount : obliger à la présence de deux participants, d'un titre et d'une description.`
+        `remplacer alert par une confirmation pour empêcher tout autre event de se déclencher`
+            `lier le oui à l'url pour la suppression du tricount`
+            `supprimer la div hidden de deleteconfirmation du js, du html`
         Nettoyer les boutons qui ne servent à rien
         ajouter l'event domcontentloaded
         bien documenter
@@ -390,7 +394,9 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     - l'affichage en pound a trop de chiffres après la virgule
     - pourquoi le clic sur un tricount déjà créé est si lent? 
     - modifier newspending.js, addspending pour que la gestion des champs non remplis soient faits en JS et pas dans la vue.
+    - modifier la confirmation de suppression de dépense par une alerte
     - bugs
+        - quand je supprime l'admin des tricounts, il n'est plus possible de cliquer sur le tricount url /tricount/1 ne marche plus
         - `clic newcount quand je supprime le participant principal ça me supprime ce que j'ai entré et me met un message d'erreur pour le titre ou pwd (ce que je n'ai pas rempli).`
         - pb avec le JS de newspending : Avancé et aussi le calcul des montants qui ne semble plus fonctionner, relancer les tests fonctionnels (pb que ce soit lié au fait que j'ai touché au html via des blocks et au CSS)
         - bug : j'ai rentré une unique dépense mais dans spending-details j'ai un bouton précédent!
@@ -403,7 +409,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `faire apparaître les messages d'erreurs via JS.`
             - `ajout d'une erreur si on tente de supprimer le dernier participant`
             - `supprimer les tests unitaires où tout nest pas rempli`
-            - modifier les tests fonctionnels
+            - `modifier les tests fonctionnels`
             - `nettoyer newcount.js`
         - `je ne peux pas supprimer deux participants de suite : au deuxième il bascule sur l'url addcount comme s'il essayait de valider le tricount.`
         - `Sol : il faut enlever l'obligation de garder l'admin.`
@@ -411,18 +417,10 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - `on peut mettre deux fois le même ptcpt`
         - `pb on ne peut faire de tricount sans l'admin`
         - `si je supprime l'admin et que je reviens de currency, l'admin est remis : JS pour ne remettre que les elts de list_participants et pas l'admin s'il a été supprimé avant`
+    - parfois on a l'affichage de la flèche retour en très grand (exe modifycount)
     - centrer le Bonjour Tony de la page logout
     - si le titre et le pwd pr cloner ne correspondent à rien, ajouter un message l'indiquant.
     - mettre aussi le msg d'erreur Remplissez mdp en rouge.
-    Améliorer:
-    - branche pour le chat (suite)
-            `copier l'html et voir si ça marche`
-            `copie de app et templates`
-            partie serveur : django : voir comment recevoir les sockets, stocke les messages et les affiche sur les comptes des différents clients.
-            apparition du message dans la page html sans réactualiser si elle est ouverte
-            apparition d'une cloche si on n'est pas dans le chat.
-            promesse dans le cas où qqun écrit : affichage qu'un utilisateur écrit.
-            voir comment lancer automatiquement app.py (lorsqu'un utilisateur entre dans le chat? ou lorsqu'un tricount est créé?) (peut-être qu'on le lançait juste pour voir les affichages et qu'on n'a pas besoin de le lancer.)
     - faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
     - pour le projet edX:
         voir pour mettre des branches accessibles uniquement via login (@auth_login)
@@ -442,11 +440,20 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         ajouter l'obligation d'enregistrer un email valide
         créer variable de temps pour time.sleep dans tests fonctionnels : essayer de diminuer le temps
         
-            
+    
     -modification des dépenses déjà entrées :
     -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`
     -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît. 
     Tests JS : voir comment en faire facilement sans selenium.
+    Améliorer:
+    - branche pour le chat (suite)
+            `copier l'html et voir si ça marche`
+            `copie de app et templates`
+            partie serveur : django : voir comment recevoir les sockets, stocke les messages et les affiche sur les comptes des différents clients.
+            apparition du message dans la page html sans réactualiser si elle est ouverte
+            apparition d'une cloche si on n'est pas dans le chat.
+            promesse dans le cas où qqun écrit : affichage qu'un utilisateur écrit.
+            voir comment lancer automatiquement app.py (lorsqu'un utilisateur entre dans le chat? ou lorsqu'un tricount est créé?) (peut-être qu'on le lançait juste pour voir les affichages et qu'on n'a pas besoin de le lancer.)
 
 
 # Bug non résolu : 

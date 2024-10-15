@@ -186,13 +186,14 @@ class NewVisitorTest(StaticLiveServerTestCase):
  
         #Du coup, il rajoute un titre mais oublie de mettre des participants:    
         click.add_tricount_characteristics('Tricount 3','pwd3', '',"EUR", 'project')
-        participant_error = self.browser.find_element(By.CLASS_NAME,'participant-error')
-        #self.assertEqual(self.browser.current_url, self.live_server_url + '/addcount')
+        participant_error = self.browser.find_element(By.CLASS_NAME,'participant-error') 
         self.assertIn("Il faut au moins un participant",participant_error.text) 
 
         #Il oublie maintenant le mot de passe :
         click.clear_registration_inputs(self.browser.find_element(By.NAME, "newtricount_title"),
-                                        self.browser.find_element(By.NAME, "newtricount_pwd"))
+                                        self.browser.find_element(By.NAME, "newtricount_pwd"),
+                                        self.browser.find_element(By.NAME, "newtricount_description"),
+                                        )
         click.add_tricount_characteristics('Tricount 3','', 'description3',"EUR", 'project')
         pwd_error = self.browser.find_element(By.ID, 'pwd-error')
         self.assertEqual(pwd_error.text, 'Il faut un mot de passe')
@@ -243,12 +244,15 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         #Il va ensuite supprimer ce second tricount mais clique sur non lorsqu'on lui demande confirmation. 
         click.click_on_successive_links(By.CLASS_NAME,"tricount-characteristics","delete-tricount")
-        click.click_on_a_link(By.ID, "no")
+        alert = self.browser.switch_to.alert
+        alert.dismiss() 
         self.assertEqual(self.browser.current_url, self.live_server_url + '/modifycount/3')
 
         #Il recommence en cliquant sur oui et voit que sa liste n'en contient plus que deux tricounts.
         click.click_on_a_link(By.CLASS_NAME, "delete-tricount")
-        click.click_on_a_link(By.ID, "yes")
+        alert = self.browser.switch_to.alert
+        alert.accept()
+        time.sleep(2)
         self.assertEqual(self.browser.current_url, self.live_server_url + '/count')
 
         counts = self.browser.find_elements(By.CLASS_NAME, "link-tricount")

@@ -219,3 +219,7 @@ button, a{
 .alert a:hover{
     background-color: lightblue;
 }
+
+.error{
+    padding: 0 1em;
+}
