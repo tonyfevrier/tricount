@@ -363,8 +363,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         #He tries to create a second spending. He forgets to put a title, a message of error appears and he stays on the page.
         click.click_and_create_a_spending('', '100.', 'Jean', ['Henri','Jean'],'EUR')
         notitle = self.browser.find_element(By.CLASS_NAME,"notitle")
-        self.assertEqual(notitle.text, "Titre non valable")
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/addspending/1")
+        self.assertEqual(notitle.text, "Il faut un titre") 
 
         #He forgets to put the amount, a spending is created with amount 0.
         click.create_a_spending('Dépense2', '', 'Jean', ['Henri','Jean'],'EUR')
@@ -416,11 +415,14 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
 
         #He now decides to supress the last spending and is correctly redirected to the spendings which contains the good number of spendings
         click.click_on_successive_links(By.CLASS_NAME, "modify-spending","delete-spending")
-        click.click_on_a_link(By.ID, "no")
+        alert = self.browser.switch_to.alert
+        alert.dismiss() 
         self.assertEqual(self.browser.current_url, self.live_server_url + '/modifyspending/1/1')
 
         click.click_on_a_link(By.CLASS_NAME, "delete-spending")
-        click.click_on_a_link(By.ID, "yes")
+        alert = self.browser.switch_to.alert
+        alert.accept()
+        time.sleep(2)
         spendings = self.browser.find_elements(By.CLASS_NAME,'spending')
         self.assertEqual(self.browser.current_url, self.live_server_url + '/tricount/1')
         self.assertEqual(len(spendings), 1)

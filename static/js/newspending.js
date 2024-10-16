@@ -1,97 +1,84 @@
-const title = document.body.querySelector(".title");
-const amount = document.body.querySelector(".amount"); 
-let counter = document.body.querySelector(".counter");
-let checkboxDiv = document.body.querySelector(".list-receivers");  
-let receivers = document.body.querySelectorAll(".receiver");
-let toggleCheckbox = document.body.querySelector(".toggle-checkboxes");
-let toggleAvance = document.body.querySelector('.special-parameters'); 
-let currency = document.body.querySelector('.newtricount_currency');
-const footer = document.body.querySelector("footer"); 
+let receivers = document.querySelectorAll(".receiver");
+let click = new Event("click", {bubbles: true,});
 
-if (footer.innerText){
-    const deletebutton = footer.firstElementChild;
-    const deletealert = footer.lastElementChild; 
-    console.log(deletealert)
-    deletebutton.addEventListener("click", userDeleteSpending); 
-    window.addEventListener("click", alertBlockScreen);
+window.addEventListener('DOMContentLoaded', () => {
 
-    function alertBlockScreen(event){
-        /*Function which prevents from clicking on another button if the alert of delation of tricount has appeared */
-        if (deletealert.hidden === false && event.target.className != "yesno" ){
-            event.preventDefault()
-        }
-        return;
+    // Change the currency if the user has chosen an other currency.
+    const url = window.location.search;
+    const params = new URLSearchParams(url);    
+
+    if (url.includes("currency")){
+        document.querySelector('.newtricount_currency').value = params.get('currency');
+    }   
+
+    for (let monnaie of document.querySelectorAll('.p-currency')){ 
+        monnaie.innerHTML = document.querySelector('.newtricount_currency').value;
     }
 
-    function userDeleteSpending(event){
-        /*Fonction making an alert appearing if the user is clicking on delete the spending */
-        if (event.target === deletebutton){
-            deletealert.hidden = false;
-        } else if (event.target === deletealert.lastElementChild){
-                deletealert.hidden = true;
-        } 
-        return;
-    } 
-}
+    // Display the number of letters of title
+    document.querySelector(".title").addEventListener("input", user_writing);
 
-//We change the currency if the user has chosen an other currency.
-const url = window.location.search;
-const params = new URLSearchParams(url); 
+    // Event on keyboard to limit the number of letters
+    document.querySelector(".title").addEventListener("keydown", user_taping);
 
-if (url.includes("currency")){
-    currency.value = params.get('currency');
-}
+    // Event to share an amount automatically to checked people
+    document.querySelector(".amount").addEventListener("input", user_amount);
 
-for (let monnaie of document.body.querySelectorAll('.p-currency')){ 
-    monnaie.innerHTML = currency.value;
-}
+    // Event to handle the check/uncheck of participants
+    document.querySelector(".list-receivers").addEventListener("click", user_checking);
 
-// Events
-title.addEventListener("input", userWriting);
-title.addEventListener("keydown", userTaping);
-amount.addEventListener("input", userAmount);
-checkboxDiv.addEventListener("click",userChecking);
-toggleCheckbox.addEventListener("click",userToggle);
-toggleAvance.addEventListener("click", userAvance); 
+    // Event to handle the global check of participants
+    document.querySelector(".toggle-checkboxes").addEventListener("click",user_toggle);
 
-let click = new Event("click", {bubbles: true,});
+    // Event for the user clicking on "Avancé" to personalize more the share of a spending
+    document.querySelector('.special-parameters').addEventListener("click", user_avance); 
+
+    // Event to prevent spending submit if some inputs are empty
+    document.querySelector('.submit-spending').addEventListener('click', submit_spending);
+
+    // Handle the modifyspending page option to delete the spending 
+    if (document.querySelector("footer").innerText){
+        document.querySelector(".delete-spending").addEventListener("click",
+             () => user_delete_spending(document.querySelector('.tricount').id, document.querySelector('.header-title').id));
+    }
+})
 
 
 /*Handlers */
-function userWriting(event){ 
-    //Afficher le compteur quand le nombre de lettres change. 
-    counter.innerHTML = `${title.value.length}/50`;
+function user_writing(){ 
+    // Display the counter when the number of letters change 
+    document.querySelector(".counter").innerHTML = `${document.querySelector(".title").value.length}/50`;
 }
 
-function userTaping(event){
-    /*si on a trop de caractères dans le titre. */
+function user_taping(event){
+    /* Prevent the user from taping too much letters. */
     if (event.target.value.length >= 50){
         if (event.key == "Backspace") return;
         else event.preventDefault();
     } 
 }
 
-function userAmount(){
-    //Quand l'utilisateur écrit un montant, il est partagé sur les personnes cochées. 
-    let table = calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(); 
-    attributeIndividualAmountWithParts(table[0],table[1],table[2]); 
-
+function user_amount(){
+    // When user writes an amount, it is shared among checked people 
+    const table = calculate_individual_amounts_and_store_spending_participants_with_parts(); 
+    attribute_individual_amount_with_parts(table[0],table[1],table[2]); 
 }
 
 
-function userChecking(event){ 
-    //Clic sur une checkbox : le participant est décoché ou coché 
+function user_checking(event){ 
+    /* Clic on a checkbox, participant is checked or unchecked */
     if (event.target.type !== 'checkbox') return; 
-    //si on coche quelqu'un, on recalcule la répartition des montants. 
-    userAmount(); 
+    // compute the amounts each person must pay after a modification 
+    user_amount(); 
 
-    //si on décoche un participant, on décoche le checkbox principal */
-    if (!event.target.checked) toggleCheckbox.checked = false;
+    // If someone is unchecked, we uncheck the global checkbox
+    if (!event.target.checked) document.querySelector(".toggle-checkboxes").checked = false;
 }
 
-function userToggle(event){ 
-    /*dans le cas où au moins 1 n'était pas coché, tout le monde devient coché.*/
-    nb_checked = NumberOfCheckedPeople();
+
+function user_toggle(){ 
+    /* Check all users if one user was unchecked, otherwise uncheck everybody*/
+    const nb_checked = number_of_checked_people();
     if (nb_checked < receivers.length){
         for (let receiver of receivers){ 
             receiver.checked = true;
@@ -105,27 +92,52 @@ function userToggle(event){
     }
 }
 
-function userAvance(event){
-    /*apparition/disparition de nouveau hidden + chgt en simple ou avancé */
-    insertOrRemovePartsForSpending(toggleAvance.innerHTML);
+function user_avance(event){
+    /* Handle the advanced share of the spending */
+    insert_or_remove_parts_for_spending(document.querySelector('.special-parameters').innerHTML);
     event.preventDefault();
 }
 
+function user_delete_spending(id_count, id_spending){
+    /* Handle to delete a spending*/
+    const confirmation = confirm("Do you want to delete this spending")
+    if (confirmation) {window.location.href = `/deletespending/${id_count}/${id_spending}`;}
+    return;
+} 
+
+function submit_spending(event){
+    // Get inputs filled by the user
+    const title = document.querySelector('.title'); 
+    const participants = document.querySelectorAll('.receiver:checked'); 
+  
+    // Submit spending if inputs are present
+    if (title.value && participants.length) return;
+
+    // Hide eventual showed messages
+    document.querySelector("#title-error").hidden = true; 
+    document.querySelector("#participant-error").hidden = true;
+
+    // Do not submit and write error messages if it lacks inputs
+    event.preventDefault();  
+    if (!title.value) {document.querySelector("#title-error").hidden = false;}   
+    if (!participants.length) {document.querySelector("#participant-error").hidden = false;}
+}
 
 
 
 /*Useful functions for handlers*/
 
-function calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(event){
+function calculate_individual_amounts_and_store_spending_participants_with_parts(event){
     let list_of_checked = [];
     let list_of_non_checked = [];
-    /*On regarde qui est coché et on calcule le nombre de parts total */
+
+    /* See how many checks there are to compute the number of parts */
     let nb_parts = 0;
     for (let receiver of receivers){ 
         if (receiver.checked){
-            //On regarde si les parts sont affichées ou non. 
-            if (document.body.querySelector(`.${receiver.id}-parts`)) {
-                nb_parts += Number(document.body.querySelector(`.${receiver.id}-parts`).value);
+            // See if parts are displayed 
+            if (document.querySelector(`.${receiver.id}-parts`)) {
+                nb_parts += Number(document.querySelector(`.${receiver.id}-parts`).value);
             } else {
                 nb_parts += 1;
             }
@@ -135,36 +147,34 @@ function calculateIndividualAmountsAndStoreSpendingParticipantsWithParts(event){
         }
     }
 
-    /*on calcule le montant par personne*/  
-    let individualAmountDico = {};
+    // Get the amount by person  
+    let individual_amount_dico = {};
 
     for (let checkman of list_of_checked){
         let poids = 1;
-        if (document.body.querySelector(`.${checkman}-parts`)) { 
-            poids =  Number(document.body.querySelector(`.${checkman}-parts`).value); 
+        if (document.querySelector(`.${checkman}-parts`)) { 
+            poids =  Number(document.querySelector(`.${checkman}-parts`).value); 
         } 
-        individualAmountDico[checkman] = amount.value * poids/nb_parts;
+        individual_amount_dico[checkman] = amount.value * poids/nb_parts;
     } 
 
-    return [individualAmountDico, list_of_checked,list_of_non_checked];
+    return [individual_amount_dico, list_of_checked,list_of_non_checked];
 }
  
-function attributeIndividualAmountWithParts(individualAmountDico, list_of_checked,list_of_non_checked){
+function attribute_individual_amount_with_parts(individual_amount_dico, list_of_checked,list_of_non_checked){
     
-    for (let checked_receiver of list_of_checked){
-        //document.body.querySelector(`.${checked_receiver}-amount`).innerHTML = `${individualAmountDico[checked_receiver].toFixed(2)} eur`; 
-        document.body.querySelector(`.${checked_receiver}-amount`).value = `${individualAmountDico[checked_receiver].toFixed(2)}`;
+    for (let checked_receiver of list_of_checked){  
+        document.querySelector(`.${checked_receiver}-amount`).value = `${individual_amount_dico[checked_receiver].toFixed(2)}`;
 
     }
-    for (let non_checked_receiver of list_of_non_checked){
-        //document.body.querySelector(`.${non_checked_receiver}-amount`).innerHTML = `0.00 eur`;
-        document.body.querySelector(`.${non_checked_receiver}-amount`).value = `0.00`;
+    for (let non_checked_receiver of list_of_non_checked){ 
+        document.querySelector(`.${non_checked_receiver}-amount`).value = `0.00`;
     }
 }
 
 
 
-function NumberOfCheckedPeople(){
+function number_of_checked_people(){
     let nb_checked = 0; 
     for (let receiver of receivers){
         if (receiver.checked){
@@ -174,26 +184,26 @@ function NumberOfCheckedPeople(){
     return nb_checked;
 }
 
-function insertOrRemovePartsForSpending(innerHTML){
+function insert_or_remove_parts_for_spending(innerHTML){
     /*Si on clique sur avancé, on fait apparaître les parts de chacun et l'utilisateur peut modifier le nombre de parts, ce qui recalcule les montants*/
     if (innerHTML === "Avancé"){ 
-        toggleAvance.innerHTML = "Simple"; 
+         document.querySelector('.special-parameters').innerHTML = "Simple"; 
         for (let receiver of receivers){
-            montant = document.body.querySelector(`.${receiver.id}-amount`); 
+            montant = document.querySelector(`.${receiver.id}-amount`); 
             if (receiver.checked){
                 montant.insertAdjacentHTML("beforebegin",`<input type = "text" class = "${receiver.id}-parts" value = "1" >`); 
             } else {  
                 montant.insertAdjacentHTML("beforebegin",`<input type = "text" class = "${receiver.id}-parts" value = "0">`); 
             }
-            document.body.querySelector(`.${receiver.id}-parts`).addEventListener("input",userAmount);
+            document.querySelector(`.${receiver.id}-parts`).addEventListener("input",user_amount);
         }
     } else { 
-        toggleAvance.innerHTML = "Avancé";
+         document.querySelector('.special-parameters').innerHTML = "Avancé";
         for (let receiver of receivers){
-            document.body.querySelector(`.${receiver.id}-parts`).removeEventListener("input",userAmount);
-            document.body.querySelector(`.${receiver.id}-parts`).remove();
+            document.querySelector(`.${receiver.id}-parts`).removeEventListener("input",user_amount);
+            document.querySelector(`.${receiver.id}-parts`).remove();
         } 
-        userAmount()
+        user_amount()
     }
 }
 

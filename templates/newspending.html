@@ -15,10 +15,7 @@
 {% block main %}
     <form action="{% url 'addspending' idcount %}" method = "post">
         <input class = "title" type="text" placeholder="Titre" name = "title"> 
-
-        {%if titre == False%}
-            <p class = "notitle">Titre non valable</p>
-        {%endif%}
+        <p class = "notitle" id="title-error" hidden>Il faut un titre</p> 
         <p class = "counter">0/50</p>
         <div class = "div-amount">
             <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount"> 
@@ -48,6 +45,7 @@
             </div> 
             {% endfor %}
         </div>
+        <p class = "notitle" id="participant-error" hidden>Il faut au moins cocher une personne</p> 
         <button class = "submit-spending" name = "submit"> <img width= 20px src="{% static 'images/check.png' %}" alt="validation"></button>
         
         {% csrf_token %}

@@ -436,17 +436,6 @@ class TestSpending(UnitaryTestMethods):
         self.extract_and_click_on_link(response.content , 'backtospending')  
 
         self.assertEqual(nb_spending,Spending.objects.count()) 
-
-    def test_notitle_bdd_unchanged(self):
-        """
-        Test if when we create a spending and forget the title, no new spending appear in the database.
-        """
-        self.create_a_tricount('tricount1', "pwd", 'description',"EUR", "Voyage", "Henri", "Jean")     
-        nb_spending = Spending.objects.count()
-        response = self.create_a_spending(1,'', 100,'EUR', 'Jean', ['Henri','Jean'],[50,50])   
-        
-        self.assertEqual(nb_spending,Spending.objects.count()) 
-        self.assertTemplateUsed(response,'newspending.html')
         
     def test_noamount_nullspending(self):
         """

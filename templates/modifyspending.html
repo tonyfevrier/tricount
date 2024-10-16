@@ -9,7 +9,8 @@
 
 {% block header %}
     <a href="{% url 'spending' count.id %}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-    <p class = "header-title">Modifier la dépense</p>
+    <p class = "header-title" id="{{spending.id}}">Modifier la dépense</p>
+    <p class = 'tricount' id='{{count.id}}' hidden></p>
 {% endblock %}
 
 {% block main %}

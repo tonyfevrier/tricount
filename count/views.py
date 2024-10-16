@@ -230,28 +230,23 @@ def addspending(request, id_count):
     receivers = request.POST.getlist("receiver")
     spender = request.POST["spender"]
 
-    #Create the spending with form informations
-    if titre != '':
-        if amount == '':
-            amount = 0. 
+    #Create the spending with form informations 
+    if amount == '':
+        amount = 0. 
 
-         #Convert the amount in the tricount currency if necessary
-        tricount_currency = Counts.objects.get(id = id_count).currency
+    #Convert the amount in the tricount currency if necessary
+    tricount_currency = Counts.objects.get(id = id_count).currency
 
-        #On récupère aussi les montants des personnes cochées pour les mettre dans un dictionnaire passé à la bdd.
+    #On récupère aussi les montants des personnes cochées pour les mettre dans un dictionnaire passé à la bdd.
 
-        if currency != tricount_currency:   
-            amount = CC.convertSpendingCurrency(tricount_currency,currency,amount)
+    if currency != tricount_currency:   
+        amount = CC.convertSpendingCurrency(tricount_currency,currency,amount)
     
-        dico_receivers = MT.createReceiversDictionaryOfASpending(currency, tricount_currency, request, *receivers)
-        Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, number = id_count)
-        MT.update_tricount_after_new_spending(id_count, {spender : float(amount)}, dico_receivers)
+    dico_receivers = MT.createReceiversDictionaryOfASpending(currency, tricount_currency, request, *receivers)
+    Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, number = id_count)
+    MT.update_tricount_after_new_spending(id_count, {spender : float(amount)}, dico_receivers)
         
-        return redirect(reverse('spending', args=[id_count]))
-    else: #Lack of title needs an error message.
-        count = Counts.objects.get(id = id_count)
-        participants = count.participants
-        return render(request, 'newspending.html',context={'idcount': id_count, 'participants':participants,'titre':False})
+    return redirect(reverse('spending', args=[id_count]))
         
 def spending_details(request, id_count, id_spending):
     """

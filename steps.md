@@ -381,21 +381,22 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     - modifier mes tests unitaires en créant un setup permettant d'enregistrer et logger systématiquement qqun (tests unitaires et peut-être aussi fonctionnels)
     - c`omprendre pourquoi si je suis loggé mais que je relance la page de log on me redemande mes identifiants: changer cela en redirection automatique à mon compte si je suis loggé`
     - `CSS des messages d'erreurs : mettre les messages à droite de la boite les concernant et pas en dessous et en + petits caractères.`
-    - factorisation des JS : créer un fichier de handler qu'on importe (des handlers sont réécrits plusieurs fois) quitte à leur ajouter des arguments. On pourrait faire un code par classe avec les handlers click, les handlers input etc.
-        améliorer le js avec query selector pour plus de lisibilité (reste newspding modifycount.js)
+    - `factorisation des JS : créer un fichier de handler qu'on importe (des handlers sont réécrits plusieurs fois) quitte à leur ajouter des arguments. On pourrait faire un code par classe avec les handlers click, les handlers input etc.`
+        `améliorer le js avec query selector pour plus de lisibilité (reste newspding modifycount.js)`
         `modifycount : obliger à la présence de deux participants, d'un titre et d'une description.`
         `remplacer alert par une confirmation pour empêcher tout autre event de se déclencher`
             `lier le oui à l'url pour la suppression du tricount`
             `supprimer la div hidden de deleteconfirmation du js, du html`
-        Nettoyer les boutons qui ne servent à rien
-        ajouter l'event domcontentloaded
-        bien documenter
+        `ajouter l'event domcontentloaded`
+        `bien documenter`
     - pour le clonage de tricount, autoriser qu'on mette une minuscule en première lettre du titre du tricount
     - l'affichage en pound a trop de chiffres après la virgule
     - pourquoi le clic sur un tricount déjà créé est si lent? 
-    - modifier newspending.js, addspending pour que la gestion des champs non remplis soient faits en JS et pas dans la vue.
-    - modifier la confirmation de suppression de dépense par une alerte
+    - `modifier newspending.js, addspending pour que la gestion des champs non remplis soient faits en JS et pas dans la vue.`
+    - `modifier la confirmation de suppression de dépense par une alerte`
+    - modifier models pour que spending ait une foreignkey tricount
     - bugs
+        - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency.
         - quand je supprime l'admin des tricounts, il n'est plus possible de cliquer sur le tricount url /tricount/1 ne marche plus
         - `clic newcount quand je supprime le participant principal ça me supprime ce que j'ai entré et me met un message d'erreur pour le titre ou pwd (ce que je n'ai pas rempli).`
         - pb avec le JS de newspending : Avancé et aussi le calcul des montants qui ne semble plus fonctionner, relancer les tests fonctionnels (pb que ce soit lié au fait que j'ai touché au html via des blocks et au CSS)
@@ -428,7 +429,6 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         faire les factorisations ci-dessus pour améliorer mon appli
         apprivoiser les django channels pour intégrer le chat
         terminer le fichier de lancement de mes tests ou le remplacer par un fichier yaml et montrer que j'ai apprivoisé la cicd dans mon projet (juste la CI pour les copyright).
-        appliquer les préceptes de sécurité évoqués dans leur dernière vidéo
         réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)
         améliorer pour la pep8 : noms de fonctions en minuscule et _
         réfléchir à utiliser le django cache framework : quelles parties pourraient s'améliorer en termes de performance? Lesquelles je ne voudrais pas recharger?
@@ -438,6 +438,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         vérifier le côté responsive du site : pas parfait exemple newspending
         Optionnel : recherche dans les dépenses avec la loupe
         ajouter l'obligation d'enregistrer un email valide
+        Nettoyer les boutons qui ne servent à rien
         créer variable de temps pour time.sleep dans tests fonctionnels : essayer de diminuer le temps
         
     
