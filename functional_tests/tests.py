@@ -369,7 +369,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.create_a_spending('Dépense2', '', 'Jean', ['Henri','Jean'],'EUR')
         amounts = self.browser.find_elements(By.CLASS_NAME,"spending-amount") 
         self.assertEqual(self.browser.current_url, self.live_server_url + "/tricount/1")
-        self.assertIn('0.0',[amount.text for amount in amounts])
+        self.assertIn('0.00',[amount.text for amount in amounts])
 
         #He wants to check the current equilibria
         click.click_on_a_link(By.CLASS_NAME,"gotoequilibria")
@@ -396,18 +396,18 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         amount = self.browser.find_element(By.CLASS_NAME, "amount")
         self.assertEqual(self.browser.current_url, self.live_server_url + '/modifyspending/1/1')
         self.assertEqual(title.get_attribute("value"), "Dépense1")
-        self.assertEqual(amount.get_attribute("value"), '100.0')
+        self.assertEqual(amount.get_attribute("value"), '100.00')
 
         click.modify_a_spending({'amount':100},"Dulciny", "Henri")
         self.assertEqual(self.browser.current_url, self.live_server_url + '/spending-details/1/1')
 
         #He also notes that the amounts have been correctly modified
-        self.check_informations_of_a_spending('dépense1','100.0', 'Payé par Jean', ['Dulciny','Henri'],['50.0', '50.0'])
+        self.check_informations_of_a_spending('dépense1','100.00', 'Payé par Jean', ['Dulciny','Henri'],['50.00', '50.00'])
 
         #He makes an other modification : he modifies the spender         
         click.click_on_a_link(By.CLASS_NAME, "modify-spending")
         click.modify_a_spending({'title': 'spending','spender': "Henri"},"Dulciny", "Henri")
-        self.check_informations_of_a_spending('spending','100.0', 'Payé par Henri', ['Dulciny','Henri'],['50.0', '50.0'])
+        self.check_informations_of_a_spending('spending','100.00', 'Payé par Henri', ['Dulciny','Henri'],['50.00', '50.00'])
 
         #He then click to modify a spending but do not change anything and validate : he is redirected correctly to the spending details.
         click.click_on_successive_links(By.CLASS_NAME, "modify-spending","submit-spending")
@@ -433,14 +433,14 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         #The user register and log in
         click.register_and_login_someone("Dulciny","dulciny@dulciny.fr", "dulciny")
 
-        #L'utilisateur crée une dépense et clique dessus
+        #L'utilisateur crée une dépense et clique dessus0
         click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri") 
         click.click_and_create_a_spending('Depense1', '120.', 'Jean', ['Henri','Jean','Dulciny'],'EUR')
         click.click_on_an_existing_spending(1) 
 
         #Il arrive sur la page et il y voit toutes les données qu'il a enregistrées.
         self.assertEqual(self.browser.current_url, self.live_server_url + "/spending-details/1/1")
-        self.check_informations_of_a_spending('depense1', '120.0', 'Payé par Jean', ['Dulciny','Henri','Jean'],['40.0', '40.0', '40.0'])
+        self.check_informations_of_a_spending('depense1', '120.00', 'Payé par Jean', ['Dulciny','Henri','Jean'],['40.00', '40.00', '40.00'])
 
         #Il revient en arrière et crée trois autres dépenses
         click.click_on_a_link(By.CLASS_NAME,"backtospending")
@@ -452,12 +452,12 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.click_on_a_link(By.CLASS_NAME,"following")
 
         #Il voit alors les infos de la seconde dépense et le bouton précédent apparaître
-        self.check_informations_of_a_spending('depense2', '12.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['4.0', '4.0', '4.0'])
+        self.check_informations_of_a_spending('depense2', '12.00', 'Payé par Henri', ['Dulciny','Henri','Jean'],['4.00', '4.00', '4.00'])
         self.assertIsNotNone(self.browser.find_element(By.CLASS_NAME,'previous'))
 
         #Il clique sur suivant une fois et voit le bouton suivant disparaître
         click.click_on_a_link(By.CLASS_NAME,"following") 
-        self.check_informations_of_a_spending('depense3', '3.0', 'Payé par Henri', ['Dulciny','Henri','Jean'],['1.0', '1.0', '1.0']) 
+        self.check_informations_of_a_spending('depense3', '3.00', 'Payé par Henri', ['Dulciny','Henri','Jean'],['1.00', '1.00', '1.00']) 
 
         #Il clique sur précédent trois fois et revient à la liste des dépenses 
         click.click_on_successive_links(By.CLASS_NAME,"previous","previous","backtospending")
@@ -495,10 +495,10 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         for credit in credits:
             participant = credit.find_element(By.CLASS_NAME,"participant")
             amount = credit.find_element(By.CLASS_NAME,"amount")
-            self.assertIn([participant.text,amount.text], [["Robert","150.0 EUR"],
-                                                           ["Henri","-130.0 EUR"],
-                                                           ["Dulciny","-95.0 EUR"],
-                                                           ["Jean","75.0 EUR"]])
+            self.assertIn([participant.text,amount.text], [["Robert","150.00 EUR"],
+                                                           ["Henri","-130.00 EUR"],
+                                                           ["Dulciny","-95.00 EUR"],
+                                                           ["Jean","75.00 EUR"]])
 
     def test_equilibria_with_multiple_spendings(self):
         
@@ -523,7 +523,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         for credit in credits:
             participant = credit.find_element(By.CLASS_NAME,"participant")
             amount = credit.find_element(By.CLASS_NAME,"amount")
-            self.assertIn([participant.text,amount.text], [["Tony","-57.5 EUR"],["Henri","-7.5 EUR"],["Yann","22.5 EUR"],["Marine","42.5 EUR"]])
+            self.assertIn([participant.text,amount.text], [["Tony","-57.50 EUR"],["Henri","-7.50 EUR"],["Yann","22.50 EUR"],["Marine","42.50 EUR"]])
         
         #Les crédits dettes du propriétaire sont présentées d'abord, celles des autres dans la section suivante
         usersolutions = self.browser.find_elements(By.NAME, "userinclude") 

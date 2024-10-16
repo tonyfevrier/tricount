@@ -24,15 +24,15 @@
 {% endblock %}
 
 {% block main %} 
-    {% for name,credit in total_credit.items %} 
+    {% for name, credit in total_credit.items %} 
         {% if credit >= 0 %}
         <div class = "credits" name = "credits-positive">
             <div><p class = participant name = "{% if name == user %}owner{%else%}other{%endif%}"> {{name}} </p></div>
-            <div><p class = "amount"> {{credit}} {{count.currency}}</p></div>
+            <div><p class = "amount"> {{credit|floatformat:2}} {{count.currency}}</p></div>
         </div> 
         {% else %}
         <div class = "credits" name = "credits-negative">
-            <div><p class = "amount"> {{credit}} {{count.currency}}</p></div>
+            <div><p class = "amount"> {{credit|floatformat:2}} {{count.currency}}</p></div>
             <div><p class = participant name = "{% if name == user %}owner{%else%}other{%endif%}"> {{name}}</p> </div>
         </div> 
         {% endif %}
@@ -53,7 +53,7 @@
                         <p class = "dueto">doit à </p>
                         <p class = "who">{{creditor}}</p>
                     </div>
-                    <p class = "reimbursement-amount">{{amount}} {{count.currency}}</p>
+                    <p class = "reimbursement-amount">{{amount|floatformat:2}} {{count.currency}}</p>
                 </div>
                 <div class = "more-options">
                     Plus d'options

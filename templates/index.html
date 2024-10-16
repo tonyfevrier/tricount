@@ -99,9 +99,9 @@
             <input type="text" class = "tricount-title" placeholder="Titre du tricount" name = "tricount-title" autocomplete="off">
             <input type="password" class = "password" placeholder="Mot de passe du tricount" name = "password" autocomplete="new-password">
             <input type="submit" class = "pwdsubmit" placeholder="submit password">
-            <div class="error" hidden>Remplissez le titre et le mot de passe</div>
             {% csrf_token %} 
         </form>
+        <div class="error" hidden> Remplissez le titre et le mot de passe</div>
     </div> 
 {% endblock %}
 

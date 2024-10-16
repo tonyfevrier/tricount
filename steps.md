@@ -390,7 +390,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         `ajouter l'event domcontentloaded`
         `bien documenter`
     - pour le clonage de tricount, autoriser qu'on mette une minuscule en première lettre du titre du tricount
-    - l'affichage en pound a trop de chiffres après la virgule
+    - `l'affichage en pound a trop de chiffres après la virgule`
     - pourquoi le clic sur un tricount déjà créé est si lent? 
     - `modifier newspending.js, addspending pour que la gestion des champs non remplis soient faits en JS et pas dans la vue.`
     - `modifier la confirmation de suppression de dépense par une alerte`
@@ -399,7 +399,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency.
         - quand je supprime l'admin des tricounts, il n'est plus possible de cliquer sur le tricount url /tricount/1 ne marche plus
         - `clic newcount quand je supprime le participant principal ça me supprime ce que j'ai entré et me met un message d'erreur pour le titre ou pwd (ce que je n'ai pas rempli).`
-        - pb avec le JS de newspending : Avancé et aussi le calcul des montants qui ne semble plus fonctionner, relancer les tests fonctionnels (pb que ce soit lié au fait que j'ai touché au html via des blocks et au CSS)
+        - `pb avec le JS de newspending : Avancé et aussi le calcul des montants qui ne semble plus fonctionner, relancer les tests fonctionnels (pb que ce soit lié au fait que j'ai touché au html via des blocks et au CSS)`
         - bug : j'ai rentré une unique dépense mais dans spending-details j'ai un bouton précédent!
         - `depuis l'introduction de la loupe dans currency.html, la barre de recherche n'apparait plus (JS pb)`
         - `newcount : je peux enlever tous les participants (en commençant par enlever l'admin puis en enlevant les autres) et quand je clique sur valider il me remet l'admin.`
@@ -421,7 +421,10 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     - parfois on a l'affichage de la flèche retour en très grand (exe modifycount)
     - centrer le Bonjour Tony de la page logout
     - si le titre et le pwd pr cloner ne correspondent à rien, ajouter un message l'indiquant.
-    - mettre aussi le msg d'erreur Remplissez mdp en rouge.
+        - le faire en JS (avec une vue JS pour éviter le chargement de la page)
+        - écrire la vue 
+        - écrire le JS dans index.js faisant la requête
+    - `mettre aussi le msg d'erreur Remplissez mdp en rouge.`
     - faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
     - pour le projet edX:
         voir pour mettre des branches accessibles uniquement via login (@auth_login)

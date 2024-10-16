@@ -21,7 +21,7 @@
             {%endif%}
             <p class = "counter">0/50</p>
             <div class = "div-amount">  
-                <input class = "amount" type="text" value="{{spending.amount}}" id="amount" name = "amount"> 
+                <input class = "amount" type="text" value="{{spending.amount|floatformat:2}}" id="amount" name = "amount"> 
                 <a href="/choosecurrency?referer=/modifyspending/{{count.id}}/{{spending.id}}" class = "choose-currency"><input type= "text" class = "newtricount_currency" value = "{{count.currency}}" name = "newtricount_currency"></a>
             </div>
             <select class = "spender" name="spender" id="spender">

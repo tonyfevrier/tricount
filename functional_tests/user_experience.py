@@ -346,7 +346,7 @@ class Check():
         self.assertEqual(payer.text, payeur)
 
         for i in range(len(ptcpts)):
-            self.assertIn(ptcpts[i],[participant.text for participant in participants])
-            self.assertIn(amnts[i],[amount.text for amount in amounts])
+            self.assertIn(ptcpts[i], [participant.text for participant in participants])
+            self.assertIn(amnts[i], [amount.text for amount in amounts])
 
              

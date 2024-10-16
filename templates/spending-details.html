@@ -16,7 +16,7 @@
         {{spending.title}}
     </h1>
     <h2 class = "price-spending">
-        {{spending.amount}}
+        {{spending.amount|floatformat:2}}
     </h2>
     <nav class = "payer-date">
         <p class = "payer"> Payé par {{spending.payer}}</p>
@@ -29,7 +29,7 @@
     {% for participant,amount in spending.receivers.items %}
     <div class = "participant">
         <p class = "participant-name"> {{participant}}</p>
-        <p class = "participant-amount"> {{amount}} </p>
+        <p class = "participant-amount"> {{amount|floatformat:2}} </p>
     </div> 
     {% endfor%}
 {% endblock %}

@@ -34,7 +34,7 @@
             <p class = "spending-payer">{{spend.payer}}</p>
         </div>
         <div class = "spending-amount-div">
-            <p class = "spending-amount">{{spend.amount}}</p>
+            <p class = "spending-amount">{{spend.amount|floatformat:2}}</p>
             <p class = "spending-date">Hier</p>
         </div>
     </a>
@@ -46,12 +46,12 @@
     <div class = footer>
         <div class = "total-cost">
             <p>Mon coût total</p>
-            <p>{{credit_owner}} {{count.currency}}</p>
+            <p>{{credit_owner|floatformat:2}} {{count.currency}}</p>
         </div>
         <div class = "total-spending">
             <p>Total dépenses</p>
-            <p>{{totalcost}} {{count.currency}}</p>
-            <p>{{totalpound}} GBP</p>
+            <p>{{totalcost|floatformat:2}} {{count.currency}}</p>
+            <p>{{totalpound|floatformat:2}} GBP</p>
         </div>
     </div>
 {% endblock %}
