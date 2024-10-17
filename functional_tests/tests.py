@@ -282,17 +282,24 @@ class MultiUsersTricount(StaticLiveServerTestCase):
         click.click_on_a_link(By.CLASS_NAME,'backtolistecount')
 
         #L'utilisateur 2 arrive sur sa liste de tricount et cherche à clôner le tricount qui a été créé par l'utilisateur 1. Il se trompe de mot de passe, il est renvoyé sur cette même page
+        click2.click_on_a_link(By.ID,'id_newcount')  
+        click2.click_on_a_link(By.CLASS_NAME,"clonecount") 
         click2.clone_a_tricount("Tricount1", "falsepassword") 
+        error = self.browser2.find_element(By.ID, "Invalid")
+        self.assertEqual(error.text, "Les identifiants ne correspondent à aucun tricount")
         self.assertEqual(self.live_server_url + "/count" , self.browser2.current_url)
 
-        #Il oublie de mettre un mot de passe : un message apparaît.
+        #Il oublie de mettre un mot de passe : un message apparaît. 
+        click2.clear_registration_inputs(self.browser2.find_element(By.CLASS_NAME, "tricount-title"),
+                                         self.browser2.find_element(By.CLASS_NAME, "password"),)
         click2.clone_a_tricount("Tricount1","")
         error = self.browser2.find_element(By.CLASS_NAME, "error")
         self.assertEqual(error.text, "Remplissez le titre et le mot de passe")
 
         #Il recommence et tape le bon mot de passe, il est envoyé vers la liste de ses tricount et le tricount de l'utilisateur 1 est apparu.
-        click2.click_on_a_link(By.CLASS_NAME, "id_newcount")
-        click2.clone_a_tricount("Tricount1", "rightpassword")
+        click2.clear_registration_inputs(self.browser2.find_element(By.CLASS_NAME, "tricount-title"),
+                                         self.browser2.find_element(By.CLASS_NAME, "password"),)
+        click2.clone_a_tricount("tricount1", "rightpassword")
         tricount = self.browser.find_element(By.CLASS_NAME, 'tricount_title') 
         self.assertEqual(tricount.text, "Tricount1")
         

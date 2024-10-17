@@ -180,28 +180,24 @@ header{
  
 
 .form-pwdcount{
-    position: absolute;
+    position: absolute; 
     bottom : 10px;
     right : 100px;
-    background-color: white; 
+    background-color: transparent; 
     margin-top: auto;
     margin-left: auto;
     border-radius: 5px;
     /*border: solid 1px black;*/
 }
+ 
 
-.form-pwdcount form{
-    display: flex;
-    flex-direction: column;
-}
-
-.form-pwdcount form > *{
+.form-pwdcount > *{
     width: 300px;
     height: 40px;
     padding: 0 1em;
 }
 
-.form-pwdcount form input:focus{
+.form-pwdcount input:focus{
     transition: .5s;
     font-size: 0.7em;
     color:blue;
@@ -224,5 +220,6 @@ input[type = "submit"]:hover{
     color:red;
     font-weight: 600;
     padding-left:0.5em;
+    height:fit-content
 }
 

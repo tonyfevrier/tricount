@@ -1,5 +1,6 @@
 from django.test import TestCase
 from bs4 import BeautifulSoup 
+import json
 
 class UnitaryTestMethods(TestCase):
     """
@@ -62,7 +63,7 @@ class UnitaryTestMethods(TestCase):
                                                                                'nameparticipant' : participants})
         return response
     
-    def clone_a_tricount(self, title, password):
+    def clone_a_tricount_0(self, title, password):
         """
         Inputs : 
             - people (str) : who wants to clone the tricount.
@@ -70,6 +71,19 @@ class UnitaryTestMethods(TestCase):
             - password (str)
         """
         self.client.post("/clonecount", data = {"tricount-title":title, "password":password})
+
+    def clone_a_tricount(self, title, password):
+        """
+        Inputs : 
+            - people (str) : who wants to clone the tricount.
+            - title (str)
+            - password (str)
+        """
+        response = self.client.post("/clonecount",
+                         data = json.dumps({"title":title, "password":password}),
+                         content_type='application/json')
+        return response
+
 
     def create_a_spending(self,idcount,title,amount,currency,spender, receivers, respective_amounts):
         """

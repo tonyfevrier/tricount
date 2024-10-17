@@ -32,6 +32,7 @@ class Click():
     def clear_registration_inputs(self,*elements):
         for element in elements:
             element.clear()
+        time.sleep(2)
 
 
     def login_someone(self,username,password):
@@ -188,9 +189,7 @@ class Click():
         Input :
             - title (str) of the tricount
             - password (str) 
-        """
-        self.click_on_a_link(By.ID,'id_newcount')  
-        self.click_on_a_link(By.CLASS_NAME,"clonecount")  
+        """ 
         tricount_title,pwd,submit = self.find_multiple_elements(By.CLASS_NAME,"tricount-title","password","pwdsubmit")
         tricount_title.send_keys(title)
         pwd.send_keys(password)

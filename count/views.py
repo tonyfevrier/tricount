@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.models import User, auth
@@ -84,17 +85,16 @@ def listecount(request):
                 items.append(item)
     return render(request,'index.html',context ={'counts' : items})
 
-def clonecount(request):
-    """
-    Function for cloning an existing tricount.
-    """  
-    item = Counts.objects.filter(title = request.POST["tricount-title"], password = request.POST['password'])   
+
+def clonecount(request): 
+    credentials = json.loads(request.body) 
+    item = Counts.objects.filter(title = String.majuscule(credentials['title']), password = credentials["password"])  
     if len(item) > 0:    
         item[0].admins.append(request.user.username)
         item[0].save()
-    
-    return redirect(reverse('listecount')) 
-    
+        return JsonResponse({'message': 'Le tricount vient d"être clôné'}, status=200)
+    else:
+        return JsonResponse({'message':'Les identifiants ne correspondent à aucun tricount'}, status=400)
     
 
 def newcount(request):
@@ -316,8 +316,10 @@ def deletespending(request, id_count, id_spending):
     spending.delete()
     return redirect(reverse('spending', args=[id_count]))
 
+
 def chat(request, id_count):
     """
     Function to go to the chat view
     """
     return render(request,'chat.html',context={'id':id_count})
+

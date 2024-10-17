@@ -389,14 +389,14 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             `supprimer la div hidden de deleteconfirmation du js, du html`
         `ajouter l'event domcontentloaded`
         `bien documenter`
-    - pour le clonage de tricount, autoriser qu'on mette une minuscule en première lettre du titre du tricount
+    - `pour le clonage de tricount, autoriser qu'on mette une minuscule en première lettre du titre du tricount`
     - `l'affichage en pound a trop de chiffres après la virgule`
     - pourquoi le clic sur un tricount déjà créé est si lent? 
     - `modifier newspending.js, addspending pour que la gestion des champs non remplis soient faits en JS et pas dans la vue.`
     - `modifier la confirmation de suppression de dépense par une alerte`
     - modifier models pour que spending ait une foreignkey tricount
     - bugs
-        - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency.
+        - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency (utiliser localstorage comme dans newcount).
         - quand je supprime l'admin des tricounts, il n'est plus possible de cliquer sur le tricount url /tricount/1 ne marche plus
         - `clic newcount quand je supprime le participant principal ça me supprime ce que j'ai entré et me met un message d'erreur pour le titre ou pwd (ce que je n'ai pas rempli).`
         - `pb avec le JS de newspending : Avancé et aussi le calcul des montants qui ne semble plus fonctionner, relancer les tests fonctionnels (pb que ce soit lié au fait que j'ai touché au html via des blocks et au CSS)`
@@ -420,10 +420,24 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - `si je supprime l'admin et que je reviens de currency, l'admin est remis : JS pour ne remettre que les elts de list_participants et pas l'admin s'il a été supprimé avant`
     - parfois on a l'affichage de la flèche retour en très grand (exe modifycount)
     - centrer le Bonjour Tony de la page logout
-    - si le titre et le pwd pr cloner ne correspondent à rien, ajouter un message l'indiquant.
-        - le faire en JS (avec une vue JS pour éviter le chargement de la page)
-        - écrire la vue 
-        - écrire le JS dans index.js faisant la requête
+    - `si le titre et le pwd pr cloner ne correspondent à rien, ajouter un message l'indiquant.`
+        - `le faire en JS (avec une vue JS pour éviter le chargement de la page)`
+        - `récrire la vue clonecount en rendant une JSON response.`
+            - `modifier la requête pour récupérer le body`
+        - `écrire le JS dans index.js faisant la requête`
+            - `ne pas oublier le tokenv`
+            `si les credentials sont faux, afficher un message d'erreur`
+           ` sinon windowslocationhref vers l'url listecount (on ne recharge la page que si les credentials sont corrects)`
+        - `enlever le form et le remplacer par un div`
+        - `test unitaire puis fonctionnel`
+        - `qd ça fonctionne enlever la div pwdcount qui ne sert plus et adapter css et js`
+        - `indices sur le bug : `
+            - `fetch quand il est mis dans parameters marche quand je clic sur les boutons mais pas sur a`
+            - `semble être lié à un comportement avec les différents event de click`
+            - `quand je clic direct sur envoyer le fecth marche, qd je clique en remplissant les deux champs ça ne marche plus et si après je reclic en ne remplissant rien, ça ne marche plus!!!!!!`
+            - `Essayer d'enlever tous les comportements JS et voir si ça fonctionne.`
+        - `après le débug, remettre les event listener et voir ceux qui font disparaitre le div de clonecount`
+        - `voir ensuite si le tricount est bien cloné.`
     - `mettre aussi le msg d'erreur Remplissez mdp en rouge.`
     - faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
     - pour le projet edX:
@@ -443,6 +457,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         ajouter l'obligation d'enregistrer un email valide
         Nettoyer les boutons qui ne servent à rien
         créer variable de temps pour time.sleep dans tests fonctionnels : essayer de diminuer le temps
+        voir si des vues sont à passer en JS : se demander quand il est inutile de perdre du temps à recharger la page (exemple: pour clonecount, inutile de recharger quand les credentials sont faux).
         
     
     -modification des dépenses déjà entrées :
@@ -506,6 +521,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     - A VERSUS INPUT : Les <a> ne sont pas prévus pour encapsuler des input : quand je mets un input dans un <a>, si je mets une value par défaut, lorsque je soumets le formulaire, cette valeur n'est pas envoyée à la soumission.
     - JS LOCAL VARIABLES IN IF : les éléments définis dans un if n'existent que dans ce if. En particulier, s'il y a des handlers qui les utilisent, il faut les mettre dans le if.
     - SASS EXTEND : Attention il semble que si on utilise extend dans un élement, sass copie les attributs des enfants aussi. Cela peut mener à des absurdités : sélecteur avec des parents n'ayant pas l'enfant qui leur est associé. Pour parer à ça, on peut créer un élément fictif qui n'est pas dans le html et qui n'aura pas d'enfant et utiliser @extend de cet élément.
+    - FETCH EVENT PREVENT DEFAULT: Si je mets un event click sur un input submit ou a ou sur un bouton dans un formulaire (qui du coup est assimilé à un input submit) et que je mets un fecth dedans, il faut veiller à bien empêcher le comportement par défaut sinon le fetch n'aboutit pas.
 
 # Mes difficultés principales
 

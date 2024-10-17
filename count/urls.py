@@ -25,5 +25,5 @@ urlpatterns = [
     path('modifyspending/<int:id_count>/<int:id_spending>', countviews.modifyspending,name = "modifyspending"),
     path('modifyspendingregister/<int:id_count>/<int:id_spending>', countviews.modifyspendingregister,name = "modifyspendingregister"),
     path('deletespending/<int:id_count>/<int:id_spending>', countviews.deletespending, name = "deletespending"),
-    path('spending-details/<int:id_count>/<int:id_spending>', countviews.spending_details, name = "spending-details"),
+    path('spending-details/<int:id_count>/<int:id_spending>', countviews.spending_details, name = "spending-details"), 
 ]

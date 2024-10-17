@@ -5,6 +5,7 @@
     <title>Tricount list</title>
     <link rel="stylesheet" href="{% static 'css/common.css' %}">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">
 {% endblock %}
 
 {% block header %}
@@ -95,12 +96,9 @@
     </div>
 
     <div data-div = "hidden" class = 'form-pwdcount' hidden>
-        <form  class = "pwdcount" method = "POST" action = "{% url 'clonecount' %}"> 
-            <input type="text" class = "tricount-title" placeholder="Titre du tricount" name = "tricount-title" autocomplete="off">
-            <input type="password" class = "password" placeholder="Mot de passe du tricount" name = "password" autocomplete="new-password">
-            <input type="submit" class = "pwdsubmit" placeholder="submit password">
-            {% csrf_token %} 
-        </form>
+        <input type="text" class = "tricount-title" placeholder="Titre du tricount" name = "tricount-title" autocomplete="off">
+        <input type="password" class = "password" placeholder="Mot de passe du tricount" name = "password" autocomplete="new-password">
+        <button class = "pwdsubmit">Envoyer</button>
         <div class="error" hidden> Remplissez le titre et le mot de passe</div>
     </div> 
 {% endblock %}
