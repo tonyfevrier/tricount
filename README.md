@@ -5,6 +5,7 @@
 - api extérieure currency
 - chat websockets
 - écriture de l'intégration continue si fait avec gitlab
+- utilisation de docker pour lancer mon projet en local et pour le partage avec d'autres dev
 
 
 # Complexity

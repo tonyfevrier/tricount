@@ -441,9 +441,9 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency (utiliser localstorage comme dans newcount).
         - quand on supprime un participant et qu'on le remet, son ancien passif n'est pas conservé s'il avait fait des dépenses avant.
     - branche pour le chat (suite)
-            `copier l'html et voir si ça marche`
-            `copie de app et templates`
-            - créer un modèle qui conserve les messages
+            - `copier l'html et voir si ça marche`
+            - `copie de app et templates`
+            - `créer un modèle qui conserve les messages`
             - écrire une vue de type JS qui reçoit de manière asynchrone un message, l'enregistre en bdd et le renvoit avec la date et l'envoyeur.
                 - ce renvoi doit s'adresser à tous les participants au tricount.
             - écrire dans chat.js :
@@ -459,8 +459,11 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
                 - si clic sur coeur, envoi d'un message avec like
                 - affichage automatique au receive du nombre de likes à côté du coeur
             - ajout au html : d'un message avec le jour avant la liste des messages lui correspondant
+            - css de la page chat
+            - besoin de déclencher un serveur redis pour que ça fonctionne : voir si je peux donner un fichier yaml qui s'exécute automatiquement pour qqun qui voudrait lancer mon code.
+            - faut il faire de l'asynchrone auquel cas il faut faire attention à ne pas accéder aux modèles en asynchrone
+            - voir comment remplir l'url dans routing.py
     - pour le projet edX:
-        ** faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
         `** voir pour mettre des branches accessibles uniquement via login (@auth_login)`
         `regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.`
         `faire les factorisations ci-dessus pour améliorer mon appli`
@@ -482,6 +485,9 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             centrer le Bonjour Tony de la page logout
         ** remettre l'API si ça marche après tous les tests effectués
         - faire des sous dossiers dans templates pour chaque application?
+        * créer une docker image permettant aux examinateurs de créer facilement le conteneur associé à mon application
+        * créer un fichier yaml permettant facilement de lancer mon application et un pour lancer les tests unitaires, fonctionnels.
+        ** faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
         
     
     -modification des dépenses déjà entrées :
