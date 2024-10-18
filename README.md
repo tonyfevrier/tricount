@@ -13,7 +13,7 @@
 - appli de calculation à créer entièrement et à coupler
 - chat websockets : prise en main des django channels si fait
 - barre de recherche filtre des monnaies
-- taille du projet
+- taille du projet : deux applications et deux API (une interne, une externe)
 - prise en main de yaml
 
 # Improvement thanks to the formation

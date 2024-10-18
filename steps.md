@@ -440,6 +440,25 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - modifyspending : quand je modifie la monnaie de la dépense déjà enregistrée, j'ai un bug
         - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency (utiliser localstorage comme dans newcount).
         - quand on supprime un participant et qu'on le remet, son ancien passif n'est pas conservé s'il avait fait des dépenses avant.
+    - branche pour le chat (suite)
+            `copier l'html et voir si ça marche`
+            `copie de app et templates`
+            - créer un modèle qui conserve les messages
+            - écrire une vue de type JS qui reçoit de manière asynchrone un message, l'enregistre en bdd et le renvoit avec la date et l'envoyeur.
+                - ce renvoi doit s'adresser à tous les participants au tricount.
+            - écrire dans chat.js :
+                - quand on charge le contenu on crée une ws
+                - quand on clique sur submit, event envoyer un message
+                - event ws.receive (un message): création d'un élément en bas de page affichant le message et ses infos  
+                - event ws.receive (création d'un indicateur rouge sur le tricount dans listecount ainsi que sur la cloche dans la liste des dépenses).
+            - écriture d'une vue JS qui renvoit un message particulier si quelqu'un est en train d'écrire (peut-être dans la même vue JS).
+            - dans chat.js : 
+                - si ws.receive un message de type "qqun écrit", écriture quelque part de "Untel est en train d'écrire". 
+            - une vue (ptet encore la même pour l'envoi de likes)
+            - dans chat.js :
+                - si clic sur coeur, envoi d'un message avec like
+                - affichage automatique au receive du nombre de likes à côté du coeur
+            - ajout au html : d'un message avec le jour avant la liste des messages lui correspondant
     - pour le projet edX:
         ** faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
         `** voir pour mettre des branches accessibles uniquement via login (@auth_login)`
@@ -469,16 +488,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     -`pb à résoudre : quand j'écris un titre et que j'entre un participant, le titre n'est pas conservé : voir comment garder ça : (devrait être résolu en passant en JS : plus de chgt d'url)`
     -quand on clique sur la loupe dans la page de dépenses, on a une barre de recherche qui apparaît. 
     Tests JS : voir comment en faire facilement sans selenium.
-    Améliorer:
-    - branche pour le chat (suite)
-            `copier l'html et voir si ça marche`
-            `copie de app et templates`
-            partie serveur : django : voir comment recevoir les sockets, stocke les messages et les affiche sur les comptes des différents clients.
-            apparition du message dans la page html sans réactualiser si elle est ouverte
-            apparition d'une cloche si on n'est pas dans le chat.
-            promesse dans le cas où qqun écrit : affichage qu'un utilisateur écrit.
-            voir comment lancer automatiquement app.py (lorsqu'un utilisateur entre dans le chat? ou lorsqu'un tricount est créé?) (peut-être qu'on le lançait juste pour voir les affichages et qu'on n'a pas besoin de le lancer.)
-
+    
 
 # Bug non résolu : 
 

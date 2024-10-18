@@ -16,10 +16,10 @@
 {% endblock %} 
 
 {% block footer %}
-    <form action="">
-        <input type="text" class = "send" placeholder = "Ajoutez un message...">
-        <button type="submit"  class = "submit"><img width = "20px" src = "{%static 'images/send.png'%}" alt="send"></button>
-    </form>
+    <div>
+        <textarea class = "send" placeholder = "Ajoutez un message..."></textarea>
+        <button class = "submit"><img width = "20px" src = "{%static 'images/send.png'%}" alt="send"></button>
+    </div>
 {% endblock %}
 
 {% block js %}
