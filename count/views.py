@@ -336,11 +336,3 @@ def deletespending(request, id_count, id_spending):
     spending.delete()
     return redirect(reverse('spending', args=[id_count]))
 
-
-@login_required
-def chat(request, id_count):
-    """
-    Function to go to the chat view
-    """
-    return render(request,'chat.html',context={'id':id_count})
-

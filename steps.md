@@ -453,7 +453,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         ** sécurité : introduire le hachage des pwd dans mon application
         ** vérifier toutes les spécifications.
         ** vérifier le côté responsive du site : pas parfait exemple newspending
-            - newcount: si écran > longueur max du titre, le titre est mdp sur la même ligne, les participants sur la même ligne au max avec des petites croix à côté ET le formulaire de clonage en hauteur si écran < l
+            - newcount: si écran > longueur max du titre, le titre est mdp sur la même ligne, les participants sur la même ligne au max avec des petites croix à côté et la bouton ajouter pas trop loin de Autre participant ET le formulaire de clonage en hauteur si écran < l
             - newspending, modifycount, modifyspending : idem montant et monnaie sur même ligne que titre
         - Optionnel : recherche dans les dépenses avec la loupe
         ** Nettoyer momentanément les boutons qui ne servent à rien en les commentant
@@ -462,6 +462,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - CSS des ajouter pour que le ajouter soit mieux placé qqs taille écran - parfois on a l'affichage de la flèche retour en très grand (exe modifycount)
             centrer le Bonjour Tony de la page logout
         ** remettre l'API si ça marche après tous les tests effectués
+        - faire des sous dossiers dans templates pour chaque application?
         
     
     -modification des dépenses déjà entrées :
