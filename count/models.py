@@ -18,5 +18,5 @@ class Spending(models.Model):
     amount = models.FloatField(default=0.)
     payer = models.TextField(default='')
     receivers = models.JSONField(default=[]) 
-    number = models.IntegerField(default = 0)
+    tricount = models.ForeignKey(Counts, on_delete=models.CASCADE, related_name='spendings')
     date = models.DateField(default = timezone.now) 

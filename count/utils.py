@@ -108,7 +108,7 @@ class ModifyTricount(CurrencyConversion):
         count.save()
 
     @staticmethod
-    def add_new_participants_to_a_tricount(count,participants):  
+    def add_new_participants_to_a_tricount(count, participants):  
         """
         Function which checks if there are new participants in participants and creates an object Participant and add it for future credits calculations.
 

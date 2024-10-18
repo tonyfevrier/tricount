@@ -391,16 +391,15 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         `bien documenter`
     - `pour le clonage de tricount, autoriser qu'on mette une minuscule en première lettre du titre du tricount`
     - `l'affichage en pound a trop de chiffres après la virgule`
-    - pourquoi le clic sur un tricount déjà créé est si lent? 
+    - `pourquoi le clic sur un tricount déjà créé est si lent? `
     - `modifier newspending.js, addspending pour que la gestion des champs non remplis soient faits en JS et pas dans la vue.`
     - `modifier la confirmation de suppression de dépense par une alerte`
-    - modifier models pour que spending ait une foreignkey tricount
-    - bugs
-        - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency (utiliser localstorage comme dans newcount).
-        - quand je supprime l'admin des tricounts, il n'est plus possible de cliquer sur le tricount url /tricount/1 ne marche plus
+    - `modifier models pour que spending ait une foreignkey tricount`
+    - `bugs`
+        - `quand je supprime l'admin des tricounts, il n'est plus possible de cliquer sur le tricount url /tricount/1 ne marche plus`
         - `clic newcount quand je supprime le participant principal ça me supprime ce que j'ai entré et me met un message d'erreur pour le titre ou pwd (ce que je n'ai pas rempli).`
         - `pb avec le JS de newspending : Avancé et aussi le calcul des montants qui ne semble plus fonctionner, relancer les tests fonctionnels (pb que ce soit lié au fait que j'ai touché au html via des blocks et au CSS)`
-        - bug : j'ai rentré une unique dépense mais dans spending-details j'ai un bouton précédent!
+        - `bug : j'ai rentré une unique dépense mais dans spending-details j'ai un bouton précédent!`
         - `depuis l'introduction de la loupe dans currency.html, la barre de recherche n'apparait plus (JS pb)`
         - `newcount : je peux enlever tous les participants (en commençant par enlever l'admin puis en enlevant les autres) et quand je clique sur valider il me remet l'admin.`
         - `On devrait en JS empêcher toutes les suppressions déjà (garantir toujours au - 1 ptcpt mais ajouter un message "Il faut au - un participant" qu'il faudra enlever de views). `
@@ -418,8 +417,6 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - `on peut mettre deux fois le même ptcpt`
         - `pb on ne peut faire de tricount sans l'admin`
         - `si je supprime l'admin et que je reviens de currency, l'admin est remis : JS pour ne remettre que les elts de list_participants et pas l'admin s'il a été supprimé avant`
-    - parfois on a l'affichage de la flèche retour en très grand (exe modifycount)
-    - centrer le Bonjour Tony de la page logout
     - `si le titre et le pwd pr cloner ne correspondent à rien, ajouter un message l'indiquant.`
         - `le faire en JS (avec une vue JS pour éviter le chargement de la page)`
         - `récrire la vue clonecount en rendant une JSON response.`
@@ -439,25 +436,32 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - `après le débug, remettre les event listener et voir ceux qui font disparaitre le div de clonecount`
         - `voir ensuite si le tricount est bien cloné.`
     - `mettre aussi le msg d'erreur Remplissez mdp en rouge.`
-    - faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
+    - bugs
+        - modifyspending : quand je modifie la monnaie de la dépense déjà enregistrée, j'ai un bug
+        - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency (utiliser localstorage comme dans newcount).
+        - quand on supprime un participant et qu'on le remet, son ancien passif n'est pas conservé s'il avait fait des dépenses avant.
     - pour le projet edX:
-        voir pour mettre des branches accessibles uniquement via login (@auth_login)
-        regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.
-        faire les factorisations ci-dessus pour améliorer mon appli
-        apprivoiser les django channels pour intégrer le chat
-        terminer le fichier de lancement de mes tests ou le remplacer par un fichier yaml et montrer que j'ai apprivoisé la cicd dans mon projet (juste la CI pour les copyright).
-        réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)
-        améliorer pour la pep8 : noms de fonctions en minuscule et _
-        réfléchir à utiliser le django cache framework : quelles parties pourraient s'améliorer en termes de performance? Lesquelles je ne voudrais pas recharger?
-        sécurité : mettre ma clé d'API non pas dans le code source mais dans une variable d'environnement ou la sécuriser.
-        sécurité : introduire le hachage des pwd dans mon application
-        vérifier toutes les spécifications.
-        vérifier le côté responsive du site : pas parfait exemple newspending
-        Optionnel : recherche dans les dépenses avec la loupe
-        ajouter l'obligation d'enregistrer un email valide
-        Nettoyer les boutons qui ne servent à rien
-        créer variable de temps pour time.sleep dans tests fonctionnels : essayer de diminuer le temps
-        voir si des vues sont à passer en JS : se demander quand il est inutile de perdre du temps à recharger la page (exemple: pour clonecount, inutile de recharger quand les credentials sont faux).
+        ** faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
+        `** voir pour mettre des branches accessibles uniquement via login (@auth_login)`
+        `regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.`
+        `faire les factorisations ci-dessus pour améliorer mon appli`
+        ** apprivoiser les django channels pour intégrer le chat
+        ** réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)
+        - améliorer pour la pep8 : noms de fonctions en minuscule et _
+        - réfléchir à utiliser le django cache framework : quelles parties pourraient s'améliorer en termes de performance? Lesquelles je ne voudrais pas recharger?
+        ** sécurité : mettre ma clé d'API non pas dans le code source mais dans une variable d'environnement ou la sécuriser.
+        ** sécurité : introduire le hachage des pwd dans mon application
+        ** vérifier toutes les spécifications.
+        ** vérifier le côté responsive du site : pas parfait exemple newspending
+            - newcount: si écran > longueur max du titre, le titre est mdp sur la même ligne, les participants sur la même ligne au max avec des petites croix à côté ET le formulaire de clonage en hauteur si écran < l
+            - newspending, modifycount, modifyspending : idem montant et monnaie sur même ligne que titre
+        - Optionnel : recherche dans les dépenses avec la loupe
+        ** Nettoyer momentanément les boutons qui ne servent à rien en les commentant
+        - créer variable de temps pour time.sleep dans tests fonctionnels : essayer de diminuer le temps
+        - voir si des vues sont à passer en JS : se demander quand il est inutile de perdre du temps à recharger la page (exemple: pour clonecount, inutile de recharger quand les credentials sont faux).
+        - CSS des ajouter pour que le ajouter soit mieux placé qqs taille écran - parfois on a l'affichage de la flèche retour en très grand (exe modifycount)
+            centrer le Bonjour Tony de la page logout
+        ** remettre l'API si ça marche après tous les tests effectués
         
     
     -modification des dépenses déjà entrées :

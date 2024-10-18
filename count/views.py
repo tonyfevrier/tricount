@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.models import User, auth
+from django.contrib.auth.decorators import login_required
 from count.models import Counts, Spending
 from count.utils import CurrencyConversion as CC, ModifyTricount as MT, String    
 from count.calculation import *
@@ -56,6 +57,8 @@ def login(request):
         messages.info(request, 'Invalid credentials')
         return redirect(reverse('log'))
 
+
+@login_required
 def logout(request):
     """
     Function to go to the logout page containing the parameters.
@@ -63,6 +66,7 @@ def logout(request):
     userObject = User.objects.get(username = request.user.username)
     return render(request, "logout.html",context = {'userobject':userObject})
 
+@login_required
 def delog(request):
     """
     Function which is delogging the user
@@ -71,6 +75,7 @@ def delog(request):
     auth.logout(request)
     return redirect(reverse('log'))
 
+@login_required
 def listecount(request): 
     """
     Function rendering the list of tricounts of a single user.
@@ -86,6 +91,7 @@ def listecount(request):
     return render(request,'index.html',context ={'counts' : items})
 
 
+@login_required
 def clonecount(request): 
     credentials = json.loads(request.body) 
     item = Counts.objects.filter(title = String.majuscule(credentials['title']), password = credentials["password"])  
@@ -97,6 +103,7 @@ def clonecount(request):
         return JsonResponse({'message':'Les identifiants ne correspondent à aucun tricount'}, status=400)
     
 
+@login_required
 def newcount(request):
     """
     Function rendering the page of creation of a tricount
@@ -105,6 +112,7 @@ def newcount(request):
     return render(request, 'newcount.html',context={'user':request.user.username, 'currency': currency})
     
 
+@login_required
 def addcount(request):
     """
     Function adding a new tricount. A tricount necessitates a title, a password, a description, some participants and a list of admins
@@ -131,7 +139,8 @@ def addcount(request):
                                   data = tricount.to_json(),
                                   admins = admins) 
     return redirect(reverse('spending', args=[count.id])) 
-    
+
+@login_required    
 def modifycount(request, id_count):
     """
     Function which leads to modify the properties of the tricount.
@@ -140,6 +149,7 @@ def modifycount(request, id_count):
 
     return render(request, "modifycount.html", context={'count':count})
 
+@login_required
 def modifycountregister(request, id_count):
     """
     Function which modifies the tricount including the modifications of the user
@@ -158,6 +168,7 @@ def modifycountregister(request, id_count):
  
     return redirect(reverse('spending', args=[id_count]))
 
+@login_required
 def deletecount(request, id_count):
     """
     Function which deletes a tricount.
@@ -166,6 +177,7 @@ def deletecount(request, id_count):
     count.delete()
     return redirect(reverse("listecount"))
 
+@login_required
 def choosecurrency(request):
     """
     Function which leads to the choice of the payment currency
@@ -175,15 +187,16 @@ def choosecurrency(request):
     file.close() 
     return render(request, 'currency.html', context = {'currencies' : currencies, 'user':request.user.username})
 
+@login_required
 def spending(request, id_count):
     """
     Function which leads to the page of all spendings of a given tricount.
     """
     count = Counts.objects.get(id=id_count)  
     participants = count.participants 
-    spending = Spending.objects.filter(number = id_count)
-    tricount = Tricount.from_json(count.data) 
-    total_credit_owner = tricount.calculate_total_credit()[request.user.username] 
+    spendings = count.spendings.all()
+    tricount = Tricount.from_json(count.data)  
+    total_credit_owner = tricount.calculate_total_credit()[request.user.username]  
     total_cost = tricount.total_cost 
 
     rate = 0.84 #useAPICurrency("GBP", "EUR") 
@@ -192,13 +205,14 @@ def spending(request, id_count):
     context = {
         'count':count,
         'names':participants,
-        'spending' : spending,
+        'spending' : spendings,
         'credit_owner' : total_credit_owner,
         'totalcost' : total_cost,
         'totalpound' : total_cost_in_pound,
     }
     return render(request, "spending.html", context = context)
 
+@login_required
 def spendingEquilibria(request, id_count):
     """
     Function which leads to the page of the equilibria of a given tricount.
@@ -210,6 +224,7 @@ def spendingEquilibria(request, id_count):
     total_credit,transfert_to_equilibrium = tricount.calculate_total_credit_and_resolve_solution() 
     return render(request, "spendingEquilibria.html", context = {'user':request.user.username,'count':count,'total_credit' : total_credit,'transfert_to_equilibrium' : transfert_to_equilibrium})
 
+@login_required
 def newspending(request, id_count):
     """
     Function which render the template when we want to add a new spending
@@ -219,6 +234,7 @@ def newspending(request, id_count):
     currency = count.currency
     return render(request, 'newspending.html',context={'idcount': id_count, 'participants':participants, 'currency': currency})
 
+@login_required
 def addspending(request, id_count):
     """
     Function to create a new spending and redirecting to the list of tricounts. 
@@ -243,16 +259,17 @@ def addspending(request, id_count):
         amount = CC.convertSpendingCurrency(tricount_currency,currency,amount)
     
     dico_receivers = MT.createReceiversDictionaryOfASpending(currency, tricount_currency, request, *receivers)
-    Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, number = id_count)
+    Spending.objects.create(title = titre, amount = float(amount) , payer = spender , receivers = dico_receivers, tricount = Counts.objects.get(id = id_count))
     MT.update_tricount_after_new_spending(id_count, {spender : float(amount)}, dico_receivers)
         
     return redirect(reverse('spending', args=[id_count]))
-        
+
+@login_required        
 def spending_details(request, id_count, id_spending):
     """
     Function to render the page allowing to see the details of a given spending
-    """
-    spending = Spending.objects.get(id = id_spending, number = id_count) 
+    """ 
+    spending = Spending.objects.get(id = id_spending, tricount = Counts.objects.get(id=id_count)) 
     number_of_spending = Spending.objects.count()
     context = {'idcount' : id_count, 
                'idspending' : id_spending,
@@ -262,21 +279,23 @@ def spending_details(request, id_count, id_spending):
                'number_of_spending' : number_of_spending}
     return render(request,"spending-details.html",context)
 
+@login_required
 def modifyspending(request, id_count, id_spending):
     """
     Function which redirects to the page allowing to modify a given spending.
     """  
     count = Counts.objects.get(id = id_count)
-    spending = Spending.objects.get(id = id_spending, number = id_count)  
+    spending = Spending.objects.get(id = id_spending, tricount = Counts.objects.get(id=id_count)) 
     context = {'count': count, 'spending': spending, 'participants': count.participants}
     return render(request, "modifyspending.html", context = context)
 
+@login_required
 def modifyspendingregister(request, id_count, id_spending):
     """
     Function which recovers data obtained from the modification of a spending.
     """      
     count = Counts.objects.get(id = id_count)
-    spending = Spending.objects.get(id = id_spending, number = id_count) 
+    spending = Spending.objects.get(id = id_spending, tricount = Counts.objects.get(id=id_count)) 
 
     #We first delete the previous spending in the calculation by making the inverse spending : the spender is now a receiver.
     receiver = spending.payer
@@ -307,16 +326,18 @@ def modifyspendingregister(request, id_count, id_spending):
 
     return redirect(reverse('spending-details', args=[id_count, id_spending]))
 
+@login_required
 def deletespending(request, id_count, id_spending):
     """
     Function which delete a spending
     """
     #on supprimer la dépense, on redirige vers la page des 
-    spending = Spending.objects.get(number = id_count, id = id_spending)
+    spending = Spending.objects.get(tricount = Counts.objects.get(id=id_count), id = id_spending)
     spending.delete()
     return redirect(reverse('spending', args=[id_count]))
 
 
+@login_required
 def chat(request, id_count):
     """
     Function to go to the chat view

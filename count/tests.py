@@ -31,6 +31,7 @@ class HomepageTest(UnitaryTestMethods):
         """
         Test if the title appears in the page.
         """
+        self.register_someone('Tony','pwd','tony.fevrier62@gmail.com')
         response = self.client.get('/count') 
 
         self.assertIn(b'Tricount',response.content)
@@ -427,7 +428,7 @@ class TestSpending(UnitaryTestMethods):
         self.assertEqual(spending.amount, 100)
         self.assertEqual(spending.payer, 'Jean')
         self.assertDictEqual(spending.receivers, {'Henri':50,'Jean':50})
-        self.assertEqual(spending.number, 1)
+        self.assertEqual(spending.tricount, Counts.objects.first())
         self.assertEqual(spending.date, date.today())
     
     def test_goback_bdd_unchanged(self):

@@ -1,7 +1,7 @@
 # Distinctiveness
 
 - tests unitaires, tests fonctionnels
-- fichier yaml pour exécuter les tests si fait?
+- écriture d'un fichier d'exécution au choix des tests avec python
 - api extérieure currency
 - chat websockets
 - écriture de l'intégration continue si fait avec gitlab

@@ -11,17 +11,17 @@
 {% block header %}
     <div class="titre"> tricount</div>
     <nav class = "header_data">
-        <a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>
+        <!--<a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>-->
         <button data-button="JS" class="parameters"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </button>
     </nav>
 {% endblock %}
 
 {% block main %}
     <div data-div = "hidden" class = "parameters-options" hidden>
-        <a href=""> Premium </a>
+        <!--<a href=""> Premium </a>-->
         <a class = "myparameters" href="{% url 'logout' %}"> Mes paramètres </a>
         <button data-button="JS" class = "share"> Partagez l'app </button>
-        <a href=""> Evaluez l'app</a>
+        <!--<a href=""> Evaluez l'app</a>-->
         <button data-button="JS" class = "help"> Aide </button>
         <button data-button="JS" class = "conditions"> Conditions et confidentialité </button>
     </div>
@@ -41,29 +41,6 @@
     <div data-div = "hidden" class = "share-options" hidden>
         <a href=""> test</a> 
     </div>
-
-    <!--<div class = "header_images">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-        <img class = "trois" src="{% static 'images/internet.png' %}" alt="web">
-        <img src="{% static 'images/dollar-bill.png' %}" alt="billet">
-        <img src="{% static 'images/scale.png' %}" alt="scale">
-    </div>-->
 
     <main> 
         {% for count in counts %}
