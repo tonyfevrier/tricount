@@ -1,5 +1,5 @@
 
-const main = document.querySelector("main");
+const main = document.querySelector(".container");
 
 let current_date = "";
 
@@ -24,7 +24,6 @@ function sendMsg(websocket){
     }); 
 }
 
-// ARRIVE ICI
 function receiveMsg(websocket){   
     // A message arrives
     websocket.addEventListener("message", ({data})=>{ 

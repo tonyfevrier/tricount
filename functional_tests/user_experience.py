@@ -304,6 +304,14 @@ class Click():
         time.sleep(2) 
 
 
+    def post_chat_message(self, content):
+        textarea = self.browser.find_element(By.CLASS_NAME, 'message')
+        submit = self.browser.find_element(By.CLASS_NAME, 'submit')
+        textarea.send_keys(content)
+        submit.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+
 class Check():
     """
     Class containing methods to check that some JS actions work

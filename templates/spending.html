@@ -16,7 +16,7 @@
             {% endfor%}
         </a>
         <a href=""><img width = 20px src="{%static 'images/loupe.png'%}" alt="loupe de recherche"></a>
-        <a href="{% url 'chat' count.id %}"><img width = 20px src="{%static 'images/cloche.png'%}" alt="chat"></a>
+        <a href="{% url 'chat' count.id %}" class="chat"><img width = 20px src="{%static 'images/cloche.png'%}" alt="chat"></a>
         <!--<a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>-->
         <!--<a href="" class="options"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </a>-->
     </nav>

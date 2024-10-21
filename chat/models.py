@@ -15,6 +15,6 @@ class Chat(models.Model):
 
     def serialize(self):
         return {'writer': self.writer,
-                'date': self.date.strftime("%b %d %Y, %I:%M %p"),
+                'date': self.datetime.strftime("%b %d %Y, %I:%M %p"),
                 'content': self.content,
                 'likes': len(self.likers)}

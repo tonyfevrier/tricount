@@ -463,6 +463,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - besoin de déclencher un serveur redis pour que ça fonctionne : voir si je peux donner un fichier yaml qui s'exécute automatiquement pour qqun qui voudrait lancer mon code.
             - faut il faire de l'asynchrone auquel cas il faut faire attention à ne pas accéder aux modèles en asynchrone
             - voir comment remplir l'url dans routing.py et l'adresse ws dans le JS windonws.location.host?
+            - test unitaire : voir comment vérifier que Chat a bien créé un message, comment intégrer une websocket en test unitaire.
     - pour le projet edX:
         `** voir pour mettre des branches accessibles uniquement via login (@auth_login)`
         `regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.`

@@ -1,12 +1,10 @@
 #from django.test import LiveServerTestCase
 
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from django.db import connections
+from channels.testing import ChannelsLiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase 
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.common.by import By 
+from selenium.webdriver.firefox.options import Options 
 import time
 
 from count.models import Counts
@@ -647,7 +645,32 @@ class JSTest(StaticLiveServerTestCase,user_experience.Check):
         self.assertEqual(self.browser.current_url, self.live_server_url+ '/newcount')
 
 
+class TestChat(ChannelsLiveServerTestCase):
 
+    def setUp(self):
+        self.browser = webdriver.Firefox(options=options)
+        self.browser.implicitly_wait(3)  
+        click = user_experience.Click(self.browser, self.live_server_url)
+        click.register_and_login_someone('tony', 't@gmail.com', '1234')
+        click.create_a_tricount('tricount', '1234', 'description', 'EUR', 'trip', 'marine')
+        self.click = click
+    
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_chat(self):
+        # The user go to the chat application, send a message and see it 
+        self.click.click_on_a_link(By.CLASS_NAME, 'chat') 
+        self.click.post_chat_message('Ceci est mon premier message')
+        message = self.browser.find_element(By.CLASS_NAME, "owner-popup")
+        self.assertEqual(message.text, 'Ceci est mon premier message')
+
+
+
+    
+        
+
+         
         
         
 
