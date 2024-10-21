@@ -1,56 +1,60 @@
-const form = document.querySelector('form');
-const input = document.querySelector("input[type = 'text']");
+
 const main = document.querySelector("main");
 
 let current_date = "";
 
-window.addEventListener("DOMContentLoaded", () => {
-    const user = prompt("enter your username");
-    const websocket = new WebSocket(`ws://localhost:8001/?user=${user}`);
+window.addEventListener("DOMContentLoaded", () => { 
+    //const websocket = new WebSocket(`ws://${window.location.host}/chat/?user=${document.querySelector('.owner').textContent}`);
+    const websocket = new WebSocket(`ws://${window.location.host}/chat/?user=${document.querySelector('.owner').textContent}`);
     sendMsg(websocket);
     receiveMsg(websocket);
 });
 
 
-function sendMsg(websocket){ 
-    form.addEventListener("submit", (event) => {
-        //on envoie le message et l'utilisateur au serveur 
-        event.preventDefault(); 
-        message = input.value; 
+function sendMsg(websocket){  
+    document.querySelector('.submit').addEventListener("click", (event) => { 
+        // Get message
+        message = document.querySelector('textarea').value;  
         if (message == "") return;
 
-        let msg = {text : message, user : getParamsWs(websocket)};
+        // Send the message and put the textarea as empty
+        const msg = {content : message, writer : getParamsWs(websocket)};
         websocket.send(JSON.stringify(msg));
-        input.value = "";
+        document.querySelector('textarea').value = "";
     }); 
 }
 
-function receiveMsg(websocket){ 
-    //on crée un élément div avec le message qu'on ajoute à l'html
+// ARRIVE ICI
+function receiveMsg(websocket){   
+    // A message arrives
     websocket.addEventListener("message", ({data})=>{ 
+        console.log('hjhkjh');
         const event = JSON.parse(data);  
+
+        // Create an element to print the message
         const popup = document.createElement('div');
-        popup.innerHTML = `<p class = "popupuser">${event.user}</p> <p class = "popuptext">${event.text}</p>  <p class = "popuphour">${event.hour}</p>`;
+        popup.innerHTML = `<p class = "user">${event.writer}</p>
+                           <p class = "text">${event.content}</p>
+                           <p class = "date">${event.date}</p>
+                           <p class = "likes">${event.likes}</p>`;
         
-        //si c'est moi qui envoie le message, le css sera différent.
- 
+        // Prepare for different CSS if I am the sender or not
         if (event.user == getParamsWs(websocket)){
             popup.className = "owner-popup";
         } else {
             popup.className = "popup";
         }
-        date = printDate(event);
+
+        date = print_date(event);
         if (date) main.append(date);
         main.append(popup);
     });
 }
 
-function printDate(event){
+function print_date(event){
     /* Function which prints a div containing the date if it is the first message of the day */
-
-    //on récupère la date de l'évent, si la date est différente d'une variable créee avec la précédente date
-    //on crée l'élement sinon on ne fait rien.
-
+ 
+    // Create a div with date if the date become different from the previous registered date
     if (event.date != current_date){
         const date = document.createElement('div');
         date.innerHTML = event.date;
@@ -63,7 +67,7 @@ function printDate(event){
 }
 
 function getParamsWs(websocket){
-    /* Function to recover the name of the user from the websocket*/
+    /* Function to recover the name of the user from the websocket */
     const url = new URL(websocket.url);
     const params = new URLSearchParams(url.search); 
     return params.get('user');

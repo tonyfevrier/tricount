@@ -11,6 +11,7 @@
     <a href="/tricount/{{id}}" class = "backtospending" id = "backtospending"><img width = "20px" src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
     <nav>
         <p class = "header-title">Titre</p>
+        <p class = "owner">{{user}}</p>
         <p class = "header-participants">Participants</p>
     </nav>
 {% endblock %} 
@@ -23,7 +24,7 @@
 {% endblock %}
 
 {% block js %}
-    <script src = "chat.js"></script>
+    <script src = "{% static 'js/chat.js' %}"></script>
 {% endblock %}
 
  
