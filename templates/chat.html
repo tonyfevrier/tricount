@@ -10,7 +10,7 @@
 {% block header %}
     <a href="/tricount/{{id}}" class = "backtospending" id = "backtospending"><img width = "20px" src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
     <nav>
-        <p class = "header-title">Titre</p>
+        <p class = "header-title" id="{{id}}">Titre</p>
         <p class = "owner">{{user}}</p>
         <p class = "header-participants">Participants</p>
     </nav>

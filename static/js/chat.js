@@ -3,9 +3,8 @@ const main = document.querySelector(".container");
 
 let current_date = "";
 
-window.addEventListener("DOMContentLoaded", () => { 
-    //const websocket = new WebSocket(`ws://${window.location.host}/chat/?user=${document.querySelector('.owner').textContent}`);
-    const websocket = new WebSocket(`ws://${window.location.host}/chat/?user=${document.querySelector('.owner').textContent}`);
+window.addEventListener("DOMContentLoaded", () => {  
+    const websocket = new WebSocket(`ws://${window.location.host}/chat/${document.querySelector('.header-title').id}/?user=${document.querySelector('.owner').textContent}`);
     sendMsg(websocket);
     receiveMsg(websocket);
 });
@@ -26,9 +25,8 @@ function sendMsg(websocket){
 
 function receiveMsg(websocket){   
     // A message arrives
-    websocket.addEventListener("message", ({data})=>{ 
-        console.log('hjhkjh');
-        const event = JSON.parse(data);  
+    websocket.addEventListener("message", ({data})=>{  
+        const event = JSON.parse(data); 
 
         // Create an element to print the message
         const popup = document.createElement('div');

@@ -444,12 +444,12 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `copier l'html et voir si ça marche`
             - `copie de app et templates`
             - `créer un modèle qui conserve les messages`
-            - écrire une vue de type JS qui reçoit de manière asynchrone un message, l'enregistre en bdd et le renvoit avec la date et l'envoyeur.
+            - `écrire une vue de type JS qui reçoit de manière asynchrone un message, l'enregistre en bdd et le renvoit avec la date et l'envoyeur.`
                 - ce renvoi doit s'adresser à tous les participants au tricount.
             - écrire dans chat.js :
-                - quand on charge le contenu on crée une ws
-                - quand on clique sur submit, event envoyer un message
-                - event ws.receive (un message): création d'un élément en bas de page affichant le message et ses infos  
+                - `quand on charge le contenu on crée une ws`
+                - `quand on clique sur submit, event envoyer un message`
+                - `event ws.receive (un message): création d'un élément en bas de page affichant le message et ses infos`  
                 - event ws.receive (création d'un indicateur rouge sur le tricount dans listecount ainsi que sur la cloche dans la liste des dépenses).
             - écriture d'une vue JS qui renvoit un message particulier si quelqu'un est en train d'écrire (peut-être dans la même vue JS).
             - dans chat.js : 
@@ -458,12 +458,12 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - dans chat.js :
                 - si clic sur coeur, envoi d'un message avec like
                 - affichage automatique au receive du nombre de likes à côté du coeur
-            - ajout au html : d'un message avec le jour avant la liste des messages lui correspondant
+            - `ajout au html : d'un message avec le jour avant la liste des messages lui correspondant`
             - css de la page chat
             - besoin de déclencher un serveur redis pour que ça fonctionne : voir si je peux donner un fichier yaml qui s'exécute automatiquement pour qqun qui voudrait lancer mon code.
             - faut il faire de l'asynchrone auquel cas il faut faire attention à ne pas accéder aux modèles en asynchrone
-            - voir comment remplir l'url dans routing.py et l'adresse ws dans le JS windonws.location.host?
-            - test unitaire : voir comment vérifier que Chat a bien créé un message, comment intégrer une websocket en test unitaire.
+            - `voir comment remplir l'url dans routing.py et l'adresse ws dans le JS windonws.location.host?`
+            - `test unitaire : voir comment vérifier que Chat a bien créé un message, comment intégrer une websocket en test unitaire.`
     - pour le projet edX:
         `** voir pour mettre des branches accessibles uniquement via login (@auth_login)`
         `regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.`
@@ -489,6 +489,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         * créer une docker image permettant aux examinateurs de créer facilement le conteneur associé à mon application
         * créer un fichier yaml permettant facilement de lancer mon application et un pour lancer les tests unitaires, fonctionnels.
         ** faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
+        - voir pour créer deux bdd dbsqlite différentes afin d'éviter son écrasement à chaque lancement des tests channels
         
     
     -modification des dépenses déjà entrées :
@@ -544,6 +545,10 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
     - JS LOCAL VARIABLES IN IF : les éléments définis dans un if n'existent que dans ce if. En particulier, s'il y a des handlers qui les utilisent, il faut les mettre dans le if.
     - SASS EXTEND : Attention il semble que si on utilise extend dans un élement, sass copie les attributs des enfants aussi. Cela peut mener à des absurdités : sélecteur avec des parents n'ayant pas l'enfant qui leur est associé. Pour parer à ça, on peut créer un élément fictif qui n'est pas dans le html et qui n'aura pas d'enfant et utiliser @extend de cet élément.
     - FETCH EVENT PREVENT DEFAULT: Si je mets un event click sur un input submit ou a ou sur un bouton dans un formulaire (qui du coup est assimilé à un input submit) et que je mets un fecth dedans, il faut veiller à bien empêcher le comportement par défaut sinon le fetch n'aboutit pas.
+    - WEBSOCKET CONNECT : Dans settings, il y a un paramètre ALLOWED_HOSTS qui permet d'autoriser la connection à une websocket dans le protocolrouter de asgi avec AllowedHostsOriginValidator. Pour que les tests s'exécutent il faut autoriser l'host des tests ou plus simplement ALLOWED_HOSTS = ["*"]
+    - TEST FONCTIONNELS CHANNELS : il faut ajouter les lignes "TEST": {
+            "NAME": BASE_DIR / "db.sqlite3",
+        } au dictionnaire DATABASES pour ces tests et seulement pour eux (pas les unitaires) car ces tests ne fonctionnent pas sur une bdd créée en mémoire comme c'est le cas pour STATICLIVESERVERTESTCASE.
 
 # Mes difficultés principales
 
