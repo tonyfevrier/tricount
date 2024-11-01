@@ -18,7 +18,7 @@ function sendMsg(websocket){
         if (message == "") return;
 
         // Send the message and put the textarea as empty
-        const msg = {content : message, writer : getParamsWs(websocket), tricount_id : document.querySelector('.header-title').id};
+        const msg = {content : message, writer : getParamsWs(websocket), tricountid : document.querySelector('.header-title').id};
         websocket.send(JSON.stringify(msg));
         document.querySelector('textarea').value = "";
     }); 

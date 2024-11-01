@@ -88,7 +88,7 @@ def listecount(request):
         for item in counts: 
             if request.user.username in item.admins:
                 items.append(item)
-    return render(request,'index.html',context ={'counts' : items})
+    return render(request,'index.html', context ={'counts' : items})
 
 
 @login_required

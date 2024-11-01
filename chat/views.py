@@ -8,8 +8,8 @@ def chat(request, id_count):
     """
     Function to go to the chat view
     """
-    messages = Chat.objects.filter(tricount_id=id_count) 
+    messages = Chat.objects.filter(tricountid=id_count) 
 
     return render(request,'chat.html',context={'id':id_count,
                                                'user': request.user.username,
-                                               'messages': [message.serialize() for message in messages]})
+                                               'messages': messages})

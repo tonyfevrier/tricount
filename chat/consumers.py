@@ -29,7 +29,9 @@ class Consumer(WebsocketConsumer):
         # Create a chat message  
         Chat.objects.create(writer=chat_object['writer'],
                             content=chat_object['content'],
-                            tricount_id=chat_object['tricount_id'])   
+                            tricountid=chat_object['tricountid'])  
+
+        print(Chat.objects.all()) 
         
         # Send it with date and like informations to the group 
         async_to_sync(self.channel_layer.group_send)(self.group_name, {'type':'send.message',

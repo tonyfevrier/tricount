@@ -16,6 +16,16 @@
     </nav>
 {% endblock %} 
 
+{% block main %}
+    {% for message in messages %}
+         <div class = "{% if message.writer == user %} owner-popup {% else %} popup  {% endif %}">
+            <p class = "user">{{message.writer}}</p>
+            <p class = "text">{{message.content}}</p>
+            <p class = "date">{{message.datetime}}</p>
+         </div>
+    {% endfor %} 
+{% endblock%}
+
 {% block footer %} 
     <textarea class = "message" placeholder = "Ajoutez un message..."></textarea>
     <button class = "submit"><img width = "20px" src = "{%static 'images/send.png'%}" alt="send"></button>

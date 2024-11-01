@@ -446,8 +446,9 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `créer un modèle qui conserve les messages`
             - `écrire une vue de type JS qui reçoit de manière asynchrone un message, l'enregistre en bdd et le renvoit avec la date et l'envoyeur.`
                 - `ce renvoi doit s'adresser à tous les participants au tricount.`
-                - modifier la vue pour que quand un participant se déconnecte, il revoit tous les messages précédents.
-                - test unitaire pour voir si les messages précédents sont bien transmis par la vue
+                - `modifier la vue pour que quand un participant se déconnecte, il revoit tous les messages précédents.`
+                - `test unitaire pour voir si les messages précédents sont bien transmis par la vue`
+                - débug test fonctionnel en enlevant la bdd de test (en écrasant la base classique) et vérification que les messages sont bien là même après reconnection.
             - écrire dans chat.js :
                 - `quand on charge le contenu on crée une ws`
                 - `quand on clique sur submit, event envoyer un message`
@@ -468,7 +469,6 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `voir comment remplir l'url dans routing.py et l'adresse ws dans le JS windonws.location.host?`
             - `test unitaire : voir comment vérifier que Chat a bien créé un message, comment intégrer une websocket en test unitaire.`
             - passer non plus la date complète mais juste le jour pour daydate et l'heure pour les posts
-            - débug test fonctionnel en enlevant la bdd de test (en écrasant la base classique)
     - pour le projet edX:
         `** voir pour mettre des branches accessibles uniquement via login (@auth_login)`
         `regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.`

@@ -19,7 +19,7 @@ class ChatTest(UnitaryTestMethods):
         communicator = WebsocketCommunicator(application, "chat/1/?user=tony") 
         connected, _= await communicator.connect() 
         self.assertTrue(connected)
-        await communicator.send_json_to({"content":"test", "writer":"tony", "tricount_id":1})
+        await communicator.send_json_to({"content":"test", "writer":"tony", "tricountid":1})
 
         # To give time to the consumer triggered by the json sending to execute before accessing the first chat object
         await asyncio.sleep(2) 
@@ -28,7 +28,7 @@ class ChatTest(UnitaryTestMethods):
         chat = await sync_to_async(Chat.objects.first)()   
         self.assertEqual(chat.writer, "tony")
         self.assertEqual(chat.content, "test")
-        self.assertEqual(chat.tricount_id, 1)
+        self.assertEqual(chat.tricountid, 1)
 
         # Verify the return message contains good informations and disconnect
         response = await communicator.receive_json_from()
@@ -41,7 +41,7 @@ class ChatTest(UnitaryTestMethods):
         communicator = WebsocketCommunicator(application, "chat/1/?user=tony") 
         connected, _= await communicator.connect() 
         self.assertTrue(connected)
-        await communicator.send_json_to({"content":"test", "writer":"tony", "tricount_id":1})
+        await communicator.send_json_to({"content":"test", "writer":"tony", "tricountid":1})
 
         # To give time to the consumer triggered by the json sending to execute before accessing the first chat object
         await asyncio.sleep(0.1)
@@ -49,5 +49,5 @@ class ChatTest(UnitaryTestMethods):
         response = await sync_to_async(self.client.get)('/chat/1')
         self.assertEqual(response.context['id'], 1)
         self.assertEqual(len(response.context['messages']), 1) 
-        self.assertEqual(response.context['messages'][0]["writer"], "tony")
-        self.assertEqual(response.context['messages'][0]["content"], "test")
+        self.assertEqual(response.context['messages'][0].writer, "tony")
+        self.assertEqual(response.context['messages'][0].content, "test")

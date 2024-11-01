@@ -7,18 +7,16 @@ class Chat(models.Model):
     writer = models.CharField(default='', max_length=50)
     datetime = models.DateTimeField(default=timezone.now)
     content = models.TextField(default='')
-    tricount_id = models.IntegerField(default=0)
-    #tricount = models.ForeignKey(Counts, on_delete=models.CASCADE, related_name='chat')
+    tricountid = models.IntegerField(default=0) 
 
     def __str__(self):
         return f'Chat sent by {self.writer} at {self.datetime}. He tells {self.content}'
     
     def __repr__(self):
-        return f'Chat(writer={self.writer}, datetime={self.datetime}, content={self.content}, tricount={self.tricount_id})'
+        return f'Chat(writer={self.writer}, datetime={self.datetime}, content={self.content}, tricountid={self.tricountid})'
 
     def serialize(self):
         return {'writer': self.writer,
                 'date': self.datetime.strftime("%b %d %Y, %I:%M %p"),
                 'content': self.content,
-                'tricount_id': self.tricount_id}
-                #'tricount_id': self.tricount.id}
+                'tricountid': self.tricountid} 
