@@ -648,22 +648,44 @@ class JSTest(StaticLiveServerTestCase,user_experience.Check):
 class TestChat(ChannelsLiveServerTestCase):
 
     def setUp(self):
+        # Create a first user experience
         self.browser = webdriver.Firefox(options=options)
         self.browser.implicitly_wait(3)  
         click = user_experience.Click(self.browser, self.live_server_url)
-        click.register_and_login_someone('tony', 't@gmail.com', '1234')
+        click.register_and_login_someone('toto', 'toto@gmail.com', '1234')
         click.create_a_tricount('tricount', '1234', 'description', 'EUR', 'trip', 'marine')
         self.click = click
+ 
+        # Create a second user experience and clone the previous tricount to access the same chat
+        self.browser2 = webdriver.Firefox(options=options)
+        self.browser2.implicitly_wait(3)  
+        click2 = user_experience.Click(self.browser2, self.live_server_url)
+        click2.register_and_login_someone('marine', 'm@gmail.com', '1234')
+        click2.clone_a_tricount('tricount', '1234')
+        self.click2 = click2
     
     def tearDown(self):
         self.browser.quit()
+        self.browser2.quit()
 
     def test_chat(self):
-        # The user go to the chat application, send a message and see it 
+        # The user go to the chat application 
         self.click.click_on_a_link(By.CLASS_NAME, 'chat') 
+
+        # The second user go to the tricount and see the message on the chat
+        self.click2.click_on_an_existing_tricount(1)
+        self.click2.click_on_a_link(By.CLASS_NAME, 'chat') 
+
+        # The first user sends a message and sees it
         self.click.post_chat_message('Ceci est mon premier message')
         message = self.browser.find_element(By.CLASS_NAME, "owner-popup")
         self.assertEqual(message.text, 'Ceci est mon premier message')
+
+        # The second user also sees it
+        message = self.browser.find_element(By.CLASS_NAME, "popup")
+        self.assertEqual(message.text, 'Ceci est mon premier message')
+
+
 
 
 

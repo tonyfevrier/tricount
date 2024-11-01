@@ -4,6 +4,7 @@ const main = document.querySelector(".container");
 let current_date = "";
 
 window.addEventListener("DOMContentLoaded", () => {  
+    document.querySelector('.container').scrollTop = document.querySelector(".container").scrollHeight; 
     const websocket = new WebSocket(`ws://${window.location.host}/chat/${document.querySelector('.header-title').id}/?user=${document.querySelector('.owner').textContent}`);
     sendMsg(websocket);
     receiveMsg(websocket);
@@ -32,11 +33,11 @@ function receiveMsg(websocket){
         const popup = document.createElement('div');
         popup.innerHTML = `<p class = "user">${event.writer}</p>
                            <p class = "text">${event.content}</p>
-                           <p class = "date">${event.date}</p>
-                           <p class = "likes">${event.likes}</p>`;
+                           <p class = "date">${event.date}</p>`;
+                           //<p class = "likes">${event.likes}</p>`;
         
-        // Prepare for different CSS if I am the sender or not
-        if (event.user == getParamsWs(websocket)){
+        // Prepare for different CSS if I am the sender or not 
+        if (event.writer == getParamsWs(websocket)){
             popup.className = "owner-popup";
         } else {
             popup.className = "popup";
@@ -45,6 +46,8 @@ function receiveMsg(websocket){
         date = print_date(event);
         if (date) main.append(date);
         main.append(popup);
+        
+        document.querySelector('.container').scrollTop = document.querySelector(".container").scrollHeight; 
     });
 }
 

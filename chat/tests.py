@@ -29,3 +29,5 @@ class ChatTest(TestCase):
         self.assertEqual(response['content'], "test")
         self.assertEqual(response['likes'], 0) 
         await communicator.disconnect()
+
+    

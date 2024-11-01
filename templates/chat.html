@@ -16,11 +16,9 @@
     </nav>
 {% endblock %} 
 
-{% block footer %}
-    <div>
-        <textarea class = "message" placeholder = "Ajoutez un message..."></textarea>
-        <button class = "submit"><img width = "20px" src = "{%static 'images/send.png'%}" alt="send"></button>
-    </div>
+{% block footer %} 
+    <textarea class = "message" placeholder = "Ajoutez un message..."></textarea>
+    <button class = "submit"><img width = "20px" src = "{%static 'images/send.png'%}" alt="send"></button>
 {% endblock %}
 
 {% block js %}

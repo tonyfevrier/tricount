@@ -33,7 +33,6 @@ class Consumer(WebsocketConsumer):
         async_to_sync(self.channel_layer.group_send)(self.group_name, {'type':'send.message',
                                                                         'id': Chat.objects.last().id})
         
-        #self.send(json.dumps(Chat.objects.first().serialize())) 
 
     def send_message(self, event):
         """Handler when group_send a message"""

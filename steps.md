@@ -445,17 +445,19 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `copie de app et templates`
             - `créer un modèle qui conserve les messages`
             - `écrire une vue de type JS qui reçoit de manière asynchrone un message, l'enregistre en bdd et le renvoit avec la date et l'envoyeur.`
-                - ce renvoi doit s'adresser à tous les participants au tricount.
+                - `ce renvoi doit s'adresser à tous les participants au tricount.`
+                - modifier la vue pour que quand un participant se déconnecte, il revoit tous les messages précédents.
             - écrire dans chat.js :
                 - `quand on charge le contenu on crée une ws`
                 - `quand on clique sur submit, event envoyer un message`
                 - `event ws.receive (un message): création d'un élément en bas de page affichant le message et ses infos`  
-                - event ws.receive (création d'un indicateur rouge sur le tricount dans listecount ainsi que sur la cloche dans la liste des dépenses).
+                - event ws.receive (création d'un indicateur rouge sur le tricount dans listecount ainsi que sur la cloche dans la liste des dépenses). 
             - écriture d'une vue JS qui renvoit un message particulier si quelqu'un est en train d'écrire (peut-être dans la même vue JS).
             - dans chat.js : 
                 - si ws.receive un message de type "qqun écrit", écriture quelque part de "Untel est en train d'écrire". 
             - une vue (ptet encore la même pour l'envoi de likes)
             - dans chat.js :
+                - enlever les likes de la bdd et vues, c'est du gadget j'ajouterai plus tard si nécessaire
                 - si clic sur coeur, envoi d'un message avec like
                 - affichage automatique au receive du nombre de likes à côté du coeur
             - `ajout au html : d'un message avec le jour avant la liste des messages lui correspondant`
@@ -464,6 +466,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - faut il faire de l'asynchrone auquel cas il faut faire attention à ne pas accéder aux modèles en asynchrone
             - `voir comment remplir l'url dans routing.py et l'adresse ws dans le JS windonws.location.host?`
             - `test unitaire : voir comment vérifier que Chat a bien créé un message, comment intégrer une websocket en test unitaire.`
+            - passer non plus la date complète mais juste le jour pour daydate et l'heure pour les posts
+            - débug test fonctionnel en enlevant la bdd de test (en écrasant la base classique)
     - pour le projet edX:
         `** voir pour mettre des branches accessibles uniquement via login (@auth_login)`
         `regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.`
@@ -472,8 +476,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         ** réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)
         - améliorer pour la pep8 : noms de fonctions en minuscule et _
         - réfléchir à utiliser le django cache framework : quelles parties pourraient s'améliorer en termes de performance? Lesquelles je ne voudrais pas recharger?
-        ** sécurité : mettre ma clé d'API non pas dans le code source mais dans une variable d'environnement ou la sécuriser.
-        ** sécurité : introduire le hachage des pwd dans mon application
+        * sécurité : mettre ma clé d'API non pas dans le code source mais dans une variable d'environnement ou la sécuriser.
+        * sécurité : introduire le hachage des pwd dans mon application
         ** vérifier toutes les spécifications.
         ** vérifier le côté responsive du site : pas parfait exemple newspending
             - newcount: si écran > longueur max du titre, le titre est mdp sur la même ligne, les participants sur la même ligne au max avec des petites croix à côté et la bouton ajouter pas trop loin de Autre participant ET le formulaire de clonage en hauteur si écran < l

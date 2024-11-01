@@ -1,52 +1,4 @@
 /*header{
-    justify-content:flex-start;
-    padding: 1em;
-}
-
-header a{
-    margin-right: 1em;
-}
-
-.header-title{
-    font-size: 1.5em;
-}
-
-main, form{
-    padding: 1em;
-    background-color: lightgray;
-}
-
-
-input[type="text"]{
-    border-radius: 10px;
-    height: 2em;
-    width: 90%;
-}
-
-button{
-    background-color: var(--color); 
-    cursor: pointer;
-    border-radius: 100%;
-    width:35px;
-    height: 35px;
-}
-
-button img{
-    align-items: center;
-}*/
-
-*{
-    box-sizing: border-box;
-    margin : 0;
-    font-size: 14px;
-}
-
-:root{
-    --padding:0.5em;
-    --color:rgb(71, 71, 199);
-}
-
-header{
     position: sticky;
     top:0;
     left:0;
@@ -60,19 +12,7 @@ header{
     justify-content:flex-start;
     padding: 1em;
 }
-
-body{
-    background-color: lightgray;
-}
-
-main{
-    background-color: white;   
-}
-
-button {
-    cursor: pointer;
-}
-
+  
 header a{
     margin-right: 1em;
 }
@@ -95,66 +35,99 @@ form{
     bottom:0px;
     left:0px;
     right: 0px;
+}*/
+
+.container{
+    overflow-y: auto;
+    height: 80vh;
 }
 
+.backtospending{
+    padding: 0 2em;
+    height: 1.5em;
+    width:1.5em
+}
+
+header nav{
+    padding: 0 1em;
+}
+ 
+
 .owner-popup{
-    background-color: white;
+    background-color: cyan;
     width : 30%;
     margin: 1em 0;
     border-radius: 10px;
     margin-left: auto;
+    padding:0.5em;
+    margin-right: 1em;
 }
 
 .popup{
-    background-color: green;
+    background-color: lightgray;
     width : 30%;
     margin: 1em 0;
     border-radius: 10px;
+    padding:0.5em;
+    margin-left: 1em;
     margin-right: auto;
 }
 
-.popupuser {
+
+.popup .user, .owner-popup .user {
     padding-top: 0.5em;
     padding-left: 0.5em;
     font-weight: 700;
 }
 
-.popuptext {
+.popup .text, .owner-popup .text {
     padding-top: 0.5em;
     padding-left: 0.5em;
 }
 
-.popuphour{
+.popup .date, .owner-popup .date{
     text-align: end;
-    color: lightgray;
+    color: gray;
     font-size: 0.7em;
     padding-bottom: 0.5em;
-    padding-right: 0.5em;
+    padding-right: 0.5em; 
 }
 
-.daydate{
-    background-color: var(--color);
-    border-radius: 5px;
+.daydate{   
     width: fit-content;
     margin: auto;
-    padding: 0.2em;
+    font-weight: 600;
+    padding: 1em;
+    color: var(--color);
 }
 
-input[type="text"]{
+footer{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    bottom:0px;
+    left:0px;
+    right: 0px;
+}
+
+
+textarea{
     border-radius: 10px;
     height: 2em;
-    width: 90%;
+    width: 90vw;
+    margin: 1em 0.5em 1em 1em; 
 }
 
-button{
-    background-color: var(--color); 
+
+.submit{ 
     cursor: pointer;
-    border-radius: 100%;
-    width:50px;
-    height: 35px;
+    border-radius: 10px;
+    width: 40px;
+    margin: 1em 1em 1em 0.5em; 
+    height: 2em;
 }
 
-button img{
+.submit img{
     align-items: center;
-}
+} 
 
