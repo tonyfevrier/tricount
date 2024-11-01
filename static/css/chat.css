@@ -85,7 +85,7 @@ header nav{
     padding-left: 0.5em;
 }
 
-.popup .date, .owner-popup .date{
+.popup .time, .owner-popup .time{
     text-align: end;
     color: gray;
     font-size: 0.7em;

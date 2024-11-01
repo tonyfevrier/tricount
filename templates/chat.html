@@ -17,12 +17,15 @@
 {% endblock %} 
 
 {% block main %}
-    {% for message in messages %}
-         <div class = "{% if message.writer == user %} owner-popup {% else %} popup  {% endif %}">
-            <p class = "user">{{message.writer}}</p>
-            <p class = "text">{{message.content}}</p>
-            <p class = "date">{{message.datetime}}</p>
-         </div>
+    {% for date, messages in date_messages.items %}
+        <div class="daydate">{{date}}</div>
+        {% for message in messages %}
+            <div class = "{% if message.writer == user %} owner-popup {% else %} popup  {% endif %}">
+                <p class = "user">{{message.writer}}</p>
+                <p class = "text">{{message.content}}</p>
+                <p class = "time">{{message.time}}</p>
+            </div>
+        {% endfor %}
     {% endfor %} 
 {% endblock%}
 

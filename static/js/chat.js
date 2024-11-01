@@ -33,8 +33,7 @@ function receiveMsg(websocket){
         const popup = document.createElement('div');
         popup.innerHTML = `<p class = "user">${event.writer}</p>
                            <p class = "text">${event.content}</p>
-                           <p class = "date">${event.date}</p>`;
-                           //<p class = "likes">${event.likes}</p>`;
+                           <p class = "time">${event.time}</p>`; 
         
         // Prepare for different CSS if I am the sender or not 
         if (event.writer == getParamsWs(websocket)){
@@ -52,10 +51,12 @@ function receiveMsg(websocket){
 }
 
 function print_date(event){
-    /* Function which prints a div containing the date if it is the first message of the day */
+    /* Function which prints a div containing the date if it is the first message of the day */   
  
-    // Create a div with date if the date become different from the previous registered date
-    if (event.date != current_date){
+    const date_elements = document.querySelectorAll('.daydate');  
+
+    // Create a div with date if the date become different from the previous registered date and not already printed
+    if (event.date != current_date && date_elements[date_elements.length - 1].innerHTML !== event.date){
         const date = document.createElement('div');
         date.innerHTML = event.date;
         date.className = "daydate";

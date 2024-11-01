@@ -448,7 +448,9 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
                 - `ce renvoi doit s'adresser à tous les participants au tricount.`
                 - `modifier la vue pour que quand un participant se déconnecte, il revoit tous les messages précédents.`
                 - `test unitaire pour voir si les messages précédents sont bien transmis par la vue`
-                - débug test fonctionnel en enlevant la bdd de test (en écrasant la base classique) et vérification que les messages sont bien là même après reconnection.
+                - débug test fonctionnel en enlevant la bdd de test (en écrasant la base classique) et vérification que les messages sont bien là même après reconnection et que la date est affichée correctement.
+                - `ajouter la date des jours en ne l'affichant que jour après jour et pas toutes les min.`
+                - `modifier printdate de js pour qu'il n'affiche la date que si elle ne l'est pas déjà`
             - écrire dans chat.js :
                 - `quand on charge le contenu on crée une ws`
                 - `quand on clique sur submit, event envoyer un message`
@@ -456,19 +458,12 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
                 - event ws.receive (création d'un indicateur rouge sur le tricount dans listecount ainsi que sur la cloche dans la liste des dépenses). 
             - écriture d'une vue JS qui renvoit un message particulier si quelqu'un est en train d'écrire (peut-être dans la même vue JS).
             - dans chat.js : 
-                - si ws.receive un message de type "qqun écrit", écriture quelque part de "Untel est en train d'écrire". 
-            - une vue (ptet encore la même pour l'envoi de likes)
-            - dans chat.js :
-                - enlever les likes de la bdd et vues, c'est du gadget j'ajouterai plus tard si nécessaire
-                - si clic sur coeur, envoi d'un message avec like
-                - affichage automatique au receive du nombre de likes à côté du coeur
+                - si ws.receive un message de type "qqun écrit", écriture quelque part de "Untel est en train d'écrire".  
             - `ajout au html : d'un message avec le jour avant la liste des messages lui correspondant`
             - `css de la page chat`
             - besoin de déclencher un serveur redis pour que ça fonctionne : voir si je peux donner un fichier yaml qui s'exécute automatiquement pour qqun qui voudrait lancer mon code.
-            - faut il faire de l'asynchrone auquel cas il faut faire attention à ne pas accéder aux modèles en asynchrone
             - `voir comment remplir l'url dans routing.py et l'adresse ws dans le JS windonws.location.host?`
-            - `test unitaire : voir comment vérifier que Chat a bien créé un message, comment intégrer une websocket en test unitaire.`
-            - passer non plus la date complète mais juste le jour pour daydate et l'heure pour les posts
+            - `test unitaire : voir comment vérifier que Chat a bien créé un message, comment intégrer une websocket en test unitaire.` 
     - pour le projet edX:
         `** voir pour mettre des branches accessibles uniquement via login (@auth_login)`
         `regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.`
