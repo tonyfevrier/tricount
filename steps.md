@@ -447,6 +447,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `écrire une vue de type JS qui reçoit de manière asynchrone un message, l'enregistre en bdd et le renvoit avec la date et l'envoyeur.`
                 - `ce renvoi doit s'adresser à tous les participants au tricount.`
                 - modifier la vue pour que quand un participant se déconnecte, il revoit tous les messages précédents.
+                - test unitaire pour voir si les messages précédents sont bien transmis par la vue
             - écrire dans chat.js :
                 - `quand on charge le contenu on crée une ws`
                 - `quand on clique sur submit, event envoyer un message`
@@ -461,7 +462,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
                 - si clic sur coeur, envoi d'un message avec like
                 - affichage automatique au receive du nombre de likes à côté du coeur
             - `ajout au html : d'un message avec le jour avant la liste des messages lui correspondant`
-            - css de la page chat
+            - `css de la page chat`
             - besoin de déclencher un serveur redis pour que ça fonctionne : voir si je peux donner un fichier yaml qui s'exécute automatiquement pour qqun qui voudrait lancer mon code.
             - faut il faire de l'asynchrone auquel cas il faut faire attention à ne pas accéder aux modèles en asynchrone
             - `voir comment remplir l'url dans routing.py et l'adresse ws dans le JS windonws.location.host?`
