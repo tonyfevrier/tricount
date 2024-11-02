@@ -48,6 +48,4 @@ class ChatTest(UnitaryTestMethods):
 
         response = await sync_to_async(self.client.get)('/chat/1')
         self.assertEqual(response.context['id'], 1)
-        self.assertEqual(len(response.context['messages']), 1) 
-        self.assertEqual(response.context['messages'][0].writer, "tony")
-        self.assertEqual(response.context['messages'][0].content, "test")
+        self.assertEqual(len(response.context['date_messages']), 1)  

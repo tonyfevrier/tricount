@@ -1,41 +1,6 @@
-/*header{
-    position: sticky;
-    top:0;
-    left:0;
-    right:0;
-    display: flex; 
-    align-items: center;
-    background-color: var(--color);
-    padding: 1em 0;
-    z-index: 1;
-    color:white;
-    justify-content:flex-start;
-    padding: 1em;
+.header-participants{
+    display: inline;
 }
-  
-header a{
-    margin-right: 1em;
-}
-
-.header-title{
-    font-size: 1.5em;
-}
-
-main, form{
-    padding: 1em;
-    background-color: lightgray;
-}
-
-main{
-    height:90%;
-}
-
-form{
-    position:sticky;
-    bottom:0px;
-    left:0px;
-    right: 0px;
-}*/
 
 .container{
     overflow-y: auto;

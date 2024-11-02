@@ -448,7 +448,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
                 - `ce renvoi doit s'adresser à tous les participants au tricount.`
                 - `modifier la vue pour que quand un participant se déconnecte, il revoit tous les messages précédents.`
                 - `test unitaire pour voir si les messages précédents sont bien transmis par la vue`
-                - débug test fonctionnel en enlevant la bdd de test (en écrasant la base classique) et vérification que les messages sont bien là même après reconnection et que la date est affichée correctement.
+                - `modif test unitaire avec date et time`
+                - `débug test fonctionnel en enlevant la bdd de test (en écrasant la base classique) et vérification que les messages sont bien là même après reconnection et que la date est affichée correctement.`
                 - `ajouter la date des jours en ne l'affichant que jour après jour et pas toutes les min.`
                 - `modifier printdate de js pour qu'il n'affiche la date que si elle ne l'est pas déjà`
             - écrire dans chat.js :
@@ -461,14 +462,13 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
                 - si ws.receive un message de type "qqun écrit", écriture quelque part de "Untel est en train d'écrire".  
             - `ajout au html : d'un message avec le jour avant la liste des messages lui correspondant`
             - `css de la page chat`
-            - besoin de déclencher un serveur redis pour que ça fonctionne : voir si je peux donner un fichier yaml qui s'exécute automatiquement pour qqun qui voudrait lancer mon code.
             - `voir comment remplir l'url dans routing.py et l'adresse ws dans le JS windonws.location.host?`
             - `test unitaire : voir comment vérifier que Chat a bien créé un message, comment intégrer une websocket en test unitaire.` 
     - pour le projet edX:
         `** voir pour mettre des branches accessibles uniquement via login (@auth_login)`
         `regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.`
         `faire les factorisations ci-dessus pour améliorer mon appli`
-        ** apprivoiser les django channels pour intégrer le chat
+        `** apprivoiser les django channels pour intégrer le chat minimal`
         ** réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)
         - améliorer pour la pep8 : noms de fonctions en minuscule et _
         - réfléchir à utiliser le django cache framework : quelles parties pourraient s'améliorer en termes de performance? Lesquelles je ne voudrais pas recharger?
@@ -480,6 +480,7 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - newspending, modifycount, modifyspending : idem montant et monnaie sur même ligne que titre
         - Optionnel : recherche dans les dépenses avec la loupe
         ** Nettoyer momentanément les boutons qui ne servent à rien en les commentant
+        ** Vérifier que tous les tests fonctionnels marchent
         - créer variable de temps pour time.sleep dans tests fonctionnels : essayer de diminuer le temps
         - voir si des vues sont à passer en JS : se demander quand il est inutile de perdre du temps à recharger la page (exemple: pour clonecount, inutile de recharger quand les credentials sont faux).
         - CSS des ajouter pour que le ajouter soit mieux placé qqs taille écran - parfois on a l'affichage de la flèche retour en très grand (exe modifycount)
@@ -488,7 +489,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - faire des sous dossiers dans templates pour chaque application?
         * créer une docker image permettant aux examinateurs de créer facilement le conteneur associé à mon application
         * créer un fichier yaml permettant facilement de lancer mon application et un pour lancer les tests unitaires, fonctionnels.
-        ** faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
+            - besoin de déclencher un serveur redis pour que ça fonctionne : voir si je peux donner un fichier yaml qui s'exécute automatiquement pour qqun qui voudrait lancer mon code.
+        * faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
         - voir pour créer deux bdd dbsqlite différentes afin d'éviter son écrasement à chaque lancement des tests channels
         
     

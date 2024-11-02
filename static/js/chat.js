@@ -53,18 +53,26 @@ function receiveMsg(websocket){
 function print_date(event){
     /* Function which prints a div containing the date if it is the first message of the day */   
  
-    const date_elements = document.querySelectorAll('.daydate');  
+    const date_elements = document.querySelectorAll('.daydate'); 
 
     // Create a div with date if the date become different from the previous registered date and not already printed
-    if (event.date != current_date && date_elements[date_elements.length - 1].innerHTML !== event.date){
-        const date = document.createElement('div');
-        date.innerHTML = event.date;
-        date.className = "daydate";
-        current_date = event.date;
-        return date;
+    if (date_elements.length){
+        if (event.date != current_date && date_elements[date_elements.length - 1].innerHTML !== event.date){
+            return create_date_element(event);
+        } 
     } else {
-        return;
+        if (event.date != current_date){
+            return create_date_element(event);
+        } 
     }
+}
+
+function create_date_element(event){
+    const date = document.createElement('div');
+    date.innerHTML = event.date;
+    date.className = "daydate";
+    current_date = event.date;
+    return date;
 }
 
 function getParamsWs(websocket){

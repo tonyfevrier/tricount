@@ -306,7 +306,7 @@ class Click():
 
     def post_chat_message(self, content):
         textarea = self.browser.find_element(By.CLASS_NAME, 'message')
-        submit = self.browser.find_element(By.CLASS_NAME, 'submit')
+        submit = self.browser.find_element(By.CLASS_NAME, 'submit') 
         textarea.send_keys(content)
         submit.send_keys(Keys.ENTER)
         time.sleep(2)

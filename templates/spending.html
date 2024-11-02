@@ -12,7 +12,7 @@
         <a class = "tricount-characteristics" href = "{% url 'modifycount' count.id %}" >
             <p class = "tricount-title">{{count.title}}</p>
             {% for name in names%}
-            <p class = "tricount-participants">{{name}}</p>
+                <p class = "tricount-participants">{{name}}</p>
             {% endfor%}
         </a>
         <a href=""><img width = 20px src="{%static 'images/loupe.png'%}" alt="loupe de recherche"></a>

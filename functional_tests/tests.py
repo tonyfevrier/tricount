@@ -653,7 +653,7 @@ class TestChat(ChannelsLiveServerTestCase):
         self.browser.implicitly_wait(3)  
         click = user_experience.Click(self.browser, self.live_server_url)
         click.register_and_login_someone('toto', 'toto@gmail.com', '1234')
-        click.create_a_tricount('tricount', '1234', 'description', 'EUR', 'trip', 'marine')
+        click.create_a_tricount('tricount', '1234', 'description', 'EUR', 'trip', 'toto', 'marine')
         self.click = click
  
         # Create a second user experience and clone the previous tricount to access the same chat
@@ -661,6 +661,8 @@ class TestChat(ChannelsLiveServerTestCase):
         self.browser2.implicitly_wait(3)  
         click2 = user_experience.Click(self.browser2, self.live_server_url)
         click2.register_and_login_someone('marine', 'm@gmail.com', '1234')
+        click2.click_on_a_link(By.ID,'id_newcount')  
+        click2.click_on_a_link(By.CLASS_NAME,"clonecount") 
         click2.clone_a_tricount('tricount', '1234')
         self.click2 = click2
     
@@ -676,14 +678,40 @@ class TestChat(ChannelsLiveServerTestCase):
         self.click2.click_on_an_existing_tricount(1)
         self.click2.click_on_a_link(By.CLASS_NAME, 'chat') 
 
-        # The first user sends a message and sees it
+        # The first user sends a message and sees it and the date
         self.click.post_chat_message('Ceci est mon premier message')
-        message = self.browser.find_element(By.CLASS_NAME, "owner-popup")
+        message = self.browser.find_element(By.CSS_SELECTOR, ".owner-popup .text")
+        dates = self.browser.find_elements(By.CLASS_NAME, 'daydate')
         self.assertEqual(message.text, 'Ceci est mon premier message')
+        self.assertEqual(len(dates), 1)
 
-        # The second user also sees it
-        message = self.browser.find_element(By.CLASS_NAME, "popup")
+        # The second user also sees it and the date
+        message = self.browser2.find_element(By.CSS_SELECTOR, ".popup .text")
+        dates = self.browser2.find_elements(By.CLASS_NAME, 'daydate')
         self.assertEqual(message.text, 'Ceci est mon premier message')
+        self.assertEqual(len(dates), 1)
+
+        # The second user sends an answer and sees his message. There is no new print of the date 
+        self.click2.post_chat_message('Voici ma réponse.')
+        message = self.browser2.find_element(By.CSS_SELECTOR, ".owner-popup .text")
+        dates = self.browser2.find_elements(By.CLASS_NAME, 'daydate')
+        self.assertEqual(message.text, 'Voici ma réponse.')
+        self.assertEqual(len(dates), 1)
+
+        # The first user also sees it
+        message = self.browser.find_element(By.CSS_SELECTOR, ".popup .text")
+        self.assertEqual(message.text, 'Voici ma réponse.')
+
+        # He go back to the tricount informations and returns on the chat. Old messages are still there
+        self.click.click_on_a_link(By.CLASS_NAME, 'backtospending')
+        self.click.click_on_a_link(By.CLASS_NAME, 'chat')
+        message1 = self.browser.find_element(By.CSS_SELECTOR, ".popup .text")
+        message2 = self.browser.find_element(By.CSS_SELECTOR, ".owner-popup .text")
+        self.assertEqual(message1.text, 'Voici ma réponse.')
+        self.assertEqual(message2.text, 'Ceci est mon premier message')
+
+
+
 
 
 

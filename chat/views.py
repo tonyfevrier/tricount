@@ -17,4 +17,5 @@ def chat(request, id_count):
 
     return render(request,'chat.html',context={'id':id_count,
                                                'user': request.user.username,
-                                               'date_messages': date_messages}) 
+                                               'date_messages': date_messages,
+                                               'count': Counts.objects.get(id=id_count)}) 
