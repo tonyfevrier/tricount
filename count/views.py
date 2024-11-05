@@ -198,9 +198,8 @@ def spending(request, id_count):
     tricount = Tricount.from_json(count.data)  
     total_credit_owner = tricount.calculate_total_credit()[request.user.username]  
     total_cost = tricount.total_cost 
-
-    rate = 0.84 #useAPICurrency("GBP", "EUR") 
-    total_cost_in_pound = rate * float(total_cost) 
+ 
+    total_cost_in_pound = CC.convertSpendingCurrency("GBP", "EUR", total_cost)
 
     context = {
         'count':count,

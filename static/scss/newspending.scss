@@ -17,7 +17,7 @@ header {
     display: block;
     padding-top: 2em;
     margin: 0 1em ;
-    width: 94%;
+    width: 450px;
 
     &:focus{
         outline:none;
@@ -34,9 +34,10 @@ header {
 
 .counter{
     color: gray;
-    text-align:end;
+    text-align:begin;
     font-size: 0.8em;
-    width : 95%;
+    margin-left: 1em;
+    /*width : 95%;*/
 }
 
 .notitle{
@@ -45,14 +46,22 @@ header {
     font-size: 0.8em;
 }
 
+form{
+    @media screen and (min-width:480px) {
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
 .div-amount{
-    display: block;
+    display: inline-block;
     margin: 0 1em;
-    width: 100%;
+    width: 450px;
 
     .amount{
         padding-top: 2em;
-        width:85%;
+        width:350px;
 
         &:focus{
             outline:none;
@@ -67,12 +76,27 @@ header {
         }
     }
 
-    &::after{
+    .newtricount_currency{
+        width: 90px;
+    }
+
+    ::after{
         content: "Payé par";
         color: $gray;
         display: block;
         font-size: 10px; 
-        transform: translateY(2.5em);
+        position: absolute;
+        top:170px;
+        left:1.5em;
+        
+        
+        @media screen and (min-width:955px) { 
+            top:120px;
+        }
+        @media screen and (min-width:1430px) { 
+            top:60px;
+            left:970px;
+        }
     }
 }
 
@@ -91,7 +115,7 @@ input{
     @extend %bords-des-inputs;
     padding: 0.5em 0;
     margin: 1.5em 1em 1em 1em;
-    width:94%;
+    width:450px;
 
     &:focus{
         border-color: $blue;
@@ -130,7 +154,8 @@ input{
     display: flex;
     padding: 1em 0;
     margin: 0 1em ;
-    align-items: center;  
+    align-items: center;
+    width: 420px;  
 
     label{
         padding-left: 0.5em;
@@ -152,6 +177,16 @@ input{
         color:$gray;
         outline: none;
         border-color: $gray;
+    }
+
+}
+
+.list-receivers{
+    
+    @media screen and (min-width:460px) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 }
  

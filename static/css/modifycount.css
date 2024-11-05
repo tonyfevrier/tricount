@@ -155,6 +155,7 @@ button, a{
     justify-content: space-between;
     text-align: center; 
     padding: 0 1em;
+    width: 433px;
 }
 
 .closeparticipant{
@@ -222,4 +223,16 @@ button, a{
 
 .error{
     padding: 0 1em;
+}
+
+.form-participant{
+    width: 433px;
+}
+
+@media screen and (min-width: 533px) {
+    .participants-container{
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    } 
 }

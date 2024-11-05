@@ -23,22 +23,22 @@
     <main>
         <div class="main-sections">Mes paramètres</div>
         <form action = "" class = "myparameters">
-            <div class = name>
-                <p>Nom complet</p>
-                <input type="text" placeholder="Owner">
+            <div class = "name">
+                <p>Identifiant</p>
+                <input type="text" placeholder="{{userobject.username}}">
             </div>
-            <div class = name>
-                <p>Surnom</p>
-                <input type="text" placeholder="Owner">
+            <div class = "name">
+                <p>Mail</p>
+                <input type="text" placeholder="{{userobject.email}}">
             </div>
-            <input type="text" placeholder="IBAN" class="iban">
-            <p class = "textIBAN">Renseignez votre IBAN. Il sera communiqué à vos amis qui vous doivent de l'argent. Vous serez remboursé(e) au plus vite</p>
+            <!--<input type="text" placeholder="IBAN" class="iban">
+            <p class = "textIBAN">Renseignez votre IBAN. Il sera communiqué à vos amis qui vous doivent de l'argent. Vous serez remboursé(e) au plus vite</p>-->
         </form>
-        <div class="main-sections">Préférences</div>
+        <!--<div class="main-sections">Préférences</div>
         <div class = "notifications">
             <p>Notifications</p>
             <input type="range" name="range" min="0" max="1"/>
-        </div>
+        </div>-->
     </main>
     <form action="{% url 'delog' %}" class="form-logout">
         <input type="submit" class="logout" value="Se déconnecter"> 

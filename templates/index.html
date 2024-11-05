@@ -12,7 +12,8 @@
     <div class="titre"> tricount</div>
     <nav class = "header_data">
         <!--<a href="" class="premium"><img width = 20px src="{% static 'images/crown.png' %}" alt="premium"></a>-->
-        <button data-button="JS" class="parameters"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </button>
+        <!--<button data-button="JS" class="parameters"> <img width = 20px src="{% static 'images/settings.png' %}" alt="parameters"> </button>-->
+        <a class="logout" href="{% url 'logout' %}"> Logout </a>
     </nav>
 {% endblock %}
 
@@ -81,7 +82,7 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{% static 'js/index2.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
 
     

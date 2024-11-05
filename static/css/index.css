@@ -1,25 +1,17 @@
 
-/*
-header::before{
-    position: fixed;
-    top:0;
-    left: 0;
-    width: 100%;
-    height: 3em;
-    content:"";
-    background-image: url('/static/images/dollar-bill.png'),url('/static/images/scale.png');
-    background-position-x: 10px, 40px;
-    background-size: 20px,20px;
-    opacity: 0.3;
-    background-repeat: no-repeat; 
-    z-index: 0;
-}*/
-
-
 header{
     justify-content: space-between;
 }
 
+.logout{
+    color: white;
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+.logout:hover{
+    opacity: 1;
+}
 
 .titre{
     padding-left: 1em;
@@ -100,16 +92,21 @@ header{
 }
 
 .link-tricount{
+    display: inline;
     text-decoration: none;
+}
+
+.tricount:hover{
+    background-color: rgb(250, 248, 248);
 }
  
 
 .tricount{
     border-bottom-style: solid;
     border-color: black;
-    border-width: 1px; 
-    height:3.5em; 
-
+    border-width: 1px;  
+    height: fit-content;
+    
 }
 
 .tricount:active{
@@ -128,7 +125,7 @@ header{
     font-size: 0.8em;
     padding-top: calc(0.5* var(--padding));
     padding-bottom: var(--padding);  
-    padding-left: var(--padding); 
+    padding-left: var(--padding);   
 }
 
 .id_newcount{
@@ -138,12 +135,18 @@ header{
     font-size: 1.8em;
     font-weight: 700;
     color: white;
-    width:1.5em;
-    height : 1.5em;
+    width:1.25em;
+    height : 1.25em;
     background-color: var(--color);
     border-radius: 100%;
     text-decoration: none;
     text-align: center;
+}
+
+.id_newcount:hover{
+    transition: 0.2s;
+    width:1.5em;
+    height : 1.5em;
 }
 
 .choosecount{
@@ -181,13 +184,12 @@ header{
 
 .form-pwdcount{
     position: absolute; 
-    bottom : 10px;
-    right : 100px;
+    bottom : 10px; 
+    right:100px; 
     background-color: transparent; 
     margin-top: auto;
     margin-left: auto;
-    border-radius: 5px;
-    /*border: solid 1px black;*/
+    border-radius: 5px; 
 }
  
 
@@ -221,5 +223,11 @@ input[type = "submit"]:hover{
     font-weight: 600;
     padding-left:0.5em;
     height:fit-content
+}
+
+@media screen and (max-width: 1035px) { 
+    .form-pwdcount input, .form-pwdcount button{
+        display: block;
+    }
 }
 

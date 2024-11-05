@@ -14,9 +14,11 @@
 
 {% block main %}
     <form action="{% url 'addspending' idcount %}" method = "post">
-        <input class = "title" type="text" placeholder="Titre" name = "title"> 
-        <p class = "notitle" id="title-error" hidden>Il faut un titre</p> 
-        <p class = "counter">0/50</p>
+        <div class="title-input">
+            <input class = "title" type="text" placeholder="Titre" name = "title"> 
+            <p class = "notitle" id="title-error" hidden>Il faut un titre</p> 
+            <p class = "counter">0/50</p>
+        </div>
         <div class = "div-amount">
             <input class = "amount" type="text" placeholder="Montant" id="amount" name = "amount"> 
             <a href="/choosecurrency?referer=/newspending/{{idcount}}" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>

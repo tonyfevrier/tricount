@@ -11,7 +11,7 @@
     <a href="/tricount/{{id}}" class = "backtospending" id = "backtospending"><img width = "20px" src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
     <nav>
         <p class = "header-title" id="{{id}}">{{count.title}}</p>
-        <p class = "owner">{{user}}</p>
+        <p class = "owner" hidden>{{user}}</p>
         <p class = "header-participants">Participants au chat : </p>
         {% for participant in count.participants%}
             <p class = "header-participants">{{participant}}</p>

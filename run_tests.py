@@ -14,8 +14,8 @@ PATH_SCSS = "/Users/LCI/Documents/Developpement info/code python/tricount/static
 # out of manage.py, we have to tell django where are the settings in order to use django specificities
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tricount.settings')
 django.setup()
-
-#CLASSES = get_classes_names('functional_tests/tests.py') #list of classes names in functional tests.
+ 
+# initialize 
 app = typer.Typer()
 commands = []
 filename = "functional_tests/tests.py"  
@@ -96,7 +96,7 @@ def get_methods_names(filename,*classnames):
     return methods_names
 
 def commands_for_unit_tests():
-    commands.append(['python', 'manage.py','test', 'count'])
+    commands.append(['python', 'manage.py','test', 'count'], ['python', 'manage.py','test', 'chat'])
     return commands
 
 def commands_for_functionals_tests(*classnames):

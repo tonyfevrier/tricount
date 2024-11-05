@@ -15,11 +15,13 @@
 
 {% block main %}
         <form action="{% url 'modifyspendingregister' count.id spending.id %}" method = "post">
-            <input class = "title" type="text" placeholder="{{spending.title}}" value = {{spending.title}} name = "title"> 
-            {%if titre == False%}
-                <p class = "notitle">Titre non valable</p>
-            {%endif%}
-            <p class = "counter">0/50</p>
+            <div class="title-input">
+                <input class = "title" type="text" placeholder="{{spending.title}}" value = {{spending.title}} name = "title"> 
+                {%if titre == False%}
+                    <p class = "notitle">Titre non valable</p>
+                {%endif%}
+                <p class = "counter">0/50</p>
+            </div>
             <div class = "div-amount">  
                 <input class = "amount" type="text" value="{{spending.amount|floatformat:2}}" id="amount" name = "amount"> 
                 <a href="/choosecurrency?referer=/modifyspending/{{count.id}}/{{spending.id}}" class = "choose-currency"><input type= "text" class = "newtricount_currency" value = "{{count.currency}}" name = "newtricount_currency"></a>
@@ -27,7 +29,9 @@
             <select class = "spender" name="spender" id="spender">
                 <option class = "spender-participant" value="{{spending.payer}}" selected>{{spending.payer}}</option> 
                 {% for participant in participants%}
-                <option class = "spender-participant" value="{{participant}}">{{participant}}</option> 
+                    {% if participant != spending.payer %}
+                        <option class = "spender-participant" value="{{participant}}">{{participant}}</option> 
+                    {% endif %}
                 {%endfor%}
             </select>   
             <div class = "forwho">

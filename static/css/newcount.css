@@ -240,6 +240,7 @@ label[for="other"]::before{
     justify-content: space-between;
     text-align: center; 
     padding: 0 1em;
+    width: 433px;
 }
 
 .closeparticipant{
@@ -262,4 +263,16 @@ label[for="other"]::before{
 
 .compteur{
     padding-right: 1em;
+}
+
+.form-participant{
+    width: 433px;
+}
+
+@media screen and (min-width: 533px) {
+    .participants-container{
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    } 
 }

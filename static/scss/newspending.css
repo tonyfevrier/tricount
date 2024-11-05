@@ -13,11 +13,18 @@ header .header-title {
   display: block;
   padding-top: 2em;
   margin: 0 1em;
-  width: 450px;
+  width: 94%;
 }
 .title:focus {
   outline: none;
   border-color: rgb(71, 71, 199);
+}
+.title:focus::-moz-placeholder {
+  color: rgb(71, 71, 199);
+  transform: translate(0, -20px);
+  font-size: 10px;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
 }
 .title:focus::placeholder {
   color: rgb(71, 71, 199);
@@ -28,10 +35,9 @@ header .header-title {
 
 .counter {
   color: gray;
-  text-align: begin;
+  text-align: end;
   font-size: 0.8em;
-  margin-left: 1em;
-  /*width : 95%;*/
+  width: 95%;
 }
 
 .notitle {
@@ -40,26 +46,25 @@ header .header-title {
   font-size: 0.8em;
 }
 
-@media screen and (min-width: 480px) {
-  form {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-}
-
 .div-amount {
-  display: inline-block;
+  display: block;
   margin: 0 1em;
-  width: 450px;
+  width: 100%;
 }
 .div-amount .amount {
   padding-top: 2em;
-  width: 350px;
+  width: 85%;
 }
 .div-amount .amount:focus {
   outline: none;
   border-color: rgb(71, 71, 199);
+}
+.div-amount .amount:focus::-moz-placeholder {
+  color: rgb(71, 71, 199);
+  transform: translate(0, -20px);
+  font-size: 10px;
+  -moz-transition: 0.2s;
+  transition: 0.2s;
 }
 .div-amount .amount:focus::placeholder {
   color: rgb(71, 71, 199);
@@ -67,28 +72,12 @@ header .header-title {
   font-size: 10px;
   transition: 0.2s;
 }
-.div-amount .newtricount_currency {
-  width: 90px;
-}
-.div-amount ::after {
+.div-amount::after {
   content: "Payé par";
   color: gray;
   display: block;
   font-size: 10px;
-  position: absolute;
-  top: 170px;
-  left: 1.5em;
-}
-@media screen and (min-width: 955px) {
-  .div-amount ::after {
-    top: 120px;
-  }
-}
-@media screen and (min-width: 1430px) {
-  .div-amount ::after {
-    top: 60px;
-    left: 970px;
-  }
+  transform: translateY(2.5em);
 }
 
 .div-receiver, .spender, input {
@@ -101,7 +90,7 @@ header .header-title {
 .spender {
   padding: 0.5em 0;
   margin: 1.5em 1em 1em 1em;
-  width: 450px;
+  width: 94%;
 }
 .spender:focus {
   border-color: rgb(71, 71, 199);
@@ -156,12 +145,9 @@ header .header-title {
   outline: none;
   border-color: gray;
 }
-
-@media screen and (min-width: 460px) {
-  .list-receivers {
-    display: flex;
+@media screen and (min-width: 420px) {
+  .div-receiver {
     flex-direction: row;
-    flex-wrap: wrap;
   }
 }
 
@@ -177,6 +163,7 @@ header .header-title {
 
 .delete-spending {
   display: block;
+  width: -moz-fit-content;
   width: fit-content;
   margin: 2em auto;
   border: none;
@@ -196,6 +183,7 @@ header .header-title {
 }
 
 .delete-confirmation {
+  width: -moz-fit-content;
   width: fit-content;
   margin: auto;
   background-color: white;
@@ -210,6 +198,7 @@ header .header-title {
   justify-content: space-around;
 }
 .delete-confirmation .alert a {
+  width: -moz-fit-content;
   width: fit-content;
   border-color: var(--color);
   border-width: 1px;
@@ -222,6 +211,4 @@ header .header-title {
 }
 .delete-confirmation .alert a:hover {
   background-color: lightblue;
-}
-
-/*# sourceMappingURL=newspending.css.map */
+}/*# sourceMappingURL=newspending.css.map */

@@ -437,9 +437,13 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - `voir ensuite si le tricount est bien cloné.`
     - `mettre aussi le msg d'erreur Remplissez mdp en rouge.`
     - bugs
-        - modifyspending : quand je modifie la monnaie de la dépense déjà enregistrée, j'ai un bug
+        - total cost à changer quand je modifie la dépense (dans l'affichage de spending.html)
+        - modifyspending : quand je modifie la monnaie de la dépense déjà enregistrée, j'ai un bug 
+        - `modifyspending: dans les spender, j'ai deux fois le owner`
         - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency (utiliser localstorage comme dans newcount).
         - quand on supprime un participant et qu'on le remet, son ancien passif n'est pas conservé s'il avait fait des dépenses avant.
+        - spending-details : quand je clique sur suivant il ne trouve pas forcément la bonne dépense car on peut avoir créé la dépense 1 avec le tricount1 puis la 2 avec le tricount2 et la 3 avec le tricount 1. Ainsi si on fait plus 1, il n'y a pas de dépense 2 pour le tricount 1 et donc idpreviousspending et idnextspending ne mènent à des pages qui n'existent pas
+        - js de index le bouton + ne fonctionne plus
     - branche pour le chat (suite)
             - `copier l'html et voir si ça marche`
             - `copie de app et templates`
@@ -469,29 +473,32 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         `regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.`
         `faire les factorisations ci-dessus pour améliorer mon appli`
         `** apprivoiser les django channels pour intégrer le chat minimal`
-        ** réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)
+        ** `réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)`
         - améliorer pour la pep8 : noms de fonctions en minuscule et _
         - réfléchir à utiliser le django cache framework : quelles parties pourraient s'améliorer en termes de performance? Lesquelles je ne voudrais pas recharger?
+        ** css : en grand écran espacer les participants dans newspending (marge et diminuer la taille d'écriture des montants). Mettre des hover pour rendre la plateforme + attractive
         * sécurité : mettre ma clé d'API non pas dans le code source mais dans une variable d'environnement ou la sécuriser.
         * sécurité : introduire le hachage des pwd dans mon application
         ** vérifier toutes les spécifications.
-        ** vérifier le côté responsive du site : pas parfait exemple newspending
-            - newcount: si écran > longueur max du titre, le titre est mdp sur la même ligne, les participants sur la même ligne au max avec des petites croix à côté et la bouton ajouter pas trop loin de Autre participant ET le formulaire de clonage en hauteur si écran < l
-            - newspending, modifycount, modifyspending : idem montant et monnaie sur même ligne que titre
+        ** `vérifier le côté responsive du site : pas parfait exemple newspending`
+            `- newcount: si écran > longueur max du titre, le titre est mdp sur la même ligne, les participants sur la même ligne au max avec des petites croix à côté et la bouton ajouter pas trop loin de Autre participant ET le formulaire de clonage en hauteur si écran < l`
+            - `newspending, modifycount, modifyspending : idem montant et monnaie sur même ligne que titre`
+            - `modifyspending est chamboulé : à modifier (il faut juste mettre les nouvelles div comme newspending)`
         - Optionnel : recherche dans les dépenses avec la loupe
-        ** Nettoyer momentanément les boutons qui ne servent à rien en les commentant
+        ** `Nettoyer momentanément les boutons qui ne servent à rien en les commentant notamment la recherche de dépense`
         ** Vérifier que tous les tests fonctionnels marchent
+        ** voir si run_tests doit être modifié
         - créer variable de temps pour time.sleep dans tests fonctionnels : essayer de diminuer le temps
         - voir si des vues sont à passer en JS : se demander quand il est inutile de perdre du temps à recharger la page (exemple: pour clonecount, inutile de recharger quand les credentials sont faux).
         - CSS des ajouter pour que le ajouter soit mieux placé qqs taille écran - parfois on a l'affichage de la flèche retour en très grand (exe modifycount)
             centrer le Bonjour Tony de la page logout
-        ** remettre l'API si ça marche après tous les tests effectués
+        ** `remettre l'API si ça marche après tous les tests effectués`
         - faire des sous dossiers dans templates pour chaque application?
         * créer une docker image permettant aux examinateurs de créer facilement le conteneur associé à mon application
         * créer un fichier yaml permettant facilement de lancer mon application et un pour lancer les tests unitaires, fonctionnels.
             - besoin de déclencher un serveur redis pour que ça fonctionne : voir si je peux donner un fichier yaml qui s'exécute automatiquement pour qqun qui voudrait lancer mon code.
         * faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
-        - voir pour créer deux bdd dbsqlite différentes afin d'éviter son écrasement à chaque lancement des tests channels
+        - voir pour créer deux bdd dbsqlite différentes afin d'éviter son écrasement à chaque lancement des tests channels 
         
     
     -modification des dépenses déjà entrées :

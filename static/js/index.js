@@ -1,129 +1,166 @@
-/*
-Essayer de ne mettre qu'un événement sur le doc et d'assigner des méthodes différentes suivant là où on clique.
-    click sur l'engrenage : apparition d'un élément 
-    click sur bas : apparition d'un élément
-    click sur qqch qui n'est ni un lien ni un cadre ouvert : réinitialisation de la page initiale.
-    clic sur un lien de l'élément généré par l'engrenage : un autre élément remplace le précédent.
-*/
+window.addEventListener('DOMContentLoaded', () => {
+     
 
-document.addEventListener("click", parameters);
+    // Get all possible popups initially hidden
+    let elemtsInitiallyHidden = document.body.querySelectorAll('[data-div = hidden]'); 
 
-let parameters = document.querySelector('.parameters'); 
-let parameters_options = document.querySelector('.parameters-options');
-let create_tricount = document.querySelector('.create-tricount');
-let help_options = document.querySelector('.help-options');
+    // Behaviour when clicking on the page
+    document.addEventListener("click", (event) => click_on_page(event, elemtsInitiallyHidden));
 
-let help = document.querySelector('.help');
-let conditions = document.querySelector('.conditions');
+    // Specific behaviour clicks
+    document.querySelector('.parameters').addEventListener("click", (event) => click_on_parameter(event, elemtsInitiallyHidden));
+    document.querySelector('.parameters-options').addEventListener("click", click_on_parameter_options);
+    document.querySelector('.id_newcount').addEventListener("click", (event) => click_on_newcount(event, elemtsInitiallyHidden));
+    document.querySelector('.choosecount').addEventListener("click", click_on_choose_count);
 
+    // Event when clicking on submitting to clone a tricount  
+    document.querySelector('.pwdsubmit').addEventListener("click", click_on_submit); 
+})
 
+/*Events handlers */
+function click_on_parameter(event, elemtsInitiallyHidden) { 
+    // Do nothing if a popup is opened
+    if (isOnePopUpApparent(elemtsInitiallyHidden)) return;
 
-//IMPORTANT : Il faudrait une fonction click on button qui marche qqs la popup ouverte, qui prendrait une popup en argument
-//en gros la même qui marche quand je clique sur l'engrenage devrait aussi marcher quand je clique sur le bouton d'une 
-//popup ouverte. PCq là j'essaie d'imbriquer un événement dans un autre alors que moralement ça correpsond à deux événements analogues
-//La question : comment coder une succession de clics sur des événements apparus entre temps en évitant une ribambelle de if imbriqués.
-//Une idée : chaque bouton est assigné à un enfant dont on donne le même nom de classe+'-options' (pour faire un lien entre le bouton et l'objet affiché).
-//On demande alors simplement d'afficher ce bloc tout en prenant soin de supprimer toutes les popup qui ont pu être ouvertes.
-// nom : click_on_popup_button. Par ailleurs on peut donner un attribut qui caractérise tous ces bouttons qui mènent à une popup JS.
-
-
-
-
-
-
-
-
-
-
-//options.onclick = parameters;
-
-function parameters(event){ 
-    /*si on clique sur autre chose que display_options, engrenage ou + 
-     on cache ou tous les éléments affichés
-      return
-    si on clique sur engrenage
-    display_options.hidden = !display_options.hidden; 
-    si on clique sur +, autre elt apparait
-    si on clique sur display_options
-    si je clique sur un lien cliquable quand la fenêtre est ouverte ça enlève juste la fenêtre, le lien est inactif.
-    */
-
-    //
-    
-    //si on est sur la page initiale 
-    if (parameters_options.hidden === true){
-        //et qu'on ne clique pas sur un des boutons menant à une popup
-        if (!options.contains(event.target) && event.target != id_newcount) return;
-
-        if (options.contains(event.target)) toggle(parameters_options);  display_block_for_children(parameters_options);
-        if (event.target === create_tricount) toggle(create_tricount); display_block_for_children(create_tricount);
-
-    } else {
-        //si on ne clique pas sur le pop up qui vient de s'ouvrir.
-        if (!parameters_options.contains(event.target)){
-            desactive_links_when_PopUp_opened(event);
-        } else { 
-            //PB il faut aussi que si help options est affiché quand on clique ailleurs la pop up disparaisse.
-            toggle(parameters_options);
-            if (event.target === help){
-                toggle(help_options);
-                display_block_for_children(help_options);
-            }
-        }
+    // Display a popup if click on parameter
+    if (event.currentTarget == document.querySelector('.parameters')){ 
+        toggle(document.querySelector('.parameters-options'));  
+        style_display_block_for_children(document.querySelector('.parameters-options'));
+        
+        // Prevent goback from being launched
+        event.stopPropagation();
     }
 }
 
-function IsaPopUpDisplayed(){
+function click_on_parameter_options(event){ 
 
+    // Do nothing if click on other then a button
+    if (!event.target.dataset.button) return; 
+
+    // Display the child element the user clicks on 
+    toggle(document.querySelector('.parameters-options'));  
+    toggle(document.querySelector(`.${event.target.className}-options`));
+    style_display_block_for_children(document.querySelector(`.${event.target.className}-options`));
+
+    // Prevent goback from being launched
+    event.stopPropagation();
 }
 
-function clickBehaviourForNativePage(){
-    /* Fonction qui donne le comportement de clic lorsqu'aucune pop-up n'est ouverte */
-}
+function click_on_page(event, elemtsInitiallyHidden){ 
+    // Do nothing if a popup is opened
+    if (!isOnePopUpApparent(elemtsInitiallyHidden)) return;
 
-function clickBehaviourWhenPopUpOpened(event,popup){
-    /* Fonction qui donne le comportement de clic lorsqu'aucune pop-up n'est ouverte
-    Inputs : event, l'événement.
-            popup : l'élément html correspondant à la popup qui s'est ouverte?
-    */
-    
-    //si on ne clique pas sur le pop up qui vient de s'ouvrir, la popup disparait
-    if (!popup.contains(event.target)){
-        desactive_links_and_close_popup(event,popup);
-    } else { 
-        //si on clique sur un des boutons de la popup, on remplace la popup affiché par la nouvelle popup.
-        replace_popup_by_popup_clicked(event, popup);
+    // Hide all opened popups if the user does not click on it
+    if (!event.target.closest('div')?.dataset.div){ 
+        event.preventDefault(); 
+        hide_all_popup_elements(elemtsInitiallyHidden);
     }
 }
 
 
-
+/*Utilities */
 function toggle(elem){
     elem.hidden = !elem.hidden;
 }
 
-function display_block_for_children(elem){
+function isOnePopUpApparent(elemtsInitiallyHidden){
+    /* Returns true of a popup is opened */
+    let bool = false;
+    for (elem of elemtsInitiallyHidden){ 
+        if (elem.hidden === false){ 
+            bool = true;
+        }
+    }  
+    return bool;
+}
+
+function hide_all_popup_elements(elemtsInitiallyHidden){
+    for (elem of elemtsInitiallyHidden) elem.hidden = true;
+}
+
+function style_display_block_for_children(elem){
     for (let child of elem.children){
         child.style.display = "block";
     }
 }
 
-function replace_popup_by_popup_clicked(event,popup){
-    /*Fonction qui remplace par la popup par la popup correspondant au bouton sur lequel on a cliqué */
-    let popup_buttons = popup.querySelectorAll('button');
-    toggle(popup);
-    if (event.target === help){
-        toggle(help_options);
-        display_block_for_children(help_options);
-    }
+function click_on_newcount(event, elemtsInitiallyHidden){
+    // Do nothing if a popup or the last form are opened
+    if (isOnePopUpApparent(elemtsInitiallyHidden)) return;
+    if (!document.querySelector('.form-pwdcount').hidden) return;
+
+    // Display a popup to choose the way to create a tricount
+    document.querySelector('.choosecount').hidden = false;
+    event.stopPropagation();
 }
 
-function desactive_links_and_close_popup(event, popup){
-    /*Function called when one of the hidden elements are displayed : it prevents from 
-    executing links if we click on them*/
+function click_on_choose_count(event){
+    /* Open the form to clone an existing tricount*/  
+    if (event.target != document.body.querySelector('.clonecount')) return;
+    document.querySelector('.choosecount').hidden = true;
+    document.querySelector('.form-pwdcount').hidden = false;  
+    document.querySelector('.error').hidden = true;
+    event.stopPropagation();
+}
 
-    event.preventDefault();
-    popup.hidden = true;
-    //parameters_options.hidden = true;
-    //create_tricount.hidden = true;
+function click_on_submit(event){ 
+    // Hide eventual error message (no inputs filled and invalid credentials)
+    document.querySelector('.error').hidden = true;
+    if (document.querySelector('#Invalid')){
+        document.querySelector('#Invalid').remove();
+    }; 
+
+    // Make a request to clone count if inputs are filled 
+    if (document.querySelector('.password').value !== "Mot de passe du tricount" 
+        && document.querySelector('.password').value !== "" 
+        && document.querySelector('.tricount-title').value !== "Titre du tricount" 
+        && document.querySelector('.tricount-title').value !== ""){
+            
+            const csrf_token = document.querySelector('meta[name="csrf-token"]').content;     
+
+            fetch('/clonecount', {
+                method: 'POST',
+                headers: {
+                   'X-CSRFToken': csrf_token,
+                },
+                body: JSON.stringify({
+                   title: document.querySelector('.tricount-title').value,
+                   password: document.querySelector('.password').value,
+                })
+            })
+            .then(response => {
+                // Récupérer le statut HTTP
+                const status = response.status;
+            
+                // Retourner une promesse qui résout en JSON
+                return response.json().then(data => ({ data, status }));
+            })
+            .then(({ data, status }) => { 
+                // When password and title do not correspond to any tricount
+                if (status == 400) {
+                    // Create an error message 
+                    const error = document.createElement('p');
+                    error.className = "error";
+                    error.id = "Invalid"
+                    error.innerHTML = `${data['message']}`
+                    document.querySelector('.form-pwdcount').append(error);
+                    return;
+                }
+                else {
+                    // Redirect to listecount page where the tricount should appear
+                    window.location.href = '/count';
+                }
+            })
+            .catch(error => console.log(error))
+            return; 
+    }   
+
+    
+    // Display an error message if the user does not fill an input in the clone count form
+    event.preventDefault(); 
+    document.querySelector('.error').hidden = false; 
+    
+    // Clear inputs
+    document.querySelector('.tricount-title').value = ''; 
+    document.querySelector('.password').value = ''; 
 }
