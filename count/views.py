@@ -268,15 +268,30 @@ def spending_details(request, id_count, id_spending):
     """
     Function to render the page allowing to see the details of a given spending
     """ 
-    spending = Spending.objects.get(id = id_spending, tricount = Counts.objects.get(id=id_count)) 
+    # Get the spending to print
+    tricount = Counts.objects.get(id=id_count)
+    #spending = Spending.objects.get(id = id_spending, tricount = tricount) 
+    spending = tricount.spendings.get(id = id_spending)
+
+    # Creates the context dictionary
     number_of_spending = Spending.objects.count()
     context = {'idcount' : id_count, 
-               'idspending' : id_spending,
-               'previousidspending' : id_spending - 1, 
-               'followingidspending' : id_spending + 1,
+               'idspending' : id_spending, 
                'spending': spending, 
                'number_of_spending' : number_of_spending}
-    return render(request,"spending-details.html",context)
+
+    # Get the eventual previous and next spending 
+    spending_ids = [spending.id for spending in tricount.spendings.all()]
+    spending_index = spending_ids.index(id_spending)
+    try :
+        previous_id_spending = spending_ids[spending_index - 1]
+        context['previousidspending'] = previous_id_spending
+        following_id_spending = spending_ids[spending_index + 1]
+        context['followingidspending'] = following_id_spending
+    except IndexError:
+        pass
+    
+    return render(request, "spending-details.html", context)
 
 @login_required
 def modifyspending(request, id_count, id_spending):

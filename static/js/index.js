@@ -8,8 +8,8 @@ window.addEventListener('DOMContentLoaded', () => {
     document.addEventListener("click", (event) => click_on_page(event, elemtsInitiallyHidden));
 
     // Specific behaviour clicks
-    document.querySelector('.parameters').addEventListener("click", (event) => click_on_parameter(event, elemtsInitiallyHidden));
-    document.querySelector('.parameters-options').addEventListener("click", click_on_parameter_options);
+    //document.querySelector('.parameters').addEventListener("click", (event) => click_on_parameter(event, elemtsInitiallyHidden));
+    //document.querySelector('.parameters-options').addEventListener("click", click_on_parameter_options);
     document.querySelector('.id_newcount').addEventListener("click", (event) => click_on_newcount(event, elemtsInitiallyHidden));
     document.querySelector('.choosecount').addEventListener("click", click_on_choose_count);
 

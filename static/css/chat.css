@@ -13,6 +13,12 @@
     width:1.5em
 }
 
+.backtospending:hover{
+    width : 1.6em; 
+    height: 1.6em;
+    transition: .2s;
+}
+
 header nav{
     padding: 0 1em;
 }

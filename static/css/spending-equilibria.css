@@ -66,6 +66,11 @@ header{
     width : 20px; 
 }
 
+.backtolistecount img:hover{
+    width : 25px; 
+    transition: .2s;
+}
+
 .header-spending{
     display: flex;
     justify-content: space-around;
@@ -175,4 +180,8 @@ div[name = "credits-negative"] .participant{
     border-bottom-left-radius: 10px;
     padding:0.5em;
     color: gray;
+}
+
+.gotospending:hover{
+    opacity: 1;
 }

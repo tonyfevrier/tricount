@@ -60,6 +60,11 @@ header{
     width : 20px; 
 }
 
+.backtolistecount img:hover{
+    width : 25px; 
+    transition: .2s;
+}
+
 .header-spending{
     display: flex;
     justify-content: space-around;

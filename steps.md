@@ -442,8 +442,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - `modifyspending: dans les spender, j'ai deux fois le owner`
         - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency (utiliser localstorage comme dans newcount).
         - quand on supprime un participant et qu'on le remet, son ancien passif n'est pas conservé s'il avait fait des dépenses avant.
-        - spending-details : quand je clique sur suivant il ne trouve pas forcément la bonne dépense car on peut avoir créé la dépense 1 avec le tricount1 puis la 2 avec le tricount2 et la 3 avec le tricount 1. Ainsi si on fait plus 1, il n'y a pas de dépense 2 pour le tricount 1 et donc idpreviousspending et idnextspending ne mènent à des pages qui n'existent pas
-        - js de index le bouton + ne fonctionne plus
+        - `spending-details : quand je clique sur suivant il ne trouve pas forcément la bonne dépense car on peut avoir créé la dépense 1 avec le tricount1 puis la 2 avec le tricount2 et la 3 avec le tricount 1. Ainsi si on fait plus 1, il n'y a pas de dépense 2 pour le tricount 1 et donc idpreviousspending et idnextspending ne mènent à des pages qui n'existent pas`
+        - `js de index le bouton + ne fonctionne plus`
     - branche pour le chat (suite)
             - `copier l'html et voir si ça marche`
             - `copie de app et templates`

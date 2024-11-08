@@ -2,6 +2,10 @@
 header .backtospending {
   padding-left: 1em;
 }
+header .backtospending img:hover {
+  width: 25px;
+  transition: 0.2s;
+}
 header .header-title {
   color: white;
   padding: 0 2em;

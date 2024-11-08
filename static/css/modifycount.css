@@ -14,6 +14,11 @@ button, a{
     width : 20px; 
 }
 
+.backtotricount img:hover{
+    width : 25px; 
+    transition: .2s;
+}
+
 .titre{
     padding-left: 2em; 
     font-size: 1.5em;

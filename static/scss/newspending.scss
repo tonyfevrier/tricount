@@ -4,6 +4,11 @@ $gray : gray;
 header {
     .backtospending{
         padding-left: 1em;
+
+        img:hover{
+            width : 25px; 
+            transition: .2s;
+        }
     }
     .header-title{
         color: white;
