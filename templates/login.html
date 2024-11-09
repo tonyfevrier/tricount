@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block header %}
-    <a class = "welcome" href="{% url 'welcome' %}">Créer un compte</a>
-    <a class = "login" href="{% url 'log' %}">Se connecter</a>
+    <a class = "welcome" href="{% url 'welcome' %}">Create an account</a>
+    <a class = "login" href="{% url 'log' %}">Log in</a>
 {% endblock %}
 
 {% block main %}
@@ -17,7 +17,7 @@
         {% csrf_token %}
         <input class = "username" type="text" placeholder="Username" name = "username" autocomplete="off"> 
         <input class = "password" type="password" placeholder="Password" name="password" autocomplete="new-password">
-        <input class = "submit" type="submit">
+        <input class = "submit" type="submit" value="Send">
     </form>
     {% if messages %}
         <ul class="messages">

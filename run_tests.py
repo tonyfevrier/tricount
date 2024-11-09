@@ -96,7 +96,8 @@ def get_methods_names(filename,*classnames):
     return methods_names
 
 def commands_for_unit_tests():
-    commands.append(['python', 'manage.py','test', 'count'], ['python', 'manage.py','test', 'chat'])
+    commands.append(['python', 'manage.py','test', 'count'])
+    commands.append(['python', 'manage.py','test', 'chat'])
     return commands
 
 def commands_for_functionals_tests(*classnames):

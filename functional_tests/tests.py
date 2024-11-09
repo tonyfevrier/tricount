@@ -37,7 +37,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertEqual(self.browser.current_url, url + "/count")
 
         #Il va dans paramètres, constate que ses données sont bien présentes et se délogge directement 
-        click.click_on_successive_links(By.CLASS_NAME,"parameters","myparameters")
+        #click.click_on_successive_links(By.CLASS_NAME,"parameters","myparameters")
+        click.click_on_a_link(By.CLASS_NAME, "logout")
         firstletter,name,mail = click.find_multiple_elements(By.CLASS_NAME,"firstletter","hello","mail")
         self.assertEqual(firstletter.text, "T")
         self.assertEqual(name.text, "Bonjour Tony")

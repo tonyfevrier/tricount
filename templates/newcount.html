@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block header %}
-    <a href="{% url 'listecount' %}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-    <div class = "titre">Nouveau tricount</div>
+    <a href="{% url 'listecount' %}" class = "backtotricount" id = "backtotricount"><img  width='20px' src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+    <div class = "titre">New tricount</div>
 {% endblock %}
 
 {% block main %}  
@@ -17,36 +17,36 @@
         <form method="POST" class = "newtricount" action="{% url 'addcount' %}">
             {% csrf_token %}
 
-            <input type ="text" class = "newtricount_title" placeholder="Titre" name = "newtricount_title" autocomplete="off">  
+            <input type ="text" class = "newtricount_title" placeholder="Title" name = "newtricount_title" autocomplete="off">  
  
-            <p class="error" id="title-error" hidden >Le titre doit comporter au moins un caractère.</p>
+            <p class="error" id="title-error" hidden >Title must contain at least one letter.</p>
 
-            <input type="password" class = "newtricount_pwd" placeholder="Entrez un mot de passe" name = "newtricount_pwd" autocomplete="new-password">
+            <input type="password" class = "newtricount_pwd" placeholder="Enter a password" name = "newtricount_pwd" autocomplete="new-password">
 
-            <p class = "error" id="pwd-error" hidden>Il faut un mot de passe</p>
+            <p class = "error" id="pwd-error" hidden>Enter a password</p>
 
             <input type ="text" class = "newtricount_description" placeholder="Description" name = "newtricount_description">
             
             <a href="/choosecurrency?referer=/newcount" class = "choose-currency"><input type="text" class = "newtricount_currency" placeholder="{{currency}}" value = "{{currency}}" name = "newtricount_currency"></a>
             
 
-            <p class="title_category"> Catégorie </p> 
+            <p class="title_category"> Category </p> 
             <div class = "category" name = "category" >
                 <input class = "newtricount_category" type="radio" id="trip" name="newtricount_category" value="trip">
-                <label for="trip">Voyage</label>
+                <label for="trip">Trip</label>
                 <input class = "newtricount_category" type="radio" id="coloc" name="newtricount_category" value="coloc">
                 <label for="coloc">Coloc</label>
                 <input class = "newtricount_category" type="radio" id="couple" name="newtricount_category" value="couple">
                 <label for="couple">Couple</label>
                 <input class = "newtricount_category" type="radio" id="event" name="newtricount_category" value="event">
-                <label for="event">Evénement</label>
+                <label for="event">Event</label>
                 <input class = "newtricount_category" type="radio" id="project" name="newtricount_category" value="project">
-                <label for="project">Projet</label>
+                <label for="project">Project</label>
                 <input class = "newtricount_category" type="radio" id="other" name="newtricount_category" value="other">
-                <label for="other">Autre</label>
+                <label for="other">Other</label>
             </div>
 
-            <p class="error" id="category-error" hidden >Il faut choisir une catégorie.</p>
+            <p class="error" id="category-error" hidden >Choose one category.</p>
 
 
             <button class = "submittricount" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
@@ -65,10 +65,10 @@
         </div>
 
         <div class="form-participant">
-            <input type ="text" name="new_participant" class ='new_participant' placeholder="Autre participant">
-            <button class = "add_participant">Ajouter</button> 
+            <input type ="text" name="new_participant" class ='new_participant' placeholder="Other participant">
+            <button class = "add_participant">Add</button> 
         </div>
-        <p class="error participant-error" id="participant-error" hidden>Il faut au moins un participant.</p> 
+        <p class="error participant-error" id="participant-error" hidden>You need at least one participant.</p> 
 {% endblock %}
 
 {% block js %}

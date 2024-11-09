@@ -8,7 +8,7 @@
 
 {% block header %}
     <nav class = "header-nav"> 
-        <a href="{% url 'listecount' %}" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+        <a href="{% url 'listecount' %}" class = "backtolistecount" id = "backtolistecount"><img  width='20px' src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
         <div class = "tricount-characteristics" >
             <p class = "tricount-title">{{count.title}}</p>
             {% for name in total_credit.keys %}
@@ -19,8 +19,8 @@
         <button class = "share"></button>
     </nav>
     <div class = header-spending>
-        <a class = "gotospending" href = "{% url 'spending' count.id %}">Dépenses</a>
-        <a class = "gotoequilibria" data-light="underline" href = "{% url 'equilibria' count.id %}">Equilibres</a>
+        <a class = "gotospending" href = "{% url 'spending' count.id %}">Spendings</a>
+        <a class = "gotoequilibria" data-light="underline" href = "{% url 'equilibria' count.id %}">Equilibria</a>
     </div>
 {% endblock %}
 
@@ -40,7 +40,7 @@
     {% endfor %}
 
     <p class = "equilibrating">
-        Comment puis-je équilibrer?
+        How can I equilibrate
     </p> 
 
     {% for debitor, debitor_data in transfert_to_equilibrium.items %}
@@ -51,13 +51,13 @@
                 <div class = "reimbursement-details">
                     <div class = "onetoone">
                         <p class = "who">{{debitor}}</p>
-                        <p class = "dueto">doit à </p>
+                        <p class = "dueto">must pay to </p>
                         <p class = "who">{{creditor}}</p>
                     </div>
                     <p class = "reimbursement-amount">{{amount|floatformat:2}} {{count.currency}}</p>
                 </div>
                 <div class = "more-options">
-                    Plus d'options
+                    
                 </div>
             </div>
             {% endif %}
@@ -67,7 +67,7 @@
 
     
     <p class = "equilibrating">
-        Autres remboursements
+        Other reimbursements
     </p> 
     {% for debitor, debitor_data in transfert_to_equilibrium.items %}
         {% for creditor, amount in debitor_data.items %}
@@ -76,13 +76,13 @@
                 <div class = "reimbursement-details">
                     <div class = "onetoone">
                         <p class = "who">{{debitor}}</p>
-                        <p class = "dueto">doit à </p>
+                        <p class = "dueto">must pay to</p>
                         <p class = "who">{{creditor}}</p>
                     </div>
                     <p class = "reimbursement-amount">{{amount}} {{count.currency}}</p>
                 </div>
                 <div class = "more-options">
-                    Plus d'options
+                    
                 </div>
             </div>
             {% endif %}

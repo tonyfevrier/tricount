@@ -69,15 +69,15 @@
     <button data-button="JS" class ="id_newcount" id = "id_newcount"> + </button>
 
     <div data-div = "hidden" class = "choosecount" hidden>
-        <a href="{% url 'newcount' %}" id = "countfromzero"> Créer un nouveau tricount </a>
-        <button class = "clonecount" href=""> Clôner un tricount existant </button> 
+        <a href="{% url 'newcount' %}" id = "countfromzero"> Create a new tricount </a>
+        <button class = "clonecount" href=""> Clone an existing tricount </button> 
     </div>
 
     <div data-div = "hidden" class = 'form-pwdcount' hidden>
-        <input type="text" class = "tricount-title" placeholder="Titre du tricount" name = "tricount-title" autocomplete="off">
-        <input type="password" class = "password" placeholder="Mot de passe du tricount" name = "password" autocomplete="new-password">
-        <button class = "pwdsubmit">Envoyer</button>
-        <div class="error" hidden> Remplissez le titre et le mot de passe</div>
+        <input type="text" class = "tricount-title" placeholder="Tricount title" name = "tricount-title" autocomplete="off">
+        <input type="password" class = "password" placeholder="Tricount password" name = "password" autocomplete="new-password">
+        <button class = "pwdsubmit">Send</button>
+        <div class="error" hidden> Fill the title and password</div>
     </div> 
 {% endblock %}
 

@@ -100,6 +100,23 @@ To launch chat app unitary tests: `python manage.py test chat`.
 
 Run : `python run_tests.py`. You will be asked which classes of tests you want to include.
 
+## Specificity of test using ChannelsLiveServerTestCase
+
+The test using channels can not be run on a temporary created database so that you have to define a test database in settings.py 
+before launching it by adding 
+
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3', 
+        "TEST": {
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+}
+```
+
 # Improvement et perspectives thanks to the EdX formation
 
 I had begun this project before beginning your formation but your formation helped to improve the code in the following points:

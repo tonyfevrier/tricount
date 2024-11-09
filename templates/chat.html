@@ -12,7 +12,7 @@
     <nav>
         <p class = "header-title" id="{{id}}">{{count.title}}</p>
         <p class = "owner" hidden>{{user}}</p>
-        <p class = "header-participants">Participants au chat : </p>
+        <p class = "header-participants">Participants of the chat : </p>
         {% for participant in count.participants%}
             <p class = "header-participants">{{participant}}</p>
         {% endfor %}
@@ -33,7 +33,7 @@
 {% endblock%}
 
 {% block footer %} 
-    <textarea class = "message" placeholder = "Ajoutez un message..."></textarea>
+    <textarea class = "message" placeholder = "Add a message..."></textarea>
     <button class = "submit"><img width = "20px" src = "{%static 'images/send.png'%}" alt="send"></button>
 {% endblock %}
 

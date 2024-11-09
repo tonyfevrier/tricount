@@ -10,21 +10,21 @@
 {% block header %}
     <nav class = "navbar">
         <a href="{% url 'listecount' %}" class = "backtolistecount" id = "backtolistecount"><img src="{%static 'images/back.png' %}" width="20px" alt="Retour en arrière"></a>
-        <p>Mes paramètres</p>
+        <p>My parameters</p>
     </nav>
     <div class = "owner-title">
         <p class = "firstletter"> {{userobject.username.0}} </p>
-        <p class = "hello"> Bonjour {{userobject.username}}</p>
+        <p class = "hello"> Hello {{userobject.username}}</p>
         <p class = "mail"> {{userobject.email}}</p>
     </div>
 {% endblock %}
 
 {% block main %}
     <main>
-        <div class="main-sections">Mes paramètres</div>
+        <div class="main-sections">My parameters</div>
         <form action = "" class = "myparameters">
             <div class = "name">
-                <p>Identifiant</p>
+                <p>Identifier</p>
                 <input type="text" placeholder="{{userobject.username}}">
             </div>
             <div class = "name">
@@ -41,6 +41,6 @@
         </div>-->
     </main>
     <form action="{% url 'delog' %}" class="form-logout">
-        <input type="submit" class="logout" value="Se déconnecter"> 
+        <input type="submit" class="logout" value="Log out"> 
     </form> 
 {% endblock %}

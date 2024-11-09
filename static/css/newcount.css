@@ -280,4 +280,8 @@ label[for="other"]::before{
         flex-direction: row;
         flex-wrap: wrap;
     } 
+
+    .printparticipant{
+        margin-right: 2em; 
+    }
 }

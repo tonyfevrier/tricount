@@ -70,8 +70,9 @@ class Click():
         """
         Function which logout the user from the page listing the counts of the user
         """
-        self.click_on_a_link(By.CLASS_NAME,"parameters")
-        self.click_on_a_link(By.CLASS_NAME,"myparameters")
+        #self.click_on_a_link(By.CLASS_NAME,"parameters")
+        #self.click_on_a_link(By.CLASS_NAME,"myparameters")
+        self.click_on_a_link(By.CLASS_NAME, "logout")
 
         logout = self.browser.find_element(By.CLASS_NAME, "logout")
         logout.send_keys(Keys.ENTER)

@@ -240,4 +240,8 @@ button, a{
         flex-direction: row;
         flex-wrap: wrap;
     } 
+
+    .printparticipant{
+        margin-right: 2em;
+    }
 }

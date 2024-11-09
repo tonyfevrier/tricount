@@ -437,7 +437,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         - `voir ensuite si le tricount est bien cloné.`
     - `mettre aussi le msg d'erreur Remplissez mdp en rouge.`
     - bugs
-        - total cost à changer quand je modifie la dépense (dans l'affichage de spending.html)
+        - `qd je veux accéder à une dépense qui est seule, bug à cause de followingidspending...`
+        - total cost à changer quand je modifie la dépense (dans l'affichage de spending.html) (changement de monnaie uniquement pose pb)
         - modifyspending : quand je modifie la monnaie de la dépense déjà enregistrée, j'ai un bug 
         - `modifyspending: dans les spender, j'ai deux fois le owner`
         - newspending et modifyspending ne permettent pas de conserver les données entrées avant d'avoir cliqué sur currency (utiliser localstorage comme dans newcount).
@@ -473,10 +474,10 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
         `regarder mon code et appli pour voir les axes d'amélioration clairs issus de la formation.`
         `faire les factorisations ci-dessus pour améliorer mon appli`
         `** apprivoiser les django channels pour intégrer le chat minimal`
-        ** `réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)`
+        `** réfléchir bien au readme et à complexité (appli de calculation, chat websockets (si intégré), taille de l'appli, couplage avec API extérieures, tests unitaires, tests fonctionnels)`
         - améliorer pour la pep8 : noms de fonctions en minuscule et _
         - réfléchir à utiliser le django cache framework : quelles parties pourraient s'améliorer en termes de performance? Lesquelles je ne voudrais pas recharger?
-        ** css : en grand écran espacer les participants dans newspending (marge et diminuer la taille d'écriture des montants). Mettre des hover pour rendre la plateforme + attractive
+        ** `css : en grand écran espacer les participants dans newspending (marge et diminuer la taille d'écriture des montants). Mettre des hover pour rendre la plateforme + attractive`
         * sécurité : mettre ma clé d'API non pas dans le code source mais dans une variable d'environnement ou la sécuriser.
         * sécurité : introduire le hachage des pwd dans mon application
         ** vérifier toutes les spécifications.
@@ -486,6 +487,8 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             - `modifyspending est chamboulé : à modifier (il faut juste mettre les nouvelles div comme newspending)`
         - Optionnel : recherche dans les dépenses avec la loupe
         ** `Nettoyer momentanément les boutons qui ne servent à rien en les commentant notamment la recherche de dépense`
+        ** `html : mettre images de backtotricount en width 20 en html (et pas uniquement css)`
+        ** faire un plan pour la vidéo, organiser ce que je montre
         ** Vérifier que tous les tests fonctionnels marchent
         ** voir si run_tests doit être modifié
         - créer variable de temps pour time.sleep dans tests fonctionnels : essayer de diminuer le temps

@@ -274,15 +274,16 @@ def spending_details(request, id_count, id_spending):
     spending = tricount.spendings.get(id = id_spending)
 
     # Creates the context dictionary
-    number_of_spending = Spending.objects.count()
-    context = {'idcount' : id_count, 
-               'idspending' : id_spending, 
-               'spending': spending, 
-               'number_of_spending' : number_of_spending}
+    number_of_spending = tricount.spendings.count() 
+    context = {'idcount' : id_count,  
+               'spending': spending,  
+               'lastspendingindex' : number_of_spending - 1}
 
     # Get the eventual previous and next spending 
     spending_ids = [spending.id for spending in tricount.spendings.all()]
     spending_index = spending_ids.index(id_spending)
+    context['spending_index'] = spending_index
+    
     try :
         previous_id_spending = spending_ids[spending_index - 1]
         context['previousidspending'] = previous_id_spending
@@ -311,12 +312,12 @@ def modifyspendingregister(request, id_count, id_spending):
     count = Counts.objects.get(id = id_count)
     spending = Spending.objects.get(id = id_spending, tricount = Counts.objects.get(id=id_count)) 
 
-    #We first delete the previous spending in the calculation by making the inverse spending : the spender is now a receiver.
+    # We first delete the previous spending in the calculation by making the inverse spending : the spender is now a receiver.
     receiver = spending.payer
     payers = spending.receivers
     MT.update_tricount_after_new_receiving(id_count, {receiver : float(spending.amount)}, payers)
 
-    #Then we change data of the spending in the database.
+    # Then we change data of the spending in the database.
     newtitle = request.POST['title'] 
     newamount = request.POST['amount']
     newcurrency = request.POST['newtricount_currency']
@@ -337,6 +338,7 @@ def modifyspendingregister(request, id_count, id_spending):
     #We update the calculations with the new spending.
     MT.update_tricount_after_new_spending(id_count, {newspender : float(newamount)}, spending.receivers)
     spending.save()  
+    
 
     return redirect(reverse('spending-details', args=[id_count, id_spending]))
 

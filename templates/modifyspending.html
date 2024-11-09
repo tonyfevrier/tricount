@@ -9,7 +9,7 @@
 
 {% block header %}
     <a href="{% url 'spending' count.id %}" class = "backtospending" id = "backtospending"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-    <p class = "header-title" id="{{spending.id}}">Modifier la dépense</p>
+    <p class = "header-title" id="{{spending.id}}">Modify spending</p>
     <p class = 'tricount' id='{{count.id}}' hidden></p>
 {% endblock %}
 
@@ -18,7 +18,7 @@
             <div class="title-input">
                 <input class = "title" type="text" placeholder="{{spending.title}}" value = {{spending.title}} name = "title"> 
                 {%if titre == False%}
-                    <p class = "notitle">Titre non valable</p>
+                    <p class = "notitle">Invalid title</p>
                 {%endif%}
                 <p class = "counter">0/50</p>
             </div>
@@ -37,9 +37,9 @@
             <div class = "forwho">
                 <div class ="div-forwho">
                     <input class = "toggle-checkboxes" type="checkbox" checked>
-                    Pour qui
+                    For whom
                 </div>
-                <button class = "special-parameters">Avancé</button>
+                <button class = "special-parameters">Advanced</button>
             </div> 
             <div class = "list-receivers">
                 {% for participant, amount in spending.receivers.items%}
@@ -48,7 +48,7 @@
                     <label class = "receiver-participant" for="{{participant}}">{{participant}}</label> 
                     <div class = "amount-and-parts"> 
                         <input name = "{{participant}}" type = "text" class = "{{participant}}-amount" value = "{{amount|floatformat:2}}">
-                        <p class = "p-currency">{{currency}}</p>
+                        <p class = "p-currency">{{count.currency}}</p>
                     </div>
                 </div> 
                 {% endfor %}
@@ -59,7 +59,7 @@
                             <label class = "receiver-participant" for="{{participant}}">{{participant}}</label> 
                             <div class = "amount-and-parts"> 
                                 <input name = "{{participant}}" type = "text" class = "{{participant}}-amount" value = "0.00">
-                                <p class = "p-currency">{{currency}}</p>
+                                <p class = "p-currency">{{count.currency}}</p>
                             </div>
                         </div> 
                     {% endif %}
@@ -71,14 +71,7 @@
 {% endblock %}
 
 {% block footer %}
-    <button class = "delete-spending"> Supprimer cette dépense</button>
-    <div class = 'delete-confirmation' hidden>
-        Confirmez-vous vouloir supprimer la dépense 
-        <div class = 'alert'>
-            <a class = 'yesno' id = "yes" href = "{% url 'deletespending' count.id spending.id %}">Oui</a>
-            <a class = 'yesno' id = "no" href = ''>Non</a>
-        </div>
-    </div>
+    <button class = "delete-spending"> Delete spending</button>
 {% endblock %}
 
 {% block js %}

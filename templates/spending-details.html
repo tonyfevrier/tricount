@@ -10,7 +10,7 @@
 {% block header %}
     <nav>
         <a href="{% url 'spending' idcount %}" class = "backtospending" id = "backtospending"><img src="{%static 'images/back.png' %}" width = "20px" alt="Retour en arrière"></a>
-        <a href="{% url 'modifyspending' idcount idspending %}" class = "modify-spending">Modifier</a>
+        <a href="{% url 'modifyspending' idcount spending.id %}" class = "modify-spending">Modify</a>
     </nav>
     <h1 class = "title-spending">
         {{spending.title}}
@@ -19,13 +19,13 @@
         {{spending.amount|floatformat:2}}
     </h2>
     <nav class = "payer-date">
-        <p class = "payer"> Payé par {{spending.payer}}</p>
+        <p class = "payer"> Paid by {{spending.payer}}</p>
         <p class = "date"> {{spending.date}} </p>
     </nav>
 {% endblock %}
 
 {% block main %}
-    <div class = "forwho"> Pour {{spending.receivers.len}} participants, dont </div>
+    <div class = "forwho"> For {{spending.receivers.len}} participants including </div>
     {% for participant,amount in spending.receivers.items %}
     <div class = "participant">
         <p class = "participant-name"> {{participant}}</p>
@@ -35,11 +35,11 @@
 {% endblock %}
 
 {% block footer %}
-    {% if idspending != 1 %}
-        <a class = "previous" href = "{% url 'spending-details' idcount previousidspending %}">Précédent</a>
+    {% if spending_index != 0 %}
+        <a class = "previous" href = "{% url 'spending-details' idcount previousidspending %}">Previous</a>
     {% endif %}
-    {% if idspending != number_of_spending %}
-        <a class = "following" href = "{% url 'spending-details' idcount followingidspending %}">Suivant</a>
+    {% if spending_index != lastspendingindex %}
+        <a class = "following" href = "{% url 'spending-details' idcount followingidspending %}">Following</a>
     {% endif %}
 {% endblock %}
 

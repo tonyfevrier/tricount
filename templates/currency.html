@@ -9,8 +9,8 @@
 
 {% block header %}
     <a class = "backtonewcount" id = "backtonewcount"><img width = 20px src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-    <input type="text" hidden name="research" class ="research">
-    <p id = "select">Sélectionner une devise</p>
+    <input type="text" hidden name="research" class ="research" placeholder="Enter a string">
+    <p id = "select">Select a currency</p>
     <button class = "currencyresearch" id = "loupe"><img width = 20px src="{% static 'images/loupe.png' %}" alt="loupe"></button>
 {% endblock %}
 
@@ -33,7 +33,7 @@
             <p class = "currencyentire"> {{currencies.USD}}</p> 
         </a>
     </main>
-    <div class = 'currencies-list'> Toutes les devises </div>
+    <div class = 'currencies-list'> All currencies </div>
     <main> 
             {% for acronym, currency in currencies.items%} 
             <a class = "{{acronym}}" name = "link-newcount">

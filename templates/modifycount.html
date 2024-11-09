@@ -8,25 +8,25 @@
 {% endblock %}
 
 {% block header %}
-    <a href="{% url 'spending' count.id %}" class = "backtotricount" id = "backtotricount"><img src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
-    <div class = "titre" id = {{count.id}}>Modifier le tricount</div>
+    <a href="{% url 'spending' count.id %}" class = "backtotricount" id = "backtotricount"><img width='20px' src="{%static 'images/back.png' %}" alt="Retour en arrière"></a>
+    <div class = "titre" id = {{count.id}}>Modify the tricount</div>
 {% endblock %}
 
 {% block main %}
         <form method="POST" class = "tricount" action="{% url 'modifycountregister' count.id %}">
             {% csrf_token %}
-            <input type ="text" class = "tricount_title" value = "{{count.title}}" placeholder="Titre" name= "tricount_title">  
-            <p class="error" id="title-error" hidden >Le titre doit comporter au moins un caractère.</p>
+            <input type ="text" class = "tricount_title" value = "{{count.title}}" placeholder="Title" name= "tricount_title">  
+            <p class="error" id="title-error" hidden >Title must have at least one letter.</p>
 
             <input type ="text" class = "tricount_description" value = "{{count.description}}" placeholder="Description" name = "tricount_description">
-            <p class = "error" id="description-error" hidden>La description doit comporter au moins un caractère.</p>
+            <p class = "error" id="description-error" hidden>Description must have at least one letter.</p>
             
-            <p class = "currency"> <strong>Devise :</strong> {{count.currency}} </p>
+            <p class = "currency"> <strong>Currency :</strong> {{count.currency}} </p>
 
-            <p class = "category"> <strong>Catégorie :</strong> {{count.category}}</p>
+            <p class = "category"> <strong>Catégory :</strong> {{count.category}}</p>
             
             <div class = "participants"> 
-                <p> Participants au tricount </p> 
+                <p> Participants to the tricount </p> 
             </div>
 
             <div class = "participants-container">
@@ -37,7 +37,7 @@
                 </div> 
                 {% endfor%}
             </div>
-            <p class="error participant-error" id="participant-error" hidden>Il faut au moins deux participants.</p> 
+            <p class="error participant-error" id="participant-error" hidden>You need at least two participants.</p> 
 
 
             <button class = "submittricount" name = "submit"> <img src="{% static 'images/check.png' %}" alt="validation"></button> 
@@ -45,13 +45,13 @@
 
         </form>
         <div class="form-participant">
-            <input type ="text" name="new_participant" class ='new_participant' placeholder="Autre participant">
-            <button class = "add_participant">Ajouter</button>
+            <input type ="text" name="new_participant" class ='new_participant' placeholder="Other participant">
+            <button class = "add_participant">Add</button>
         </div>
 {% endblock %}
 
 {% block footer %}
-    <button class = "delete-tricount"> Supprimer ce tricount</button>
+    <button class = "delete-tricount"> Delete tricount</button>
 {% endblock %}
 
 {% block js %}
