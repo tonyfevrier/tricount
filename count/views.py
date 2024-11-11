@@ -100,7 +100,7 @@ def clonecount(request):
         item[0].save()
         return JsonResponse({'message': 'Le tricount vient d"être clôné'}, status=200)
     else:
-        return JsonResponse({'message':'Les identifiants ne correspondent à aucun tricount'}, status=400)
+        return JsonResponse({'message':'Invalid credentials'}, status=400)
     
 
 @login_required
@@ -194,7 +194,7 @@ def spending(request, id_count):
     """
     count = Counts.objects.get(id=id_count)  
     participants = count.participants 
-    spendings = count.spendings.all()
+    spendings = count.spendings.all() 
     tricount = Tricount.from_json(count.data)  
     total_credit_owner = tricount.calculate_total_credit()[request.user.username]  
     total_cost = tricount.total_cost 
@@ -283,7 +283,7 @@ def spending_details(request, id_count, id_spending):
     spending_ids = [spending.id for spending in tricount.spendings.all()]
     spending_index = spending_ids.index(id_spending)
     context['spending_index'] = spending_index
-    
+
     try :
         previous_id_spending = spending_ids[spending_index - 1]
         context['previousidspending'] = previous_id_spending
@@ -300,7 +300,7 @@ def modifyspending(request, id_count, id_spending):
     Function which redirects to the page allowing to modify a given spending.
     """  
     count = Counts.objects.get(id = id_count)
-    spending = Spending.objects.get(id = id_spending, tricount = Counts.objects.get(id=id_count)) 
+    spending = Spending.objects.get(id = id_spending, tricount = count) 
     context = {'count': count, 'spending': spending, 'participants': count.participants}
     return render(request, "modifyspending.html", context = context)
 
@@ -308,14 +308,9 @@ def modifyspending(request, id_count, id_spending):
 def modifyspendingregister(request, id_count, id_spending):
     """
     Function which recovers data obtained from the modification of a spending.
-    """      
-    count = Counts.objects.get(id = id_count)
-    spending = Spending.objects.get(id = id_spending, tricount = Counts.objects.get(id=id_count)) 
-
-    # We first delete the previous spending in the calculation by making the inverse spending : the spender is now a receiver.
-    receiver = spending.payer
-    payers = spending.receivers
-    MT.update_tricount_after_new_receiving(id_count, {receiver : float(spending.amount)}, payers)
+    """ 
+    # Delete the spending from calculations
+    count, spending = delete_spending_from_calculation(id_count, id_spending)
 
     # Then we change data of the spending in the database.
     newtitle = request.POST['title'] 
@@ -334,11 +329,11 @@ def modifyspendingregister(request, id_count, id_spending):
         spending.amount = newamount 
     else: 
         spending.amount = CC.convertSpendingCurrency(count.currency,newcurrency,newamount)
-    
+        
     #We update the calculations with the new spending.
-    MT.update_tricount_after_new_spending(id_count, {newspender : float(newamount)}, spending.receivers)
+    MT.update_tricount_after_new_spending(id_count, {newspender : float(spending.amount)}, spending.receivers)
+ 
     spending.save()  
-    
 
     return redirect(reverse('spending-details', args=[id_count, id_spending]))
 
@@ -347,8 +342,22 @@ def deletespending(request, id_count, id_spending):
     """
     Function which delete a spending
     """
-    #on supprimer la dépense, on redirige vers la page des 
-    spending = Spending.objects.get(tricount = Counts.objects.get(id=id_count), id = id_spending)
+    # Delete the spending from calculations
+    count, spending = delete_spending_from_calculation(id_count, id_spending) 
+
+    # Delete the object
     spending.delete()
     return redirect(reverse('spending', args=[id_count]))
+
+
+def delete_spending_from_calculation(id_count, id_spending):
+    # Get the spending
+    count = Counts.objects.get(id = id_count)
+    spending = Spending.objects.get(id = id_spending, tricount = Counts.objects.get(id=id_count)) 
+
+    # We first delete the previous spending in the calculation by making the inverse spending : the spender is now a receiver.
+    receiver = spending.payer
+    payers = spending.receivers
+    MT.update_tricount_after_new_receiving(id_count, {receiver : float(spending.amount)}, payers)
+    return count, spending
 

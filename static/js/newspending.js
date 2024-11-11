@@ -1,7 +1,7 @@
 let receivers = document.querySelectorAll(".receiver");
 let click = new Event("click", {bubbles: true,});
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', (event) => {
 
     // Change the currency if the user has chosen an other currency.
     const url = window.location.search;
@@ -10,6 +10,9 @@ window.addEventListener('DOMContentLoaded', () => {
     if (url.includes("currency")){
         document.querySelector('.newtricount_currency').value = params.get('currency');
     }   
+
+    // Recover previous inputs if the user come from the currency page 
+    recover_user_inputs(event);
 
     for (let monnaie of document.querySelectorAll('.p-currency')){ 
         monnaie.innerHTML = document.querySelector('.newtricount_currency').value;
@@ -23,6 +26,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Event to share an amount automatically to checked people
     document.querySelector(".amount").addEventListener("input", user_amount);
+
+    // Event when clicking on currency
+    document.querySelector('.choose-currency').addEventListener("click", click_on_currency);
 
     // Event to handle the check/uncheck of participants
     document.querySelector(".list-receivers").addEventListener("click", user_checking);
@@ -124,6 +130,36 @@ function submit_spending(event){
 }
 
 
+function click_on_currency(event){
+    /*Function to keep what the user's inputs in local storage before he chooses the currency */
+
+    event.preventDefault();
+    localStorage.clear();
+
+    // Put inputs in memory
+    localStorage.setItem("titre", document.querySelector('.title').value);
+    localStorage.setItem("amount", document.querySelector('.amount').value); 
+    localStorage.setItem("spender", document.querySelector('.spender').value); 
+
+    // Go to the page of currencies to choose one
+    window.location.href = document.querySelector('.choose-currency').getAttribute("href");
+}
+
+function recover_user_inputs(event){
+    /* Function to recover what has been to put in local storage if we come from the currency page */
+    if (!document.referrer.includes('currency')) return;
+
+    // Get stored data
+    document.querySelector('.title').value = localStorage.getItem("titre");
+    document.querySelector('.amount').value = localStorage.getItem("amount"); 
+    document.querySelector('.spender').value = localStorage.getItem("spender"); 
+
+    // Share the amount among checked users
+    if (document.querySelector('.amount').value) user_amount();
+}
+
+
+
 
 /*Useful functions for handlers*/
 
@@ -186,8 +222,8 @@ function number_of_checked_people(){
 
 function insert_or_remove_parts_for_spending(innerHTML){
     /*Si on clique sur avancé, on fait apparaître les parts de chacun et l'utilisateur peut modifier le nombre de parts, ce qui recalcule les montants*/
-    if (innerHTML === "Avancé"){ 
-         document.querySelector('.special-parameters').innerHTML = "Simple"; 
+    if (innerHTML === "Advanced"){ 
+        document.querySelector('.special-parameters').innerHTML = "Simple"; 
         for (let receiver of receivers){
             montant = document.querySelector(`.${receiver.id}-amount`); 
             if (receiver.checked){
@@ -198,7 +234,7 @@ function insert_or_remove_parts_for_spending(innerHTML){
             document.querySelector(`.${receiver.id}-parts`).addEventListener("input",user_amount);
         }
     } else { 
-         document.querySelector('.special-parameters').innerHTML = "Avancé";
+         document.querySelector('.special-parameters').innerHTML = "Advanced";
         for (let receiver of receivers){
             document.querySelector(`.${receiver.id}-parts`).removeEventListener("input",user_amount);
             document.querySelector(`.${receiver.id}-parts`).remove();

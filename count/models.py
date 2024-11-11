@@ -20,3 +20,6 @@ class Spending(models.Model):
     receivers = models.JSONField(default=[]) 
     tricount = models.ForeignKey(Counts, on_delete=models.CASCADE, related_name='spendings')
     date = models.DateField(default = timezone.now) 
+
+    def __repr__(self):
+        return f"Spending(title={self.title}\n, amount={self.amount},\n payer={self.payer},\n receivers={self.receivers})"

@@ -565,6 +565,10 @@ class TestSpending(UnitaryTestMethods):
         self.assertDictEqual(spending.receivers, {"Henri":90, "Yann":90})
         self.assertRedirects(response,'/spending-details/1/1')
 
+        # Verify the total_cost has been correctly calculated
+        response = self.client.get('/tricount/1')
+        self.assertEqual(response.context['totalcost'], 180)
+
         #We create a second spending and only modify the currency
         self.login_someone('Henri', '1234')
         self.create_a_spending(1,'dépense', 100,'EUR', 'Henri', ['Henri','Yann'], [50,50]) 
@@ -576,6 +580,13 @@ class TestSpending(UnitaryTestMethods):
         self.assertListEqual(list(spending2.receivers.keys()), ['Henri', 'Yann'])
         self.assertEqual(spending2.receivers['Henri'], amount/2)
         self.assertEqual(spending2.receivers['Yann'], amount/2)
+
+        # Verify the total_cost has been correctly calculated
+        response = self.client.get('/tricount/1')
+        totalcost = 180 + amount
+        self.assertEqual(response.context['totalcost'], totalcost)
+
+    
 
     def test_modify_several_spendings_in_different_tricounts(self):
         """

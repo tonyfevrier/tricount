@@ -74,8 +74,8 @@ class Tricount():
         """
 
         #The payer expense and credits change. 
-        for spender in payer.keys():
-            self.total_cost += payer[spender] 
+        for spender in payer.keys(): 
+            self.total_cost += payer[spender]  
             self.dict_participants[spender].expense += payer[spender] 
 
             for receiver in forwho.keys():

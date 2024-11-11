@@ -28,13 +28,16 @@ def run():
     """
     classnames = askArgumentUntilNone()
 
-    #if the user does not enter a classname, he wants to test all classes
+    #if the user does not enter a classname, he wants to test all classes except Chat one
     if not classnames:
         classnames = get_classes_names(filename)
-     
+    if 'TestChat' in classnames:
+        classnames.remove('TestChat')
+    
     commands = compile_scss()
     commands = commands_for_unit_tests()
     commands = commands_for_functionals_tests(*classnames) 
+    
     execute_process(commands)
  
 
