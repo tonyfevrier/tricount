@@ -111,6 +111,9 @@ function user_adding_participant(event, name){
     list_participants.push(name);
     document.querySelector('.new_participant').value = ''; 
 
+    // Delete the counter after clicking
+    compteur.remove()
+
     //Creation of event for closing the new participant 
     closeparticipant = document.querySelector(`.closeparticipant[name=${name}]`); 
     closeparticipant.addEventListener("click", (event) => user_closing_participant(event, name)); 

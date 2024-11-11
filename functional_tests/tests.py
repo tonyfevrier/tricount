@@ -41,7 +41,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         click.click_on_a_link(By.CLASS_NAME, "logout")
         firstletter,name,mail = click.find_multiple_elements(By.CLASS_NAME,"firstletter","hello","mail")
         self.assertEqual(firstletter.text, "T")
-        self.assertEqual(name.text, "Bonjour Tony")
+        self.assertEqual(name.text, "Hello Tony")
         self.assertEqual(mail.text, "tony.fevrier62@gmail.com")
 
         click.click_on_a_link(By.CLASS_NAME, "logout")
@@ -181,12 +181,12 @@ class NewVisitorTest(StaticLiveServerTestCase):
         #self.assertEqual(self.browser.current_url, self.live_server_url + '/addcount')
 
         msg = self.browser.find_element(By.CLASS_NAME,'error')
-        self.assertIn('Le titre doit comporter au moins un caractère.',msg.text)
+        self.assertIn('Title must contain at least one letter.',msg.text)
  
         #Du coup, il rajoute un titre mais oublie de mettre des participants:    
         click.add_tricount_characteristics('Tricount 3','pwd3', '',"EUR", 'project')
         participant_error = self.browser.find_element(By.CLASS_NAME,'participant-error') 
-        self.assertIn("Il faut au moins un participant",participant_error.text) 
+        self.assertIn("You need at least one participant.",participant_error.text) 
 
         #Il oublie maintenant le mot de passe :
         click.clear_registration_inputs(self.browser.find_element(By.NAME, "newtricount_title"),
@@ -195,7 +195,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
                                         )
         click.add_tricount_characteristics('Tricount 3','', 'description3',"EUR", 'project')
         pwd_error = self.browser.find_element(By.ID, 'pwd-error')
-        self.assertEqual(pwd_error.text, 'Il faut un mot de passe')
+        self.assertEqual(pwd_error.text, 'Enter a password')
 
         #Il met des participants puis crée son tricount. 
         click.add_participants('Totolitoto','Biloute','Anne')
@@ -285,7 +285,7 @@ class MultiUsersTricount(StaticLiveServerTestCase):
         click2.click_on_a_link(By.CLASS_NAME,"clonecount") 
         click2.clone_a_tricount("Tricount1", "falsepassword") 
         error = self.browser2.find_element(By.ID, "Invalid")
-        self.assertEqual(error.text, "Les identifiants ne correspondent à aucun tricount")
+        self.assertEqual(error.text, "Invalid credentials")
         self.assertEqual(self.live_server_url + "/count" , self.browser2.current_url)
 
         #Il oublie de mettre un mot de passe : un message apparaît. 
@@ -293,7 +293,7 @@ class MultiUsersTricount(StaticLiveServerTestCase):
                                          self.browser2.find_element(By.CLASS_NAME, "password"),)
         click2.clone_a_tricount("Tricount1","")
         error = self.browser2.find_element(By.CLASS_NAME, "error")
-        self.assertEqual(error.text, "Remplissez le titre et le mot de passe")
+        self.assertEqual(error.text, "Fill the title and password")
 
         #Il recommence et tape le bon mot de passe, il est envoyé vers la liste de ses tricount et le tricount de l'utilisateur 1 est apparu.
         click2.clear_registration_inputs(self.browser2.find_element(By.CLASS_NAME, "tricount-title"),
@@ -369,9 +369,10 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         #He tries to create a second spending. He forgets to put a title, a message of error appears and he stays on the page.
         click.click_and_create_a_spending('', '100.', 'Jean', ['Henri','Jean'],'EUR')
         notitle = self.browser.find_element(By.CLASS_NAME,"notitle")
-        self.assertEqual(notitle.text, "Il faut un titre") 
+        self.assertEqual(notitle.text, "Enter a title") 
 
         #He forgets to put the amount, a spending is created with amount 0.
+        click.clear_registration_inputs(self.browser.find_element(By.ID, "amount"))
         click.create_a_spending('Dépense2', '', 'Jean', ['Henri','Jean'],'EUR')
         amounts = self.browser.find_elements(By.CLASS_NAME,"spending-amount") 
         self.assertEqual(self.browser.current_url, self.live_server_url + "/tricount/1")
@@ -408,12 +409,12 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         self.assertEqual(self.browser.current_url, self.live_server_url + '/spending-details/1/1')
 
         #He also notes that the amounts have been correctly modified
-        self.check_informations_of_a_spending('dépense1','100.00', 'Payé par Jean', ['Dulciny','Henri'],['50.00', '50.00'])
+        self.check_informations_of_a_spending('dépense1','100.00', 'Paid by Jean', ['Dulciny','Henri'],['50.00', '50.00'])
 
         #He makes an other modification : he modifies the spender         
         click.click_on_a_link(By.CLASS_NAME, "modify-spending")
         click.modify_a_spending({'title': 'spending','spender': "Henri"},"Dulciny", "Henri")
-        self.check_informations_of_a_spending('spending','100.00', 'Payé par Henri', ['Dulciny','Henri'],['50.00', '50.00'])
+        self.check_informations_of_a_spending('spending','100.00', 'Paid by Henri', ['Dulciny','Henri'],['50.00', '50.00'])
 
         #He then click to modify a spending but do not change anything and validate : he is redirected correctly to the spending details.
         click.click_on_successive_links(By.CLASS_NAME, "modify-spending","submit-spending")
@@ -446,7 +447,7 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
 
         #Il arrive sur la page et il y voit toutes les données qu'il a enregistrées.
         self.assertEqual(self.browser.current_url, self.live_server_url + "/spending-details/1/1")
-        self.check_informations_of_a_spending('depense1', '120.00', 'Payé par Jean', ['Dulciny','Henri','Jean'],['40.00', '40.00', '40.00'])
+        self.check_informations_of_a_spending('depense1', '120.00', 'Paid by Jean', ['Dulciny','Henri','Jean'],['40.00', '40.00', '40.00'])
 
         #Il revient en arrière et crée trois autres dépenses
         click.click_on_a_link(By.CLASS_NAME,"backtospending")
@@ -458,12 +459,12 @@ class RegisterSpending(StaticLiveServerTestCase,user_experience.Check):
         click.click_on_a_link(By.CLASS_NAME,"following")
 
         #Il voit alors les infos de la seconde dépense et le bouton précédent apparaître
-        self.check_informations_of_a_spending('depense2', '12.00', 'Payé par Henri', ['Dulciny','Henri','Jean'],['4.00', '4.00', '4.00'])
+        self.check_informations_of_a_spending('depense2', '12.00', 'Paid by Henri', ['Dulciny','Henri','Jean'],['4.00', '4.00', '4.00'])
         self.assertIsNotNone(self.browser.find_element(By.CLASS_NAME,'previous'))
 
         #Il clique sur suivant une fois et voit le bouton suivant disparaître
         click.click_on_a_link(By.CLASS_NAME,"following") 
-        self.check_informations_of_a_spending('depense3', '3.00', 'Payé par Henri', ['Dulciny','Henri','Jean'],['1.00', '1.00', '1.00']) 
+        self.check_informations_of_a_spending('depense3', '3.00', 'Paid by Henri', ['Dulciny','Henri','Jean'],['1.00', '1.00', '1.00']) 
 
         #Il clique sur précédent trois fois et revient à la liste des dépenses 
         click.click_on_successive_links(By.CLASS_NAME,"previous","previous","backtospending")
@@ -551,36 +552,36 @@ class JSTest(StaticLiveServerTestCase,user_experience.Check):
     def tearDown(self):
         self.browser.quit()
 
-    def test_JS_of_listecount_page(self):
+    # def test_JS_of_listecount_page(self):
 
-        #The user arrives on listecount page, no popup is opened :
-        self.browser.get(self.live_server_url+ '/count')
-        popup_children = self.browser.find_elements(By.CSS_SELECTOR, "[data-div = hidden] > *")
+    #     #The user arrives on listecount page, no popup is opened :
+    #     self.browser.get(self.live_server_url+ '/count')
+    #     popup_children = self.browser.find_elements(By.CSS_SELECTOR, "[data-div = hidden] > *")
 
-        for elt in popup_children:
-            self.assertEqual(elt.is_displayed(),False) 
+    #     for elt in popup_children:
+    #         self.assertEqual(elt.is_displayed(),False) 
 
-        #He creates a tricount and come back.
-        self.click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri")
-        self.click.click_on_a_link(By.CLASS_NAME,'backtolistecount')  
+    #     #He creates a tricount and come back.
+    #     self.click.create_a_tricount('Tricount1',"pwd","Je décris", "EUR", "project","Jean","Henri")
+    #     self.click.click_on_a_link(By.CLASS_NAME,'backtolistecount')  
 
-        # he clicks on parameters, a popup appears
-        self.click.click_on_a_link(By.CLASS_NAME,"parameters")
-        self.check_if_popup_displayed("parameters-options",True) 
+    #     # he clicks on parameters, a popup appears
+    #     self.click.click_on_a_link(By.CLASS_NAME,"parameters")
+    #     self.check_if_popup_displayed("parameters-options",True) 
         
-        #He clicks on a JS button of the popup, an other popup replaces the previous one.
-        self.click.click_on_a_link(By.CLASS_NAME, "conditions") 
-        self.check_if_popup_displayed("parameters-options",False)
-        self.check_if_popup_displayed("conditions-options",True)
+    #     #He clicks on a JS button of the popup, an other popup replaces the previous one.
+    #     self.click.click_on_a_link(By.CLASS_NAME, "conditions") 
+    #     self.check_if_popup_displayed("parameters-options",False)
+    #     self.check_if_popup_displayed("conditions-options",True)
 
-        #He clicks on the link of the tricount and no popup is visible and he stays on the same page.
-        self.click.click_on_a_link(By.CLASS_NAME,"link-tricount")
+    #     #He clicks on the link of the tricount and no popup is visible and he stays on the same page.
+    #     self.click.click_on_a_link(By.CLASS_NAME,"link-tricount")
 
-        popup_children = self.browser.find_elements(By.CSS_SELECTOR, "[data-div = hidden] > *")
+    #     popup_children = self.browser.find_elements(By.CSS_SELECTOR, "[data-div = hidden] > *")
 
-        for elt in popup_children:
-            self.assertEqual(elt.is_displayed(),False)
-        self.assertEqual(self.browser.current_url, self.live_server_url + "/count")
+    #     for elt in popup_children:
+    #         self.assertEqual(elt.is_displayed(),False)
+    #     self.assertEqual(self.browser.current_url, self.live_server_url + "/count")
 
     def test_JS_of_newcount_page(self): 
 

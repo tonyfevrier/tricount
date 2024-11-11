@@ -94,7 +94,13 @@ If python is installed in a conda environment :
 ## Launch unitary tests
 
 To launch count app unitary tests: `python manage.py test count`.
-To launch chat app unitary tests: `python manage.py test chat`.
+To launch chat app unitary tests: 
+
+`docker run -p 6379:6379 -d redis:5` in a terminal
+`python manage.py test chat` in an other terminal
+
+Be aware of the fact that the number of requests per day to freecurrencyapi is limited so that launching multiple times unitary tests
+may make too many calls to the api. Then yoçu should not be able to make any request to this API.
 
 ## Launch unitary tests and chosen functional tests
 
@@ -102,8 +108,7 @@ Run : `python run_tests.py`. You will be asked which classes of tests you want t
 
 ## Specificity of test using ChannelsLiveServerTestCase
 
-The test using channels can not be run on a temporary created database so that you have to define a test database in settings.py 
-before launching it by adding 
+Do not use run_tests.py to lauch the functional tests class named TestChat. he test using channels can not be run on a temporary created database so that you have to define a test database in settings.py before launching it by adding 
 
 ```
 DATABASES = {
@@ -117,11 +122,13 @@ DATABASES = {
 }
 ```
 
+Ensure redis server works before launching these tests: `docker run -p 6379:6379 -d redis:5`
+
 # Improvement et perspectives thanks to the EdX formation
 
 I had begun this project before beginning your formation but your formation helped to improve the code in the following points:
 
-- creation of html blocks to get a common html structure
+- creation of html blocks to get a common html structure 
 - improvement of the JS code quality using more document.querySelector to avoid to create too many variable names, structuration of a JS file inspired from yours. 
 - use of django url tags to avoid plain urls writting in files.
 

@@ -1,0 +1,12 @@
+tricount/__pycache__/
+count/migrations/
+chat/migrations/
+count/__pycache__/
+chat/__pycache__/
+functional_tests/__pycache__/
+*.log
+db.sqlite3
+.gitignore
+steps.md
+run_tests.py 
+
