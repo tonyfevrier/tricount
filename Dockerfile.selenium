@@ -1,0 +1,8 @@
+FROM tonyfevrier/python-selenium
+ 
+WORKDIR /app 
+
+COPY requirements-selenium.txt /app/
+RUN pip install -r requirements-selenium.txt
+
+COPY . /app/

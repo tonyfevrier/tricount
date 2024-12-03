@@ -6,3 +6,5 @@ chat/__pycache__/
 functional_tests/__pycache__/
 *.log
 db.sqlite3
+firefox/
+geckodriver.exe

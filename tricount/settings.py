@@ -53,6 +53,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',  
+]
+
+
 ROOT_URLCONF = 'tricount.urls'
 
 TEMPLATES = [
@@ -137,7 +142,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [('channel', 6379)], #("127.0.0.1", 6379) pour l'appli sur conda
         },
     },
 }

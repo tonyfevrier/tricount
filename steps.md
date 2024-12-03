@@ -506,9 +506,13 @@ Méthodo : écriture d'une fonctionnalité puis écriture de tests unitaires (si
             centrer le Bonjour Tony de la page logout
         ** `remettre l'API si ça marche après tous les tests effectués`
         - faire des sous dossiers dans templates pour chaque application?
-        * créer une docker image permettant aux examinateurs de créer facilement le conteneur associé à mon application
-        * créer un fichier yaml permettant facilement de lancer mon application et un pour lancer les tests unitaires, fonctionnels.
-            - besoin de déclencher un serveur redis pour que ça fonctionne : voir si je peux donner un fichier yaml qui s'exécute automatiquement pour qqun qui voudrait lancer mon code.
+        * `créer une docker image permettant aux examinateurs de créer facilement le conteneur associé à mon application`
+            - `voir comment lancer les tests localt sur mon application dockerisée. Comment modifier le dockerfile`
+            - `voir comment fournir au conteneur le lien vers mon geckodriver de la machine hôte`
+            - réussir à pousser l'image python selenium sur dockerhub ou charger l'image locale
+                ça marche si je mets juste FROM python
+        * `créer un fichier yaml permettant facilement de lancer mon application et un pour lancer les tests unitaires, fonctionnels.`
+            - `besoin de déclencher un serveur redis pour que ça fonctionne : voir si je peux donner un fichier yaml qui s'exécute` `automatiquement pour qqun qui voudrait lancer mon code.`
         * faire un yaml pour l'intégration continue de mon projet, voir si je peux aussi utiliser yaml non pas pour lancer des tests sur des dépôts distants mais pour programmer mes tests en local.
         - voir pour créer deux bdd dbsqlite différentes afin d'éviter son écrasement à chaque lancement des tests channels 
         

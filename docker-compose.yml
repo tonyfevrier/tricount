@@ -1,0 +1,37 @@
+services:
+
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "8000:8000"
+    command: ["/app/cmd/exec.sh"]
+    depends_on:
+      - channel
+
+
+  channel:
+    image: redis:5
+    ports:
+      - "6379:6379" 
+
+
+  unit-tests:
+    build: 
+      context: .
+      dockerfile: Dockerfile.web
+    command: ["/app/cmd/unit-tests.sh"]
+    depends_on:
+      - channel
+
+
+  functional-tests:
+    build: 
+      context: .
+      dockerfile: Dockerfile.selenium
+    command: ["/app/cmd/functional-tests.sh"] 
+        
+
+  
+  

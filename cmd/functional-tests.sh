@@ -1,0 +1,9 @@
+#!/bin/bash
+python manage.py test functional_tests.tests.NewVisitorTest.test_tricount_creation_and_delation
+python manage.py test functional_tests.tests.MultiUsersTricount.test_clone_creation
+python manage.py test functional_tests.tests.RegisterSpending.test_spending_creation
+python manage.py test functional_tests.tests.RegisterSpending.test_the_page_of_some_spendings
+python manage.py test functional_tests.tests.RegisterSpending.test_equilibria_with_multiple_spendings
+python manage.py test functional_tests.tests.JSTest.test_JS_of_newcount_page
+python manage.py test functional_tests.tests.JSTest.test_JS_currency_research_bar
+

@@ -1,0 +1,16 @@
+# Import d'une image de base
+FROM python:3.12.6 
+
+# Nom du répertoire de travail à créer dans le conteneur
+WORKDIR /app
+
+# Copie dans ce répertoire du fichier requirements indispensable car la commande run s'exécute dans le conteneur et pas dans notre système de fichiers.
+COPY requirements.txt /app/
+RUN pip install -r requirements.txt
+
+# Copie du reste des fichiers dans le répertoire de travail du conteneur
+COPY . /app/
+ 
+# Exécution des commandes présentes dans le fichier exec.sh (la copie dans le conteneur)
+#CMD ["/app/exec.sh"]
+

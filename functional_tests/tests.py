@@ -11,7 +11,12 @@ from count.models import Counts
 from functional_tests import user_experience 
 
 options = Options() 
-options.binary_location = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+options.binary_location = "/usr/bin/firefox-esr" #"C:\\Program Files\\Mozilla Firefox\\firefox.exe" si on exécute sur la machine hôte
+
+# Partie à n'utiliser que si on exécute le test dans docker sans interface graphique
+options.add_argument("--headless")
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--no-sandbox")
 
 class NewVisitorTest(StaticLiveServerTestCase): 
     
